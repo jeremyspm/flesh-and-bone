@@ -315,3 +315,22 @@ question in her M1 + M2 banks or slide of her M3 revision deck: 130 at >= 0.8, 2
 her true/false pair "The clavicle is part of the axial skeleton - False" and "The skull and mandible are part of the appendicular
 skeleton - False"; low overlap only because the clue states the answer rather than the statement). One clue of mine was looser
 than her wording and was replaced by her own MCQ stem (tunica media = "most critical in regulating systemic blood pressure").
+
+## Cut-open figures, the skull from inside, and joints (21 Sep 2026)
+
+Every remaining "you cannot see it on a whole model" gap from the marks audit, each checked against her banks or slides before it was built.
+
+| what | deck | how | her source |
+|---|---|---|---|
+| **Joints** — "Name this type of joint" | Bones → set *Joints* | points on the real skeleton; items named by TYPE and `strict`, so Name it offers only joint types | M2 MCQs: shoulder = ball-and-socket, atlas/axis = pivot, knees and elbows = hinge; essay: cranium / vertebrae / elbow = the three functional names |
+| **Foramen magnum** | Bones → *Inside the skull* | `section:'skull'`: one horizontal clipping plane lifts the skull cap off; seen from above with the face at the top, like her figure. The hole is real in the mesh | her numbered cranial-floor figure ("which labels show a foramen") |
+| **Frontal + sphenoidal sinus** | Bones → *Inside the skull* | the two REAL sinus meshes of the source (`models/sinuses.glb`, 12 KB, `tools/export_deck.py sinuses`), staged `men:'sin'`, inside a glass skull (`openable` skull bones) | her sagittal skull figure: "they are both a sinus" |
+| **Long bone** in section | Tissues → *Long bone* | built (`made-sections.js`) | the nouns of her ossification / bone-growth questions: diaphysis, epiphysis, epiphyseal plate, medullary cavity, spongy bone |
+| **Adrenal cortex / medulla** | Glands | built, beside the body | "adrenal cortex", "epinephrine from adrenal gland medulla" |
+| **Trachea · bronchiole · alveolus** walls | Airway → *Airway walls* | built | M1 histology slides: C-shaped cartilage, trachealis, ciliated lining, cuboidal bronchiole, alveolar cell types 1 and 2, respiratory membrane |
+| **Inside the cochlea** | Eye & Ear | built | M3 revision slide 21: three scalae (perilymph yellow, endolymph blue — her colour code), Reissner's / basilar / tectorial membranes, organ of Corti, hair cells |
+| **Layers of the retina** | Eye & Ear | built | M3 slide 16: pigment layer, rods, cones, bipolar cells, ganglion cells |
+
+Engine: `setSection(on)` now takes `true` (heart) or `'skull'`; each clipped mesh carries its own plane in `info.sect`, which is what `cast()` tests. Explore in Bones gains "Lift the skull cap" and "Glass skull".
+Not built, on purpose: foramen ovale (not a hole in this decimated sphenoid — said so in the item's fact), intervertebral discs (absent from the source; the vertebrae stand for that joint).
+Verified at 375×812: 430 items, 0 unbound, reach scan on all 41 new items, real tapped rounds on every new set, heart section + septa and both traces re-run after the `setSection` rewrite. `docs/autoplayer.js` learned to aim at `between` items (the septa) — before, a re-queued septum could stall its round.

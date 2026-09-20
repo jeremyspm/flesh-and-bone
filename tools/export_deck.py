@@ -29,6 +29,8 @@ DECKS = {
     # Module 3. The male organs (the source body is male) + bladder and urethra, which the sperm path ends in.
     'male':   dict(names=[r'^(testis|epididymis|ductus deferens|ejaculatory duct|seminal gland|prostate|glans penis)$', r'^corpus (cavernosum|spongiosum) of penis$',
                           r'^(urethra|urinary bladder)$']),
+    # Module 2. Her sagittal skull figure circles two of these: "they are both a sinus" (a cavity within a bone). Shown inside a glass skull.
+    'sinuses': dict(names=[r'^sinus of (frontal|sphenoid) bone$']),
     'willis': dict(names=[r'^(anterior|posterior) communicating artery$', r'^(anterior|middle|posterior) cerebral artery', r'^internal carotid artery$',
                           r'^vertebral artery$', r'^basilar artery$', r'^insular branches of middle cerebral artery']),
 }

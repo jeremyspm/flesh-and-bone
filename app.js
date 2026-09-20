@@ -15,6 +15,7 @@ import { buildConduction } from './made-heart.js';
 import { buildEye } from './made-eye.js';
 import { buildEar } from './made-ear.js';
 import { buildVessels, buildHeartWall, buildUterusWall, buildECG, buildSpirogram } from './made-figures.js';
+import { buildLongBone, buildAdrenal, buildAirwayWall, buildCochlea, buildRetina } from './made-sections.js';
 const REGIONS = { ...REGIONS0, ...MORE_REGIONS }, SETS = { ...SETS0, ...MORE_SETS };
 
 const $ = s => document.querySelector(s);
@@ -41,20 +42,20 @@ const LOCK = 2;
 
 /* a deck = which models are on stage (solid, or a ghost for context) and which of them its items are bound to */
 const DECK = {
-  bones:  { label:'Bones',   acc:'#f2b84b', ink:'#1b1303', items:BONES,   models:{ skeletal:'solid' }, bind:['skeletal'], noun:'bone' },
+  bones:  { label:'Bones',   acc:'#f2b84b', ink:'#1b1303', items:BONES,   models:{ skeletal:'solid', sinuses:'solid' }, bind:['skeletal', 'sinuses'], noun:'bone', openLabel:'Glass skull' },
   muscles:{ label:'Muscles', acc:'#ff7d68', ink:'#220804', items:MUSCLES, models:{ skeletal:'solid', muscular:'solid' }, bind:['muscular'], noun:'muscle' },
   /* her three body levers on the real skeleton: only the muscles that ARE the effort stay on stage */
   levers: { label:'Levers',  acc:'#c4f07a', ink:'#162403', items:LEVERS,  models:{ skeletal:'solid', muscular:'solid' }, bind:['skeletal', 'muscular'], noun:'part', view:[70, 4], frame:{ pad:1.3, min:.22 },
     only:{ muscular:[/head of gastrocnemius$/, 'soleus muscle', 'calcaneal tendon', /head of biceps brachii$/, 'brachialis muscle', 'sternocleidomastoid muscle', 'descending part of trapezius muscle', 'splenius capitis muscle'] } },
-  glands: { label:'Glands',  acc:'#5fd4c0', ink:'#03211c', items:GLANDS,  models:{ skeletal:'ghost', glands:'solid', ovary:'solid' }, bind:['glands', 'ovary'], noun:'gland' },
+  glands: { label:'Glands',  acc:'#5fd4c0', ink:'#03211c', items:GLANDS,  models:{ skeletal:'ghost', glands:'solid', ovary:'solid', adrenalcut:'solid' }, bind:['glands', 'ovary', 'adrenalcut'], noun:'gland' },
   brain:  { label:'Brain',   acc:'#b9a2ff', ink:'#140b2e', items:BRAIN,   models:{ brain:'solid' }, bind:['brain'], noun:'part of the brain', home:'brain', frame:{ pad:1.3, min:.13 } },      // a 34 cm frame (right for a body) left the brain 75 px wide on a phone
   nerves: { label:'Nerves',  acc:'#ffd95e', ink:'#231a02', items:NERVES,  models:{ skeletal:'ghost', nerves:'solid' }, bind:['nerves'], noun:'nerve' },
   willis: { label:'Circle of Willis', acc:'#7fe3ff', ink:'#03222b', items:WILLIS, models:{ brain:'ghost', willis:'solid' }, bind:['willis'], noun:'artery', home:'brain', view:[12, -52], frame:{ pad:1.45, min:.08 } },   // under a ghost brain, seen from below: it is on the VENTRAL side. The accent is ice blue because a red glow on a red artery cannot be seen
   neuron: { label:'Neuron',  acc:'#ff8fd6', ink:'#2b0620', items:NEURON,  models:{ neuron:'solid', glia:'solid' }, bind:['neuron', 'glia'], noun:'part', home:'neuron', view:[0, 4], frame:{ pad:1.5, min:.09 }, schematic:'schematic · not to scale' },   // BUILT, not loaded: made-neuron.js
-  tissues:{ label:'Tissues', acc:'#9be38a', ink:'#0c2407', items:TISSUES, models:{ tissues:'solid', walls:'solid' }, bind:['tissues', 'walls'], noun:'part', home:'tissues', view:[0, 12], frame:{ pad:1.5, min:.06 }, schematic:'schematic · not to scale' },   // three of her figures, built: made-tissues.js
+  tissues:{ label:'Tissues', acc:'#9be38a', ink:'#0c2407', items:TISSUES, models:{ tissues:'solid', walls:'solid', longbone:'solid' }, bind:['tissues', 'walls', 'longbone'], noun:'part', home:'tissues', view:[0, 12], frame:{ pad:1.5, min:.06 }, schematic:'schematic · not to scale' },   // three of her figures, built: made-tissues.js
   heart:  { label:'Heart',   acc:'#fff0b3', ink:'#2a2205', items:HEART,   models:{ heart:'solid', ecg:'solid' }, bind:['heart', 'ecg'], noun:'structure', home:'heart', view:[15, 4], frame:{ pad:1.45, min:.09 }, extra:'Conduction system' },   // Module 1. Chambers turn to glass when what is asked is inside them
-  airway: { label:'Airway',  acc:'#a9c4ff', ink:'#0a1230', items:AIRWAY,  models:{ skeletal:'ghost', airway:'solid', spiro:'solid' }, bind:['airway', 'spiro'], noun:'structure', openLabel:'Glass lungs', home:'airway', view:[15, 4], frame:{ pad:1.4, min:.1 } },   // Module 1. The lobes turn to glass when a bronchus is asked
-  senses: { label:'Eye & Ear', acc:'#ffc46b', ink:'#2a1a02', items:SENSES,  models:{ eye:'solid', ear:'solid' }, bind:['eye', 'ear'], noun:'part', home:'eye', view:[38, 22], frame:{ pad:1.35, min:.05 }, schematic:'schematic · not to scale' },   // Module 3. Both BUILT: made-eye.js, made-ear.js
+  airway: { label:'Airway',  acc:'#a9c4ff', ink:'#0a1230', items:AIRWAY,  models:{ skeletal:'ghost', airway:'solid', spiro:'solid', awwall:'solid' }, bind:['airway', 'spiro', 'awwall'], noun:'structure', openLabel:'Glass lungs', home:'airway', view:[15, 4], frame:{ pad:1.4, min:.1 } },   // Module 1. The lobes turn to glass when a bronchus is asked
+  senses: { label:'Eye & Ear', acc:'#ffc46b', ink:'#2a1a02', items:SENSES,  models:{ eye:'solid', ear:'solid', cochlea:'solid', retina:'solid' }, bind:['eye', 'ear', 'cochlea', 'retina'], noun:'part', home:'eye', view:[38, 22], frame:{ pad:1.35, min:.05 }, schematic:'schematic · not to scale' },   // Module 3. Both BUILT: made-eye.js, made-ear.js
   repro:  { label:'Reproductive', acc:'#ff9ecb', ink:'#2b0618', items:REPRO, models:{ skeletal:'ghost', female:'solid', male:'solid', uterwall:'solid' }, bind:['female', 'male', 'uterwall'], sex:{ female:'female', male:'male', uterwall:'female' }, noun:'structure', home:'rpFemale', view:[0, 10], frame:{ pad:1.5, min:.08 } },   // Module 3. Two bodies share one pelvis: only one is on stage at a time
 };
 const ITEM = {};
@@ -150,7 +151,15 @@ const MODELS = {
   ecg:     { kind:'cell',   noun:'part',      note:'Opening the chest…', make:buildECG },
   spiro:   { kind:'cell',   noun:'part',      note:'Filling the lungs…', make:buildSpirogram },
   glia:    { kind:'cell',   noun:'cell',      note:'Growing a neuron…', make:buildGlia },
+  /* the cut-open figures (made-sections.js) and the two real sinus meshes of the source skull, which only show inside a glass skull */
+  sinuses: { kind:'organ',  noun:'cavity',    note:'Unpacking the skeleton…' },
+  longbone:{ kind:'cell',   noun:'part',      note:'Building the tissues…', make:buildLongBone },
+  adrenalcut:{ kind:'cell', noun:'part',      note:'Placing the glands…', make:buildAdrenal },
+  awwall:  { kind:'cell',   noun:'part',      note:'Filling the lungs…', make:buildAirwayWall },
+  cochlea: { kind:'cell',   noun:'part',      note:'Building the ear…', make:buildCochlea },
+  retina:  { kind:'cell',   noun:'part',      note:'Building the eye…', make:buildRetina },
 };
+const SKULL_RE = /^(frontal|parietal|occipital|temporal|sphenoid|ethmoid|zygomatic|nasal|lacrimal|palatine|inferior nasal concha) bone$|^maxilla$|^vomer$/;
 const HIDE_BRAIN = [/^falx cerebri$/, /^tentorium cerebelli$/, /root of spinal nerve$/, /^nerve to /, /^central canal/];      // the dura folds stand in front of the medial cut and the cerebellum
 
 const BONE_C = new THREE.Color('#e7dcc6'), CART_C = new THREE.Color('#9fb6c4'), TOOTH_C = new THREE.Color('#f4f0e6'), TENDON_C = new THREE.Color('#dacdb4');
@@ -217,8 +226,8 @@ async function loadModel(name, onProg) {
     const info = { mesh:o, base, side, mat:ownerMat || matName, model:name, kind:soft ? 'tendon' : kind, colour:colour.clone(), clipX:clip ? clip.x : 0,
       pretty:orig.replace(/ muscles?$/i, '').replace(/^\((.*)\)$/, '$1'), box:new THREE.Box3().setFromObject(o), items:[], ghost:false,
       soft:(kind === 'brain' && (ownerMat || matName) === 'LCR') || (kind === 'heart' && /lobe of/.test(base)),        // …the lungs round the heart likewise
-      openable:(kind === 'heart' && /^(left|right) (atrium|ventricle)$|^ascending aorta$|^pulmonary trunk$/.test(base)) || (kind === 'airway' && /lobe of/.test(base)),      // turns to glass when the question is about what is inside it        // a ventricle is a fluid space: drawn as glass, and a tap passes through it unless it is what was asked
-      men:kind === 'brain' && base === 'superior sagittal sinus' };      // on stage with the meninges only
+      openable:(kind === 'heart' && /^(left|right) (atrium|ventricle)$|^ascending aorta$|^pulmonary trunk$/.test(base)) || (kind === 'airway' && /lobe of/.test(base)) || (kind === 'bone' && SKULL_RE.test(base)),      // turns to glass when the question is about what is inside it        // a ventricle is a fluid space: drawn as glass, and a tap passes through it unless it is what was asked
+      men:(kind === 'brain' && base === 'superior sagittal sinus') || (name === 'sinuses' && 'sin') };      // on stage with the meninges only
     o.userData.info = info; REG.push(info);
   });
   const NONE = new THREE.MeshBasicMaterial({ visible:false }); kill.forEach(o => { o.material = NONE; });
@@ -321,7 +330,7 @@ function unglow(infos) { for (const i of infos || [...glows.keys()]) { glows.del
 /* (the lungs round the heart are glass at .1: context, not clutter) */
 /* one painter for both kinds of see-through: a deck's ghost context (the skeleton around the glands) and the x-ray round a deep target */
 function paint(i) { const g = i.baseGhost || i.xr || i.peel, dimmed = (i.dimK || 1) < 1, m = i.mesh.material, was = m.transparent, glass = !!i.glassy || (i.soft && !(xray && xray.has(i) && !G.tr));
-  m.transparent = !!g || glass || dimmed; m.opacity = i.baseGhost ? .11 : i.peel ? .13 : i.xr ? (i.kind === 'bone' ? .16 : .07) : glass ? (i.glassy || (i.openable ? .3 : i.kind === 'heart' ? .1 : G.tr ? .5 : .42)) : dimmed ? .3 : 1; m.depthWrite = !(g || glass || dimmed); if (was !== m.transparent) m.needsUpdate = true; i.ghost = !!g; }
+  m.transparent = !!g || glass || dimmed; m.opacity = i.baseGhost ? .11 : i.peel ? .13 : i.xr ? (i.kind === 'bone' ? .16 : .07) : glass ? (i.glassy || (i.openable ? (i.kind === 'bone' ? .13 : .3) : i.kind === 'heart' ? .1 : G.tr ? .5 : .42)) : dimmed ? .3 : 1; m.depthWrite = !(g || glass || dimmed); if (was !== m.transparent) m.needsUpdate = true; i.ghost = !!g; }
 let xray = null;
 function setXray(keep) { xray = new Set(keep); for (const i of REG) { i.xr = !xray.has(i); paint(i); } refreshPickables(); invalidate(); }
 function clearXray() { if (!xray) return; xray = null; for (const i of REG) { i.xr = false; paint(i); } refreshPickables(); invalidate(); }
@@ -335,10 +344,13 @@ function setMeninges(on) { if (on === 1) on = true; menOn = on; for (const i of 
 /* open the heart: its chambers (and the two great roots) turn to glass and a tap passes through them, so the valves inside can be seen and touched */
 let openOn = false;
 function setOpen(on) { openOn = on; for (const i of REG) if (i.openable) { i.soft = on; paint(i); } refreshPickables(); invalidate(); }
-let sectionOn = false, sectionPlane = null;
-function setSection(on) { const hs = REG.filter(i => i.model === 'heart'); if (!hs.length || (on === sectionOn && !on)) { sectionOn = on && hs.length > 0; return; } sectionOn = on;
+let sectionOn = false, sectionPlane = null, skullPlane = null;
+const clipTo = (i, pl) => { if ((i.sect || null) === pl) return; const m = i.mesh.material; m.clippingPlanes = pl ? [pl] : null; m.side = pl || i.made ? THREE.DoubleSide : THREE.FrontSide; m.needsUpdate = true; i.sect = pl; };
+function setSection(on) { if (on === 1) on = true; sectionOn = on; if (!skullPlane) skullPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1.645);
+  for (const i of REG) if (i.model === 'skeletal' && SKULL_RE.test(i.base)) clipTo(i, on === 'skull' ? skullPlane : null);
+  const hs = REG.filter(i => i.model === 'heart'); if (!hs.length) { refreshPickables(); invalidate(); return; } on = on === true;
   if (!sectionPlane) { const b = new THREE.Box3(); hs.filter(i => /^(left|right) (atrium|ventricle)$/.test(i.base)).forEach(i => b.union(i.box)); const n = new THREE.Vector3(.25, 0, -1).normalize(); sectionPlane = new THREE.Plane(n, -n.dot(b.getCenter(new THREE.Vector3())) + .004); }
-  for (const i of hs) { if (/lobe of/.test(i.base)) { i.mesh.visible = !on; continue; } const m = i.mesh.material; m.clippingPlanes = on ? [sectionPlane] : null; m.side = on || i.made ? THREE.DoubleSide : THREE.FrontSide; m.needsUpdate = true; i.sect = on; }
+  for (const i of hs) { if (/lobe of/.test(i.base)) { i.mesh.visible = !on; continue; }    clipTo(i, on ? sectionPlane : null); }
   refreshPickables(); invalidate(); }
 /* a wall SHARED by two chambers (the septa): a tap is right where one chamber's wall lies within t of the other chamber */
 const wverts = info => info.wv || (info.wv = (() => { const p = info.mesh.geometry.attributes.position, o = []; info.mesh.updateMatrixWorld(true); for (let k = 0; k < p.count; k += 2) o.push(new THREE.Vector3(p.getX(k), p.getY(k), p.getZ(k)).applyMatrix4(info.mesh.matrixWorld)); return o; })());
@@ -426,7 +438,7 @@ const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
 const INSIDE = { 'choroid plexus':['lateral ventricle', .03], 'nucleus':['soma', .08], 'synaptic vesicles':['axon terminals', .09],
   'articular cartilage':['synovial fluid', .12], 'osteocytes':['lacunae', .01], 'utricle':['vestibule', .05], 'saccule':['vestibule', .05] };
 function cast(x, y) { const r = canvas.getBoundingClientRect(); ndc.set(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, camera);
-  const hits = ray.intersectObjects(pickables, false).filter(h => { const i = h.object.userData.info; return !(i.clipX && Math.abs(h.point.x) < i.clipX) && !(i.sect && sectionPlane.distanceToPoint(h.point) < 0) && !(i.soft && !(xray && xray.has(i)) && G.cur && !G.cur.it.infos.includes(i)); });
+  const hits = ray.intersectObjects(pickables, false).filter(h => { const i = h.object.userData.info; return !(i.clipX && Math.abs(h.point.x) < i.clipX) && !(i.sect && i.sect.distanceToPoint(h.point) < 0) && !(i.soft && !(xray && xray.has(i)) && G.cur && !G.cur.it.infos.includes(i)); });
   const h0 = hits[0]; if (!h0) return null; const i0 = h0.object.userData.info;
   if (!(i0.soft || i0.glassy) || (G.cur && G.cur.it.infos.includes(i0))) return h0;
   if (i0.openable) return hits.find(h => !h.object.userData.info.soft && h.distance - h0.distance < .07) || h0;      // an opened chamber: what is inside it wins
@@ -492,7 +504,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
   next() {
     const R = this.round; unglow(); clearXray(); setPeel(null); ring.hide(); callout.hide(); toast();
     if (!R.queue.length) return this.finish();
-    const q = R.queue.shift(), it = q.it; setNerves(/^br-cn/.test(it.id)); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); setSection(!!it.section); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); } this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
+    const q = R.queue.shift(), it = q.it; setNerves(/^br-cn/.test(it.id)); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); setSection(it.section || false); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); } this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
     $('#barTitle').textContent = `${innerWidth > 520 ? DECK[this.deck].label + ' · ' : ''}${this.mode === 'find' ? 'Find it' : 'Name it'} · ${Math.min(R.done + 1, R.total)} of ${R.total}${q.first ? '' : ' · again'}`;
     $('#prog i').style.width = (R.done / R.total * 100) + '%';
     const P = $('#prompt'); P.classList.remove('swap'); void P.offsetWidth; P.classList.add('swap');
@@ -500,7 +512,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
       const st = this.cur.style, text = st === 'clue' ? it.clue.t : st === 'common' ? it.common : it.name;
       P.querySelector('.k').textContent = st === 'clue' ? (it.clue.hers ? 'Find it · clue from her quiz' : 'Find it · clue') : it.on && (it.deck === 'bones' || it.deck === 'airway') ? `On the ${it.on} · find the` : 'Find the';
       const n = P.querySelector('.n'); n.textContent = text; n.classList.toggle('long', st === 'clue');
-      P.querySelector('.s').textContent = st === 'name' ? (it.sub ? `(${it.sub})` : '') : st === 'common' ? 'Tap it — what is its proper name?' : it.cut ? 'cut in half · seen from the left' : it.men ? (it.stage || 'schematic layers · thickness exaggerated') : it.section ? 'the heart is cut open — a frontal section, like her figure' : it.open ? 'the chambers are shown as glass' : DECK[this.deck].schematic || '';
+      P.querySelector('.s').textContent = st === 'name' ? (it.sub ? `(${it.sub})` : '') : st === 'common' ? 'Tap it — what is its proper name?' : it.cut ? 'cut in half · seen from the left' : it.men ? (it.stage || 'schematic layers · thickness exaggerated') : it.section === 'skull' ? 'the skull cap is lifted off — you are looking down at the floor of the cranium, like her figure' : it.section ? 'the heart is cut open — a frontal section, like her figure' : it.open ? 'the chambers are shown as glass' : DECK[this.deck].schematic || '';
       dock(`<div class="acts"><button class="act" data-a="hint">Zoom me in</button><button class="act" data-a="show">Show me</button></div>`);
       if (it.peelNow) setPeel(it.peel);
       flyTo(regionFrame(it.region, it.az, it.el));
@@ -676,7 +688,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
   /* explore */
   explore() {
     const P = $('#prompt'); P.querySelector('.k').textContent = 'Explore'; const n = P.querySelector('.n'); n.textContent = 'Tap anything'; n.classList.remove('long'); P.querySelector('.s').textContent = 'Drag to turn · pinch to zoom';
-    $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xCut').hidden = this.deck !== 'brain'; $('#xMen').hidden = !REG.some(i => i.men && DECK[this.deck].bind.includes(i.model)); $('#xMen').textContent = DECK[this.deck].extra || 'Meninges'; $('#xOpen').hidden = !REG.some(i => i.openable && DECK[this.deck].bind.includes(i.model)); $('#xSect').hidden = this.deck !== 'heart'; $('#xSect').setAttribute('aria-pressed', 'false'); $('#xSex').hidden = !DECK[this.deck].sex; $('#xSex').textContent = this.sex === 'female' ? 'Show male' : 'Show female'; $('#xOpen').setAttribute('aria-pressed', 'false'); $('#xOpen').textContent = DECK[this.deck].openLabel || 'Glass chambers'; $('#xCut').setAttribute('aria-pressed', 'false'); $('#xMen').setAttribute('aria-pressed', 'false'); $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
+    $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xCut').hidden = this.deck !== 'brain'; $('#xMen').hidden = !REG.some(i => i.men && DECK[this.deck].bind.includes(i.model)); $('#xMen').textContent = DECK[this.deck].extra || 'Meninges'; $('#xOpen').hidden = !REG.some(i => i.openable && DECK[this.deck].bind.includes(i.model)); $('#xSect').hidden = this.deck !== 'heart' && this.deck !== 'bones'; $('#xSect').textContent = this.deck === 'bones' ? 'Lift the skull cap' : 'Cut it open'; if (this.deck === 'levers') $('#xOpen').hidden = true; $('#xSect').setAttribute('aria-pressed', 'false'); $('#xSex').hidden = !DECK[this.deck].sex; $('#xSex').textContent = this.sex === 'female' ? 'Show male' : 'Show female'; $('#xOpen').setAttribute('aria-pressed', 'false'); $('#xOpen').textContent = DECK[this.deck].openLabel || 'Glass chambers'; $('#xCut').setAttribute('aria-pressed', 'false'); $('#xMen').setAttribute('aria-pressed', 'false'); $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
     dock(`<input id="xq" type="search" placeholder="Search this deck…" autocomplete="off" autocapitalize="off" spellcheck="false"><div id="xhits"></div><div id="xbody"><div class="xcard"><p class="quiet">Nothing selected. Tap a ${DECK[this.deck].noun} to see what it is${this.deck === 'bones' ? ' — on the femur and hip bone the landmarks are live too' : ''}, or search for it.</p></div></div>`);
     flyTo(homeFrame(this.deck === 'brain' ? 60 : 15));
   },
@@ -691,7 +703,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
     $('#xhits').innerHTML = hits.map(i => `<button class="chip" data-peek="${i.id}">${esc(i.name)}</button>`).join('') || (q.length < 2 ? '' : '<span class="quiet" style="font-size:12.5px;color:var(--tx3)">Nothing by that name in this deck.</span>'); syncDock(); },
   /* put ONE structure on stage the way its own question would show it, fly to it and light it — from a results row or the Explore search */
   peek(id) { const it = ITEM[id]; if (!it || !it.ok) return; unglow(); clearXray(); ring.hide(); callout.hide(); controls.autoRotate = false;
-    setNerves(/^br-cn/.test(it.id) || this.mode === 'explore'); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); setSection(!!it.section); setPeel(it.peel || null); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); }
+    setNerves(/^br-cn/.test(it.id) || this.mode === 'explore'); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); setSection(it.section || false); setPeel(it.peel || null); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); }
     if (it.deep) setXray(it.infos); this.spot(it, ACC(), 'pulse'); callout.show(this.anchor(it), it.name, '', 0); flyTo(this.itemFrame(it));
     if (document.body.dataset.state === 'play') this.card(`<div class="xcard"><h3>${esc(it.name)}</h3><div class="tags">${it.her ? '<span class="tag her">On her list</span>' : '<span class="tag">Not on her list</span>'}${it.alt ? `<span class="tag">${esc(it.alt)}</span>` : ''}</div>${it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`); },
   toggle(which) {
@@ -699,8 +711,8 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
     if (which === 'cut') { setCut(!cutOn); $('#xCut').setAttribute('aria-pressed', cutOn); unglow(); callout.hide(); flyTo(regionFrame('brain', cutOn ? 90 : 60, 8)); }
     if (which === 'men') { setMeninges(!menOn); $('#xMen').setAttribute('aria-pressed', menOn); unglow(); callout.hide(); if (this.deck === 'brain') { if (menOn) flyTo(regionFrame('meninges', 60, 35)); } else { setOpen(menOn); $('#xOpen').setAttribute('aria-pressed', openOn); } }
     if (which === 'sex') { this.sex = this.sex === 'female' ? 'male' : 'female'; applyDeck(); $('#xSex').textContent = this.sex === 'female' ? 'Show male' : 'Show female'; unglow(); callout.hide(); flyTo(regionFrame(this.sex === 'female' ? 'rpFemale' : 'rpMale', this.sex === 'female' ? 0 : 100, 8)); }
-    if (which === 'sect') { setSection(!sectionOn); $('#xSect').setAttribute('aria-pressed', sectionOn); if (sectionOn) { setOpen(false); $('#xOpen').setAttribute('aria-pressed', 'false'); } unglow(); callout.hide(); flyTo(regionFrame('heart', 10, 2)); }
-    if (which === 'open') { setOpen(!openOn); $('#xOpen').setAttribute('aria-pressed', openOn); unglow(); callout.hide(); }
+    if (which === 'sect') { setSection(sectionOn ? false : this.deck === 'bones' ? 'skull' : true); $('#xSect').setAttribute('aria-pressed', sectionOn); if (sectionOn) { setOpen(false); $('#xOpen').setAttribute('aria-pressed', 'false'); } unglow(); callout.hide(); flyTo(this.deck === 'bones' ? regionFrame('head', 180, 78) : regionFrame('heart', 10, 2)); }
+    if (which === 'open') { setOpen(!openOn); if (this.deck === 'bones') { setMeninges(openOn ? 'sin' : false); if (openOn) flyTo(regionFrame('head', 90, 5)); } $('#xOpen').setAttribute('aria-pressed', openOn); unglow(); callout.hide(); }
     if (which === 'peel') { this.xPeel = !this.xPeel; $('#xPeel').setAttribute('aria-pressed', this.xPeel); groups.muscular.visible = !this.xPeel; unglow(); callout.hide(); refreshPickables(); invalidate(); }
   },
   reframe() { const st = document.body.dataset.state; if (st === 'home' || st === 'results') flyTo(homeFrame(), 500); else if (this.tr && this.cur) flyTo(this.cur.revealed ? this.itemFrame(this.cur.it) : this.traceFrame(), 400); else if (this.cur) flyTo(this.mode === 'find' && !this.cur.revealed ? regionFrame(this.cur.it.region, this.cur.it.az, this.cur.it.el) : this.itemFrame(this.cur.it), 400); },

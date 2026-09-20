@@ -191,6 +191,33 @@ export const BONES = [
     fact:'The outer of the two rounded knuckles at the knee end of the femur.' },
 ];
 
+/* ── Joints. Her MCQs: "Name this type of joint. (Shoulder)" = ball-and-socket · "…allows rotation between the atlas (C1) and the axis (C2)" = pivot · "found at the knees and elbows" = hinge.
+ *    Her essay: the elbow, the joints between the vertebrae and the bones of the cranium carry the three FUNCTIONAL names. All items are named by TYPE and `strict`,
+ *    so Name it is her question with only joint types as options. (The source skeleton has no intervertebral discs: the vertebrae themselves stand for that joint.) ── */
+const JT = (id, name, sub, region, az, el, extra) => ({ id:'jt-' + id, kind:'joint', strict:1, name, sub, her:1, region, az, el, ask:'Name this type of joint.', ...extra });
+BONES.push(
+  JT('shoulder', 'Ball-and-socket joint', 'the shoulder', 'arm', 20, 8, { on:'humerus', p:[.682, .959, .56], r:.035, alsoOn:[{ on:'scapula', p:[0, .84, .776], r:.04 }],
+    clue:{ t:'Name this type of joint. (Shoulder)', hers:1 }, fact:'The glenohumeral joint — the one "most commonly seen as the shoulder joint": the head of the humerus in the shallow, pear-shaped glenoid fossa of the SCAPULA. Synovial = a diarthrosis, freely movable. The hip is the other ball-and-socket.' }),
+  JT('hip', 'Ball-and-socket joint', 'the hip', 'pelvis', 0, 0, { her:0, on:'femur', p:[0.544, 0.945, 0.696], r:.03, fact:'The head of the femur in the acetabulum of the hip bone: deeper and more stable than the shoulder, so less movable.' }),
+  JT('elbow', 'Hinge joint', 'the elbow', 'arm', 20, 0, { on:'humerus', p:[.5, .03, .5], r:.04, alsoOn:[{ on:'ulna', p:[.5, .96, .5], r:.04 }, { on:'radius', p:[.5, .97, .5], r:.035 }],
+    clue:{ t:'What type of joint is found at the knees and elbows?', hers:1 }, fact:'Moves in one plane, like a door: flexion and extension. Synovial, so functionally a DIARTHROSIS — freely movable, with synovial fluid, a capsule and ligaments.' }),
+  JT('knee', 'Hinge joint', 'the knee', 'leg', 0, 5, { on:'femur', p:[.5, .026, .5], r:.05, alsoOn:[{ on:'tibia', p:[.33, .99, .63], r:.045 }, { on:'patella', p:[.5, .5, .5], r:.04 }],
+    clue:{ t:'What type of joint is found at the knees and elbows?', hers:1 }, fact:'The condyles of the femur on the tibia, with the patella in front. A synovial hinge: a diarthrosis.' }),
+  JT('pivot', 'Pivot joint', 'atlas on axis', 'head', 180, -5, { m:['atlas (c1)', 'axis (c2)'],
+    clue:{ t:'Name this type of joint that allows rotation between the atlas (C1) and the axis (C2).', hers:1 }, fact:'The ring of the atlas turns round the dens of the axis: shaking the head "no". (Nodding "yes" is the atlanto-occipital joint — her first-class lever.)' }),
+  JT('fibrous', 'Fibrous joint', 'sutures of the skull', 'head', 60, 25, { alt:'synarthrosis — immovable', m:[/^(frontal|parietal|occipital|temporal) bone$/],
+    clue:{ t:'The joints between the bones that form the cranium. (Tap any of those bones.)', hers:1 }, fact:'Sutures: bone held to bone by fibrous tissue, no cavity. Functional name SYNARTHROSIS — immovable.' }),
+  JT('cartilaginous', 'Cartilaginous joint', 'between the vertebrae', 'trunk', 90, 0, { alt:'amphiarthrosis — slightly movable', m:[/^vertebra [tl]\d+$/],
+    clue:{ t:'The joints between the vertebrae. (Tap any thoracic or lumbar vertebra.)', hers:1 }, fact:'Vertebral bodies joined by discs of fibrocartilage. Functional name AMPHIARTHROSIS — slightly movable. (The discs are not in the 3D source.)' }),
+  /* ── inside the skull: her two figures. A foramen is a HOLE (the foramen magnum is a real hole in this mesh; foramen ovale is not modelled). A sinus is a CAVITY WITHIN A BONE. ── */
+  { id:'sk-fmagnum', kind:'skullin', name:'Foramen magnum', her:1, section:'skull', on:'occipital bone', p:[.506, .05, .631], r:.03, alsoOn:[{ on:'atlas (c1)', p:[.508, 1, .319], r:.03 }, { on:'axis (c2)', p:[.513, 1.1, .419], r:.035 }], region:'head', az:180, el:78,
+    clue:{ t:'A foramen — a "round hole for vessels and nerves". Tap the largest one, in the floor of the skull.', hers:1 }, fact:'The spinal cord leaves the skull through it (you can see the atlas below). Her figure numbers it 3; her other foramen, number 2, is the foramen ovale in the sphenoid — too small to be a real hole in this model.' },
+  { id:'sk-frontal-sinus', kind:'skullin', name:'Frontal sinus', her:1, open:1, men:'sin', stage:'the skull is shown as glass', c:'#7cc4f2', m:['sinus of frontal bone'], region:'head', az:70, el:5,
+    clue:{ t:'A sinus — a "cavity within a bone". Tap the one in the forehead.', hers:1 }, fact:'An air space inside the frontal bone, above the orbits, opening into the nose. Her sagittal skull figure circles this and the sphenoid sinus: "they are both a sinus".' },
+  { id:'sk-sphenoid-sinus', kind:'skullin', name:'Sphenoidal sinus', her:1, open:1, men:'sin', stage:'the skull is shown as glass', c:'#7cc4f2', m:['sinus of sphenoid bone'], region:'head', az:70, el:5,
+    clue:{ t:'A sinus — a "cavity within a bone". Tap the one deep in the middle of the skull.', hers:1 }, fact:'Inside the body of the sphenoid, right under the sella turcica where the pituitary sits — which is why pituitary surgery goes in through the nose.' },
+);
+
 export const MUSCLES = [
   // ── her labelled figure, front ──
   { id:'deltoid', name:'Deltoid', her:1, region:'upper', az:40,
@@ -358,8 +385,10 @@ export const REGIONS = {
 
 export const SETS = {
   bones: [
-    { id:'her',       name:'Her list',      hint:'Every bone her Module 2 quizzes key', f:i => i.her && (!i.on || /^(ilium|ischium|pubis)$/.test(i.id)) },   // her 22-label figure asks ilium, ischium and pubis by name
-    { id:'landmarks', name:'Femur & hip',   hint:'Ilium · ischium · pubis · trochanters · condyles', f:i => !!i.on },
+    { id:'her',       name:'Her list',      hint:'Every bone her Module 2 quizzes key', f:i => i.her && !i.kind && (!i.on || /^(ilium|ischium|pubis)$/.test(i.id)) },   // her 22-label figure asks ilium, ischium and pubis by name
+    { id:'landmarks', name:'Femur & hip',   hint:'Ilium · ischium · pubis · trochanters · condyles', f:i => !!i.on && !i.kind },
+    { id:'joints',    name:'Joints',        hint:'Name this type of joint: ball-and-socket · hinge · pivot · fibrous · cartilaginous', f:i => i.kind === 'joint' },
+    { id:'skullin',   name:'Inside the skull', hint:'A foramen is a hole; a sinus is a cavity within a bone', f:i => i.kind === 'skullin' },
     { id:'axial',     name:'Skull & spine', hint:'Cranial bones, vertebrae, sternum parts', f:i => !i.on && /^(cranium|mandible|maxilla|hyoid|frontal|parietal|temporal|occipital|zygomatic|nasal|cervical|thoracic|lumbar|sacrum|coccyx|atlas|axis|manubrium|xiphoid|true-ribs|false-ribs|floating-ribs)$/.test(i.id) },
     { id:'all',       name:'Everything',    hint:'All of it', f:() => true },
   ],

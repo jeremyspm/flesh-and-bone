@@ -607,6 +607,52 @@ REPRO.push(
   UW('basal', 'Basal layer', ['basal layer'], 'The layer with STRAIGHT arteries: it stays intact and forms the new functional layer.', 'Stratum basalis: never shed.'),
 );
 
+/* ── The cut-open figures (made-sections.js). Every name below is one her banks or slides use; the wording of `hers` clues is hers. ── */
+const LB = (id, name, m, clue, fact, extra) => ({ id:'lb-' + id, kind:'longbone', name, her:1, region:'tsLong', az:0, el:8, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+TISSUES.push(
+  LB('diaphysis', 'Diaphysis', ['compact bone of the shaft', 'medullary cavity', 'periosteum'], 'The shaft of a long bone.', 'Her skeleton match keys "tibial diaphysis" and "ulnar diaphysis". In endochondral ossification the bone collar forms round it and the PRIMARY ossification centre is in it.'),
+  LB('epiphysis', 'Epiphysis', ['spongy bone', 'articular cartilage'], 'The end of a long bone. A "head" is a distinct one, separated from the shaft by a narrowed neck.', 'Spongy bone inside, articular cartilage on the joint surface. The SECONDARY ossification centres appear here.'),
+  LB('medullary', 'Medullary cavity', ['medullary cavity'], 'The hollow of the shaft. In endochondral ossification it forms as the secondary ossification centres appear.', 'Holds yellow (fatty) marrow in adults. Lined by endosteum.'),
+  LB('compact', 'Compact bone', ['compact bone of the shaft'], null, 'The dense wall of the shaft, built of osteons — the other figure in this deck is one block of it, magnified.', { her:0 }),
+  LB('spongy', 'Spongy bone', ['spongy bone'], 'Formed when the periosteal bud invades the internal cavities.', 'Trabeculae with red marrow in the gaps: light, but strong along the lines of stress.'),
+  LB('periosteum', 'Periosteum', ['periosteum'], null, 'The fibrous membrane round the outside of the bone (not over the articular cartilage). The periosteal bud grows in from it; appositional growth — growth in THICKNESS — happens under it.', { her:0 }),
+);
+const AWL = (id, name, region, m, clue, fact, extra) => ({ id:'awl-' + id, kind:'awall', name, her:1, region, az:0, el:0, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+AIRWAY.push(
+  AWL('cring', 'C-shaped cartilage ring', 'awTrachea', ['c-shaped cartilage ring'], 'Hyaline cartilage that keeps the trachea open and gives it shape — open at the back.', 'Looks like white teeth when the trachea is cut lengthwise. The carina, epiglottis, trachea and bronchi have cartilage in their walls; bronchioles have none.'),
+  AWL('trachealis', 'Trachealis muscle', 'awTrachea', ['trachealis muscle'], 'Connects the two free sides of the C-shaped cartilage rings, at the posterior side of the trachea.', 'When it contracts it narrows the trachea, so air is expelled with more force and clears the mucus during coughing. Being soft, it also lets food pass down the oesophagus behind it.'),
+  AWL('lining', 'Ciliated epithelium', 'awTrachea', ['ciliated epithelium of the trachea', 'cilia'], 'The lining of the trachea: pseudostratified columnar epithelium — part of the mucociliary escalator.', 'Goblet cells make mucus that traps particles; the cilia sweep it upwards. The escalator does NOT include the squamous cells of the alveoli.', { alt:'pseudostratified columnar epithelium' }),
+  AWL('cilia', 'Cilia', 'awTrachea', ['cilia'], 'The faint hairs on the lumen side of the duct, sweeping trapped particles upwards.', 'Her image question keys them as label B. Smoking paralyses them.'),
+  AWL('bmuscle', 'Smooth muscle', 'awBronchiole', ['smooth muscle of the bronchiole'], 'In asthma it constricts, so less air reaches the alveoli.', 'A bronchiole has NO cartilage, so nothing holds it open when this ring of muscle tightens.', { sub:'of the bronchiole' }),
+  AWL('cuboidal', 'Cuboidal epithelium', 'awBronchiole', ['cuboidal epithelium of the bronchiole'], 'The lining of a bronchiolus: cartilage absent.', 'Her slide match: trachea and bronchus = pseudostratified columnar + cartilage · bronchiolus = cuboidal, no cartilage · alveoli = mainly squamous.', { sub:'of the bronchiole' }),
+  AWL('type1', 'Alveolar cell type 1', 'awAlveolus', ['alveolar cell type 1'], 'Squamous epithelium: allows rapid diffusion of respiratory gases.', 'The thin wall of the alveolus — a short distance for gases to diffuse during EXTERNAL respiration (her T/F says "internal": false).', { az:0, el:0 }),
+  AWL('type2', 'Alveolar cell type 2', 'awAlveolus', ['alveolar cell type 2'], 'Cuboidal epithelium: the cell type that produces surfactant.', 'Surfactant is a lipoprotein that lowers surface tension so the alveoli stay open. Premature babies lack it: neonatal respiratory distress syndrome.'),
+  AWL('capillary', 'Pulmonary capillary', 'awAlveolus', ['pulmonary capillary'], null, 'A single layer of endothelium (simple squamous). Blood arrives low in oxygen and leaves oxygenated.', { her:0 }),
+  AWL('membrane', 'Respiratory membrane', 'awAlveolus', ['respiratory membrane'], null, 'The alveolar wall + the fused basement membranes + the capillary endothelium. Her T/F: it is NOT "alveolar cells and surfactant".'),
+);
+const SX = (id, kind, name, region, m, clue, fact, extra) => ({ id:'sx-' + id, kind, name, her:1, region, az:0, el:0, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+SENSES.push(
+  SX('vestibuli', 'cochlea', 'Scala vestibuli', 'seCochlea', ['scala vestibuli'], 'The superior chamber of the cochlea, with perilymph.', 'Starts at the oval window, where the stapes pushes on the perilymph.'),
+  SX('media', 'cochlea', 'Scala media', 'seCochlea', ['scala media'], 'The middle chamber — the cochlear duct, with endolymph. It houses the organ of Corti.', 'Her colour code: perilymph yellow, endolymph blue.', { alt:'cochlear duct' }),
+  SX('tympani', 'cochlea', 'Scala tympani', 'seCochlea', ['scala tympani'], 'The inferior chamber of the cochlea, with perilymph.', 'Ends at the round window, which bulges out as the oval window is pushed in.'),
+  SX('reissner', 'cochlea', "Reissner's membrane", 'seCochlea', ["reissner's membrane"], null, 'The thin roof of the scala media, between it and the scala vestibuli. Her slide lists it with the basilar and tectorial membranes.', { alt:'vestibular membrane' }),
+  SX('basilar', 'cochlea', 'Basilar membrane', 'seCochlea', ['basilar membrane'], 'Movement of perilymph and endolymph results in its displacement.', 'The floor of the scala media; the organ of Corti sits on it. Where along the cochlea it moves most depends on the pitch (frequency).'),
+  SX('tectorial', 'cochlea', 'Tectorial membrane', 'seCochlea', ['tectorial membrane'], null, 'The stiff flap over the hair cells. When the basilar membrane moves, the hairs bend against it. Loud noise drives them into it too violently — hair cells are lost for good.'),
+  SX('corti', 'cochlea', 'Organ of Corti', 'seCochlea', ['organ of corti', 'hair cells'], 'In the scala media: where mechanical waves are transduced to electrical impulses.', 'The hearing organ itself: hair cells and their supporting cells on the basilar membrane.'),
+  SX('hair', 'cochlea', 'Hair cells', 'seCochlea', ['hair cells'], 'Mechanoreceptors: bending them transduces sound to electrical stimuli.', 'Their stereocilia touch the tectorial membrane. Impulses leave along the cochlear part of the vestibulocochlear nerve (VIII) to the auditory cortex in the temporal lobe.'),
+  SX('pigment', 'retina', 'Pigment layer', 'seRetina', ['pigment layer'], 'Prevents light reflection in the eye.', 'The outermost layer of the retina, against the choroid. Light has already passed through every other layer by the time it gets here.'),
+  SX('rods', 'retina', 'Rods', 'seRetina', ['rods'], 'Photoreceptors for scotopic, achromatic vision.', 'Dim light, black and white, mostly round the edge of the retina. None at the optic disc.'),
+  SX('cones', 'retina', 'Cones', 'seRetina', ['cones'], 'Photoreceptors for photopic, chromatic vision.', 'Bright light and colour. The fovea has ONLY cones — sharpest vision.'),
+  SX('bipolar', 'retina', 'Bipolar cells', 'seRetina', ['bipolar cells'], null, 'The middle neurons of the retina: they pass the signal from the photoreceptors to the ganglion cells.'),
+  SX('ganglion', 'retina', 'Ganglion cells', 'seRetina', ['ganglion cells', 'optic nerve fibres'], null, 'The last neurons of the retina. Their axons run over the inner surface and leave together as the optic nerve — at the optic disc, which therefore has no rods or cones: the blind spot.'),
+);
+GLANDS.push(
+  { id:'gl-cortex', kind:'adrenalcut', name:'Adrenal cortex', her:1, region:'glAdrenal', az:0, el:0, m:['adrenal cortex'], clue:{ t:'The outer part of the adrenal gland: aldosterone and cortisol come from here.', hers:0 },
+    fact:'Steroid hormones, under HORMONAL control: aldosterone (keeps blood sodium — her MCQ), cortisol (raises blood glucose; long-term therapy suppresses the immune system), and a trickle of gonadocorticoids — insignificant next to the gonads. SCHEMATIC: a gland cut open, beside the body.' },
+  { id:'gl-medulla', kind:'adrenalcut', name:'Adrenal medulla', her:1, region:'glAdrenal', az:0, el:0, m:['adrenal medulla'], clue:{ t:'Sympathetic nerves stimulate it to release epinephrine: the fight and flight reflex — a neural stimulus.', hers:1 },
+    fact:'The core of the gland: really a sympathetic ganglion that secretes into the blood. Epinephrine and norepinephrine — her example of NEURAL stimulation of an endocrine gland.' },
+);
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -638,6 +684,13 @@ export const MORE_REGIONS = {
   rpFemale: { model:'female', m:[/./], pad:1.25, min:0.05 },
   rpMale:   { model:'male', m:[/./], pad:1.12, min:0.05 },
   arm:      { m:['humerus', 'radius', 'ulna', /metacarpal/, /of hand$/], side:'L', pad:1.08 },
+  tsLong:    { model:'longbone', m:[/./], pad:1.1, min:0.05 },
+  glAdrenal: { model:'adrenalcut', m:[/./], pad:1.5, min:0.05 },
+  awTrachea: { model:'awwall', m:['c-shaped cartilage ring', 'oesophagus'], pad:1.15, min:0.05 },
+  awBronchiole:{ model:'awwall', m:['smooth muscle of the bronchiole'], pad:1.6, min:0.05 },
+  awAlveolus:{ model:'awwall', m:['alveolar cell type 1', 'pulmonary capillary'], pad:1.4, min:0.05 },
+  seCochlea: { model:'cochlea', m:[/./], pad:1.1, min:0.05 },
+  seRetina:  { model:'retina', m:[/./], pad:1.15, min:0.05 },
   wlVessels: { model:'walls', m:[/ of (artery|vein)$/, 'capillary', 'valve'], pad:1.12, min:0.05 },
   wlHeart:   { model:'walls', m:[/cardium$/, 'pericardial cavity'], pad:1.25, min:0.05 },
   ecg:       { model:'ecg', m:[/./], pad:1.08, min:0.05 },
@@ -663,12 +716,15 @@ export const MORE_SETS = {
     { id:'her', name:'Her list', hint:'The parts on her Module 3 revision slides. Schematics, not to scale', f:i => i.her },
     { id:'eye', name:'Eye', hint:'Three tunics, the lens, two humors', f:i => i.kind === 'eye' },
     { id:'ear', name:'Ear', hint:'Outer, middle and inner ear', f:i => i.kind === 'ear' },
+    { id:'cochlea', name:'Inside the cochlea', hint:'Her slide 21: three chambers, three membranes, the organ of Corti', f:i => i.kind === 'cochlea' },
+    { id:'retina', name:'Layers of the retina', hint:'Light comes in from the left: ganglion → bipolar → rods and cones → pigment layer', f:i => i.kind === 'retina' },
   ],
   airway: [
     { id:'her', name:'Her list', hint:'Her airway figure (nostril and nasal cavity are not in the 3D source)', f:i => i.her },
     { id:'upper', name:'Pharynx & larynx', hint:'Above the trachea', f:i => i.kind === 'upper' },
     { id:'tree', name:'Bronchial tree', hint:'Trachea, carina, bronchi — the lobes turn to glass', f:i => i.kind === 'tree' },
     { id:'lung', name:'Lungs', hint:'Five lobes and the diaphragm', f:i => i.kind === 'lung' },
+    { id:'awall', name:'Airway walls', hint:'Module 1 histology: trachea in cross-section · a bronchiole · an alveolus', f:i => i.kind === 'awall' },
     { id:'spiro', name:'Lung volumes', hint:'Four volumes in one column; each capacity spans the volumes it adds up', f:i => i.kind === 'spiro' },
     { id:'all', name:'Everything', hint:'All of it', f:() => true },
   ],
@@ -688,6 +744,7 @@ export const MORE_SETS = {
     { id:'muscle', name:'Muscle', hint:'Muscle, fascicle, fibre and their three wrappings', f:i => i.kind === 'muscle' },
     { id:'vessel', name:'Vessel wall', hint:'Module 1: artery, vein, capillary, valve and the three tunics — her 7-point match', f:i => i.kind === 'vessel' },
     { id:'hwall', name:'Heart wall', hint:'Module 1: pericardium to endocardium', f:i => i.kind === 'hwall' },
+    { id:'longbone', name:'Long bone', hint:'Cut open: the nouns of her ossification and bone-growth questions', f:i => i.kind === 'longbone' || i.id === 'ts-plate' || i.id === 'ts-cartilage' },
     { id:'all', name:'Everything', hint:'All of it', f:() => true },
   ],
   neuron: [
