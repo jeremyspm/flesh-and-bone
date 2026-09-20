@@ -26,6 +26,19 @@ export const NEUTRAL = { 'hip bone': n => hipPart(n) === 'acetabulum' ? { title:
 const RIB = n => new RegExp('^(' + n + ') rib$');
 
 export const BONES = [
+  // ── the two divisions (her true/false pair: "the clavicle is axial" — false; "skull and mandible are appendicular" — false) ──
+  { id:'axial', name:'Axial skeleton', her:1, region:'whole', az:20,
+    m:[/^(frontal|parietal|occipital|temporal|sphenoid|ethmoid|zygomatic|nasal|lacrimal|palatine|inferior nasal concha|hyoid) bone$/, 'maxilla', 'mandible', 'vomer',
+       /^(upper|lower) (canine|lateral incisor|medial incisor|first|second)/, / rib$/, /^(body of sternum|manubrium of sternum|xiphoid process)$/,
+       /^(atlas|axis) \(c[12]\)$/, /^vertebra [ctl]\d+$/, 'sacrum', 'coccyx'],
+    clue:{ t:'The skull and mandible belong to this division of the skeleton — the clavicle does not.', hers:1 },
+    fact:'Skull, hyoid, vertebral column (with sacrum and coccyx), ribs and sternum — the central axis. 80 bones.' },
+  { id:'appendicular', name:'Appendicular skeleton', her:1, region:'whole', az:20,
+    m:['clavicle', 'scapula', 'humerus', 'radius', 'ulna', /^(capitate|hamate|lunate|pisiform|scaphoid|trapezium|trapezoid|triquetrum) bone$/, /metacarpal bone$/, /phalanx of /,
+       'hip bone', 'femur', 'patella', 'tibia', 'fibula', /^(calcaneus|talus|cuboid bone|navicular bone|(intermediate|lateral|medial) cuneiform bone)$/, /metatarsal bone$/],
+    clue:{ t:'The clavicle belongs to this division of the skeleton, even though it sits on the trunk.', hers:1 },
+    fact:'The limbs plus the girdles that hang them on the axis: clavicle + scapula, and the hip bones. 126 bones.' },
+
   // ── skull & neck ──
   { id:'cranium', name:'Cranium', common:'Skull (braincase)', her:1, region:'head', az:25,
     m:[/^(frontal|parietal|occipital|temporal|sphenoid|ethmoid) bone$/],
