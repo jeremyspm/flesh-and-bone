@@ -365,8 +365,9 @@ common fibular = her "peroneal nerve" (foot drop), trigeminal (tooth extraction)
 **A · mechanical, at 375×812.** `fabAutoplay(deck, mode, 'all')` played EVERY item of every deck in Find it and in Name it (every set where a deck has no "Everything"), and all 10 traces.
 All pass. It caught one real bug: a joint placed on the same spot as a bone landmark (hip joint ↔ head of femur, knee ↔ condyles) stole the tap, so "Head of femur" could not be
 answered — `nearestSphere` now competes inside the current deck and inside the asked item's family (`kind`).
-**B · reading.** All 469 items (name, other names, clue, fact) and every trace step were read for falseness. Three corrections: "zona radiata" had been given the wrong synonym
-(corona radiata → zona pellucida, with the difference said); sperm mitochondria "stay outside the egg" → "are destroyed after fertilisation"; a note that bronchioles and alveoli are
+**B · reading.** All 469 items (name, other names, clue, fact) and every trace step were read for falseness. Two corrections that stand, and one of mine that was WRONG and is reverted (second pass, same day): I had changed the zona radiata's other name
+from corona radiata to zona pellucida. Her own drop-down keys "zona radiata" for "the outer layer covering the egg and originating from the follicle" and offers "zona pelucida" as a
+wrong option; both her figures label that layer corona radiata. The item now carries her sentence as its clue, and says not to swap them. The two that stand: sperm mitochondria "stay outside the egg" → "are destroyed after fertilisation"; a note that bronchioles and alveoli are
 "too small for this model" predated the Airway walls figure. Provenance: 233 clues tagged as her wording were scored against her three banks + slides; seven that were my framing of
 her figure lost the tag.
 **C · what his screenshots showed.** Built figures floated unlabelled ("why do some models look like this"): each now carries a plain-words caption (`CAPTIONS`, a sprite, never a part's
@@ -392,3 +393,23 @@ synovial joint (frontal section), osteon (telescoped lamellae), muscle → fasci
 Captions were also made quieter than the question prompt. Driven at 375×812 after the change: Eye & Ear 46 items in both modes + the light trace, Reproductive
 her list in both modes and both sexes + the three figure sets + the egg trace — all answerable; the only misses are the harness's one planted miss per round.
 What this does NOT give him: her actual picture. The trainer teaches where things are and why; the Paper Sims ask her questions on her own figures.
+
+## Second comprehensive pass, TOOL-WIDE (21 Sep 2026, his ask: "make sure we didn't miss anything / build the wrong thing … tool wide, spare nothing")
+
+**Mechanical.** Every item of all 13 decks in Find it and Name it, every set of the two decks without an "Everything" set, and all 10 traces, at 375×812: all answerable
+(the only misses are the harness's one planted miss per round).
+
+**Every deck's question VIEW against her own label figures** (M1/M2 sim figures, M3 quiz figures, M3 revision deck). The real-mesh decks cannot be laid out wrongly, only
+viewed from the wrong side, so the check was the side: skeleton and glands from the front (her whole-body figures), muscles front + back, brain areas from the LEFT with the
+frontal lobe on the left (her A-G map), cranial nerves and the circle of Willis from below with the front at the top (her Willis drawing), the male pelvis from the left with
+the front on the left (her sagittal figure), the female organs from the front (her 1-8 figure), tiptoe / elbow / nod as her body examples. All agreed — except the heart.
+
+| found | her figure | fix |
+|---|---|---|
+| **my own wrong "correction"** | her drop-down keys "zona radiata" = the OUTER, follicle-derived layer and lists "zona pelucida" as a WRONG option; both her figures label that layer corona radiata | the first audit had changed its other name to zona pellucida. Reverted; the clue is now her sentence; the card says not to swap them; her calcium key added |
+| heart chambers asked on the OUTSIDE (left atrium from behind) | all her heart figures are the cut-open frontal section, RA upper left · LA upper right | the four chambers are asked on the frontal cut (`section:1`, az 10); the cards say where each sits on her figure and where it really is |
+| meninges only on the brain | her "label the three meninges" is a SPINAL CORD figure (pia L · arachnoid K · dura J; CSF in the subarachnoid space and central canal; ependymal cells; blood-brain barrier) | pia · subarachnoid space · arachnoid · dura added round the cord figure, clues in her words, drawn finger-thick and asked on a zoomed region (`pnCordIn`): 16-28 px wide at 375 |
+| levers only on limbs | half her lever questions are BARS (load box · fulcrum triangle · effort arrow; "lever arm" = the bones) | each class card spells the lever as her bar, in her order, with her keys. A 3D bar beside the limb was rejected: seen edge-on from half the question angles, and it gives the class away |
+| two loose facts | — | spermatozoa are not "released tail-first" (heads in the Sertoli cells, tails in the lumen); corpus luteum card gains her relaxin key |
+
+Re-read against her graded keys and slide text: all 44 Reproductive and 46 Eye & Ear cards. 473 items.

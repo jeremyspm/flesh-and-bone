@@ -24,6 +24,13 @@ export function buildSpinalCord() { const M = maker(V(.52, 1.28)), D = .018, zF 
   M.add('Dorsal horn', [slab([[.006, .006], [.012, .012], [.022, .034], [.03, .038], [.033, .03], [.026, .008], [.02, .002]], D + .006)], '#8f7bd6', { anchor:V(.026, .03, zF) });
   M.add('Ventral horn', [slab([[.006, -.006], [.02, .002], [.026, .008], [.034, -.014], [.03, -.03], [.018, -.032], [.01, -.012]].reverse(), D + .006)], '#d9776a', { anchor:V(.026, -.02, zF) });
   M.add('Central canal', [disc(.0042, D + .01, 0, 0)], '#6db7ee', { anchor:V(0, 0, D / 2 + .005) });
+  /* the three coverings, deepest first — her meninges label question is asked on a spinal cord figure (pia L · arachnoid K · dura J). C-shaped: open on the right, where the roots leave. Drawn far thicker than life: at phone size a true-to-scale pia is 3 px wide and no finger can hit it */
+  const cee = (r0, r1) => { const A0 = 58 * Math.PI / 180, A1 = 308 * Math.PI / 180, n = 60, at = (r, k) => { const a = A0 + (A1 - A0) * k / n; return [r * 1.2 * Math.cos(a), r * Math.sin(a)]; };
+    return slab([...Array.from({ length:n + 1 }, (_, k) => at(r1, k)), ...Array.from({ length:n + 1 }, (_, k) => at(r0, n - k))], D); };
+  M.add('Pia mater of the cord', [cee(.0505, .0575)], '#f29bb0', { anchor:V(-.0648, 0, D / 2) });
+  M.add('Subarachnoid space of the cord', [cee(.0575, .0695)], '#9fdcff', { glassy:.45, anchor:V(-.0762, .004, D / 2) });
+  M.add('Arachnoid mater of the cord', [cee(.0695, .0765)], '#c3aef0', { anchor:V(-.0876, 0, D / 2) });
+  M.add('Dura mater of the cord', [cee(.078, .087)], '#c9bea6', { anchor:V(-.099, 0, D / 2) });
   // roots: dorsal (sensory, with its ganglion) and ventral (motor) join into the spinal nerve (mixed)
   M.add('Dorsal root', [tube([V(.03, .036), V(.06, .05), V(.095, .045), V(.125, .02)], .0048)], '#7cc4f2', { anchor:V(.07, .051, .0048) });
   M.add('Dorsal root ganglion', [ball(.0115, .098, .043, 0, 1.35, 1)], '#4f9fe0', { anchor:V(.098, .043, .0115) });

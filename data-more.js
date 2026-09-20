@@ -364,11 +364,11 @@ TISSUES.push(
 const HT = (id, kind, name, az, el, m, extra) => ({ id:'ht-' + id, kind, name, region:'heart', az, el, m, ...extra });
 const COND = { her:1, men:1, open:1, stage:'schematic · placed on the real heart · chambers shown as glass' };
 export const HEART = [
-  HT('ra', 'chamber', 'Right atrium', 330, 5, ['right atrium'], { her:1, fact:'Receives deoxygenated blood from the superior and inferior venae cavae and the coronary sinus.' }),
-  HT('rv', 'chamber', 'Right ventricle', 10, 0, ['right ventricle'], { her:1,
-    clue:{ t:'The pumping force that drives the blood through the PULMONARY circulation.', hers:1 }, fact:'Most of the FRONT of the heart. Pumps to the lungs only, so its wall is thinner than the left.' }),
-  HT('la', 'chamber', 'Left atrium', 180, 10, ['left atrium'], { her:1, fact:'On the BACK of the heart. Receives oxygenated blood from the four pulmonary veins — where the pulmonary circulation ends.' }),
-  HT('lv', 'chamber', 'Left ventricle', 60, 0, ['left ventricle'], { her:1,
+  HT('ra', 'chamber', 'Right atrium', 10, 0, ['right atrium'], { her:1, section:1, fact:'Upper LEFT of her cut-open heart figure (the right side of the heart is on YOUR left). Receives deoxygenated blood from the superior and inferior venae cavae and the coronary sinus.' }),
+  HT('rv', 'chamber', 'Right ventricle', 10, 0, ['right ventricle'], { her:1, section:1,
+    clue:{ t:'The pumping force that drives the blood through the PULMONARY circulation.', hers:1 }, fact:'Most of the FRONT of the heart — so a true frontal cut takes most of it away; her drawn figure shows it bigger than this. Pumps to the lungs only, so its wall is thinner than the left.' }),
+  HT('la', 'chamber', 'Left atrium', 10, 0, ['left atrium'], { her:1, section:1, fact:'Upper RIGHT of her cut-open heart figure, under the pulmonary trunk. In the body it is on the BACK of the heart (turn the model to see). Receives oxygenated blood from the four pulmonary veins — where the pulmonary circulation ends.' }),
+  HT('lv', 'chamber', 'Left ventricle', 10, 0, ['left ventricle'], { her:1, section:1,
     clue:{ t:'The pumping force that drives the blood through the SYSTEMIC circulation.', hers:1 }, fact:'Forms the apex. The thickest wall: it pumps to the whole body. Stroke volume and cardiac output are measured from HERE.' }),
 
   HT('tricuspid', 'valve', 'Tricuspid valve', 20, 0, [/leaflet of right atrioventricular valve$/], { her:1, open:1, alt:'right atrioventricular valve',
@@ -592,11 +592,11 @@ export const LEVERS = [
   LV('3l', 'role', 'Load', 'flexing the elbow', 'arm', 20, 0, { m:HAND,
     clue:{ t:'Flexing the arm at the elbow: tap the LOAD.', hers:1 }, fact:'The hand (and whatever it holds). The bones of the forearm are the LEVER ARM — her answer to "what part of the lever system represents bones".' }),
   LV('c1', 'class', 'First-class lever', 'fulcrum in the middle', 'head', 90, 0, { m:['atlas (c1)', ...SKULL, ...NECK],
-    clue:{ t:'The lever with the FULCRUM in the middle. Tap any part of it.', hers:1 }, fact:'Nodding the head on the atlanto-occipital joint. Like a see-saw or scissors: it can change the direction of a force; moving the fulcrum closer to the LOAD makes the load easier to move (more mechanical advantage).' }),
+    clue:{ t:'The lever with the FULCRUM in the middle. Tap any part of it.', hers:1 }, fact:'As the bar her quiz draws:  LOAD ▇ —— ▲ FULCRUM —— ↓ EFFORT. The bar itself (her key: the LEVER ARM) is the bones. Nodding the head on the atlanto-occipital joint. Like a see-saw or scissors: it can change the direction of a force; moving the fulcrum closer to the LOAD makes the load easier to move (more mechanical advantage).' }),
   LV('c2', 'class', 'Second-class lever', 'load in the middle', 'leg', 90, 0, { m:[...BALL, 'tibia', 'talus', 'fibula', ...CALF],
-    clue:{ t:'The lever that gives a STRENGTH advantage — the load is in the middle. Tap any part of it.', hers:1 }, fact:'Standing on tiptoe (like a wheelbarrow). The effort arm is longer than the load arm, so mechanical advantage is greater than 1: strength.' }),
+    clue:{ t:'The lever that gives a STRENGTH advantage — the load is in the middle. Tap any part of it.', hers:1 }, fact:'As the bar her quiz draws:  ▲ FULCRUM —— LOAD ▇ —— ↑ EFFORT. Standing on tiptoe (like a wheelbarrow): toes = fulcrum, body weight through the tibia = load, calf pulling on the Achilles tendon = effort. The effort arm is longer than the load arm, so mechanical advantage is greater than 1: strength. Her key for "largest mechanical advantage" picks the bars where the effort is far from the fulcrum and the load close to it.' }),
   LV('c3', 'class', 'Third-class lever', 'effort in the middle', 'arm', 20, 0, { m:['humerus', 'radius', 'ulna', ...HAND, ...BICEPS],
-    clue:{ t:'The lever that gives a SPEED advantage — the effort is in the middle. Tap any part of it.', hers:1 }, fact:'Flexing the elbow with the biceps (like tweezers). Mechanical advantage is LESS than 1 (her example: 3 ÷ 30 = 0.1) — it does not make the work easier, it makes it fast and wide-ranging. Most levers in the body are third class.' }),
+    clue:{ t:'The lever that gives a SPEED advantage — the effort is in the middle. Tap any part of it.', hers:1 }, fact:'As the bar her quiz draws:  ▲ FULCRUM —— ↑ EFFORT —— LOAD ▇. Flexing the elbow with the biceps (like tweezers). Mechanical advantage is LESS than 1 (her example: 3 ÷ 30 = 0.1) — it does not make the work easier, it makes it fast and wide-ranging. Most levers in the body are third class.' }),
 ];
 
 /* ── The uterus wall (Module 3), BUILT, on stage with the female organs. Her revision slide 2: perimetrium · myometrium (smooth muscle) · endometrium,
@@ -667,22 +667,26 @@ REPRO.push(
   RX('primary', 'tubule', 'male', 'Primary spermatocytes', 'rpTubule', ['primary spermatocytes'], 'Diploid cells that go through Meiosis I to form haploid secondary spermatocytes.', 'The biggest cells in the wall. Her sequence: spermatogonium → diploid spermatocyte → haploid spermatocyte → spermatid → spermatozoon.'),
   RX('secondary', 'tubule', 'male', 'Secondary spermatocytes', 'rpTubule', ['secondary spermatocytes'], 'Haploid cells that go through Meiosis II to form haploid spermatids.', 'Short-lived, so seldom seen on a slide.'),
   RX('spermatids', 'tubule', 'male', 'Spermatids', 'rpTubule', ['spermatids'], 'A haploid male gamete before spermiogenesis.', 'Round cells near the lumen. SPERMIOGENESIS reshapes them into spermatozoa; spermatoGENESIS is the whole process from spermatogonia.'),
-  RX('zoa', 'tubule', 'male', 'Spermatozoa', 'rpTubule', ['spermatozoa'], null, 'Released tail-first into the lumen of the tubule, then on to the epididymis to mature.', { her:0, alt:'sperm' }),
+  RX('zoa', 'tubule', 'male', 'Spermatozoa', 'rpTubule', ['spermatozoa'], null, 'Their heads stay tucked into the Sertoli cells with the tails trailing into the lumen; once released into it they travel on to the epididymis to mature.', { her:0, alt:'sperm' }),
   RX('sertoli', 'tubule', 'male', 'Sertoli cells', 'rpTubule', ['sertoli cells'], 'They nurture the sperm cells and make the hormone inhibin.', 'Tall cells from the wall to the lumen. FSH acts on them; their inhibin suppresses FSH from the anterior pituitary.'),
   RX('leydig', 'tubule', 'male', 'Leydig cells', 'rpTubule', ['leydig cells'], 'Between the seminiferous tubules: they make the hormone testosterone.', 'OUTSIDE the tubule, next to the capillaries. LH acts on them.'),
   RX('pfollicle', 'ovarysec', 'female', 'Primary follicle', 'rpOvary', ['primary follicle', 'oocyte in a primary follicle'], null, 'Holds a PRIMARY oocyte: diploid, arrested in prophase I since before birth. Oogonia → primary oocytes happens during fetal development. Her figures draw the stages IN ORDER round the edge of the ovary: primary → secondary → tertiary follicle → ovulation → corpus luteum → corpus albicans.', { her:0 }),
   RX('sfollicle', 'ovarysec', 'female', 'Secondary follicle', 'rpOvary', ['secondary follicle', 'oocyte in the secondary follicle'], null, 'Growing under FSH; the developing follicle releases estrogen.', { her:0 }),
   RX('tfollicle', 'ovarysec', 'female', 'Tertiary follicle', 'rpOvary', ['tertiary follicle', 'oocyte in the tertiary follicle', 'antrum of the tertiary follicle', 'ruptured follicle'], 'The fluid-filled Graafian follicle that ruptures at ovulation.', 'Ovulation is triggered by the LH peak. It releases a secondary oocyte arrested in metaphase of Meiosis II. Drawn twice, as her figures do: ripe and bulging at the surface, then burst open beside it. Her slide calls it the VESICULAR follicle; the blue is its fluid (antrum).', { alt:'Graafian / vesicular follicle' }),
   RX('oocyte', 'ovarysec', 'female', 'Secondary oocyte', 'rpOvary', ['secondary oocyte', 'zona radiata'], 'A haploid female gamete that is released from the tertiary follicle.', 'Caught by the fimbriae and swept into the Fallopian tube. Meiosis II is only completed if fertilisation occurs.'),
-  RX('zona', 'ovarysec', 'female', 'Zona radiata', 'rpOvary', ['zona radiata'], 'The layer round the egg that the sperm must get through.', 'Her drop-down keys it as "zona radiata": the coat round the egg (most textbooks say zona pellucida; the corona radiata is the cloud of follicle cells outside it). The acrosome\'s enzymes open the way; calcium then blocks other sperm.', { alt:'zona pellucida' }),
+  RX('zona', 'ovarysec', 'female', 'Zona radiata', 'rpOvary', ['zona radiata'], 'The outer layer covering the egg, originating from the follicle.', 'HER name for it. Her drop-down keys "zona radiata" and lists "zona pelucida" as a WRONG option, so do not swap them. Both of her figures label this same ring of follicle cells "corona radiata"; the zona pellucida is the thin coat underneath it. The acrosome\'s enzymes open the way through, and her key for the mineral the sperm needs to penetrate the outer layers is CALCIUM.', { alt:'corona radiata (the label on her figures)' }),
   RX('owall', 'ovarysec', 'female', 'Ovarian wall', 'rpOvary', ['ovarian wall'], 'It ruptures at ovulation to let the secondary oocyte out.', 'Drawn open at the lower right, where the follicle has just burst.'),
-  RX('luteum', 'ovarysec', 'female', 'Corpus luteum', 'rpOvary', ['corpus luteum', 'centre of the corpus luteum'], 'What is left of the follicle after ovulation: it releases progesterone and estrogen.', 'Progesterone keeps the endometrium. No pregnancy → it degenerates into the corpus albicans and menstruation follows; hCG from an embryo keeps it alive.'),
+  RX('luteum', 'ovarysec', 'female', 'Corpus luteum', 'rpOvary', ['corpus luteum', 'centre of the corpus luteum'], 'What is left of the follicle after ovulation: it releases progesterone and estrogen.', 'Progesterone keeps the endometrium. No pregnancy → it degenerates into the corpus albicans and menstruation follows; hCG from an embryo keeps it alive. Her fertility-quiz key for the first three months of pregnancy: it makes progesterone, estrogen AND relaxin.'),
   RX('albicans', 'ovarysec', 'female', 'Corpus albicans', 'rpOvary', ['corpus albicans'], null, 'The white scar a corpus luteum leaves behind.', { her:0 }),
 );
 
 /* ── Her PERIPHERAL NERVOUS SYSTEM quiz (Module 2.2, graded keys read 21 Sep 2026): two figures no whole-body model shows (made-pns.js). ── */
 const PN = (id, kind, name, region, m, clue, fact, extra) => ({ id:'pn-' + id, kind, name, her:1, region, az:0, el:0, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
 NERVES.push(
+  PN('pia', 'cord', 'Pia mater', 'pnCordIn', ['pia mater of the cord'], 'The DEEPEST of the three meninges: it follows the blood vessels into the choroid plexuses.', 'Her label question asks the meninges on a spinal cord figure like this one: pia (deepest) → arachnoid (middle) → dura (outer). Pia = delicate: it clings to the cord itself.'),
+  PN('arachnoid', 'cord', 'Arachnoid mater', 'pnCordIn', ['arachnoid mater of the cord'], 'The MIDDLE one of the three meninges.', 'Arachnoid = spider-web. The CSF is UNDER it, in the subarachnoid space.'),
+  PN('dura', 'cord', 'Dura mater', 'pnCordIn', ['dura mater of the cord'], 'The OUTER one of the three meninges, closest to the skull and the vertebral canal.', 'Dura = tough. Outside it, in the vertebral canal, is the epidural space — where an epidural anaesthetic goes.'),
+  PN('sas', 'cord', 'Subarachnoid space', 'pnCordIn', ['subarachnoid space of the cord'], 'Cerebrospinal fluid circulates in this space — and in the central canal.', 'Between the arachnoid and the pia. Her key: the CSF is made by EPENDYMAL cells, which also move it with their cilia, and with the astrocytes they form the blood-brain barrier. A lumbar puncture samples CSF from here.'),
   PN('canal', 'cord', 'Central canal', 'pnCord', ['central canal'], 'In the middle of the grey matter, with CSF.', 'Her label figure keys it as number 1. It is continuous with the fourth ventricle.'),
   PN('dhorn', 'cord', 'Dorsal horn', 'pnCord', ['dorsal horn'], null, 'The posterior limb of the grey-matter butterfly: SENSORY fibres come in here and synapse on interneurons. Her label figure keys it.'),
   PN('vhorn', 'cord', 'Ventral horn', 'pnCord', ['ventral horn'], 'The portion of the spinal cord that controls muscle movement.', 'The anterior limb: the cell bodies of the MOTOR neurons (lower motor neurons) sit here.'),
@@ -703,7 +707,7 @@ NERVES.push(
 );
 
 /* clues that are MY framing of her figure, not her sentence: not tagged as her wording (content audit, 21 Sep 2026) */
-for (const id of ['pn-canal', 'pn-droot', 'pn-vroot', 'pn-spinal', 'pn-receptor', 'pn-effector', 'rx-zona']) { const it = [...NERVES, ...REPRO].find(i => i.id === id); if (it && it.clue) it.clue.hers = 0; }
+for (const id of ['pn-canal', 'pn-droot', 'pn-vroot', 'pn-spinal', 'pn-receptor', 'pn-effector']) { const it = [...NERVES, ...REPRO].find(i => i.id === id); if (it && it.clue) it.clue.hers = 0; }
 
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
@@ -735,6 +739,7 @@ export const MORE_REGIONS = {
   earIn:    { model:'ear', m:['vestibule', 'cochlea', 'semicircular canals', 'vestibulocochlear nerve'], pad:1.12, min:0.05 },
   rpFemale: { model:'female', m:[/./], pad:1.25, min:0.05 },
   pnCord:   { model:'cord', m:[/./], pad:1.1, min:0.05 },
+  pnCordIn: { model:'cord', m:[/^(white matter of the spinal cord|grey commissure|dorsal horn|ventral horn|central canal)$| of the cord$/], pad:1.12, min:0.05 },      // the cord and its coverings alone: the reflex arc makes the whole figure twice as wide
   pnNerve:  { model:'nervecut', m:[/./], pad:1.15, min:0.05 },
   rpSperm:  { model:'sperm', m:[/./], pad:1.12, min:0.05 },
   rpTubule: { model:'tubule', m:[/./], pad:1.12, min:0.05 },
@@ -766,7 +771,7 @@ export const CAPTIONS = [
   { region:'awTrachea', t:'Looking down the trachea\nfront of the neck at the top' }, { region:'awBronchiole', t:'A bronchiole, cut across' }, { region:'awAlveolus', t:'One air sac and its blood supply' },
   { region:'seCochlea', t:'One turn of the cochlea, cut across' }, { region:'seRetina', t:'The retina, magnified\nlight comes in from the left' },
   { region:'rpSperm', t:'A sperm cell' }, { region:'rpTubule', t:'A seminiferous tubule, cut across\nthe hollow in the middle is its lumen' }, { region:'rpOvary', t:'An ovary, cut open\nthe stages run clockwise from the top left' },
-  { region:'pnCord', t:'The spinal cord, cut across, with a reflex\nback of the body at the top' }, { region:'pnNerve', t:'A nerve, cut across' }, { region:'glAdrenal', t:'An adrenal gland, cut open' },
+  { region:'pnCord', t:'The spinal cord in its coverings, cut across\nback of the body at the top · a reflex runs through it' }, { region:'pnNerve', t:'A nerve, cut across' }, { region:'glAdrenal', t:'An adrenal gland, cut open' },
 ];
 
 export const MORE_SETS = {
