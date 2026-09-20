@@ -762,6 +762,33 @@ export const MORE_REGIONS = {
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
+/* ── HER FIGURE beside ours (spec: docs/HER-FIGURE-REFERENCE-SPEC.md). URLs only: the images stay on his own unlisted Paper Sims and load on tap.
+ *    Keys, first match wins: item id → region → 'kind:<kind>' → 'deck:<deck>'. `differs` is one plain sentence on how hers is drawn; I have LOOKED at every
+ *    figure listed here (21 Sep 2026). `labelled:true` = her picture carries the names, so it must never show while a question is open. ── */
+const M1 = 'https://jeremyspm.github.io/hs2-paper-m1/', M2 = 'https://jeremyspm.github.io/hs2-test2/';
+const FG = (sim, file, from, differs, labelled) => ({ src:sim + 'img/' + file, sim, from, differs, labelled:!!labelled });
+const JOINT = [FG(M2, 'HS2IMG-8818604.png', 'Module 2 formative · “Label the parts of the synovial joint”', 'The same frontal cut as ours. Hers letters the parts A–F: the cartilage is the blue-grey cap on each bone end, the synovial membrane the thin orange line inside the capsule.')];
+const BONE = [FG(M2, 'HS2IMG-8820770.png', 'MS Overview quiz · compact and spongy bone', 'Hers pulls ONE osteon up out of a wedge of bone, with spongy bone inside and periosteum outside. Ours shows three osteons and no spongy bone.', 1)];
+const MUSCLE = [FG(M2, 'HS2IMG-8820771.png', 'MS Overview quiz · skeletal muscle', 'Hers runs left to right in three steps: muscle → fascicle → fibre. Ours stacks the same three levels upward.', 1)];
+const CORD = [FG(M2, 'HS2IMG-EXT-15f41cb601de.jpg', 'Revision quiz · “Label the three meninges”', 'Hers is a length of cord in 3D with the coverings peeled back in steps: L = pia (on the cord), K = arachnoid, J = dura (outermost). Ours is the same thing cut across.'),
+  FG(M2, 'HS2DATA-979fe9b65a13352c.png', 'PNS quiz · label the sensory, motor and mixed nerve', 'The same cross-section as ours: sensory in by the dorsal root (with its ganglion), motor out by the ventral root, mixed in the spinal nerve.')];
+export const FIGREF = {
+  tsJoint:JOINT, tsBone:BONE, tsOsteon:BONE, tsMuscle:MUSCLE, tsFibre:MUSCLE, pnCord:CORD, pnCordIn:CORD,
+  pnNerve:[FG(M2, 'HS2DATA-2de7f5a6fd8badb2.png', 'PNS quiz · nerve fibre versus nerve', 'The same cut-across view as ours: endoneurium round each fibre, perineurium round each bundle, epineurium round the whole nerve.', 1)],
+  wlHeart:[FG(M1, 'HS2IMG-b001f5f56a6c4221.png', 'Module 1 · layers of the heart wall, A–G', 'The same order as ours, outside at the top: fibrous pericardium first, endocardium last.')],
+  wlVessels:[FG(M1, 'HS2IMG-f3b230e2b4ffb2ea.jpg', 'Module 1 · Blood vessel walls (label question)', 'Hers is a microscope photo. The artery is the round one with the thick wall and the wavy lining; the vein is the big collapsed one with the thin wall.')],
+  heart:[FG(M1, 'HS2IMG-af9241e369a824f0.png', 'Module 1 · Anatomical structures of the heart', 'Hers is a drawing cut open from the front, so the right ventricle looks big; a true frontal cut (ours) takes most of it away. In both, the right side of the heart is on YOUR left.'),
+    FG(M1, 'HS2IMG-01d343b6dfbb8ce4.jpg', 'Module 1 · the five parts of the conduction system, A–E', 'The same cut-open heart with the pathway drawn in: SA node top left, then AV node, bundle, branches, Purkinje fibres.')],
+  spiro:[FG(M1, 'HS2IMG-c85b6ba9f489a86e.png', 'Module 1 · lung volumes, A–H', 'The same layout as ours: the breathing trace on the left, the four volumes stacked in the first column, each capacity a taller bar beside them.')],
+  awTrachea:[FG(M1, 'HS2IMG-07448c35c77d9686.png', 'Module 1 · the trachealis muscle', 'Hers is a REAL trachea opened up in the lab: the white lumps along the edge are the cut ends of the C-shaped cartilage rings, and the stripy band joining them is the trachealis muscle.')],
+  'kind:area':[FG(M2, 'HS2IMG-8819609.png', 'Module 2 formative · functional areas of the brain, A–G', 'The LEFT side of the brain with the frontal lobe on the left — the way ours opens.')],
+  'deck:bones':[FG(M2, 'HS2IMG-8819819.png', 'Formative: General bones · the skeleton, A–O', 'A whole skeleton from the front with lettered boxes. Ours is the same view in 3D.')],
+  'deck:muscles':[FG(M2, 'HS2IMG-4720419.png', 'Labelling muscles and bones', 'Front and back views side by side, lettered A–Q.')],
+  'deck:glands':[FG(M2, 'HS2IMG-EXT-520535e61b34.jpg', 'Diencephalon & Endocrine · label the glands, A–H', 'A body from the front, with the head turned and the brain cut so the pituitary and pineal show.')],
+  'deck:willis':[FG(M2, 'HS2DATA-bc2946b06d8be8aa.jpg', 'The Brain & Stroke · circle of Willis', 'A flat drawing seen from below with the front at the top, as ours opens. Hers is labelled and marks where berry aneurysms form.', 1)],
+  'deck:levers':[FG(M2, 'HS2IMG-8819232.png', 'Module 2: MS & NS · a lever system', 'Hers is the BAR: a load box, a fulcrum triangle, an effort arrow — the bar itself (the lever arm) is the bones. Ours is the same lever on the limb.', 1)],
+};
+
 /* What each BUILT figure is, in plain words, drawn above it. A caption names the figure, never a part that can be asked. `\n` starts a dimmer second line. */
 export const CAPTIONS = [
   { region:'tsJoint', t:'A synovial joint, cut open' }, { region:'tsBone', t:'A block of compact bone, magnified' }, { region:'tsMuscle', t:'A skeletal muscle, cut across' },

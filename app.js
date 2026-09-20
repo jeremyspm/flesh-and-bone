@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
-import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, SENSES, REPRO, LEVERS, PLACE, MORE_REGIONS, MORE_SETS, TRACES, CAPTIONS } from './data-more.js';
+import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, SENSES, REPRO, LEVERS, PLACE, MORE_REGIONS, MORE_SETS, TRACES, CAPTIONS, FIGREF } from './data-more.js';
 import { buildMeninges } from './made.js';
 import { buildNeuron } from './made-neuron.js';
 import { buildTissues } from './made-tissues.js';
@@ -247,6 +247,19 @@ async function loadModel(name, onProg) {
 }
 
 const menLines = [];
+/* HER FIGURE, one tap away (docs/HER-FIGURE-REFERENCE-SPEC.md). The chip is only ever built where no question is open: Explore cards, results peeks, the fact AFTER an answer. */
+const figKey = (it, deck) => [it && it.id, it && it.region, it && it.kind && 'kind:' + it.kind, 'deck:' + (deck || (it && it.deck) || '')].find(k => k && FIGREF[k]) || '';
+const figChip = (it, deck) => { const k = figKey(it, deck); return k ? `<button class="tag figchip" data-fig="${k}">Her figure ↗</button>` : ''; };
+function openFig(key, n = 0) { const L = FIGREF[key]; if (!L) return; const f = L[n % L.length]; let el = $('#figsheet');
+  if (!el) { el = document.createElement('div'); el.id = 'figsheet'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', 'Her figure'); document.body.appendChild(el);
+    el.addEventListener('click', e => { if (e.target === el || e.target.closest('[data-figx]')) { el.hidden = true; return; } const nx = e.target.closest('[data-fign]'); if (nx) openFig(el.dataset.key, +nx.dataset.fign); });
+    addEventListener('keydown', e => { if (e.key === 'Escape' && !el.hidden) el.hidden = true; }); }
+  el.dataset.key = key; el.hidden = false;
+  el.innerHTML = `<div class="figbox"><div class="fighead"><b>HER FIGURE</b><span>from her quiz — not ours</span><button class="figx" data-figx aria-label="Close">✕</button></div>`
+    + `<div class="figimg"><img alt="Her figure: ${esc(f.from)}" src="${esc(f.src)}" onerror="this.replaceWith(Object.assign(document.createElement('p'),{className:'figfail',textContent:'Her figure would not load — open the Paper Sim instead.'}))"></div>`
+    + `<p class="figfrom">${esc(f.from)}</p><p class="figdiff">${esc(f.differs)}</p>`
+    + `<div class="figacts">${L.length > 1 ? `<button class="act" data-fign="${(n + 1) % L.length}">Her other figure (${(n + 1) % L.length + 1} of ${L.length})</button>` : ''}<a class="act pri" href="${esc(f.sim)}" target="_blank" rel="noopener">Answer her questions on it ↗</a></div></div>`; }
+document.addEventListener('click', e => { const b = e.target.closest('[data-fig]'); if (b) { e.preventDefault(); e.stopPropagation(); openFig(b.dataset.fig); } }, true);
 /* A built figure says what it IS, in plain words, above itself — never the name of a part (that would be the answer). A sprite, not in REG, so it cannot be tapped.
    It was the first thing he asked on seeing them: "why do some models look like this". */
 function addCaptions(root, model) {
@@ -620,7 +633,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
     if (!ok) c.tries = 1;
     const pts = this.settle(ok); this.spot(it, ok ? '#3ddc97' : ACC(), ok ? 'flash' : 'pulse', 1200); callout.show(this.anchor(it), it.name, ok ? 'good' : '', 0);
     if (ok) { sfx.good(); buzz(12); const r = btn.getBoundingClientRect(); popScore(r.left + r.width / 2, r.top, '+' + pts); } else { sfx.bad(); buzz([30, 40, 30]); }
-    const d = $('#dock'); d.insertAdjacentHTML('afterbegin', `<div class="fact">${ok ? '' : `You picked <b>${esc(ITEM[btn.dataset.id].name)}</b>. `}<b>${esc(it.name)}</b>${it.alt ? ` (${esc(it.alt)})` : ''} — ${esc(it.fact || '')}</div>`);
+    const d = $('#dock'); d.insertAdjacentHTML('afterbegin', `<div class="fact">${ok ? '' : `You picked <b>${esc(ITEM[btn.dataset.id].name)}</b>. `}<b>${esc(it.name)}</b>${it.alt ? ` (${esc(it.alt)})` : ''} — ${esc(it.fact || '')} ${figChip(it, G.deck)}</div>`);
     d.insertAdjacentHTML('beforeend', `<div class="acts" style="margin-top:8px"><button class="act pri" data-a="skip">Next</button></div>`); syncDock();
     if (ok) setTimeout(() => this.round && this.cur === c && this.next(), 1500);
   },
@@ -721,7 +734,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
   inspect(hit) {
     const info = hit.object.userData.info, d = describe(info, hit.point), it = d.item; unglow();
     const same = it && !it.on ? it.infos : REG.filter(i => i.base === info.base); glow(same, ACC(), 'solid'); callout.show(hit.point, d.title, '', 0); sfx.tick();
-    const tags = [d.her ? '<span class="tag her">On her list</span>' : '<span class="tag">Not on her list</span>', it && it.common ? `<span class="tag">${esc(it.common)}</span>` : '', it && it.alt ? `<span class="tag">${esc(it.alt)}</span>` : '', info.made ? '<span class="tag">Schematic</span>' : '', d.sub ? `<span class="tag">${esc(d.sub)}</span>` : ''].join('');
+    const tags = [d.her ? '<span class="tag her">On her list</span>' : '<span class="tag">Not on her list</span>', it && it.common ? `<span class="tag">${esc(it.common)}</span>` : '', it && it.alt ? `<span class="tag">${esc(it.alt)}</span>` : '', info.made ? '<span class="tag">Schematic</span>' : '', d.sub ? `<span class="tag">${esc(d.sub)}</span>` : '', DECK[this.deck].bind.includes(info.model) ? figChip(it, this.deck) : ''].join('');
     this.card(`<div class="xcard"><h3>${esc(d.title)}</h3><div class="tags">${tags}</div>${it && it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it && it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`);
   },
   card(html) { const b = $('#xbody'); if (b) { b.innerHTML = html; const h = $('#xhits'); if (h) h.innerHTML = ''; syncDock(); } else dock(html); },
@@ -731,7 +744,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
   peek(id) { const it = ITEM[id]; if (!it || !it.ok) return; unglow(); clearXray(); ring.hide(); callout.hide(); controls.autoRotate = false;
     setNerves(/^br-cn/.test(it.id) || this.mode === 'explore'); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open || it.section === 1 || it.section === true); setSection(it.section || false); focusFigure(it); setPeel(it.peel || null); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); }
     if (it.deep) setXray(it.infos); this.spot(it, ACC(), 'pulse'); callout.show(this.anchor(it), it.name, '', 0); flyTo(this.itemFrame(it));
-    if (document.body.dataset.state === 'play') this.card(`<div class="xcard"><h3>${esc(it.name)}</h3><div class="tags">${it.her ? '<span class="tag her">On her list</span>' : '<span class="tag">Not on her list</span>'}${it.alt ? `<span class="tag">${esc(it.alt)}</span>` : ''}</div>${it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`); },
+    if (document.body.dataset.state === 'play') this.card(`<div class="xcard"><h3>${esc(it.name)}</h3><div class="tags">${it.her ? '<span class="tag her">On her list</span>' : '<span class="tag">Not on her list</span>'}${it.alt ? `<span class="tag">${esc(it.alt)}</span>` : ''}${figChip(it, this.deck)}</div>${it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`); },
   toggle(which) {
     if (which === 'her') { this.xHer = !this.xHer; $('#xHer').setAttribute('aria-pressed', this.xHer); const bind = DECK[this.deck].bind; setDim(this.xHer ? (i => !bind.includes(i.model) || i.items.some(x => x.her)) : null); }
     if (which === 'cut') { setCut(!cutOn); $('#xCut').setAttribute('aria-pressed', cutOn); unglow(); callout.hide(); flyTo(regionFrame('brain', cutOn ? 90 : 60, 8)); }

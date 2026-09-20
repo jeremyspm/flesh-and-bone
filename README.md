@@ -413,3 +413,16 @@ the front on the left (her sagittal figure), the female organs from the front (h
 | two loose facts | — | spermatozoa are not "released tail-first" (heads in the Sertoli cells, tails in the lumen); corpus luteum card gains her relaxin key |
 
 Re-read against her graded keys and slide text: all 44 Reproductive and 46 Eye & Ear cards. 473 items.
+
+## "Her figure" beside ours — phase 1 (21 Sep 2026, his idea; spec in `docs/HER-FIGURE-REFERENCE-SPEC.md`)
+
+The small in-depth views will never look like the diagram she shows, so hers is now one tap away. `FIGREF` in `data-more.js` maps
+item id → region → `kind:` → `deck:` to her figure: 19 keys, 18 images, all Module 1 and 2 (joint, compact bone, muscle, heart wall, vessel walls,
+cut-open heart + conduction, lung volumes, trachea, spinal cord ×2, nerve, brain areas, skeleton, muscles, glands, circle of Willis, lever bar).
+Each entry says where it is from and, in one sentence I wrote after LOOKING at it, how hers is drawn differently from ours.
+
+- **Nothing of hers is in this repo.** The images are third-party pictures; they stay on his own unlisted Paper Sims and load from there on tap
+  (same origin, plain `<img>`). `tools/check-figrefs.mjs [--live]` fails on a src that is not on a sim, is missing from the sim's `img/` on disk, or is dead.
+- **No answer leaks.** The button is only built where no question is open: Explore cards, results peeks, and the fact shown AFTER a Name-it answer.
+  Checked at 375 px: 0 buttons while a Find-it or Name-it question is open, 1 after answering; sheet opens, loads, closes (✕, backdrop, Esc); no overflow.
+- Module 3 figures (ovary, eye, cochlea, tubule, sperm, female, male) join when `hs2-test3` is published and hosts them.

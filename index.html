@@ -243,6 +243,15 @@ body[data-mode=explore] #stats,body[data-mode=explore] #prog{visibility:hidden}
 }
 @media (max-height:620px){ #home{max-height:78dvh} .brand{margin-bottom:8px} }
 @media (prefers-reduced-motion:reduce){ *{animation-duration:.01s!important;transition-duration:.01s!important} }
+.figchip{cursor:pointer;border:1px solid color-mix(in srgb,var(--acc) 55%,transparent);background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--tx);font:inherit;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+#figsheet{position:fixed;inset:0;z-index:60;background:rgba(3,6,14,.72);display:flex;align-items:flex-end;justify-content:center}
+#figsheet[hidden]{display:none}
+.figbox{width:min(720px,100%);max-height:86dvh;overflow:auto;background:#121826;border:1px solid rgba(255,255,255,.12);border-radius:18px 18px 0 0;padding:14px 16px calc(16px + env(safe-area-inset-bottom));box-sizing:border-box}
+.fighead{display:flex;align-items:baseline;gap:8px;font-size:12px;letter-spacing:.06em;color:var(--tx2)}.fighead b{color:var(--acc)}.figx{margin-left:auto;background:none;border:0;color:var(--tx);font-size:18px;cursor:pointer;padding:4px 8px}
+.figimg{margin:10px 0;background:#fff;border-radius:10px;overflow:auto;max-height:52dvh;text-align:center}.figimg img{max-width:100%;height:auto;display:block;margin:0 auto}
+.figfrom{margin:0;font-size:12.5px;color:var(--tx3)}.figdiff{margin:6px 0 12px;font-size:14px;line-height:1.45;color:var(--tx)}.figfail{padding:24px;color:#333;margin:0}
+.figacts{display:flex;flex-wrap:wrap;gap:8px}.figacts .act{flex:1 1 160px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;padding:0 12px;box-sizing:border-box}
+@media (min-width:900px){#figsheet{align-items:center}.figbox{border-radius:18px}}
 </style>
 </head>
 <body data-deck="bones" data-state="loading" data-mode="find">
@@ -329,7 +338,7 @@ body[data-mode=explore] #stats,body[data-mode=explore] #prog{visibility:hidden}
   <h3>Airway</h3>
   <p>Pharynx, palate, epiglottis, larynx, trachea, the whole bronchial tree, the five lobes and the diaphragm, inside a ghost skeleton. When a <b>bronchus</b> is asked the lobes turn to glass. The 3D source has no nasal cavity, nostril, bronchioles or alveoli, so those labels of her figure cannot be asked here. The carina is a measured point on the trachea.</p>
   <h3>Layers and graphs</h3>
-  <p>Some of her label questions are about things no whole organ can show: the three <b>tunics</b> of an artery and a vein, the layers of the <b>heart wall</b> and of the <b>uterus wall</b>, the waves of an <b>ECG</b>, the <b>lung volumes</b> on a spirometer trace. Each is built as a schematic and lives in the deck it belongs to (Tissues, Reproductive, Heart, Airway) as its own set. Each follows the layout of her own drawing of it (the uterus wall side-on with the outside on the left, the ovary with its stages in order round the edge, the tubule cut across with the lumen in the middle), so what you drill is what she shows. Layers are pulled apart or stepped so every one can be tapped; on the lung-volume chart the four volumes are one column of bars and each capacity is a bar spanning the volumes it adds up.</p>
+  <p>Some of her label questions are about things no whole organ can show: the three <b>tunics</b> of an artery and a vein, the layers of the <b>heart wall</b> and of the <b>uterus wall</b>, the waves of an <b>ECG</b>, the <b>lung volumes</b> on a spirometer trace. Each is built as a schematic and lives in the deck it belongs to (Tissues, Reproductive, Heart, Airway) as its own set. Where she has a picture of the same thing, a <b>Her figure ↗</b> button opens HER diagram next to ours — in Explore, and on the answer once a question is done (never while it is still open: her pictures are labelled). It says where her figure is from and how it is drawn differently, and links into the Paper Sim where her questions on it live. Each follows the layout of her own drawing of it (the uterus wall side-on with the outside on the left, the ovary with its stages in order round the edge, the tubule cut across with the lumen in the middle), so what you drill is what she shows. Layers are pulled apart or stepped so every one can be tapped; on the lung-volume chart the four volumes are one column of bars and each capacity is a bar spanning the volumes it adds up.</p>
   <h3>Tissues</h3>
   <p>Three of her labelled figures, <b>built as schematics</b> (no scan models tissue at this scale; every textbook draws these): a <b>synovial joint</b> with the capsule opened at the front, <b>compact bone</b> with three osteons standing out of the block, and <b>skeletal muscle</b> pulled apart level by level — muscle, fascicle, fibre, myofibrils. The parts are the blanks of her own figures. Not to scale, nothing lettered.</p>
   <h3>Circle of Willis</h3>
