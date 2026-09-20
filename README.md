@@ -59,8 +59,8 @@ which is how a new landmark gets its numbers.
 
 ## Progress
 
-The ring on each deck is how many of her list are **locked**: right first time, twice running. A miss
-takes two steps back. Rounds deal the least-locked, least-recently-seen first. Nothing is due and
+The ring on each deck is how many of her list are **learned** (the code calls it `LOCK`): right first time, twice running. A miss
+takes two steps back. Rounds deal the least-learned, least-recently-seen first. The cards used to say "x of y locked", which read as gated content. Nothing is due and
 nothing expires — deliberately no streaks or backlog.
 
 ## Licence & credit
