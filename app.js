@@ -1,0 +1,538 @@
+/* Flesh & Bone — 3D bone and muscle trainer.
+ * One real body (Z-Anatomy meshes), three modes: Find it · Name it · Explore.
+ * No build step. State lives in localStorage under `fab.v1`. */
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { BONES, MUSCLES, HIDE, REGIONS, SETS, NEUTRAL, CLIP } from './data.js';
+
+const $ = s => document.querySelector(s);
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const hash01 = s => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return ((h >>> 0) % 10007) / 10007; };
+const DEG = Math.PI / 180;
+const DEBUG = /[?&]debug/.test(location.search);
+
+/* ───────────── persistent state ───────────── */
+const KEY = 'fab.v1';
+const S = (() => {
+  const d = { m:{}, best:{}, n:0, o:{ deck:'bones', mode:'find', set:{ bones:'her', muscles:'her' }, len:10, ask:'mix', sound:true } };
+  try { const j = JSON.parse(localStorage.getItem(KEY) || 'null'); if (j) { Object.assign(d, j); d.o = Object.assign({ deck:'bones', mode:'find', len:10, ask:'mix', sound:true }, j.o); d.o.set = Object.assign({ bones:'her', muscles:'her' }, j.o && j.o.set); } } catch {}
+  return d;
+})();
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} };
+const mast = id => S.m[id] || (S.m[id] = { b:0, s:0, r:0, w:0, t:0 });
+const LOCK = 2;
+
+const DECK = { bones:{ label:'Bones', items:BONES, model:'skeletal' }, muscles:{ label:'Muscles', items:MUSCLES, model:'muscular' } };
+const ITEM = {};
+for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
+
+/* ───────────── scene ───────────── */
+const canvas = $('#c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, powerPreference:'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.08;
+renderer.localClippingEnabled = true;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(30, 1, 0.02, 40);
+camera.position.set(0.9, 1.1, 4.2);
+scene.add(camera);
+scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x2b221c, 0.95));
+const key = new THREE.DirectionalLight(0xfff1de, 2.3); key.position.set(1.4, 1.8, 2.2); camera.add(key); camera.add(key.target); key.target.position.set(0, 0, -3);
+const fill = new THREE.DirectionalLight(0x9db8ff, 0.7); fill.position.set(-2, 0.4, 1); camera.add(fill);
+const rim = new THREE.DirectionalLight(0xffffff, 1.1); rim.position.set(0, 1.2, -3); camera.add(rim);
+
+// soft contact shadow under the feet
+{ const cv = document.createElement('canvas'); cv.width = cv.height = 256; const g = cv.getContext('2d');
+  const gr = g.createRadialGradient(128, 128, 8, 128, 128, 128); gr.addColorStop(0, 'rgba(0,0,0,.55)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+  const fl = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 1.5), new THREE.MeshBasicMaterial({ map:new THREE.CanvasTexture(cv), transparent:true, depthWrite:false }));
+  fl.rotation.x = -Math.PI / 2; fl.position.y = 0.001; fl.renderOrder = -1; scene.add(fl); }
+
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.dampingFactor = 0.09;
+controls.minDistance = 0.12; controls.maxDistance = 16;      // a phone's home sheet leaves ~250px of stage: the whole body needs ~11 m controls.zoomSpeed = 0.9; controls.rotateSpeed = 0.85; controls.panSpeed = 0.8;
+controls.touches = { ONE:THREE.TOUCH.ROTATE, TWO:THREE.TOUCH.DOLLY_PAN };
+controls.target.set(0, 0.9, 0);
+controls.autoRotateSpeed = 0.9;
+
+let dirty = true;
+const invalidate = () => { dirty = true; };
+controls.addEventListener('change', invalidate);
+controls.addEventListener('start', () => { cancelTween('cam'); controls.autoRotate = false; });
+
+function resize() {
+  const w = innerWidth, h = innerHeight;
+  if (!(w > 0 && h > 0)) return;           // a tab opened in the background is 0×0: framing it would write NaN into the camera for good
+  resize.w = w; resize.h = h;
+  renderer.setSize(w, h, false);          // CSS sizes the canvas (100%); three must not fight it at dpr 2
+  camera.aspect = w / h; camera.updateProjectionMatrix(); invalidate();
+}
+addEventListener('resize', () => { resize(); clearTimeout(resize.t); resize.t = setTimeout(() => G.reframe && G.reframe(), 180); });
+
+/* ───────────── tweens ───────────── */
+const tweens = [];
+const easeIO = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+function tween(dur, fn, tag, done) { cancelTween(tag); tweens.push({ t0:performance.now(), dur, fn, tag, done }); invalidate(); }
+function cancelTween(tag) { if (!tag) return; for (let i = tweens.length - 1; i >= 0; i--) if (tweens[i].tag === tag) tweens.splice(i, 1); }
+
+/* ───────────── registry ───────────── */
+const REG = [];                       // every mesh we keep
+const groups = {};                    // model name → THREE.Group
+const loaded = {};
+const draco = new DRACOLoader().setDecoderPath('./vendor/three/jsm/libs/draco/');
+const loader = new GLTFLoader().setDRACOLoader(draco);
+const matchAny = (ms, base) => ms.some(m => typeof m === 'string' ? m === base : m.test(base));
+
+const BONE_C = new THREE.Color('#e7dcc6'), CART_C = new THREE.Color('#9fb6c4'), TOOTH_C = new THREE.Color('#f4f0e6'), TENDON_C = new THREE.Color('#dacdb4');
+function colourFor(kind, base, matName) {
+  const h = hash01(base.replace(/^(long|short|lateral|medial|clavicular|sternocostal|acromial|ascending|descending|transverse|superficial|deep) (head|part) of /, ''));
+  if (kind === 'bone') {
+    if (/cartilage/.test(base) || matName === 'Cartilage') return CART_C.clone();
+    if (matName === 'Teeth') return TOOTH_C.clone();
+    return BONE_C.clone().offsetHSL(0, 0, (h - .5) * .05);
+  }
+  if (/^(Tendon|Ligament|Trapezius)$/.test(matName) && !/muscle|extensor carpi/.test(base)) return TENDON_C.clone().offsetHSL(0, 0, (h - .5) * .04);
+  return new THREE.Color().setHSL(0.004 + h * 0.03, 0.58 + hash01(base + 's') * 0.14, 0.29 + hash01(base + 'l') * 0.13);
+}
+
+async function loadModel(name, onProg) {
+  if (loaded[name]) return;
+  const gltf = await loader.loadAsync(`./models/${name}.glb`, e => onProg && onProg(e.loaded, e.total));
+  const kind = name === 'skeletal' ? 'bone' : 'muscle';
+  const root = gltf.scene; root.updateMatrixWorld(true);
+  const kill = [];
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    const raw = (o.userData && o.userData.name) || o.name || '';
+    const side = /\.l\.?$/i.test(raw) ? 'L' : /\.r\.?$/i.test(raw) ? 'R' : '';
+    const orig = raw.replace(/\.[lr]\.?$/i, '').trim();
+    const base = orig.toLowerCase();
+    const matName = (o.material && o.material.name) || '';
+    const hide = kind === 'bone' ? matchAny(HIDE.bone, base) : (HIDE.muscleMaterial.test(matName) || matchAny(HIDE.muscle, base));
+    if (hide) { kill.push(o); return; }      // not removed: a hidden node may still parent a visible one
+    const colour = colourFor(kind, base, matName);
+    const soft = kind === 'muscle' && colour.r > .7 && colour.g > .7;
+    o.material = new THREE.MeshStandardMaterial({ color:colour, roughness:kind === 'bone' ? .58 : .5, metalness:0, emissive:0x000000 });
+    const clip = kind === 'muscle' && CLIP.find(c => matchAny(c.m, base));      // the rectus sheath, cut away (see data.js)
+    if (clip) { o.material.clippingPlanes = [new THREE.Plane(new THREE.Vector3(side === 'R' ? -1 : 1, 0, 0), -clip.x)]; o.material.side = THREE.DoubleSide; }
+    if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+    const info = { mesh:o, base, side, model:name, kind:soft ? 'tendon' : kind, colour:colour.clone(), clipX:clip ? clip.x : 0,
+      pretty:orig.replace(/ muscles?$/i, '').replace(/^\((.*)\)$/, '$1'), box:new THREE.Box3().setFromObject(o), items:[], ghost:false };
+    o.userData.info = info; REG.push(info);
+  });
+  const NONE = new THREE.MeshBasicMaterial({ visible:false }); kill.forEach(o => { o.material = NONE; });
+  groups[name] = root; scene.add(root); loaded[name] = true;
+  bindItems(name);
+}
+
+function bindItems(model) {
+  const pool = REG.filter(i => i.model === model);
+  for (const it of Object.values(ITEM)) {
+    if (DECK[it.deck].model !== model && !(it.on && model === 'skeletal')) continue;
+    if (it.on && model !== 'skeletal') continue;
+    it.infos = it.on ? pool.filter(i => i.base === it.on) : pool.filter(i => matchAny(it.m, i.base));
+    it.bases = new Set(it.infos.map(i => i.base));
+    it.ok = it.infos.length > 0 && !(it.on && it.p.every(x => x === .5));
+    it.box = new THREE.Box3(); it.infos.forEach(i => it.box.union(i.box));
+    if (!it.infos.length) console.warn('[fab] item matches nothing:', it.id);
+    if (!it.on) it.infos.forEach(i => i.items.push(it));
+  }
+}
+const POINTS = base => BONES.filter(i => i.on === base && i.ok);
+const _v = new THREE.Vector3();
+function pointWorld(it, info) {
+  const bb = info.mesh.geometry.boundingBox;
+  return info.mesh.localToWorld(new THREE.Vector3(lerp(bb.min.x, bb.max.x, it.p[0]), lerp(bb.min.y, bb.max.y, it.p[1]), lerp(bb.min.z, bb.max.z, it.p[2])));
+}
+
+function nLocal(info, pt) { const bb = info.mesh.geometry.boundingBox, p = info.mesh.worldToLocal(pt.clone()); return [(p.x - bb.min.x) / (bb.max.x - bb.min.x), (p.y - bb.min.y) / (bb.max.y - bb.min.y), (p.z - bb.min.z) / (bb.max.z - bb.min.z)]; }
+
+/* What did they just touch? — the most specific thing we can honestly say. */
+function describe(info, pt) {
+  let lm = null; const pts = pt ? POINTS(info.base) : [];
+  if (pts.length) {
+    const n = nLocal(info, pt), neutral = NEUTRAL[info.base] && NEUTRAL[info.base](n);
+    if (neutral) return { ...neutral, neutral:true, item:null, her:false };
+    for (const it of pts.filter(i => i.zone).sort((a, b) => (b.prio || 0) - (a.prio || 0))) if (it.zone(n)) { lm = { it, d:0 }; break; }
+    if (!lm) for (const it of pts.filter(i => !i.zone)) { const d = pt.distanceTo(pointWorld(it, info)); if (d <= it.r * 1.3 && (!lm || d < lm.d)) lm = { it, d }; }
+  }
+  const own = info.items.filter(i => i.bases.size === 1)[0];
+  const grp = info.items.filter(i => i.bases.size > 1).sort((a, b) => a.bases.size - b.bases.size)[0];
+  const bone = own ? own.name : info.pretty;
+  if (lm) return { title:lm.it.name, sub:bone, item:lm.it, her:!!lm.it.her };
+  return { title:bone, sub:grp && grp.name !== bone ? grp.name : (info.kind === 'bone' && info.model === 'skeletal' && G.deck === 'muscles' ? 'bone' : ''), item:own || grp || null, her:!!((own && own.her) || (grp && grp.her)) };
+}
+function isCorrect(it, hit) {
+  const info = hit.object.userData.info;
+  if (it.on) { if (info.base !== it.on) return false; if (it.zone) { const n = nLocal(info, hit.point); return !(NEUTRAL[info.base] && NEUTRAL[info.base](n)) && it.zone(n); } return hit.point.distanceTo(pointWorld(it, info)) <= it.r; }
+  if (it.infos.includes(info)) return true;
+  return (it.accept || []).some(id => ITEM[id].infos && ITEM[id].infos.includes(info));
+}
+
+/* ───────────── look: glow · x-ray · dim ───────────── */
+const glows = new Map();
+function glow(infos, hex, mode = 'pulse', dur = 900) { const c = new THREE.Color(hex); for (const i of infos) glows.set(i, { c, mode, t0:performance.now(), dur }); invalidate(); }
+const rest = i => { i.mesh.material.emissive.setRGB(0, 0, 0); i.mesh.material.color.copy(i.colour).multiplyScalar(i.dimK || 1); };
+function unglow(infos) { for (const i of infos || [...glows.keys()]) { glows.delete(i); rest(i); } invalidate(); }
+let xray = null;
+function setXray(keep) {
+  clearXray(); xray = new Set(keep);
+  for (const i of REG) { if (xray.has(i) || !i.mesh.visible) continue; const m = i.mesh.material; m.transparent = true; m.opacity = i.kind === 'bone' ? .16 : .07; m.depthWrite = false; m.needsUpdate = true; i.ghost = true; }
+  refreshPickables(); invalidate();
+}
+function clearXray() {
+  if (!xray) return; xray = null;
+  for (const i of REG) { if (!i.ghost) continue; const m = i.mesh.material; m.transparent = false; m.opacity = 1; m.depthWrite = true; m.needsUpdate = true; i.ghost = false; }
+  refreshPickables(); invalidate();
+}
+function setDim(keepFn) { for (const i of REG) { i.dimK = !keepFn || keepFn(i) ? 1 : .3; if (!glows.has(i)) rest(i); } invalidate(); }
+
+let pickables = [];
+function refreshPickables() { pickables = REG.filter(i => i.mesh.visible && groups[i.model].visible && !i.ghost).map(i => i.mesh); }
+
+/* ───────────── camera framing ───────────── */
+function freeRect() {
+  const W = innerWidth, H = innerHeight, st = document.body.dataset.state; let top = 8, bottom = H - 8, left = 0, right = W;
+  if (st === 'play') { const p = $('#prompt'), d = $('#dock'); top = p.offsetTop + p.offsetHeight + 4; bottom = H - d.offsetHeight - 22; }
+  else if (st === 'home' || st === 'results') { const p = $('#' + st); if (W >= 880) left = 24 + p.offsetWidth; else bottom = H - p.offsetHeight - 18; }
+  if (bottom - top < 140) { top = 8; bottom = Math.max(160, bottom); }
+  return { x:left, y:top, w:right - left, h:bottom - top };
+}
+function frameBox(box, az = 0, elv = 6, pad = 1.2, minSize = 0.26) {
+  if (!(innerWidth > 0 && innerHeight > 0) || box.isEmpty()) return null;
+  const c = box.getCenter(new THREE.Vector3()), s = box.getSize(new THREE.Vector3());
+  const b = box.clone(); const grow = new THREE.Vector3(Math.max(0, minSize - s.x), Math.max(0, minSize - s.y), Math.max(0, minSize - s.z)).multiplyScalar(.5); b.min.sub(grow); b.max.add(grow);
+  const a = az * DEG, e = elv * DEG;
+  const dir = new THREE.Vector3(Math.sin(a) * Math.cos(e), Math.sin(e), Math.cos(a) * Math.cos(e));
+  const rightV = new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), dir).normalize(), upV = new THREE.Vector3().crossVectors(dir, rightV);
+  let hw = 0, hh = 0, hd = 0;
+  for (let i = 0; i < 8; i++) { _v.set(i & 1 ? b.max.x : b.min.x, i & 2 ? b.max.y : b.min.y, i & 4 ? b.max.z : b.min.z).sub(c); hw = Math.max(hw, Math.abs(_v.dot(rightV))); hh = Math.max(hh, Math.abs(_v.dot(upV))); hd = Math.max(hd, _v.dot(dir)); }
+  const fr = freeRect(), H = innerHeight, W = innerWidth, k = 2 * Math.tan(camera.fov * DEG / 2) / H;
+  const D = Math.max(hh * 2 * pad / (fr.h * k), hw * 2 * pad / (fr.w * k)) + hd;
+  const wpp = k * D, dx = (fr.x + fr.w / 2) - W / 2, dy = (fr.y + fr.h / 2) - H / 2;
+  const target = c.clone().addScaledVector(rightV, -dx * wpp).addScaledVector(upV, dy * wpp);
+  return { target, pos:target.clone().addScaledVector(dir, D) };
+}
+const regionBox = {};
+function regionFrame(name, az, elv) {
+  const R = REGIONS[name] || REGIONS.whole;
+  if (!regionBox[name]) { const b = new THREE.Box3(); REG.filter(i => i.model === 'skeletal' && (!R.side || i.side === R.side || !i.side) && matchAny(R.m, i.base)).forEach(i => b.union(i.box)); regionBox[name] = b; }
+  return frameBox(regionBox[name], az, elv, R.pad || 1.15);
+}
+const sph = new THREE.Spherical();
+function flyTo(f, dur = 850) {
+  if (!f || !Number.isFinite(f.pos.x + f.pos.y + f.pos.z + f.target.x + f.target.y + f.target.z)) return;
+  const t0 = controls.target.clone(), s0 = new THREE.Spherical().setFromVector3(camera.position.clone().sub(t0));
+  const s1 = new THREE.Spherical().setFromVector3(f.pos.clone().sub(f.target));
+  let dth = s1.theta - s0.theta; dth = ((dth + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI;
+  const same = t0.distanceTo(f.target) < .02 && Math.abs(dth) < .05 && Math.abs(s1.radius - s0.radius) < .05 && Math.abs(s1.phi - s0.phi) < .05;
+  if (same) return;
+  tween(dur, k => { const e = easeIO(k); controls.target.lerpVectors(t0, f.target, e); sph.set(lerp(s0.radius, s1.radius, e), lerp(s0.phi, s1.phi, e), s0.theta + dth * e); camera.position.setFromSpherical(sph).add(controls.target); }, 'cam');
+}
+
+/* ───────────── screen-space helpers ───────────── */
+const toScreen = p => { _v.copy(p).project(camera); return { x:(_v.x * .5 + .5) * innerWidth, y:(-_v.y * .5 + .5) * innerHeight, behind:_v.z > 1 }; };
+const callout = { el:$('#callout'), p:null, timer:0,
+  show(p, text, cls = '', ms = 0) { this.p = p.clone(); this.el.className = cls; this.el.firstElementChild.textContent = text; this.el.hidden = false; clearTimeout(this.timer); if (ms) this.timer = setTimeout(() => this.hide(), ms); invalidate(); },
+  hide() { this.p = null; this.el.hidden = true; } };
+const ring = { el:$('#ring'), p:null, show(p, cls = '') { this.p = p.clone(); this.el.className = cls; this.el.hidden = false; invalidate(); }, hide() { this.p = null; this.el.hidden = true; } };
+function place(o) { if (!o.p) return; const s = toScreen(o.p); o.el.style.transform = `translate(${s.x.toFixed(1)}px,${s.y.toFixed(1)}px)`; o.el.style.visibility = s.behind ? 'hidden' : 'visible'; }
+function popScore(x, y, text) { const e = el('div', 'pop', esc(text)); e.style.left = x + 'px'; e.style.top = y + 'px'; document.body.appendChild(e); setTimeout(() => e.remove(), 950); }
+
+/* ───────────── sound + haptics ───────────── */
+let actx = null;
+function tone(f0, f1, t, type = 'triangle', vol = .07, when = 0) {
+  if (!S.o.sound) return;
+  try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume();
+    const o = actx.createOscillator(), g = actx.createGain(), T = actx.currentTime + when; o.type = type; o.frequency.setValueAtTime(f0, T); o.frequency.exponentialRampToValueAtTime(f1, T + t);
+    g.gain.setValueAtTime(0, T); g.gain.linearRampToValueAtTime(vol, T + .012); g.gain.exponentialRampToValueAtTime(.0001, T + t); o.connect(g).connect(actx.destination); o.start(T); o.stop(T + t + .02); } catch {}
+}
+const sfx = { good:() => { tone(620, 640, .09); tone(930, 960, .16, 'triangle', .07, .08); }, bad:() => tone(210, 130, .22, 'sine', .11), tick:() => tone(440, 440, .04, 'sine', .03),
+  done:() => [523, 659, 784, 1047].forEach((f, i) => tone(f, f, .22, 'triangle', .06, i * .09)) };
+const buzz = p => { try { navigator.vibrate && navigator.vibrate(p); } catch {} };
+
+/* ───────────── picking ───────────── */
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+function cast(x, y) { const r = canvas.getBoundingClientRect(); ndc.set(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, camera); return ray.intersectObjects(pickables, false).find(h => { const i = h.object.userData.info; return !(i.clipX && Math.abs(h.point.x) < i.clipX); }) || null; }
+function pickAt(x, y, wantItem) {
+  let hit = cast(x, y);
+  const poolHit = h => h && h.object.userData.info.items.some(i => G.round && G.round.poolIds.has(i.id));
+  if (wantItem && !(hit && isCorrect(wantItem, hit)) && !poolHit(hit)) {       // fat-finger forgiveness, never at a neighbour's expense
+    for (let k = 0; k < 8; k++) { const h = cast(x + Math.cos(k * Math.PI / 4) * 13, y + Math.sin(k * Math.PI / 4) * 13); if (h && isCorrect(wantItem, h)) return h; }
+  }
+  if (!hit) for (let k = 0; k < 8 && !hit; k++) hit = cast(x + Math.cos(k * Math.PI / 4) * 10, y + Math.sin(k * Math.PI / 4) * 10);
+  return hit;
+}
+let down = null, pointers = 0, hoverInfo = null, hoverT = 0;
+canvas.addEventListener('pointerdown', e => { pointers++; down = pointers === 1 ? { x:e.clientX, y:e.clientY, t:performance.now() } : null; });
+addEventListener('pointerup', e => { pointers = Math.max(0, pointers - 1); if (!down || e.target !== canvas) { down = null; return; }
+  const ok = Math.hypot(e.clientX - down.x, e.clientY - down.y) < 8 && performance.now() - down.t < 500; down = null; if (ok) G.onTap(e.clientX, e.clientY); });
+addEventListener('pointercancel', () => { pointers = 0; down = null; });
+canvas.addEventListener('pointermove', e => {
+  if (e.pointerType !== 'mouse' || e.buttons || performance.now() - hoverT < 60 || document.body.dataset.state !== 'play' || G.mode === 'name') return; hoverT = performance.now();
+  const h = cast(e.clientX, e.clientY), info = h ? h.object.userData.info : null;
+  if (info === hoverInfo) return;
+  if (hoverInfo && !glows.has(hoverInfo)) hoverInfo.mesh.material.emissive.setRGB(0, 0, 0);
+  hoverInfo = info; canvas.classList.toggle('hot', !!info);
+  if (info && !glows.has(info)) info.mesh.material.emissive.setRGB(.09, .09, .1); invalidate();
+});
+
+/* ───────────── game ───────────── */
+const ACC = () => getComputedStyle(document.body).getPropertyValue('--acc').trim() || '#f2b84b';
+const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, xHer:false, xPeel:false,
+
+  pool(deck = this.deck, setId = S.o.set[deck], mode = this.mode) { const set = SETS[deck].find(s => s.id === setId) || SETS[deck][0]; return DECK[deck].items.filter(i => i.ok && set.f(i) && (mode !== 'find' || !i.deep)); },
+
+  async setDeck(deck) {
+    this.deck = S.o.deck = deck; document.body.dataset.deck = deck; save();
+    if (deck === 'muscles' && !loaded.muscular) { showLoader('Wrapping it in muscle…'); await loadModel('muscular', loadProg); hideLoader(); }
+    if (groups.muscular) groups.muscular.visible = deck === 'muscles';
+    refreshPickables(); renderHome(); invalidate();
+  },
+
+  start(only) {
+    const pool = only || this.pool(); if (!pool.length) return;
+    unglow(); clearXray(); setDim(null); callout.hide(); ring.hide(); toast();
+    if (groups.muscular) groups.muscular.visible = this.deck === 'muscles'; this.xHer = this.xPeel = false; refreshPickables();
+    document.body.dataset.mode = this.mode; controls.autoRotate = false;
+    if (this.mode === 'explore') { this.round = null; setState('play'); return this.explore(); }
+    const len = only ? pool.length : (S.o.len === 'all' ? pool.length : Math.min(S.o.len, pool.length));
+    const ranked = shuffle(pool.slice()).sort((a, b) => (mast(a.id).b - mast(b.id).b) || (mast(a.id).t - mast(b.id).t));
+    const queue = shuffle(ranked.slice(0, len)).map(it => ({ it, first:true }));
+    this.round = { key:[this.deck, only ? 'misses' : S.o.set[this.deck], this.mode, len].join('.'), queue, total:queue.length, done:0, score:0, streak:0, bestStreak:0, right:0, t0:performance.now(), log:[], poolIds:new Set(pool.map(i => i.id)) };
+    $('#score').textContent = '0'; const sk = $('#streak'); sk.textContent = '×0'; sk.classList.remove('on');
+    setState('play'); this.next();
+  },
+
+  askStyle(it) {
+    if (this.mode !== 'find' || S.o.ask === 'name' || mast(it.id).r < 1) return 'name';
+    const opts = ['name']; if (it.common) opts.push('common'); if (it.clue) opts.push('clue', 'clue');
+    return opts[Math.random() * opts.length | 0];
+  },
+
+  next() {
+    const R = this.round; unglow(); clearXray(); ring.hide(); callout.hide(); toast();
+    if (!R.queue.length) return this.finish();
+    const q = R.queue.shift(), it = q.it; this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
+    $('#barTitle').textContent = `${innerWidth > 520 ? DECK[this.deck].label + ' · ' : ''}${this.mode === 'find' ? 'Find it' : 'Name it'} · ${Math.min(R.done + 1, R.total)} of ${R.total}${q.first ? '' : ' · again'}`;
+    $('#prog i').style.width = (R.done / R.total * 100) + '%';
+    const P = $('#prompt'); P.classList.remove('swap'); void P.offsetWidth; P.classList.add('swap');
+    if (this.mode === 'find') {
+      const st = this.cur.style, text = st === 'clue' ? it.clue.t : st === 'common' ? it.common : it.name;
+      P.querySelector('.k').textContent = st === 'clue' ? (it.clue.hers ? 'Find it · clue from her quiz' : 'Find it · clue') : it.on ? `On the ${it.on} · find the` : 'Find the';
+      const n = P.querySelector('.n'); n.textContent = text; n.classList.toggle('long', st === 'clue');
+      P.querySelector('.s').textContent = st === 'name' ? (it.sub ? `(${it.sub})` : '') : st === 'common' ? 'Tap the bone — what is its proper name?' : '';
+      dock(`<div class="acts"><button class="act" data-a="hint">Zoom me in</button><button class="act" data-a="show">Show me</button></div>`);
+      flyTo(regionFrame(it.region, it.az, it.el));
+    } else {
+      P.querySelector('.k').textContent = it.deep ? 'Name it · x-ray' : 'Name it';
+      const n = P.querySelector('.n'); n.textContent = it.on ? `Which part of the ${it.on}?` : 'What is glowing?'; n.classList.remove('long'); P.querySelector('.s').textContent = '';
+      dock(`<div class="opts">${this.options(it).map(o => `<button class="opt" data-id="${o.id}">${esc(o.name)}${o.sub ? `<small>${esc(o.sub)}</small>` : ''}</button>`).join('')}</div>`);
+      if (it.deep) setXray(it.infos);
+      this.spot(it, ACC(), 'pulse');
+      flyTo(this.itemFrame(it));
+    }
+  },
+
+  itemFrame(it) { return it.on ? regionFrame(it.region, it.az, it.el) : frameBox(it.box, it.az, it.el == null ? 6 : it.el, it.box.getSize(_v).y > 1 ? 1.12 : 1.75, 0.34); },
+  anchor(it) { if (it.on) { const side = it.infos.find(i => i.side === 'L') || it.infos[0]; return pointWorld(it, side); } const b = (it.infos.find(i => i.side !== 'R') || it.infos[0]).box; return b.getCenter(new THREE.Vector3()); },
+  spot(it, hex, mode, dur) { if (it.on) { ring.show(this.anchor(it), mode === 'flash' ? 'good' : ''); } else glow(it.infos, hex, mode, dur); },
+
+  options(it) {
+    const zoneOf = r => /lower|leg|foot|femur|pelvis/.test(r) ? 'low' : /forearm|hand/.test(r) ? 'arm' : r;
+    const lastWord = s => s.toLowerCase().split(' ').pop(), firstWord = s => s.toLowerCase().split(' ')[0];
+    const cand = DECK[this.deck].items.filter(o => o.ok && o !== it && o.name !== it.name && !(o.accept || []).includes(it.id)
+      && !(!it.on && !o.on && [...o.bases].some(b => it.bases.has(b))) && !(!!it.on !== !!o.on && (it.on || o.on) && (it.on ? o.bases.has(it.on) : it.bases.has(o.on))));
+    const score = o => (o.on && it.on ? (o.on === it.on ? 6 : 2) : 0) + (!!o.on === !!it.on ? 3 : 0) + (lastWord(o.name) === lastWord(it.name) ? 3 : 0) + (firstWord(o.name) === firstWord(it.name) ? 3 : 0)
+      + (o.region === it.region ? 3 : zoneOf(o.region) === zoneOf(it.region) ? 1.5 : 0) + (o.name[0] === it.name[0] ? 2 : 0)      // same first letter is HER trap: cranium/carpal/clavicle/condyle
+      + (Math.abs(((o.az - it.az + 540) % 360) - 180) < 60 ? 1 : 0) + (this.round.poolIds.has(o.id) ? 1.5 : 0) + Math.random() * 2.2;
+    const seen = new Set([it.name]), out = [];
+    for (const o of cand.sort((a, b) => score(b) - score(a))) { if (seen.has(o.name)) continue; seen.add(o.name); out.push(o); if (out.length === 3) break; }
+    return shuffle([it, ...out]);
+  },
+
+  onTap(x, y) {
+    if (document.body.dataset.state !== 'play') return;
+    if (this.mode === 'explore') { const h = pickAt(x, y); return h ? this.inspect(h) : null; }
+    if (this.mode !== 'find' || !this.cur || this.cur.answered) return;
+    const c = this.cur, it = c.it, hit = pickAt(x, y, it); if (!hit) return;
+    const info = hit.object.userData.info;
+    if (isCorrect(it, hit)) {
+      c.answered = true; const clean = c.tries === 0 && !c.revealed;
+      this.spot(it, '#3ddc97', 'flash', 1100); if (it.on) setTimeout(() => ring.hide(), 900);
+      callout.show(it.on ? this.anchor({ ...it, infos:[info] }) : hit.point, it.name, 'good', 1500);
+      const pts = this.settle(clean); if (pts) popScore(x, y - 30, '+' + pts);
+      sfx.good(); buzz(12);
+      toast('good', `<b>${esc(it.name)}</b>${it.alt ? ` <span style="opacity:.7">· ${esc(it.alt)}</span>` : ''}<small>${esc(it.fact || '')}</small>`);
+      setTimeout(() => this.round && this.cur === c && this.next(), clean ? 1250 : 1700);
+    } else {
+      if (c.revealed) return;
+      const d = describe(info, hit.point);
+      if (d.neutral) { callout.show(hit.point, d.title, '', 2200); sfx.tick(); return toast('info', `<b>${esc(d.title)}</b> — ${esc(d.sub)}.<small>Doesn't count against you. Tap a part that is only ${esc(it.name.toLowerCase())}.</small>`); }
+      c.tries++;
+      glow([info], '#ff5d6c', 'flash', 800); callout.show(hit.point, d.title, 'bad', 1600);
+      sfx.bad(); buzz([30, 40, 30]); $('#prompt').classList.remove('shake'); void $('#prompt').offsetWidth; $('#prompt').classList.add('shake');
+      const rel = d.item && !it.on && !d.item.on && [...it.bases].some(b => d.item.bases.has(b));
+      toast('bad', `That's the <b>${esc(d.title)}</b>${d.sub ? ` <span style="opacity:.7">· ${esc(d.sub)}</span>` : ''}<small>${c.tries >= 2 ? 'Here it is — tap it to carry on.' : rel ? 'Close — right group, wrong part. One more go.' : 'One more go.'}</small>`);
+      if (c.tries >= 2) this.reveal();
+    }
+  },
+
+  reveal() { const c = this.cur, it = c.it; c.revealed = true; this.spot(it, ACC(), 'pulse'); flyTo(this.itemFrame(it)); setTimeout(() => this.cur === c && !c.answered && callout.show(this.anchor(it), it.name, '', 0), 500);
+    dock(`<div class="fact"><b>${esc(it.name)}</b> — ${esc(it.fact || '')}</div><div class="acts"><button class="act pri" data-a="skip">Got it · next</button></div>`); },
+
+  settle(clean) {                       // score + mastery, once per question
+    const R = this.round, c = this.cur, it = c.it, m = mast(it.id); let pts = 0;
+    if (clean) { R.streak++; R.bestStreak = Math.max(R.bestStreak, R.streak); pts = Math.round((100 + Math.min(100, 10 * (R.streak - 1))) * (c.hinted ? .5 : 1)); } else { R.streak = 0; pts = c.revealed ? 0 : 40; }
+    R.score += pts;
+    if (c.first) { R.done++; if (clean) R.right++; R.log.push({ it, ok:clean, hinted:c.hinted }); m.s++; m.t = ++S.n; if (clean && !c.hinted) { m.r++; m.b = Math.min(3, m.b + 1); } else if (!clean) { m.w++; m.b = Math.max(0, m.b - 2); R.queue.splice(Math.min(3, R.queue.length), 0, { it, first:false }); } save(); }
+    $('#score').textContent = R.score; const s = $('#streak'); s.textContent = '×' + R.streak; s.classList.toggle('on', R.streak > 1); if (clean && R.streak > 1) { s.classList.add('bump'); setTimeout(() => s.classList.remove('bump'), 220); }
+    $('#prog i').style.width = (R.done / R.total * 100) + '%';
+    return pts;
+  },
+
+  choose(btn) {
+    const c = this.cur; if (!c || c.answered) return; c.answered = true; const it = c.it, ok = ITEM[btn.dataset.id] === it;
+    document.querySelectorAll('#dock .opt').forEach(b => { b.disabled = true; if (ITEM[b.dataset.id] === it) b.classList.add('good'); }); if (!ok) btn.classList.add('bad');
+    if (!ok) c.tries = 1;
+    const pts = this.settle(ok); this.spot(it, ok ? '#3ddc97' : ACC(), ok ? 'flash' : 'pulse', 1200); callout.show(this.anchor(it), it.name, ok ? 'good' : '', 0);
+    if (ok) { sfx.good(); buzz(12); const r = btn.getBoundingClientRect(); popScore(r.left + r.width / 2, r.top, '+' + pts); } else { sfx.bad(); buzz([30, 40, 30]); }
+    const d = $('#dock'); d.insertAdjacentHTML('afterbegin', `<div class="fact">${ok ? '' : `You picked <b>${esc(ITEM[btn.dataset.id].name)}</b>. `}<b>${esc(it.name)}</b>${it.alt ? ` (${esc(it.alt)})` : ''} — ${esc(it.fact || '')}</div>`);
+    d.insertAdjacentHTML('beforeend', `<div class="acts" style="margin-top:8px"><button class="act pri" data-a="skip">Next</button></div>`); syncDock();
+    if (ok) setTimeout(() => this.round && this.cur === c && this.next(), 1500);
+  },
+
+  act(a) {
+    const c = this.cur;
+    if (a === 'skip') { if (c && !c.answered) { c.answered = true; c.revealed = true; this.settle(false); } return this.next(); }   // "Show me → Got it" is still a miss on the record
+    if (!c || c.answered) return;
+    if (a === 'hint') { c.hinted = true; sfx.tick(); const it = c.it, b = it.on ? it.box : it.box.clone().expandByScalar(Math.max(.12, it.box.getSize(_v).length() * .45)); flyTo(frameBox(b, it.az, it.el == null ? 6 : it.el, 1.1, .3)); toast('info', 'Closer. It is somewhere in view.<small>Hints halve the points for this one.</small>'); }
+    if (a === 'show') { c.tries = Math.max(c.tries, 2); sfx.tick(); this.reveal(); toast(); }
+  },
+
+  finish() {
+    const R = this.round; $('#prog i').style.width = '100%'; unglow(); clearXray(); ring.hide(); callout.hide(); toast();
+    const secs = Math.round((performance.now() - R.t0) / 1000), pct = Math.round(R.right / R.total * 100), prev = S.best[R.key] || 0, best = R.score > prev; if (best) { S.best[R.key] = R.score; save(); }
+    const misses = R.log.filter(l => !l.ok), verdict = pct === 100 ? 'Flawless.' : pct >= 80 ? 'Solid.' : pct >= 50 ? 'Getting there.' : 'First pass done.';
+    const tip = pct === 100 ? 'Every one first time. Lengthen the round or switch the mode.' : misses.length ? `${misses.length} to tighten — they come back first next round.` : '';
+    $('#results').innerHTML = `<div class="rhead"><div class="big" style="--p:${pct}"><b>${pct}%</b></div><div><h2>${verdict}</h2><p>${R.right} of ${R.total} first time. ${tip}</p></div></div>
+      <div class="kpis"><div class="kpi"><b>${R.score}</b><small>${best && prev ? 'New best' : 'Score'}</small></div><div class="kpi"><b>×${R.bestStreak}</b><small>Best run</small></div><div class="kpi"><b>${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}</b><small>Time</small></div></div>
+      <ul class="rlist">${R.log.map(l => `<li class="${l.ok ? '' : 'miss'}"><i>${l.ok ? '✓' : '✕'}</i>${esc(l.it.name)}${l.it.sub ? ` <span style="color:var(--tx3);font-weight:500">(${esc(l.it.sub)})</span>` : ''}<small>${mast(l.it.id).b >= LOCK ? 'locked' : l.hinted && l.ok ? 'with a hint' : ''}</small></li>`).join('')}</ul>
+      <div class="acts">${misses.length ? `<button class="act pri" data-r="misses">Drill the ${misses.length} I missed</button>` : `<button class="act pri" data-r="again">Another round</button>`}</div>
+      <div class="acts" style="margin-top:8px">${misses.length ? `<button class="act" data-r="again">New round</button>` : ''}<button class="act" data-r="home">Menu</button></div>`;
+    this.lastMisses = misses.map(l => l.it); this.cur = null; sfx.done(); setState('results');
+    controls.autoRotate = true; flyTo(regionFrame('whole', 20, 4), 1200);
+  },
+
+  /* explore */
+  explore() {
+    const P = $('#prompt'); P.querySelector('.k').textContent = 'Explore'; const n = P.querySelector('.n'); n.textContent = 'Tap anything'; n.classList.remove('long'); P.querySelector('.s').textContent = 'Drag to turn · pinch to zoom';
+    $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
+    dock(`<div class="xcard"><p class="quiet">Nothing selected. Tap a ${this.deck === 'bones' ? 'bone' : 'muscle'} to see what it is${this.deck === 'bones' ? ' — on the femur and hip bone the landmarks are live too' : ''}.</p></div>`);
+    flyTo(regionFrame('whole', 15, 4));
+  },
+  inspect(hit) {
+    const info = hit.object.userData.info, d = describe(info, hit.point), it = d.item; unglow();
+    const same = it && !it.on ? it.infos : REG.filter(i => i.base === info.base); glow(same, ACC(), 'solid'); callout.show(hit.point, d.title, '', 0); sfx.tick();
+    const tags = [d.her ? '<span class="tag her">On her list</span>' : '<span class="tag">Not on her list</span>', it && it.common ? `<span class="tag">${esc(it.common)}</span>` : '', it && it.alt ? `<span class="tag">${esc(it.alt)}</span>` : '', d.sub ? `<span class="tag">${esc(d.sub)}</span>` : ''].join('');
+    dock(`<div class="xcard"><h3>${esc(d.title)}</h3><div class="tags">${tags}</div>${it && it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it && it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`);
+  },
+  toggle(which) {
+    if (which === 'her') { this.xHer = !this.xHer; $('#xHer').setAttribute('aria-pressed', this.xHer); const model = DECK[this.deck].model; setDim(this.xHer ? (i => i.model !== model || i.items.some(x => x.her)) : null); }
+    if (which === 'peel') { this.xPeel = !this.xPeel; $('#xPeel').setAttribute('aria-pressed', this.xPeel); groups.muscular.visible = !this.xPeel; unglow(); callout.hide(); refreshPickables(); invalidate(); }
+  },
+  reframe() { const st = document.body.dataset.state; if (st === 'home' || st === 'results') flyTo(regionFrame('whole', 20, 4), 500); else if (this.cur) flyTo(this.mode === 'find' && !this.cur.revealed ? regionFrame(this.cur.it.region, this.cur.it.az, this.cur.it.el) : this.itemFrame(this.cur.it), 400); },
+};
+
+/* ───────────── UI plumbing ───────────── */
+function setState(s) { document.body.dataset.state = s; requestAnimationFrame(syncDock); }
+function dock(html) { $('#dock').innerHTML = html; syncDock(); }
+function syncDock() { document.body.style.setProperty('--dockH', $('#dock').offsetHeight + 'px'); }
+let toastT = 0;
+function toast(cls, html) { const t = $('#toast'); clearTimeout(toastT); if (!cls) { t.classList.remove('on'); return; } t.className = cls + ' on'; t.innerHTML = html; if (cls === 'info') toastT = setTimeout(() => t.classList.remove('on'), 2600); }
+function showLoader(msg) { const l = $('#loader'); l.querySelector('p').textContent = msg; $('#loadBar').style.width = '6%'; l.classList.remove('out'); }
+function hideLoader() { $('#loader').classList.add('out'); }
+function loadProg(got, total) { const t = total || (got > 3e6 ? 5.2e6 : 2e6); $('#loadBar').style.width = clamp(got / t * 100, 6, 98) + '%'; $('#loadNote').textContent = (got / 1e6).toFixed(1) + ' MB'; }
+
+const MODES = [['find', 'Find it', 'A name or a clue — you tap it on the body.'], ['name', 'Name it', 'It glows — you pick the name from four. Her test\'s own shape; deep muscles live here.'], ['explore', 'Explore', 'No questions. Tap anything to see what it is.']];
+function renderHome() {
+  const deckCard = d => { const her = DECK[d].items.filter(i => i.her && (i.ok || !loaded[DECK[d].model])), seen = her.some(i => S.m[i.id] && S.m[i.id].s), locked = her.filter(i => S.m[i.id] && S.m[i.id].b >= LOCK).length, p = her.length ? locked / her.length * 100 : 0;
+    return `<button class="deck" data-deck="${d}" aria-pressed="${G.deck === d}"><span class="donut" style="--p:${p};--dc:${d === 'bones' ? '#f2b84b' : '#ff7d68'}"><span>${seen ? locked : '–'}</span></span><span><b>${DECK[d].label}</b><small>${seen ? `${locked} of ${her.length} locked` : `${her.length} on her list · not started`}</small></span></button>`; };
+  $('#decks').innerHTML = deckCard('bones') + deckCard('muscles');
+  $('#modes').innerHTML = MODES.map(m => `<button data-mode="${m[0]}" aria-pressed="${G.mode === m[0]}">${m[1]}</button>`).join('');
+  $('#modeNote').textContent = MODES.find(m => m[0] === G.mode)[2];
+  const sets = SETS[G.deck]; if (!sets.some(s => s.id === S.o.set[G.deck])) S.o.set[G.deck] = sets[0].id;
+  $('#sets').innerHTML = sets.map(s => `<button class="chip" data-set="${s.id}" aria-pressed="${S.o.set[G.deck] === s.id}">${s.name}<b>${G.pool(G.deck, s.id).length}</b></button>`).join('');
+  $('#setHint').textContent = sets.find(s => s.id === S.o.set[G.deck]).hint;
+  $('#lens').innerHTML = [10, 20, 'all'].map(n => `<button data-len="${n}" aria-pressed="${String(S.o.len) === String(n)}">${n === 'all' ? 'All' : n}</button>`).join('');
+  $('#asks').innerHTML = [['name', 'Names'], ['mix', 'Mix']].map(a => `<button data-ask="${a[0]}" aria-pressed="${S.o.ask === a[0]}" title="${a[0] === 'mix' ? 'Once you have a name right, it may come back as a common name or one of her clues' : 'Always the proper name'}">${a[1]}</button>`).join('');
+  const n = G.pool().length, ex = G.mode === 'explore';
+  $('#go').textContent = ex ? 'Open the body' : n ? `Start · ${S.o.len === 'all' ? n : Math.min(S.o.len, n)} questions` : 'Nothing in this set for this mode';
+  $('#go').disabled = !ex && !n; $('#lens').parentElement.parentElement.style.display = ex ? 'none' : '';
+  const best = S.best[[G.deck, S.o.set[G.deck], G.mode, S.o.len === 'all' ? n : Math.min(S.o.len, n)].join('.')]; $('#foot2').textContent = best ? `Best here: ${best}` : '';
+  $('#btnSound').style.opacity = S.o.sound ? 1 : .4;
+  requestAnimationFrame(() => G.reframe());
+}
+$('#home').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.deck) return G.setDeck(b.dataset.deck);
+  if (b.dataset.mode) { G.mode = S.o.mode = b.dataset.mode; save(); return renderHome(); }
+  if (b.dataset.set) { S.o.set[G.deck] = b.dataset.set; save(); return renderHome(); }
+  if (b.dataset.len) { S.o.len = b.dataset.len === 'all' ? 'all' : +b.dataset.len; save(); return renderHome(); }
+  if (b.dataset.ask) { S.o.ask = b.dataset.ask; save(); return renderHome(); }
+  if (b.id === 'go') { tone(1, 1, .01, 'sine', .0001); return G.start(); }
+  if (b.id === 'homeHelp') $('#help').classList.add('on');
+});
+$('#dock').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.id) G.choose(b); else if (b.dataset.a) G.act(b.dataset.a); });
+$('#results').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const r = b.dataset.r; if (r === 'home') goHome(); else if (r === 'misses') G.start(G.lastMisses); else if (r === 'again') G.start(); });
+function goHome() { G.round = null; G.cur = null; unglow(); clearXray(); setDim(null); ring.hide(); callout.hide(); toast(); if (groups.muscular) groups.muscular.visible = G.deck === 'muscles'; refreshPickables(); setState('home'); controls.autoRotate = true; renderHome(); }
+$('#btnHome').onclick = goHome;
+$('#btnHelp').onclick = () => $('#help').classList.add('on');
+$('#helpClose').onclick = () => $('#help').classList.remove('on');
+$('#help').addEventListener('click', e => { if (e.target.id === 'help') $('#help').classList.remove('on'); });
+$('#btnSound').onclick = () => { S.o.sound = !S.o.sound; save(); $('#btnSound').style.opacity = S.o.sound ? 1 : .4; if (S.o.sound) sfx.tick(); };
+$('#xHer').onclick = () => G.toggle('her'); $('#xPeel').onclick = () => G.toggle('peel');
+addEventListener('keydown', e => { if (document.body.dataset.state !== 'play') return; if (e.key === 'Escape') goHome(); if (G.mode === 'name' && /^[1-4]$/.test(e.key)) { const b = document.querySelectorAll('#dock .opt')[+e.key - 1]; if (b && !b.disabled) G.choose(b); } if ((e.key === 'Enter' || e.key === ' ') && $('#dock [data-a=skip]')) { e.preventDefault(); G.act('skip'); } });
+
+/* ───────────── loop ───────────── */
+function frame(now) {
+  requestAnimationFrame(frame);
+  if ((innerWidth !== resize.w || innerHeight !== resize.h) && innerWidth > 0 && innerHeight > 0) { resize(); G.reframe(); }   // a size change that never sent a resize event (a tab born hidden)
+  for (let i = tweens.length - 1; i >= 0; i--) { const t = tweens[i], k = clamp((now - t.t0) / t.dur, 0, 1); t.fn(k); dirty = true; if (k >= 1) { tweens.splice(tweens.indexOf(t), 1); t.done && t.done(); } }
+  controls.update();
+  if (glows.size) { dirty = true;                       // a glow TINTS the surface as well as lighting it: emissive alone vanishes on ivory bone
+    for (const [info, g] of glows) { const age = now - g.t0, m = info.mesh.material;
+      const k = g.mode === 'pulse' ? .62 + .3 * Math.sin(now / 170) : g.mode === 'flash' ? Math.max(0, 1 - age / g.dur) : .7;
+      m.emissive.copy(g.c).multiplyScalar(k * .42); m.color.copy(info.colour).multiplyScalar(info.dimK || 1).lerp(g.c, k * .78);
+      if (g.mode === 'flash' && age > g.dur) { glows.delete(info); rest(info); } } }
+  if (!dirty) return; dirty = false;
+  renderer.render(scene, camera); place(callout); place(ring);
+  // the muscle body is 1.9 M triangles: if a phone cannot hold ~30 fps while animating, trade sharpness for smoothness (twice at most)
+  const dt = now - perf.last; perf.last = now;
+  if (dt < 200) { perf.t += dt; if (++perf.n >= 45) { if (perf.t / perf.n > 34 && perf.downs < 2 && renderer.getPixelRatio() > 1) { renderer.setPixelRatio(Math.max(1, renderer.getPixelRatio() - .5)); perf.downs++; resize(); } perf.n = perf.t = 0; } }
+}
+const perf = { last:0, t:0, n:0, downs:0 };
+
+/* ───────────── boot ───────────── */
+(async function boot() {
+  resize();
+  try { await loadModel('skeletal', loadProg); if (G.deck === 'muscles') { $('#loader p').textContent = 'Wrapping it in muscle…'; await loadModel('muscular', loadProg); } }
+  catch (err) { console.error(err); $('#loader p').textContent = 'The 3D model did not load.'; $('#loadNote').textContent = location.protocol === 'file:' ? 'Open it through a web server (or the live site) — browsers block 3D files on file://.' : String(err.message || err); return; }
+  if (groups.muscular) groups.muscular.visible = G.deck === 'muscles';
+  document.body.dataset.deck = G.deck; refreshPickables(); setState('home'); renderHome();
+  const f = regionFrame('whole', 20, 4); if (f) { controls.target.copy(f.target); camera.position.copy(f.pos); } controls.autoRotate = true;
+  requestAnimationFrame(frame); setTimeout(hideLoader, 150);
+})();
+
+/* debug + calibration: ?debug logs every tap as mesh-local 0..1 coordinates */
+window.FB = { S, G, REG, ITEM, THREE, camera, controls, scene, groups, flyTo, frameBox, regionFrame, pointWorld, cast, toScreen, invalidate,
+  local(hit) { const i = hit.object.userData.info, bb = i.mesh.geometry.boundingBox, p = i.mesh.worldToLocal(hit.point.clone()); return { base:i.base, side:i.side, p:[(p.x - bb.min.x) / (bb.max.x - bb.min.x), (p.y - bb.min.y) / (bb.max.y - bb.min.y), (p.z - bb.min.z) / (bb.max.z - bb.min.z)].map(x => +x.toFixed(3)) }; } };
+if (DEBUG) canvas.addEventListener('click', e => { const h = cast(e.clientX, e.clientY); if (h) console.log('[fab]', JSON.stringify(window.FB.local(h))); });
