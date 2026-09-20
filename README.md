@@ -180,3 +180,24 @@ objects (nerves, vessels), all of which are already in the exported models (chec
   space; satellite cells = a ring round a ganglion cell body; Schwann cells = one segment of one axon each. CNS group on top, PNS below.
 - Clues are her six-point match ("which cell does what"), so with Ask-by = Mix the FUNCTION is the prompt and the cell is the answer.
 - Context meshes (capillary, axons, CSF, ganglion cell body) are tappable in Explore and never asked. 18/18 neuron-deck items pass by tap.
+
+## Added 21 Sep: Heart (Module 1) - real heart, glass chambers, a built conduction system, two traces
+
+- `models/heart.glb` (604 KB, `tools/export_deck.py heart`): four chambers, valve leaflets, papillary muscles, the aorta and its arch
+  branches, pulmonary trunk/arteries/veins, venae cavae, jugular/subclavian/brachiocephalic veins, coronaries + coronary sinus, and
+  the lung lobes as context. "Her list" = the heart keys of the 363-question Module 1 bank, read by hand (see the header in data-more.js).
+- **Glass chambers** (`openable` + `setOpen`): when what is asked lies INSIDE (a valve, the papillary muscles: `open:1`) the four
+  chambers and the two great roots become glass and a tap passes through them; what is inside an opened chamber wins the tap. The
+  lungs are permanently glass at .1 and pass taps unless they are the question (they are one step of the blood trace).
+- **All four chambers are ONE colour**: red-left / blue-right would hand over the answer. Vessels are coloured by what they carry, so
+  the pulmonary ARTERY is blue and the pulmonary VEINS red - which is itself one of her favourite traps.
+- **The conduction system is BUILT** ([made-heart.js](made-heart.js)) - the source has none. Placed by measurement on this heart's own
+  meshes: SA node at the lowest ring of the SVC, AV node between the two AV valves, His down the first fifth of the AV-node-to-apex
+  line, a branch each side of it, Purkinje fibres from each branch's foot up the inside of that ventricle's free wall. On stage only
+  when asked (`men:1`, the same switch as the meninges), declared schematic in the prompt.
+- **Two traces**: blood through the heart in the thirteen steps of her fill-in-the-blanks sequence (her valve names), and the impulse
+  SA -> AV -> His -> bundle branches -> Purkinje (her ordering question; the ECG lines are from her ECG matches).
+- Find it 34/34 + Name it 35/35 by real taps at 375x812; the left coronary trunk hides behind the pulmonary trunk, so it is `deep:1`.
+
+**Gate trap found here: `node --check file.js` is a FALSE PASS for these ES modules** (exit 0 on a file with a swallowed brace - a `//`
+comment added mid-line ate the rest of the line and the app would not boot). Use `node --input-type=module --check < file.js`.

@@ -17,6 +17,15 @@ DECKS = {
                          r'fasciculus', r'horn of spinal', r'funiculus', r'^cauda equina$', r'nucleus of accessory nerve']),
     'nerves': dict(names=[r'^(sciatic|femoral|tibial|common fibular|obturator|pudendal|median|ulnar|radial|axillary|musculocutaneous) nerve$',
                           r'^intercostal nerves$', r'brachial plexus$', r'^vagus nerve \(']),
+    # Module 1. The heart with its great vessels, valves and coronaries; the lung lobes ride along as context for the blood-flow trace.
+    'heart':  dict(names=[r'^(left|right) (atrium|ventricle)$', r'papillary muscle of', r'leaflet', r'^(ascending aorta|aortic arch|thoracic aorta|brachiocephalic trunk)$',
+                          r'^(left|right) (common carotid|subclavian) artery$', r'^(pulmonary trunk|bifurcation of pulmonary trunk|left pulmonary artery|right pulmonary artery)$',
+                          r'^(left|right) (superior|inferior) pulmonary vein$', r'^superior vena cava$', r'^inferior vena cava \(thoracic part\)$', r'^(left|right) brachiocephalic vein$',
+                          r'^internal jugular vein$', r'^(left|right) subclavian vein$', r'^(left|right) coronary artery$', r'^anterior interventricular artery$',
+                          r'^circumflex artery of heart$', r'^marginal artery$', r'^coronary sinus$', r'^(great|middle) cardiac vein$', r'lobe of (left|right) lung$']),
+    # Module 1. The airway from the pharynx down, the lungs, and the diaphragm under them.
+    'airway': dict(names=[r'lobe of (left|right) lung$', r'^trachea$', r'bronchus', r'^(naso|oro|laryngo)pharynx$', r'^(soft palate|uvula of palate|epiglottis|tongue)$',
+                          r'^(thyroid|cricoid) cartilage$', r'^hyoid', r'^diaphragm$']),
     'willis': dict(names=[r'^(anterior|posterior) communicating artery$', r'^(anterior|middle|posterior) cerebral artery', r'^internal carotid artery$',
                           r'^vertebral artery$', r'^basilar artery$', r'^insular branches of middle cerebral artery']),
 }

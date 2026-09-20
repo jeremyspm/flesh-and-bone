@@ -321,6 +321,71 @@ export const TISSUES = [
   TS('myofibrils', 'muscle', 'Myofibrils', 'tsFibre', 0, 15, ['myofibrils'], { fact:'The contractile threads inside the fibre, made of sarcomeres (actin + myosin) end to end.' }),
 ];
 
+/* ── Heart (Module 1): heart.glb (604 KB) cut from the source's cardiovascular model. "Her list" = the keys of the 363-question
+ *    M1 bank, read by hand: her four valve labels (pulmonary semilunar, tricuspid, aortic semilunar, mitral), her numbered-diagram
+ *    matches (aortic arch, left ventricle, right atrium, aorta, pulmonary artery, left pulmonary vein, SVC, IVC, brachiocephalic
+ *    artery, left common carotid, pulmonary veins, papillary muscle), her MCQ keys (right subclavian; jugular → subclavian vein) and
+ *    her cloze keys (LAD = the widow maker; coronary sinus → right atrium; papillary muscles). `open:1` = asked with glass chambers.
+ *    The conduction system is BUILT (made-heart.js): her labelled figure, twice, and her ordering question, twice. ── */
+const HT = (id, kind, name, az, el, m, extra) => ({ id:'ht-' + id, kind, name, region:'heart', az, el, m, ...extra });
+const COND = { her:1, men:1, open:1, stage:'schematic · placed on the real heart · chambers shown as glass' };
+export const HEART = [
+  HT('ra', 'chamber', 'Right atrium', 330, 5, ['right atrium'], { her:1, fact:'Receives deoxygenated blood from the superior and inferior venae cavae and the coronary sinus.' }),
+  HT('rv', 'chamber', 'Right ventricle', 10, 0, ['right ventricle'], { her:1,
+    clue:{ t:'The pumping force that drives the blood through the PULMONARY circulation.', hers:1 }, fact:'Most of the FRONT of the heart. Pumps to the lungs only, so its wall is thinner than the left.' }),
+  HT('la', 'chamber', 'Left atrium', 180, 10, ['left atrium'], { her:1, fact:'On the BACK of the heart. Receives oxygenated blood from the four pulmonary veins — where the pulmonary circulation ends.' }),
+  HT('lv', 'chamber', 'Left ventricle', 60, 0, ['left ventricle'], { her:1,
+    clue:{ t:'The pumping force that drives the blood through the SYSTEMIC circulation.', hers:1 }, fact:'Forms the apex. The thickest wall: it pumps to the whole body. Stroke volume and cardiac output are measured from HERE.' }),
+
+  HT('tricuspid', 'valve', 'Tricuspid valve', 20, 0, [/leaflet of right atrioventricular valve$/], { her:1, open:1, alt:'right atrioventricular valve',
+    fact:'Between right atrium and right ventricle. Three cusps, anchored by chordae tendineae to the papillary muscles.' }),
+  HT('mitral', 'valve', 'Mitral valve', 100, 0, [/leaflet of left atrioventricular valve$/], { her:1, open:1, alt:'bicuspid · left atrioventricular valve',
+    clue:{ t:'The left atrioventricular valve — thicker than the right, made of two flaps or cusps.', hers:1 }, fact:'Between left atrium and left ventricle. Two cusps. If it leaks, blood returns to the left atrium when the ventricles contract: a murmur.' }),
+  HT('pulm-valve', 'valve', 'Pulmonary semilunar valve', 20, 10, [/leaflet of pulmonary valve$/], { her:1, open:1,
+    clue:{ t:'Between the right ventricle and the pulmonary artery: it stops blood on its way to the lungs from returning to the right ventricle.', hers:1 }, fact:'Three half-moon cusps at the root of the pulmonary trunk.' }),
+  HT('aortic-valve', 'valve', 'Aortic semilunar valve', 40, 10, [/^(left coronary|right coronary|non-coronary) leaflet$/], { her:1, open:1,
+    fact:'Three half-moon cusps at the root of the aorta. The coronary arteries open (the ostia) just above two of them.' }),
+  HT('papillary', 'valve', 'Papillary muscles', 30, -5, [/papillary muscle of/], { her:1, open:1,
+    clue:{ t:'The atrioventricular valves are anchored by chordae tendineae to these, in the wall of the heart.', hers:1 }, fact:'They pull on the chordae tendineae so the AV valves cannot blow back into the atria when the ventricles contract.' }),
+
+  HT('aorta', 'vessel', 'Aorta', 20, 5, ['ascending aorta', 'aortic arch', 'thoracic aorta'], { her:1, region:'heartTop', fact:'Leaves the LEFT ventricle: ascending aorta, the arch, then down the back of the chest. Where the systemic circulation starts.' }),
+  HT('arch', 'vessel', 'Aortic arch', 20, 10, ['aortic arch'], { her:1, region:'heartTop', fact:'Three branches, in order: brachiocephalic, left common carotid, left subclavian. Baroreceptors here sense blood pressure.' }),
+  HT('brachio', 'vessel', 'Brachiocephalic artery', 10, 5, ['brachiocephalic trunk'], { her:1, region:'heartTop', alt:'brachiocephalic trunk', fact:'FIRST branch of the arch. Splits into the right common carotid and the right subclavian.' }),
+  HT('lcc', 'vessel', 'Left common carotid artery', 10, 5, ['left common carotid artery'], { her:1, region:'heartTop', fact:'SECOND branch of the arch, straight off it (the right one comes from the brachiocephalic).' }),
+  HT('lsub', 'vessel', 'Left subclavian artery', 10, 5, ['left subclavian artery'], { region:'heartTop', fact:'THIRD branch of the arch.' }),
+  HT('rsub', 'vessel', 'Right subclavian artery', 10, 5, ['right subclavian artery'], { her:1, region:'heartTop', fact:'From the brachiocephalic artery, out under the right clavicle to the arm.' }),
+  HT('rcc', 'vessel', 'Right common carotid artery', 10, 5, ['right common carotid artery'], { region:'heartTop', fact:'From the brachiocephalic artery, up the right side of the neck.' }),
+  HT('pa', 'vessel', 'Pulmonary artery', 20, 10, ['pulmonary trunk', 'bifurcation of pulmonary trunk', 'left pulmonary artery', 'right pulmonary artery'], { her:1, alt:'pulmonary trunk',
+    fact:'Leaves the RIGHT ventricle for the lungs. An artery because it leaves the heart — yet it carries DEOXYGENATED blood (so it is blue here).' }),
+  HT('pv', 'vessel', 'Pulmonary veins', 180, 10, [/pulmonary vein$/], { her:1, fact:'FOUR of them, from the lungs into the left atrium. Veins because they return to the heart — yet they carry OXYGENATED blood (red here).' }),
+  HT('svc', 'vessel', 'Superior vena cava', 340, 5, ['superior vena cava'], { her:1, region:'heartTop', fact:'Drains the head, neck and arms into the right atrium. The SA node sits where it joins the atrium.' }),
+  HT('ivc', 'vessel', 'Inferior vena cava', 200, -10, ['inferior vena cava (thoracic part)'], { her:1, fact:'Drains everything below the diaphragm into the right atrium.' }),
+  HT('jugular', 'vessel', 'Internal jugular vein', 10, 5, ['internal jugular vein'], { her:1, region:'heartTop',
+    clue:{ t:'The vein that drains the head down the neck and returns blood to the subclavian vein.', hers:1 }, fact:'Joins the subclavian vein to make the brachiocephalic vein.' }),
+  HT('subv', 'vessel', 'Subclavian vein', 10, 5, [/^(left|right) subclavian vein$/], { her:1, region:'heartTop', fact:'From the arm. Jugular + subclavian = brachiocephalic vein; the two brachiocephalic veins = the superior vena cava.' }),
+  HT('bcv', 'vessel', 'Brachiocephalic vein', 10, 5, [/^(left|right) brachiocephalic vein$/], { region:'heartTop', fact:'One each side (there is only ONE brachiocephalic artery). The two join to form the superior vena cava.' }),
+
+  HT('coronary', 'coronary', 'Coronary arteries', 30, 0, [/^(left|right) coronary artery$/, 'anterior interventricular artery', 'circumflex artery of heart', 'marginal artery'], { her:1,
+    clue:{ t:'The vessels that supply blood to the myocardium.', hers:1 }, fact:'First branches of the aorta, from the ostia just above the aortic valve. Blocked → myocardial infarction.' }),
+  HT('lad', 'coronary', 'Left anterior descending artery', 40, 0, ['anterior interventricular artery'], { her:1, alt:'LAD · anterior interventricular artery',
+    clue:{ t:'The "widow maker" — the coronary artery most often involved in a myocardial infarction.', hers:1 }, fact:'Runs down the FRONT of the heart in the groove between the two ventricles.' }),
+  HT('lca', 'coronary', 'Left coronary artery', 60, 10, ['left coronary artery'], { deep:1, fact:'Short, and tucked behind the pulmonary trunk (so it is asked in Name it, x-rayed). Splits into the left anterior descending and the circumflex.' }),
+  HT('rca', 'coronary', 'Right coronary artery', 340, 0, ['right coronary artery'], { fact:'Runs in the groove between right atrium and right ventricle, round to the back.' }),
+  HT('cx', 'coronary', 'Circumflex artery', 100, 5, ['circumflex artery of heart'], { fact:'Curls round the LEFT side of the heart in the atrioventricular groove.' }),
+  HT('cs', 'coronary', 'Coronary sinus', 180, -5, ['coronary sinus'], { her:1,
+    clue:{ t:'The vessel that returns the blood of the heart wall itself — to the right atrium.', hers:1 }, fact:'A large vein on the BACK of the heart collecting the cardiac veins; it empties into the right atrium.' }),
+
+  HT('sa', 'cond', 'SA node', 330, 10, ['sa node'], { ...COND, alt:'sinoatrial node',
+    clue:{ t:'The pacemaker of the heart — where the electrical impulse is generated.', hers:1 }, fact:'In the right atrium where the superior vena cava enters. It fires; the impulse spreads through both atria (the P wave).' }),
+  HT('av', 'cond', 'AV node', 20, 5, ['av node'], { ...COND, alt:'atrioventricular node',
+    clue:{ t:'Where the impulse is briefly delayed on its way from the atria to the ventricles.', hers:1 }, fact:'In the floor of the right atrium by the septum. The delay (the PR segment) lets the ventricles fill first.' }),
+  HT('his', 'cond', 'Bundle of His', 20, 0, ['bundle of his'], { ...COND, alt:'atrioventricular bundle', fact:'The only electrical bridge from atria to ventricles; runs into the top of the interventricular septum.' }),
+  HT('branches', 'cond', 'Bundle branches', 20, -5, ['bundle branches'], { ...COND, fact:'Right and left, down either side of the interventricular septum toward the apex.' }),
+  HT('purkinje', 'cond', 'Purkinje fibres', 20, -5, ['purkinje fibres'], { ...COND, fact:'From the apex UP through the ventricular walls, so the ventricles contract from the apex upward (the QRS complex).' }),
+
+  HT('lungs', 'context', 'Lungs', 10, 5, [/lobe of (left|right) lung$/], { region:'heartAll', fact:'Where the pulmonary circulation drops its carbon dioxide and picks up oxygen. (Drawn as glass here: a tap passes through unless the lungs are what was asked.)' }),
+];
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -338,11 +403,22 @@ export const MORE_REGIONS = {
   tsFibre:  { model:'tissues', m:['sarcolemma', 'myofibrils', 'muscle fibre'], pad:1.25, min:0.05 },
   gliaCNS: { model:'glia', m:['capillary', 'cerebrospinal fluid'], pad:1.06, min:0.05 },
   gliaPNS: { model:'glia', m:['cell body (ganglion)', 'axon (pns)', 'satellite cells'], pad:1.12, min:0.05 },
+  heart:    { model:'heart', m:[/^(left|right) (atrium|ventricle)$/, 'ascending aorta', 'pulmonary trunk', 'superior vena cava', 'aortic arch'], pad:1.12, min:0.05 },
+  heartTop: { model:'heart', m:['aortic arch', 'brachiocephalic trunk', /subclavian|common carotid|brachiocephalic vein/, 'superior vena cava', 'right atrium'], pad:1.05, min:0.05 },
+  heartAll: { model:'heart', m:[/lobe of/, 'aortic arch'], pad:1.05, min:0.05 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
 export const MORE_SETS = {
+  heart: [
+    { id:'her', name:'Her list', hint:'Every heart structure that is a key in her Module 1 bank', f:i => i.her },
+    { id:'inside', name:'Chambers & valves', hint:'Four chambers, four valves, papillary muscles', f:i => /chamber|valve/.test(i.kind) },
+    { id:'vessels', name:'Great vessels', hint:'Aorta and its branches, pulmonary vessels, venae cavae', f:i => i.kind === 'vessel' },
+    { id:'coronary', name:'Coronary', hint:'The heart\'s own supply — and the widow maker', f:i => i.kind === 'coronary' },
+    { id:'cond', name:'Conduction', hint:'Schematic: SA node to Purkinje fibres', f:i => i.kind === 'cond' },
+    { id:'all', name:'Everything', hint:'All of it', f:() => true },
+  ],
   tissues: [
     { id:'her', name:'Her list', hint:'The blanks of her three figures. Schematics, not to scale', f:i => i.her },
     { id:'joint', name:'Synovial joint', hint:'Her six-blank label question', f:i => i.kind === 'joint' },
@@ -384,6 +460,36 @@ export const MORE_SETS = {
  *    keys "choroid plexuses; arachnoidal villi … into the sagittal sinus"). The foramina and apertures between the
  *    ventricles are not steps she asks, so they are not steps here. `context` = on stage and tappable, but not a step. ── */
 export const TRACES = {
+  heart: [
+    { id:'tr-blood', name:'Blood through the heart', short:'Trace the blood', ask:'from the vena cava to the aorta', open:1, xray:false, region:'heart', az:20, el:5,
+      hint:'Her thirteen-step sequence: right side → lungs → left side',
+      note:'The order and the names are her own fill-in-the-blanks sequence. Chambers are drawn as glass so the valves can be tapped.',
+      steps:[
+        { it:'ht-svc',          q:'Deoxygenated blood returns from the head and arms. Through which vessel?', say:'Superior vena cava (the inferior vena cava and the coronary sinus arrive at the same place).', region:'heartTop', az:340 },
+        { it:'ht-ra',           q:'Into which chamber?', say:'Right atrium.', az:330 },
+        { it:'ht-tricuspid',    q:'Through which valve?', say:'Right atrioventricular (tricuspid) valve.' },
+        { it:'ht-rv',           q:'Into which chamber?', say:'Right ventricle.', az:10 },
+        { it:'ht-pulm-valve',   q:'Out through which valve?', say:'Pulmonary (semilunar) valve.', el:10 },
+        { it:'ht-pa',           q:'Into which vessel?', say:'Pulmonary trunk → pulmonary arteries.', el:10 },
+        { it:'ht-lungs',        q:'…to where?', say:'The lungs: carbon dioxide out, oxygen in.', region:'heartAll', az:10 },
+        { it:'ht-pv',           q:'Back to the heart through which vessels?', say:'The four pulmonary veins.', az:180, el:10 },
+        { it:'ht-la',           q:'Into which chamber?', say:'Left atrium.', az:180, el:10 },
+        { it:'ht-mitral',       q:'Through which valve?', say:'Mitral (bicuspid, left atrioventricular) valve.', az:100 },
+        { it:'ht-lv',           q:'Into which chamber?', say:'Left ventricle.', az:60 },
+        { it:'ht-aortic-valve', q:'Out through which valve?', say:'Aortic (semilunar) valve.', az:40, el:10 },
+        { it:'ht-aorta',        q:'Into which vessel — and so to the body?', say:'Aorta.', region:'heartTop' },
+      ] },
+    { id:'tr-conduction', name:'The heartbeat\'s impulse', short:'Trace the impulse', ask:'from the pacemaker to the ventricular muscle', open:1, men:1, xray:false, region:'heart', az:20, el:2,
+      hint:'SA node → AV node → bundle of His → bundle branches → Purkinje fibres',
+      note:'The conduction system is a schematic built onto the real heart (the 3D source has none). The order is her ordering question; the ECG lines are from her ECG matches.',
+      steps:[
+        { it:'ht-sa',       q:'Where does the impulse START — the pacemaker?', say:'SA node fires; the impulse spreads through the right and left atria, which depolarise and contract — the P wave.', az:330, el:10 },
+        { it:'ht-av',       q:'Where is it briefly delayed?', say:'AV node — the brief delay is the PR segment.' },
+        { it:'ht-his',      q:'Down which bundle does it enter the ventricles?', say:'Bundle of His (atrioventricular bundle).' },
+        { it:'ht-branches', q:'Then along what, either side of the septum?', say:'Right and left bundle branches.', el:-5 },
+        { it:'ht-purkinje', q:'…and out through the ventricular walls by what?', say:'Purkinje fibres — ventricular depolarisation and contraction: the QRS complex.', el:-5 },
+      ] },
+  ],
   neuron: [
     { id:'tr-impulse', name:'A nerve impulse', short:'Trace the impulse', ask:'from where the signal arrives to the next cell', xray:false, region:'neuron', az:0, el:4,
       hint:'Dendrites → soma → axon → terminals → across the synapse',
