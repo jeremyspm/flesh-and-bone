@@ -16,6 +16,7 @@ import { buildEye } from './made-eye.js';
 import { buildEar } from './made-ear.js';
 import { buildVessels, buildHeartWall, buildUterusWall, buildECG, buildSpirogram } from './made-figures.js';
 import { buildLongBone, buildAdrenal, buildAirwayWall, buildCochlea, buildRetina } from './made-sections.js';
+import { buildSperm, buildTubule, buildOvarySection } from './made-repro.js';
 const REGIONS = { ...REGIONS0, ...MORE_REGIONS }, SETS = { ...SETS0, ...MORE_SETS };
 
 const $ = s => document.querySelector(s);
@@ -56,7 +57,7 @@ const DECK = {
   heart:  { label:'Heart',   acc:'#fff0b3', ink:'#2a2205', items:HEART,   models:{ heart:'solid', ecg:'solid' }, bind:['heart', 'ecg'], noun:'structure', home:'heart', view:[15, 4], frame:{ pad:1.45, min:.09 }, extra:'Conduction system' },   // Module 1. Chambers turn to glass when what is asked is inside them
   airway: { label:'Airway',  acc:'#a9c4ff', ink:'#0a1230', items:AIRWAY,  models:{ skeletal:'ghost', airway:'solid', spiro:'solid', awwall:'solid' }, bind:['airway', 'spiro', 'awwall'], noun:'structure', openLabel:'Glass lungs', home:'airway', view:[15, 4], frame:{ pad:1.4, min:.1 } },   // Module 1. The lobes turn to glass when a bronchus is asked
   senses: { label:'Eye & Ear', acc:'#ffc46b', ink:'#2a1a02', items:SENSES,  models:{ eye:'solid', ear:'solid', cochlea:'solid', retina:'solid' }, bind:['eye', 'ear', 'cochlea', 'retina'], noun:'part', home:'eye', view:[38, 22], frame:{ pad:1.35, min:.05 }, schematic:'schematic · not to scale' },   // Module 3. Both BUILT: made-eye.js, made-ear.js
-  repro:  { label:'Reproductive', acc:'#ff9ecb', ink:'#2b0618', items:REPRO, models:{ skeletal:'ghost', female:'solid', male:'solid', uterwall:'solid' }, bind:['female', 'male', 'uterwall'], sex:{ female:'female', male:'male', uterwall:'female' }, noun:'structure', home:'rpFemale', view:[0, 10], frame:{ pad:1.5, min:.08 } },   // Module 3. Two bodies share one pelvis: only one is on stage at a time
+  repro:  { label:'Reproductive', acc:'#ff9ecb', ink:'#2b0618', items:REPRO, models:{ skeletal:'ghost', female:'solid', male:'solid', uterwall:'solid', sperm:'solid', tubule:'solid', ovarysec:'solid' }, bind:['female', 'male', 'uterwall', 'sperm', 'tubule', 'ovarysec'], sex:{ female:'female', male:'male', uterwall:'female', sperm:'male', tubule:'male', ovarysec:'female' }, noun:'structure', home:'rpFemale', view:[0, 10], frame:{ pad:1.5, min:.08 } },   // Module 3. Two bodies share one pelvis: only one is on stage at a time
 };
 const ITEM = {};
 for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
@@ -158,6 +159,9 @@ const MODELS = {
   awwall:  { kind:'cell',   noun:'part',      note:'Filling the lungs…', make:buildAirwayWall },
   cochlea: { kind:'cell',   noun:'part',      note:'Building the ear…', make:buildCochlea },
   retina:  { kind:'cell',   noun:'part',      note:'Building the eye…', make:buildRetina },
+  sperm:   { kind:'cell',   noun:'part',      note:'Placing the organs…', make:buildSperm },
+  tubule:  { kind:'cell',   noun:'cell',      note:'Placing the organs…', make:buildTubule },
+  ovarysec:{ kind:'cell',   noun:'part',      note:'Placing the organs…', make:buildOvarySection },
 };
 const SKULL_RE = /^(frontal|parietal|occipital|temporal|sphenoid|ethmoid|zygomatic|nasal|lacrimal|palatine|inferior nasal concha) bone$|^maxilla$|^vomer$/;
 const HIDE_BRAIN = [/^falx cerebri$/, /^tentorium cerebelli$/, /root of spinal nerve$/, /^nerve to /, /^central canal/];      // the dura folds stand in front of the medial cut and the cerebellum

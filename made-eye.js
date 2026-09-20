@@ -37,12 +37,15 @@ export function buildEye(O = new THREE.Vector3(0, 1.2, 0)) {
     for (const dy of [-.0035, .0035]) lig.push(new THREE.TubeGeometry(new THREE.LineCurve3(a, b.clone().setY(b.y + dy)), 1, .0012, 6, false)); }
   fin('Suspensory ligaments', lig, '#e9e2cf', { anchor:new THREE.Vector3(.044 * Math.sin(CUT * RAD), .051, .044 * Math.cos(CUT * RAD)) });
   fin('Canal of Schlemm', body(Array.from({ length:12 }, (_, k) => P(.0625 + .0030 * Math.cos(k * 30 * RAD), .0695 + .0030 * Math.sin(k * 30 * RAD))), true, 2.4), '#4f7fe0', { anchor:at(.0625, 90, CUT, .0695) });
+  fin('Conjunctiva', body(shell(0, .1002, .1028, 42, 78)), '#ffc9c2', { anchor:at(.1015, 62, CUT) });      // her MCQ: pinkeye is an infection of it. Over the front of the sclera, not over the cornea
   // ── neural tunic ──
   fin('Retina', body(shell(0, .074, .082, 66, 180)), '#f0a868', { anchor:at(.078, 118, CUT) });
   fin('Macula lutea', body(shell(0, .0722, .0742, 171, 180), false), '#ffe14d', { anchor:new THREE.Vector3(0, -.0722, 0) });
   const dPhi = 78, dA = 163, dN = at(1, dA, dPhi), dC = dN.clone().multiplyScalar(.0730), q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dN);      // nasal to the macula, just under the horizontal cut so you look down onto it
   const disc = new THREE.CylinderGeometry(.0115, .0115, .0022, 28); disc.applyQuaternion(q); disc.translate(dC.x, dC.y, dC.z);
   fin('Optic disc', [disc], '#fff3d6', { anchor:dC.clone() });
+  fin('Fovea centralis', body(shell(0, .0712, .0732, 176.6, 180), false), '#ff8a1c', { anchor:new THREE.Vector3(0, -.0712, 0) });      // the pit at the centre of the macula: her key for "only cones"
+  fin('Hyaloid canal', [new THREE.TubeGeometry(new THREE.LineCurve3(new THREE.Vector3(0, .0262, 0), dN.clone().multiplyScalar(.0735)), 1, .0021, 10, false)], '#6fb8ff', { anchor:dN.clone().multiplyScalar(.03).add(new THREE.Vector3(0, .012, 0)) });      // her revision match: "hyaloid canal in vitreous humor"
   const nerve = new THREE.CylinderGeometry(.0125, .0115, .075, 24); nerve.translate(0, .0375, 0); nerve.applyQuaternion(q); const nC = dN.clone().multiplyScalar(.0995); nerve.translate(nC.x, nC.y, nC.z);
   fin('Optic nerve', [nerve], '#f0d66b', { anchor:dN.clone().multiplyScalar(.14) });
   // ── what is inside ──

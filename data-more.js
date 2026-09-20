@@ -507,15 +507,18 @@ export const SENSES = [
   SE('pupil', 'eye', 'Pupil', 'eyeFront', 20, 12, ['pupil'], 'Dilates in poor light, constricts in bright light.', 'Not a structure — the HOLE in the iris that the light goes through.'),
   SE('lens', 'eye', 'Lens', 'eyeFront', 38, 22, ['lens'], 'Biconvex and flexible — about 20 % of the refraction; it accommodates to focus the image on the retina.', 'Near object: ciliary muscle contracts, lens bulges. Cloudy lens = cataract.'),
   SE('retina', 'eye', 'Retina', 'eye', 38, 22, ['retina'], 'The neural tunic: photoreceptors (rods and cones), bipolar cells and ganglion cells.', 'Rods = dim light, no colour (scotopic). Cones = bright light, colour (photopic).'),
-  SE('macula', 'eye', 'Macula lutea', 'eye', 30, 30, ['macula lutea'], 'The spot with ONLY cones.', 'With the fovea at its centre: sharpest vision, straight behind the lens. Macular degeneration destroys it.', { alt:'fovea' }),
+  SE('macula', 'eye', 'Macula lutea', 'eye', 30, 30, ['macula lutea'], null, 'The yellow spot straight behind the lens, with the fovea centralis at its centre. Macular degeneration (dry or wet) destroys it.'),
+  SE('fovea', 'eye', 'Fovea centralis', 'eye', 30, 30, ['fovea centralis'], 'The small pit in the retina where only cones are found and where sharp vision happens.', 'The centre of the macula lutea. Her options list both — the fovea is the one with ONLY cones.'),
+  SE('conjunctiva', 'eye', 'Conjunctiva', 'eyeFront', 38, 22, ['conjunctiva'], 'Pinkeye is an infection of it.', 'The thin membrane over the front of the sclera and the inside of the eyelids — not over the cornea. Conjunctivitis; treated with chloramphenicol when bacterial.'),
+  SE('hyaloid', 'eye', 'Hyaloid canal', 'eye', 38, 22, ['hyaloid canal'], 'A canal in the vitreous humor.', 'Runs from the back of the lens to the optic disc: what is left of the fetal hyaloid artery. SCHEMATIC, drawn straighter and wider than life.'),
   SE('disc', 'eye', 'Optic disc', 'eye', 30, 30, ['optic disc'], 'No cones or rods — the nerve fibres leave the eye here.', 'The blind spot. It lies to the NASAL side of the macula.', { alt:'blind spot' }),
   SE('optic-nerve', 'eye', 'Optic nerve', 'eye', 150, 10, ['optic nerve'], null, 'Cranial nerve II: the ganglion-cell axons, leaving at the optic disc for the optic chiasm and the visual cortex in the occipital lobe.', { sub:'CN II' }),
-  SE('aqueous', 'eye', 'Aqueous humor', 'eyeFront', 38, 22, ['aqueous humor'], 'The fluid in the ANTERIOR segment of the eye.', 'Made by the ciliary body, drained by the canal of Schlemm. If it cannot drain, pressure rises: glaucoma.'),
+  SE('aqueous', 'eye', 'Aqueous humor', 'eyeFront', 38, 22, ['aqueous humor'], 'A watery fluid found in the anterior chamber of the eyeball.', 'Made by the ciliary body, drained by the canal of Schlemm. If it cannot drain, pressure rises: glaucoma.'),
   SE('vitreous', 'eye', 'Vitreous humor', 'eye', 38, 22, ['vitreous humor'], 'Fills the POSTERIOR segment of the eye.', 'A clear gel behind the lens; it holds the retina against the choroid.'),
   SE('schlemm', 'eye', 'Canal of Schlemm', 'eyeFront', 38, 22, ['canal of schlemm'], 'Drains the aqueous fluid.', 'A ring-shaped channel at the junction of cornea and sclera (through the trabecular mesh). Blocked → glaucoma.'),
 
   SE('pinna', 'ear', 'Pinna', 'ear', 0, 5, ['pinna'], 'Collects the sound.', 'External ear: the flap of elastic cartilage and skin.', { alt:'auricle' }),
-  SE('canal', 'ear', 'External auditory canal', 'ear', 0, 12, ['external auditory canal'], 'With ceruminous glands, which make the brown wax.', 'External ear. Ear wax here is a REVERSIBLE cause of conduction deafness. (Opened along its length so you can see the eardrum.)'),
+  SE('canal', 'ear', 'External auditory canal', 'ear', 0, 12, ['external auditory canal'], 'With ceruminous glands, which make the brown wax.', 'External ear. Ear wax here is a REVERSIBLE cause of conduction deafness. (Opened along its length so you can see the eardrum.)', { alt:'ear canal' }),
   SE('drum', 'ear', 'Tympanic membrane', 'earMid', 0, 12, ['tympanic membrane'], null, 'The eardrum: the boundary between external and middle ear. Sound waves make it vibrate. Perforated → conduction deafness.', { alt:'eardrum' }),
   SE('ossicles', 'ear', 'Ossicles', 'earMid', 0, 8, ['malleus', 'incus', 'stapes'], 'They transfer sound from the tympanic membrane to the oval window — and amplify it.', 'Malleus, incus, stapes: three tiny bones with synovial joints. Otosclerosis or arthritis of them = conduction deafness.'),
   SE('malleus', 'ear', 'Malleus', 'earMid', 0, 8, ['malleus'], null, 'The hammer: its handle is fixed to the eardrum. FIRST of the three.'),
@@ -528,7 +531,7 @@ export const SENSES = [
   SE('utricle', 'ear', 'Utricle', 'earIn', 0, 8, ['utricle'], null, 'Membranous sac in the vestibule, with otoliths in its macula: head position and straight-line movement.'),
   SE('saccule', 'ear', 'Saccule', 'earIn', 0, 8, ['saccule'], null, 'The smaller membranous sac in the vestibule, also with otoliths in its macula.'),
   SE('canals', 'ear', 'Semicircular canals', 'earIn', 0, 8, ['semicircular canals'], 'For balance and spatial orientation.', 'Three, at right angles to one another, each with an ampulla: they sense ROTATION of the head. With the utricle and saccule they make the vestibular apparatus.', { alt:'semicircular ducts' }),
-  SE('nerve8', 'ear', 'Vestibulocochlear nerve', 'earIn', 0, 8, ['vestibulocochlear nerve'], 'Takes the electrical impulses to the auditory cortex in the temporal lobe.', 'Cranial nerve VIII: a cochlear part (hearing) and a vestibular part (balance).', { sub:'CN VIII' }),
+  SE('nerve8', 'ear', 'Vestibulocochlear nerve', 'earIn', 0, 8, ['vestibulocochlear nerve'], 'Takes the electrical impulses to the auditory cortex in the temporal lobe.', 'Cranial nerve VIII: a cochlear part (hearing) and a vestibular part (balance).', { sub:'CN VIII', alt:'auditory nerve' }),
 ];
 
 /* ── Reproductive (Module 3). MALE = male.glb (72 KB) from the source body. FEMALE = HuBMAP CCF reference organs (CC BY 4.0), one
@@ -653,6 +656,30 @@ GLANDS.push(
     fact:'The core of the gland: really a sympathetic ganglion that secretes into the blood. Epinephrine and norepinephrine — her example of NEURAL stimulation of an endocrine gland.' },
 );
 
+/* ── Read from her GRADED Module 3 quizzes (captured 21 Sep 2026): the three figures she tests with an image that no organ model shows (made-repro.js). ── */
+const RX = (id, kind, sex, name, region, m, clue, fact, extra) => ({ id:'rx-' + id, kind, sex, name, her:1, region, az:0, el:0, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+REPRO.push(
+  RX('acrosome', 'sperm', 'male', 'Acrosome', 'rpSperm', ['acrosome'], 'The enzyme-filled cap that covers the head of the sperm.', 'Its enzymes digest a way through the zona radiata round the egg. Her label figure keys it; so does her fertilisation drop-down.'),
+  RX('chromatin', 'sperm', 'male', 'Chromatin', 'rpSperm', ['chromatin'], 'In the head of the sperm: only 23 chromosomes.', 'The nucleus — haploid. Her label figure calls it chromatin.', { alt:'nucleus of the sperm' }),
+  RX('mito', 'sperm', 'male', 'Mitochondria', 'rpSperm', ['mitochondria'], 'Found in the mid piece: they make the ATP for motility.', 'Wound round the start of the tail. Mitochondrial DNA is inherited only from the mother: the sperm\'s stay outside the egg.'),
+  RX('tail', 'sperm', 'male', 'Tail', 'rpSperm', ['tail'], 'To propel the sperm cell.', 'A flagellum. Sperm with short, double or crooked tails have problems with motility.', { alt:'flagellum' }),
+  RX('gonia', 'tubule', 'male', 'Spermatogonia', 'rpTubule', ['spermatogonia'], 'Diploid cells that divide mitotically to form diploid primary spermatocytes — the stem cells of the testis.', 'Against the wall of the tubule. Because they keep dividing by MITOSIS, males make gametes throughout life.', { alt:'spermatogonium' }),
+  RX('primary', 'tubule', 'male', 'Primary spermatocytes', 'rpTubule', ['primary spermatocytes'], 'Diploid cells that go through Meiosis I to form haploid secondary spermatocytes.', 'The biggest cells in the wall. Her sequence: spermatogonium → diploid spermatocyte → haploid spermatocyte → spermatid → spermatozoon.'),
+  RX('secondary', 'tubule', 'male', 'Secondary spermatocytes', 'rpTubule', ['secondary spermatocytes'], 'Haploid cells that go through Meiosis II to form haploid spermatids.', 'Short-lived, so seldom seen on a slide.'),
+  RX('spermatids', 'tubule', 'male', 'Spermatids', 'rpTubule', ['spermatids'], 'A haploid male gamete before spermiogenesis.', 'Round cells near the lumen. SPERMIOGENESIS reshapes them into spermatozoa; spermatoGENESIS is the whole process from spermatogonia.'),
+  RX('zoa', 'tubule', 'male', 'Spermatozoa', 'rpTubule', ['spermatozoa'], null, 'Released tail-first into the lumen of the tubule, then on to the epididymis to mature.', { her:0, alt:'sperm' }),
+  RX('sertoli', 'tubule', 'male', 'Sertoli cells', 'rpTubule', ['sertoli cells'], 'They nurture the sperm cells and make the hormone inhibin.', 'Tall cells from the wall to the lumen. FSH acts on them; their inhibin suppresses FSH from the anterior pituitary.'),
+  RX('leydig', 'tubule', 'male', 'Leydig cells', 'rpTubule', ['leydig cells'], 'Between the seminiferous tubules: they make the hormone testosterone.', 'OUTSIDE the tubule, next to the capillaries. LH acts on them.'),
+  RX('pfollicle', 'ovarysec', 'female', 'Primary follicle', 'rpOvary', ['primary follicle'], null, 'Holds a PRIMARY oocyte: diploid, arrested in prophase I since before birth. Oogonia → primary oocytes happens during fetal development.', { her:0 }),
+  RX('sfollicle', 'ovarysec', 'female', 'Secondary follicle', 'rpOvary', ['secondary follicle'], null, 'Growing under FSH; the developing follicle releases estrogen.', { her:0 }),
+  RX('tfollicle', 'ovarysec', 'female', 'Tertiary follicle', 'rpOvary', ['tertiary follicle', 'oocyte in the tertiary follicle'], 'The fluid-filled Graafian follicle that ruptures at ovulation.', 'Ovulation is triggered by the LH peak. It releases a secondary oocyte arrested in metaphase of Meiosis II.', { alt:'Graafian follicle' }),
+  RX('oocyte', 'ovarysec', 'female', 'Secondary oocyte', 'rpOvary', ['secondary oocyte', 'zona radiata'], 'A haploid female gamete that is released from the tertiary follicle.', 'Caught by the fimbriae and swept into the Fallopian tube. Meiosis II is only completed if fertilisation occurs.'),
+  RX('zona', 'ovarysec', 'female', 'Zona radiata', 'rpOvary', ['zona radiata'], 'The layer round the egg that the sperm must get through.', 'Her drop-down keys it. The acrosome\'s enzymes open the way; calcium then blocks other sperm.', { alt:'corona radiata' }),
+  RX('owall', 'ovarysec', 'female', 'Ovarian wall', 'rpOvary', ['ovarian wall'], 'It ruptures at ovulation to let the secondary oocyte out.', 'Drawn open at the top, where the follicle has just burst.'),
+  RX('luteum', 'ovarysec', 'female', 'Corpus luteum', 'rpOvary', ['corpus luteum'], 'What is left of the follicle after ovulation: it releases progesterone and estrogen.', 'Progesterone keeps the endometrium. No pregnancy → it degenerates into the corpus albicans and menstruation follows; hCG from an embryo keeps it alive.'),
+  RX('albicans', 'ovarysec', 'female', 'Corpus albicans', 'rpOvary', ['corpus albicans'], null, 'The white scar a corpus luteum leaves behind.', { her:0 }),
+);
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -682,6 +709,9 @@ export const MORE_REGIONS = {
   earMid:   { model:'ear', m:['tympanic membrane', 'malleus', 'incus', 'stapes', 'oval window'], pad:1.5, min:0.05 },
   earIn:    { model:'ear', m:['vestibule', 'cochlea', 'semicircular canals', 'vestibulocochlear nerve'], pad:1.12, min:0.05 },
   rpFemale: { model:'female', m:[/./], pad:1.25, min:0.05 },
+  rpSperm:  { model:'sperm', m:[/./], pad:1.12, min:0.05 },
+  rpTubule: { model:'tubule', m:[/./], pad:1.12, min:0.05 },
+  rpOvary:  { model:'ovarysec', m:[/./], pad:1.15, min:0.05 },
   rpMale:   { model:'male', m:[/./], pad:1.12, min:0.05 },
   arm:      { m:['humerus', 'radius', 'ulna', /metacarpal/, /of hand$/], side:'L', pad:1.08 },
   tsLong:    { model:'longbone', m:[/./], pad:1.1, min:0.05 },
@@ -708,8 +738,10 @@ export const MORE_SETS = {
   ],
   repro: [
     { id:'her', name:'Her list', hint:'The parts on her Module 3 revision slides (no vagina, ligaments or bulbo-urethral glands in the 3D sources)', f:i => i.her },
-    { id:'female', name:'Female', hint:'HuBMAP reference organs, placed as one set in this pelvis', f:i => i.sex === 'female' && i.kind !== 'uwall' },
-    { id:'male', name:'Male', hint:'Testis, ducts and glands — with their share of the semen', f:i => i.sex === 'male' },
+    { id:'female', name:'Female', hint:'HuBMAP reference organs, placed as one set in this pelvis', f:i => i.sex === 'female' && i.kind === 'female' },
+    { id:'male', name:'Male', hint:'Testis, ducts and glands — with their share of the semen', f:i => i.sex === 'male' && i.kind === 'male' },
+    { id:'sperm', name:'Sperm & tubule', hint:'Her sperm-cell label figure and her spermatogenesis match (Leydig cells sit OUTSIDE the tubule)', f:i => i.kind === 'sperm' || i.kind === 'tubule' },
+    { id:'ovarysec', name:'Inside the ovary', hint:'Her ovulation drop-downs: tertiary follicle → ovarian wall ruptures → secondary oocyte → corpus luteum', f:i => i.kind === 'ovarysec' },
     { id:'uwall', name:'Uterus wall', hint:'Perimetrium, myometrium, and the two layers of the endometrium', f:i => i.kind === 'uwall' },
   ],
   senses: [

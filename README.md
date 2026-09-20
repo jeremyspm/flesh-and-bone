@@ -334,3 +334,19 @@ Every remaining "you cannot see it on a whole model" gap from the marks audit, e
 Engine: `setSection(on)` now takes `true` (heart) or `'skull'`; each clipped mesh carries its own plane in `info.sect`, which is what `cast()` tests. Explore in Bones gains "Lift the skull cap" and "Glass skull".
 Not built, on purpose: foramen ovale (not a hole in this decimated sphenoid — said so in the item's fact), intervertebral discs (absent from the source; the vertebrae stand for that joint).
 Verified at 375×812: 430 items, 0 unbound, reach scan on all 41 new items, real tapped rounds on every new set, heart section + septa and both traces re-run after the `setSection` rewrite. `docs/autoplayer.js` learned to aim at `between` items (the septa) — before, a re-queued septum could stall its round.
+
+## Module 3, re-read from her GRADED quizzes (21 Sep 2026)
+
+Until today the Module 3 "her list" came from her revision slides. He sat and saved all 23 open Module 3 quizzes; they were parsed with the house parser
+(`HS2_EXPORT="_inbox/HS2 Module 3 Capture" HS2_OUT=hs2-anki/m3 node hs2-test1/audit/parse-quizzes.mjs`) and every short key of the special-senses and reproduction quizzes was matched
+against the trainer's items (196 terms; misses read by hand). Most misses are process or pathology words (hormones, meiosis, refraction errors) — Paper Sim territory. The STRUCTURES she tests with an image that the trainer lacked:
+
+| her question | built (`made-repro.js`, `made-eye.js`) |
+|---|---|
+| label the sperm cell: acrosome · chromatin · mitochondria · tail | a sperm cell — set *Sperm & tubule* |
+| spermatogenesis match: spermatogonium → primary → secondary spermatocyte → spermatid; Sertoli cells (inhibin); Leydig cells (testosterone) | a wedge of seminiferous tubule, Leydig cells OUTSIDE it by a capillary |
+| ovulation drop-downs: secondary oocyte · tertiary (Graafian) follicle · ovarian wall · zona radiata; corpus luteum | the ovary in section — set *Inside the ovary* |
+| eye match: fovea centralis (≠ macula lutea) · conjunctiva (pinkeye) · hyaloid canal; "aqueous humour in the anterior chamber" | three parts added to the built eye; macula no longer claims "only cones" |
+| "ear canal", "auditory nerve" | accepted as alternative names |
+
+Still absent because no source has them: vagina (keyed twice), uterine ligaments. 452 items, 0 unbound; real tapped rounds on each new set at 375×812.
