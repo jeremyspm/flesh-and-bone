@@ -2,7 +2,8 @@
  * show (you cannot see a tunic, a layer of the uterus wall or a P wave on an organ). All BUILT, all declared schematics:
  *   buildVessels()    artery · vein (with a valve) · capillary, walls pulled apart into the three tunics   — her 7-point M1 match
  *   buildHeartWall()  fibrous + parietal pericardium · pericardial cavity · epicardium · myocardium · endocardium — her M1 cloze keys
- *   buildUterusWall() perimetrium · myometrium · endometrium (basal + functional layer, with their arteries)   — her M3 slide 2
+ *   buildUterusWall() perimetrium · myometrium · endometrium (basal + functional layer, with their arteries)   — her M3 slide 2, DRAWN AS HER FIGURE DRAWS IT:
+ *                     side-on, outside of the uterus on the LEFT and the cavity on the RIGHT, the arteries in red (uterine → arcuate → radial → straight → spiral)
  *   buildECG()        P · PR segment · Q · R · S · ST segment · T                                             — her ECG label + two matches
  *   buildSpirogram()  the breathing trace with the four volumes and four capacities as bars                   — her lung-volume keys
  * Nothing is lettered; nothing is to scale. */
@@ -27,11 +28,20 @@ export function buildHeartWall() { return stack(V(.05, .66), [
   { name:'Fibrous pericardium', h:.007, colour:'#d9cfbf' }, { name:'Parietal pericardium', h:.005, colour:'#f3b9a6' }, { name:'Pericardial cavity', h:.006, colour:'#9fdcff', glassy:.45 },
   { name:'Epicardium', h:.006, colour:'#ffd27a' }, { name:'Myocardium', h:.034, colour:'#b5483f' }, { name:'Endocardium', h:.005, colour:'#f6e3d2' } ]); }
 
-export function buildUterusWall() {
-  const spiral = (y0, h, w, D) => mergeGeometries([0, 1, 2].map(k => flat(tube(Array.from({ length:25 }, (_, t) => V(w * (.2 + k * .3) + Math.cos(t * 1.05) * .0035, y0 + h * t / 24, D / 2 + .0015 + Math.sin(t * 1.05) * .001)), .0011, 48, 6))));
-  const straight = (y0, h, w, D) => mergeGeometries([0, 1, 2].map(k => flat(cyl(.0011, y0, y0 + h, w * (.2 + k * .3), D / 2 + .0015, 6))));
-  return stack(V(.16, .93), [ { name:'Perimetrium', h:.006, colour:'#f0d9b5' }, { name:'Myometrium', h:.034, colour:'#c9607c' },
-    { name:'Basal layer', h:.009, colour:'#e89ab0', deco:[straight] }, { name:'Functional layer', h:.015, colour:'#ffc2d1', deco:[spiral] } ], .15, .06); }
+export function buildUterusWall() { const M = maker(V(.19, .9)), D = .03, Z = D / 2 + .0022, H = x => .065 - .02 * x / .11, YS = [-.62, 0, .62];
+  /* a wedge of wall seen from the side, as her slide draws it: taller on the outside (left), shorter at the cavity (right) */
+  const slab = (x0, x1) => { const s = new THREE.Shape([new THREE.Vector2(x0, -H(x0)), new THREE.Vector2(x1, -H(x1)), new THREE.Vector2(x1, H(x1)), new THREE.Vector2(x0, H(x0))]), g = new THREE.ExtrudeGeometry(s, { depth:D, bevelEnabled:false }); g.translate(0, 0, -D / 2); return g; };
+  const lift = g => (g.translate(0, 0, Z), g);
+  M.add('Perimetrium', [slab(0, .006)], '#f3e3c4', { anchor:V(.003, .03, D / 2) });
+  M.add('Myometrium', [slab(.006, .07)], '#eeb093', { anchor:V(.05, .044, D / 2) });
+  M.add('Basal layer', [slab(.07, .084)], '#d3bd62', { anchor:V(.077, .04, D / 2) });
+  M.add('Functional layer', [slab(.084, .11)], '#f1e4a0', { anchor:V(.098, .036, D / 2) });
+  M.add('Uterine artery', [lift(tube([V(-.03, .075), V(-.022, .05), V(-.027, .02), V(-.023, -.015), V(-.026, -.05), V(-.02, -.078)], .0024, 48))], '#e0342f', { anchor:V(-.025, .035, Z + .0024) });
+  M.add('Arcuate artery', [tube([V(.024, .058), V(.019, .03), V(.023, 0), V(.019, -.03), V(.024, -.057)], .0019, 40), ...[.04, -.002, -.043].map(y => tube([V(-.024, y + .004), V(-.002, y), V(.02, y + .002)], .0014, 12))].map(lift), '#e0342f', { anchor:V(.021, .015, Z + .0019) });
+  M.add('Radial arteries', YS.map(k => lift(tube([V(.021, k * H(.02) * .78), V(.045, k * H(.045) * .8 + .003), V(.07, k * H(.07) * .8)], .0015, 16))), '#e0342f', { anchor:V(.045, .003, Z + .0015) });
+  M.add('Straight arteries', YS.flatMap(k => { const y = k * H(.07) * .8; return [tube([V(.07, y), V(.077, y + .006), V(.083, y + .0075)], .0011, 10), tube([V(.07, y), V(.077, y - .006), V(.083, y - .0075)], .0011, 10)].map(lift); }), '#e0342f', { anchor:V(.077, .006, Z + .0011) });
+  M.add('Spiral arteries', YS.map(k => { const y = k * H(.07) * .8; return lift(tube(Array.from({ length:41 }, (_, t) => V(.07 + .038 * t / 40, y + Math.sin(t * .75) * .0042 * Math.max(0, Math.min(1, (t - 14) / 5)), Math.cos(t * .75) * .0016 * Math.max(0, Math.min(1, (t - 14) / 5)))), .0012, 96, 6)); }), '#e0342f', { anchor:V(.096, .0042, Z + .0012) });
+  return M.parts; }
 
 export function buildVessels() { const M = maker(V(-.16, .56)), T = { e:'#e8dcc0', m:'#d9776a', i:'#f6d2c4' };
   // artery: thick muscular media, small round lumen

@@ -219,9 +219,10 @@ comment added mid-line ate the rest of the line and the app would not boot). Use
 - Source of the list: her Module 3 revision deck ("2019 Revision mod 3 22 slide2.pptx", posted 20 Sep; slides 15-21), read as text.
   Her Canvas quizzes on these had not been sat yet, so `her:1` in this deck means "on her revision slides", and the header says so.
 - [made-eye.js](made-eye.js): the source lacks the choroid, ciliary body, pupil, macula, optic disc and canal of Schlemm, so the whole
-  eye is generated. Every coat is a body of revolution about the optical axis with ONE quarter removed toward the viewer
-  (`PHI0`/`LEN`), and each body gets flat caps on both cut planes (`ShapeGeometry` of its own profile) - LatheGeometry leaves them open.
-  So the two cut faces show sclera > choroid > retina in order and you look in at the macula and optic disc. The lens is whole.
+  eye is generated. Every coat is a body of revolution about the optical axis with the TOP HALF removed
+  (`PHI0`/`LEN`; it was one quarter until 21 Sep - see "Figures checked against her drawings"), and each body gets a flat cap on the cut plane
+  (`ShapeGeometry` of its own profile) - LatheGeometry leaves it open. The cut face is the textbook horizontal section: sclera > choroid > retina
+  in order, the optic disc and nerve IN the plane, and you look down into the bowl at the macula. The lens is whole.
   The humors are `soft` (fluid: glass, and a tap passes through unless a humor was asked). **The coats are 8-10 mm thick on a 10 cm
   eye** - the first build used 4 mm and the reach scan put the choroid at 4 %: a phone finger cannot hit a 7 px strip.
   `grow` lets a part stand proud of the cut faces: the canal of Schlemm lies INSIDE the sclera's profile, so its caps were coplanar
@@ -344,7 +345,7 @@ against the trainer's items (196 terms; misses read by hand). Most misses are pr
 | her question | built (`made-repro.js`, `made-eye.js`) |
 |---|---|
 | label the sperm cell: acrosome · chromatin · mitochondria · tail | a sperm cell — set *Sperm & tubule* |
-| spermatogenesis match: spermatogonium → primary → secondary spermatocyte → spermatid; Sertoli cells (inhibin); Leydig cells (testosterone) | a wedge of seminiferous tubule, Leydig cells OUTSIDE it by a capillary |
+| spermatogenesis match: spermatogonium → primary → secondary spermatocyte → spermatid; Sertoli cells (inhibin); Leydig cells (testosterone) | a seminiferous tubule in ROUND cross-section (her figure), Leydig cells in the gap between tubules by a capillary |
 | ovulation drop-downs: secondary oocyte · tertiary (Graafian) follicle · ovarian wall · zona radiata; corpus luteum | the ovary in section — set *Inside the ovary* |
 | eye match: fovea centralis (≠ macula lutea) · conjunctiva (pinkeye) · hyaloid canal; "aqueous humour in the anterior chamber" | three parts added to the built eye; macula no longer claims "only cones" |
 | "ear canal", "auditory nerve" | accepted as alternative names |
@@ -370,3 +371,24 @@ answered — `nearestSphere` now competes inside the current deck and inside the
 her figure lost the tag.
 **C · what his screenshots showed.** Built figures floated unlabelled ("why do some models look like this"): each now carries a plain-words caption (`CAPTIONS`, a sprite, never a part's
 name), and during a question the deck's other built figures leave the stage (`focusFigure`) — he had tapped the ovary when asked for a layer of the uterus wall.
+
+## Figures checked against HER drawings (21 Sep 2026, his ask: "make sure everything is like her diagrams")
+
+He put a classroom ovary model beside the built ovary and asked whether someone could drill the trainer and then be blindsided by a diagram. For four
+figures the answer was yes. The cause: those were built from the WORDS of her slides and keys (the revision deck had been read as text), never from
+her pictures. Every built figure was then set beside her own figure for it — the 51 images in her Module 3 quizzes, the 47 in her Module 3 revision
+deck, and the Module 1 and 2 quiz figures already in the Paper Sims.
+
+| figure | her drawing | was | now |
+|---|---|---|---|
+| ovary | slide-2 ovulation figure + fertility-quiz "ovarian cycle": stages IN ORDER round the edge, vesicular follicle bulging at the surface, egg leaving beside it, corpus luteum → albicans, vessels from the hilum | ripe follicle at the bottom, egg leaving at the top, follicles the same yellow as the corpus luteum | her layout, clockwise from the top left; follicle drawn ripe AND burst; antrum, oocytes and the luteal core in their own colours |
+| seminiferous tubule | revision-quiz figure (b): ROUND cross-section, lumen in the middle | a strip of wall, "lumen at the top" (her flow chart runs the other way) | round: spermatogonia at the wall → sperm tails in the lumen, six Sertoli columns, Leydig cells + capillary in the gap between three tubules (two outlined) |
+| uterus wall | slide 2: side-on, outside LEFT → cavity RIGHT, arteries in red (uterine → arcuate → radial → basal → spiral) | a staircase, outside at the top, arteries the colour of their layer | her layout; the arteries are red parts of their own (myometrium accepts arcuate + radial, basal layer the straight ones, functional layer the spiral ones) |
+| eye | three figures, all FLAT sections; the two quiz figures have the cornea on the right and the nerve leaving at the bottom | one quarter wedge cut out, seen from the front | top half removed: the cut face IS that section, disc and nerve in the plane; every eye question opens on it, cornea right (az -78, el 56) |
+
+Already in her convention, left alone: cochlea turn (scala vestibuli on top), spinal cord + reflex arc, nerve in section, ear (pinna left → cochlea right),
+synovial joint (frontal section), osteon (telescoped lamellae), muscle → fascicle → fibre, heart wall (outside on top, as her A-G figure), vessel walls
+(thick artery / thin wide vein, as her histology), spirogram (trace left, volume bars right, as her A-H figure), brain areas (left lateral, frontal lobe on the left).
+Captions were also made quieter than the question prompt. Driven at 375×812 after the change: Eye & Ear 46 items in both modes + the light trace, Reproductive
+her list in both modes and both sexes + the three figure sets + the egg trace — all answerable; the only misses are the harness's one planted miss per round.
+What this does NOT give him: her actual picture. The trainer teaches where things are and why; the Paper Sims ask her questions on her own figures.

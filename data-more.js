@@ -498,24 +498,24 @@ AIRWAY.push(
  *    Her Canvas quizzes on these were not yet sat on 21 Sep, so `her:1` here means "on her revision slides". ── */
 const SE = (id, kind, name, region, az, el, m, clue, fact, extra) => ({ id:'se-' + id, kind, name, her:1, region, az, el, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
 export const SENSES = [
-  SE('cornea', 'eye', 'Cornea', 'eye', 38, 22, ['cornea'], 'Clear — it does about 80 % of the refraction (bending of the light).', 'Fibrous tunic, the transparent front. Most of the focusing happens here, not in the lens.'),
-  SE('sclera', 'eye', 'Sclera', 'eye', 38, 22, ['sclera'], 'White — the protective container.', 'Fibrous tunic: the white of the eye. The eye muscles attach to it.'),
-  SE('choroid', 'eye', 'Choroid', 'eye', 38, 22, ['choroid'], 'The layer of blood vessels.', 'Vascular tunic, between sclera and retina. Dark pigment stops light reflecting around inside the eye.'),
-  SE('ciliary', 'eye', 'Ciliary body', 'eyeFront', 38, 22, ['ciliary body'], 'Its muscle contracts to make the lens more biconvex; it also produces the aqueous humor.', 'Vascular tunic: ciliary muscle + ciliary processes + the suspensory ligaments that hold the lens.'),
-  SE('ligaments', 'eye', 'Suspensory ligaments', 'eyeFront', 38, 22, ['suspensory ligaments'], 'They pull the lens flat when the ciliary muscle relaxes.', 'Fine fibres from the ciliary body to the edge of the lens. Distant object: muscle relaxed, ligaments tight, lens flat.'),
-  SE('iris', 'eye', 'Iris', 'eyeFront', 38, 22, ['iris'], 'The coloured part — it dilates and constricts the pupil.', 'Vascular tunic. Dilator muscle = sympathetic (more light in); sphincter muscle = parasympathetic (less light in).'),
+  SE('cornea', 'eye', 'Cornea', 'eye', -78, 56, ['cornea'], 'Clear — it does about 80 % of the refraction (bending of the light).', 'Fibrous tunic, the transparent front. Most of the focusing happens here, not in the lens.'),
+  SE('sclera', 'eye', 'Sclera', 'eye', -78, 56, ['sclera'], 'White — the protective container.', 'Fibrous tunic: the white of the eye. The eye muscles attach to it.'),
+  SE('choroid', 'eye', 'Choroid', 'eye', -78, 56, ['choroid'], 'The layer of blood vessels.', 'Vascular tunic, between sclera and retina. Dark pigment stops light reflecting around inside the eye.'),
+  SE('ciliary', 'eye', 'Ciliary body', 'eyeFront', -78, 56, ['ciliary body'], 'Its muscle contracts to make the lens more biconvex; it also produces the aqueous humor.', 'Vascular tunic: ciliary muscle + ciliary processes + the suspensory ligaments that hold the lens.'),
+  SE('ligaments', 'eye', 'Suspensory ligaments', 'eyeFront', -78, 56, ['suspensory ligaments'], 'They pull the lens flat when the ciliary muscle relaxes.', 'Fine fibres from the ciliary body to the edge of the lens. Distant object: muscle relaxed, ligaments tight, lens flat.'),
+  SE('iris', 'eye', 'Iris', 'eyeFront', -78, 56, ['iris'], 'The coloured part — it dilates and constricts the pupil.', 'Vascular tunic. Dilator muscle = sympathetic (more light in); sphincter muscle = parasympathetic (less light in).'),
   SE('pupil', 'eye', 'Pupil', 'eyeFront', 20, 12, ['pupil'], 'Dilates in poor light, constricts in bright light.', 'Not a structure — the HOLE in the iris that the light goes through.'),
-  SE('lens', 'eye', 'Lens', 'eyeFront', 38, 22, ['lens'], 'Biconvex and flexible — about 20 % of the refraction; it accommodates to focus the image on the retina.', 'Near object: ciliary muscle contracts, lens bulges. Cloudy lens = cataract.'),
-  SE('retina', 'eye', 'Retina', 'eye', 38, 22, ['retina'], 'The neural tunic: photoreceptors (rods and cones), bipolar cells and ganglion cells.', 'Rods = dim light, no colour (scotopic). Cones = bright light, colour (photopic).'),
-  SE('macula', 'eye', 'Macula lutea', 'eye', 30, 30, ['macula lutea'], null, 'The yellow spot straight behind the lens, with the fovea centralis at its centre. Macular degeneration (dry or wet) destroys it.'),
-  SE('fovea', 'eye', 'Fovea centralis', 'eye', 30, 30, ['fovea centralis'], 'The small pit in the retina where only cones are found and where sharp vision happens.', 'The centre of the macula lutea. Her options list both — the fovea is the one with ONLY cones.'),
-  SE('conjunctiva', 'eye', 'Conjunctiva', 'eyeFront', 38, 22, ['conjunctiva'], 'Pinkeye is an infection of it.', 'The thin membrane over the front of the sclera and the inside of the eyelids — not over the cornea. Conjunctivitis; treated with chloramphenicol when bacterial.'),
-  SE('hyaloid', 'eye', 'Hyaloid canal', 'eye', 38, 22, ['hyaloid canal'], 'A canal in the vitreous humor.', 'Runs from the back of the lens to the optic disc: what is left of the fetal hyaloid artery. SCHEMATIC, drawn straighter and wider than life.'),
-  SE('disc', 'eye', 'Optic disc', 'eye', 30, 30, ['optic disc'], 'No cones or rods — the nerve fibres leave the eye here.', 'The blind spot. It lies to the NASAL side of the macula.', { alt:'blind spot' }),
-  SE('optic-nerve', 'eye', 'Optic nerve', 'eye', 150, 10, ['optic nerve'], null, 'Cranial nerve II: the ganglion-cell axons, leaving at the optic disc for the optic chiasm and the visual cortex in the occipital lobe.', { sub:'CN II' }),
-  SE('aqueous', 'eye', 'Aqueous humor', 'eyeFront', 38, 22, ['aqueous humor'], 'A watery fluid found in the anterior chamber of the eyeball.', 'Made by the ciliary body, drained by the canal of Schlemm. If it cannot drain, pressure rises: glaucoma.'),
-  SE('vitreous', 'eye', 'Vitreous humor', 'eye', 38, 22, ['vitreous humor'], 'Fills the POSTERIOR segment of the eye.', 'A clear gel behind the lens; it holds the retina against the choroid.'),
-  SE('schlemm', 'eye', 'Canal of Schlemm', 'eyeFront', 38, 22, ['canal of schlemm'], 'Drains the aqueous fluid.', 'A ring-shaped channel at the junction of cornea and sclera (through the trabecular mesh). Blocked → glaucoma.'),
+  SE('lens', 'eye', 'Lens', 'eyeFront', -78, 56, ['lens'], 'Biconvex and flexible — about 20 % of the refraction; it accommodates to focus the image on the retina.', 'Near object: ciliary muscle contracts, lens bulges. Cloudy lens = cataract.'),
+  SE('retina', 'eye', 'Retina', 'eye', -78, 56, ['retina'], 'The neural tunic: photoreceptors (rods and cones), bipolar cells and ganglion cells.', 'Rods = dim light, no colour (scotopic). Cones = bright light, colour (photopic).'),
+  SE('macula', 'eye', 'Macula lutea', 'eye', -70, 58, ['macula lutea'], null, 'The yellow spot straight behind the lens, with the fovea centralis at its centre. Macular degeneration (dry or wet) destroys it.'),
+  SE('fovea', 'eye', 'Fovea centralis', 'eye', -70, 58, ['fovea centralis'], 'The small pit in the retina where only cones are found and where sharp vision happens.', 'The centre of the macula lutea. Her options list both — the fovea is the one with ONLY cones.'),
+  SE('conjunctiva', 'eye', 'Conjunctiva', 'eyeFront', -78, 56, ['conjunctiva'], 'Pinkeye is an infection of it.', 'The thin membrane over the front of the sclera and the inside of the eyelids — not over the cornea. Conjunctivitis; treated with chloramphenicol when bacterial.'),
+  SE('hyaloid', 'eye', 'Hyaloid canal', 'eye', -78, 56, ['hyaloid canal'], 'A canal in the vitreous humor.', 'Runs from the back of the lens to the optic disc: what is left of the fetal hyaloid artery. SCHEMATIC, drawn straighter and wider than life.'),
+  SE('disc', 'eye', 'Optic disc', 'eye', -70, 58, ['optic disc'], 'No cones or rods — the nerve fibres leave the eye here.', 'The blind spot. It lies to the NASAL side of the macula.', { alt:'blind spot' }),
+  SE('optic-nerve', 'eye', 'Optic nerve', 'eye', -112, 50, ['optic nerve'], null, 'Cranial nerve II: the ganglion-cell axons, leaving at the optic disc for the optic chiasm and the visual cortex in the occipital lobe.', { sub:'CN II' }),
+  SE('aqueous', 'eye', 'Aqueous humor', 'eyeFront', -78, 56, ['aqueous humor'], 'A watery fluid found in the anterior chamber of the eyeball.', 'Made by the ciliary body, drained by the canal of Schlemm. If it cannot drain, pressure rises: glaucoma.'),
+  SE('vitreous', 'eye', 'Vitreous humor', 'eye', -78, 56, ['vitreous humor'], 'Fills the POSTERIOR segment of the eye.', 'A clear gel behind the lens; it holds the retina against the choroid.'),
+  SE('schlemm', 'eye', 'Canal of Schlemm', 'eyeFront', -78, 56, ['canal of schlemm'], 'Drains the aqueous fluid.', 'A ring-shaped channel at the junction of cornea and sclera (through the trabecular mesh). Blocked → glaucoma.'),
 
   SE('pinna', 'ear', 'Pinna', 'ear', 0, 5, ['pinna'], 'Collects the sound.', 'External ear: the flap of elastic cartilage and skin.', { alt:'auricle' }),
   SE('canal', 'ear', 'External auditory canal', 'ear', 0, 12, ['external auditory canal'], 'With ceruminous glands, which make the brown wax.', 'External ear. Ear wax here is a REVERSIBLE cause of conduction deafness. (Opened along its length so you can see the eardrum.)', { alt:'ear canal' }),
@@ -601,13 +601,13 @@ export const LEVERS = [
 
 /* ── The uterus wall (Module 3), BUILT, on stage with the female organs. Her revision slide 2: perimetrium · myometrium (smooth muscle) · endometrium,
  *    whose FUNCTIONAL layer (spiral arteries) is shed in menstruation while the BASAL layer (straight arteries) stays and rebuilds it. ── */
-const UW = (id, name, m, clue, fact, extra) => ({ id:'uw-' + id, kind:'uwall', sex:'female', name, her:1, region:'uterwall', az:0, el:25, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+const UW = (id, name, m, clue, fact, extra) => ({ id:'uw-' + id, kind:'uwall', sex:'female', name, her:1, region:'uterwall', az:0, el:6, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
 REPRO.push(
-  UW('peri', 'Perimetrium', ['perimetrium'], null, 'The thin OUTER serous coat of the uterus (peri = around).'),
-  UW('myo', 'Myometrium', ['myometrium'], 'The layer of smooth muscle.', 'The thick MIDDLE layer: it contracts in labour (oxytocin) and in menstrual cramps.'),
-  UW('endo', 'Endometrium', ['functional layer', 'basal layer'], null, 'The INNER lining, where the embryo implants. Two layers: functional on top of basal.'),
-  UW('func', 'Functional layer', ['functional layer'], 'The layer with SPIRAL arteries, shed during menstruation.', 'Stratum functionalis: built up in the proliferative phase (oestrogen), made secretory by progesterone, shed when progesterone falls.'),
-  UW('basal', 'Basal layer', ['basal layer'], 'The layer with STRAIGHT arteries: it stays intact and forms the new functional layer.', 'Stratum basalis: never shed.'),
+  UW('peri', 'Perimetrium', ['perimetrium'], null, 'The thin OUTER serous coat of the uterus (peri = around). Drawn as her slide draws the wall: side-on, outside on the left, cavity on the right.'),
+  UW('myo', 'Myometrium', ['myometrium', 'arcuate artery', 'radial arteries'], 'The layer of smooth muscle.', 'The thick MIDDLE layer: it contracts in labour (oxytocin) and in menstrual cramps. Her slide runs the arteries through it: uterine → arcuate → radial, on the way to the endometrium.'),
+  UW('endo', 'Endometrium', ['functional layer', 'basal layer', 'spiral arteries', 'straight arteries'], null, 'The INNER lining, where the embryo implants. Two layers: functional on top of basal.'),
+  UW('func', 'Functional layer', ['functional layer', 'spiral arteries'], 'The layer with SPIRAL arteries, shed during menstruation.', 'Stratum functionalis: built up in the proliferative phase (oestrogen), made secretory by progesterone, shed when progesterone falls.'),
+  UW('basal', 'Basal layer', ['basal layer', 'straight arteries'], 'The layer with STRAIGHT arteries: it stays intact and forms the new functional layer.', 'Stratum basalis: never shed. Her slide labels its short arteries "basal artery".'),
 );
 
 /* ── The cut-open figures (made-sections.js). Every name below is one her banks or slides use; the wording of `hers` clues is hers. ── */
@@ -670,13 +670,13 @@ REPRO.push(
   RX('zoa', 'tubule', 'male', 'Spermatozoa', 'rpTubule', ['spermatozoa'], null, 'Released tail-first into the lumen of the tubule, then on to the epididymis to mature.', { her:0, alt:'sperm' }),
   RX('sertoli', 'tubule', 'male', 'Sertoli cells', 'rpTubule', ['sertoli cells'], 'They nurture the sperm cells and make the hormone inhibin.', 'Tall cells from the wall to the lumen. FSH acts on them; their inhibin suppresses FSH from the anterior pituitary.'),
   RX('leydig', 'tubule', 'male', 'Leydig cells', 'rpTubule', ['leydig cells'], 'Between the seminiferous tubules: they make the hormone testosterone.', 'OUTSIDE the tubule, next to the capillaries. LH acts on them.'),
-  RX('pfollicle', 'ovarysec', 'female', 'Primary follicle', 'rpOvary', ['primary follicle'], null, 'Holds a PRIMARY oocyte: diploid, arrested in prophase I since before birth. Oogonia → primary oocytes happens during fetal development.', { her:0 }),
-  RX('sfollicle', 'ovarysec', 'female', 'Secondary follicle', 'rpOvary', ['secondary follicle'], null, 'Growing under FSH; the developing follicle releases estrogen.', { her:0 }),
-  RX('tfollicle', 'ovarysec', 'female', 'Tertiary follicle', 'rpOvary', ['tertiary follicle', 'oocyte in the tertiary follicle'], 'The fluid-filled Graafian follicle that ruptures at ovulation.', 'Ovulation is triggered by the LH peak. It releases a secondary oocyte arrested in metaphase of Meiosis II.', { alt:'Graafian follicle' }),
+  RX('pfollicle', 'ovarysec', 'female', 'Primary follicle', 'rpOvary', ['primary follicle', 'oocyte in a primary follicle'], null, 'Holds a PRIMARY oocyte: diploid, arrested in prophase I since before birth. Oogonia → primary oocytes happens during fetal development. Her figures draw the stages IN ORDER round the edge of the ovary: primary → secondary → tertiary follicle → ovulation → corpus luteum → corpus albicans.', { her:0 }),
+  RX('sfollicle', 'ovarysec', 'female', 'Secondary follicle', 'rpOvary', ['secondary follicle', 'oocyte in the secondary follicle'], null, 'Growing under FSH; the developing follicle releases estrogen.', { her:0 }),
+  RX('tfollicle', 'ovarysec', 'female', 'Tertiary follicle', 'rpOvary', ['tertiary follicle', 'oocyte in the tertiary follicle', 'antrum of the tertiary follicle', 'ruptured follicle'], 'The fluid-filled Graafian follicle that ruptures at ovulation.', 'Ovulation is triggered by the LH peak. It releases a secondary oocyte arrested in metaphase of Meiosis II. Drawn twice, as her figures do: ripe and bulging at the surface, then burst open beside it. Her slide calls it the VESICULAR follicle; the blue is its fluid (antrum).', { alt:'Graafian / vesicular follicle' }),
   RX('oocyte', 'ovarysec', 'female', 'Secondary oocyte', 'rpOvary', ['secondary oocyte', 'zona radiata'], 'A haploid female gamete that is released from the tertiary follicle.', 'Caught by the fimbriae and swept into the Fallopian tube. Meiosis II is only completed if fertilisation occurs.'),
   RX('zona', 'ovarysec', 'female', 'Zona radiata', 'rpOvary', ['zona radiata'], 'The layer round the egg that the sperm must get through.', 'Her drop-down keys it as "zona radiata": the coat round the egg (most textbooks say zona pellucida; the corona radiata is the cloud of follicle cells outside it). The acrosome\'s enzymes open the way; calcium then blocks other sperm.', { alt:'zona pellucida' }),
-  RX('owall', 'ovarysec', 'female', 'Ovarian wall', 'rpOvary', ['ovarian wall'], 'It ruptures at ovulation to let the secondary oocyte out.', 'Drawn open at the top, where the follicle has just burst.'),
-  RX('luteum', 'ovarysec', 'female', 'Corpus luteum', 'rpOvary', ['corpus luteum'], 'What is left of the follicle after ovulation: it releases progesterone and estrogen.', 'Progesterone keeps the endometrium. No pregnancy → it degenerates into the corpus albicans and menstruation follows; hCG from an embryo keeps it alive.'),
+  RX('owall', 'ovarysec', 'female', 'Ovarian wall', 'rpOvary', ['ovarian wall'], 'It ruptures at ovulation to let the secondary oocyte out.', 'Drawn open at the lower right, where the follicle has just burst.'),
+  RX('luteum', 'ovarysec', 'female', 'Corpus luteum', 'rpOvary', ['corpus luteum', 'centre of the corpus luteum'], 'What is left of the follicle after ovulation: it releases progesterone and estrogen.', 'Progesterone keeps the endometrium. No pregnancy → it degenerates into the corpus albicans and menstruation follows; hCG from an embryo keeps it alive.'),
   RX('albicans', 'ovarysec', 'female', 'Corpus albicans', 'rpOvary', ['corpus albicans'], null, 'The white scar a corpus luteum leaves behind.', { her:0 }),
 );
 
@@ -761,11 +761,11 @@ export const MORE_REGIONS = {
 export const CAPTIONS = [
   { region:'tsJoint', t:'A synovial joint, cut open' }, { region:'tsBone', t:'A block of compact bone, magnified' }, { region:'tsMuscle', t:'A skeletal muscle, cut across' },
   { region:'tsLong', t:'A long bone, cut open lengthwise', below:1 }, { region:'wlVessels', t:'Blood vessel walls, peeled back layer by layer' }, { region:'wlHeart', t:'The wall of the heart, in layers\noutside of the heart at the top' },
-  { region:'uterwall', t:'The wall of the uterus, in layers\noutside of the uterus at the top' }, { region:'ecg', t:'One heartbeat on an ECG' },
+  { region:'uterwall', t:'The wall of the uterus, from the side\noutside of the uterus on the left · the cavity on the right' }, { region:'ecg', t:'One heartbeat on an ECG' },
   { region:'spiro', t:'A breathing trace, with the volumes as bars\nquiet breaths · one biggest breath in · one biggest breath out' },
   { region:'awTrachea', t:'Looking down the trachea\nfront of the neck at the top' }, { region:'awBronchiole', t:'A bronchiole, cut across' }, { region:'awAlveolus', t:'One air sac and its blood supply' },
   { region:'seCochlea', t:'One turn of the cochlea, cut across' }, { region:'seRetina', t:'The retina, magnified\nlight comes in from the left' },
-  { region:'rpSperm', t:'A sperm cell' }, { region:'rpTubule', t:'Wall of a seminiferous tubule\nthe hollow of the tubule is at the top' }, { region:'rpOvary', t:'An ovary, cut open' },
+  { region:'rpSperm', t:'A sperm cell' }, { region:'rpTubule', t:'A seminiferous tubule, cut across\nthe hollow in the middle is its lumen' }, { region:'rpOvary', t:'An ovary, cut open\nthe stages run clockwise from the top left' },
   { region:'pnCord', t:'The spinal cord, cut across, with a reflex\nback of the body at the top' }, { region:'pnNerve', t:'A nerve, cut across' }, { region:'glAdrenal', t:'An adrenal gland, cut open' },
 ];
 
@@ -902,7 +902,7 @@ export const TRACES = {
         { it:'se-cochlea',  q:'Where is it turned into nerve impulses?', say:'Cochlea: hair cells of the organ of Corti transduce the waves into electrical impulses.', region:'earIn' },
         { it:'se-nerve8',   q:'…carried to the brain by?', say:'Vestibulocochlear nerve (VIII) → auditory cortex in the temporal lobe.', region:'earIn' },
       ] },
-    { id:'tr-light', name:'Light to the retina', short:'Trace the light', ask:'from the front of the eye to the brain', xray:false, region:'eye', az:38, el:22,
+    { id:'tr-light', name:'Light to the retina', short:'Trace the light', ask:'from the front of the eye to the brain', xray:false, region:'eye', az:-78, el:56,
       hint:'Cornea → aqueous humor → pupil → lens → vitreous humor → retina → optic nerve',
       note:'Standard order through the refractive media; the percentages are from her slide 16 (cornea 80 %, lens 20 %).',
       steps:[

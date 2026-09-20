@@ -11,7 +11,7 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 const RAD = Math.PI / 180, P = (r, y) => new THREE.Vector2(r, y);
-const PHI0 = 180, LEN = 270;                                      // the quarter between 90° and 180° is the one taken out (up and toward the camera once the axis is turned forward)
+const PHI0 = 270, LEN = 180;                                      // the whole TOP half is taken out: the cut face is the textbook horizontal section through lens, fovea and optic nerve — flat, as every one of her eye figures draws it (the first build took out one quarter only, and matched none of them)
 const arc = (cy, R, a0, a1, n = 22) => Array.from({ length:n + 1 }, (_, k) => { const a = (a0 + (a1 - a0) * k / n) * RAD; return P(R * Math.sin(a), cy + R * Math.cos(a)); });      // a = angle from the FRONT pole
 
 export function buildEye(O = new THREE.Vector3(0, 1.2, 0)) {
@@ -23,7 +23,7 @@ export function buildEye(O = new THREE.Vector3(0, 1.2, 0)) {
   const shell = (cy, r0, r1, a0, a1) => [...arc(cy, r1, a0, a1), ...arc(cy, r0, a1, a0)];
   const at = (r, a, phi, cy = 0) => new THREE.Vector3(r * Math.sin(a * RAD) * Math.sin(phi * RAD), cy + r * Math.cos(a * RAD), r * Math.sin(a * RAD) * Math.cos(phi * RAD));      // lathe space: y is the optical axis
   const fin = (name, geoms, colour, extra = {}) => { const g = mergeGeometries(geoms.map(flat)); g.rotateX(Math.PI / 2); g.translate(O.x, O.y, O.z); if (extra.anchor) extra.anchor = extra.anchor.clone().applyAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2).add(O); parts.push({ name, geometry:g, colour, ...extra }); };
-  const CUT = PHI0 + LEN - 4;                                       // labels point at the horizontal cut face, where every layer shows
+  const CUT = PHI0 + 4;                                       // labels point at the horizontal cut face, where every layer shows
 
   // ── fibrous tunic ──
   fin('Sclera', body(shell(0, .090, .100, 40, 180)), '#f4f1ea', { anchor:at(.095, 120, CUT) });
@@ -41,11 +41,11 @@ export function buildEye(O = new THREE.Vector3(0, 1.2, 0)) {
   // ── neural tunic ──
   fin('Retina', body(shell(0, .074, .082, 66, 180)), '#f0a868', { anchor:at(.078, 118, CUT) });
   fin('Macula lutea', body(shell(0, .0722, .0742, 171, 180), false), '#ffe14d', { anchor:new THREE.Vector3(0, -.0722, 0) });
-  const dPhi = 78, dA = 163, dN = at(1, dA, dPhi), dC = dN.clone().multiplyScalar(.0730), q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dN);      // nasal to the macula, just under the horizontal cut so you look down onto it
+  const dPhi = 270, dA = 163, dN = at(1, dA, dPhi), dC = dN.clone().multiplyScalar(.0730), q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dN);      // beside the macula and IN the cut plane, so the section passes through the disc and the nerve as her figures do
   const disc = new THREE.CylinderGeometry(.0115, .0115, .0022, 28); disc.applyQuaternion(q); disc.translate(dC.x, dC.y, dC.z);
   fin('Optic disc', [disc], '#fff3d6', { anchor:dC.clone() });
   fin('Fovea centralis', body(shell(0, .0712, .0732, 176.6, 180), false), '#ff8a1c', { anchor:new THREE.Vector3(0, -.0712, 0) });      // the pit at the centre of the macula: her key for "only cones"
-  fin('Hyaloid canal', [new THREE.TubeGeometry(new THREE.LineCurve3(new THREE.Vector3(0, .0262, 0), dN.clone().multiplyScalar(.0735)), 1, .0021, 10, false)], '#6fb8ff', { anchor:dN.clone().multiplyScalar(.03).add(new THREE.Vector3(0, .012, 0)) });      // her revision match: "hyaloid canal in vitreous humor"
+  fin('Hyaloid canal', [new THREE.TubeGeometry(new THREE.LineCurve3(new THREE.Vector3(0, .0262, 0), dN.clone().multiplyScalar(.0735)), 8, .0021, 10, false)], '#6fb8ff', { anchor:dN.clone().multiplyScalar(.03).add(new THREE.Vector3(0, .012, 0)) });      // her revision match: "hyaloid canal in vitreous humor"
   const nerve = new THREE.CylinderGeometry(.0125, .0115, .075, 24); nerve.translate(0, .0375, 0); nerve.applyQuaternion(q); const nC = dN.clone().multiplyScalar(.0995); nerve.translate(nC.x, nC.y, nC.z);
   fin('Optic nerve', [nerve], '#f0d66b', { anchor:dN.clone().multiplyScalar(.14) });
   // ── what is inside ──
