@@ -9,7 +9,10 @@ window.fabAutoplay = async (deck = 'bones', mode = 'find') => {
   const aim = it => { const f = mode === 'find' ? FB.regionFrame(it.region, it.az, it.el) : G.itemFrame(it); if (!f) return;
     FB.controls.target.copy(f.target); FB.camera.position.copy(f.pos); FB.camera.lookAt(f.target); FB.camera.updateMatrixWorld(true); };
   const findPt = it => { for (const info of it.infos) { const p = info.mesh.geometry.attributes.position, step = Math.max(1, p.count / 80 | 0);
-      for (let k = 0; k < p.count; k += step) { v.set(p.getX(k), p.getY(k), p.getZ(k)); info.mesh.localToWorld(v); const s = FB.toScreen(v);
+      for (let k = 0; k < p.count; k += step) { v.set(p.getX(k), p.getY(k), p.getZ(k));
+        if (it.zone) { const bb = info.mesh.geometry.boundingBox; if (!it.zone([(v.x - bb.min.x) / (bb.max.x - bb.min.x), (v.y - bb.min.y) / (bb.max.y - bb.min.y), (v.z - bb.min.z) / (bb.max.z - bb.min.z)])) continue; }
+        if (!info.mesh.visible) break;
+        info.mesh.localToWorld(v); const s = FB.toScreen(v);
         if (!(s.x > 5 && s.y > 5 && s.x < innerWidth - 5 && s.y < innerHeight - 5)) continue;
         const e = document.elementFromPoint(s.x, s.y); if (!e || e.id !== 'c') continue;
         const h = FB.cast(s.x, s.y); if (h && it.infos.includes(h.object.userData.info)) return s; } } return null; };

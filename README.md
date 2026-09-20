@@ -69,3 +69,28 @@ Meshes: **[Z-Anatomy](https://www.z-anatomy.com/)** (derived from BodyParts3D), 
 **[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)** — recoloured, regrouped and
 partly hidden here; the credit line in the help sheet is the licence requirement, do not remove it.
 Rendering: [three.js](https://threejs.org/) (MIT). A study aid, not a clinical reference.
+
+## Decks added 20 Sep (evening): Glands and Brain
+
+- **Glands** — her label-the-glands figure in 3D: pituitary (both lobes), hypothalamus, pineal, thyroid, parathyroids,
+  thymus, adrenals, pancreas, ovaries, testes, plus the kidney as the "not a gland, but makes erythropoietin" item. The
+  skeleton is a ghost for context (unpickable). `models/glands.glb` is 159 KB, cut from the Z-Anatomy source by
+  `tools/export_deck.py` (Blender, headless) with the same export settings as the big models, so it sits in the body exactly.
+- **The ovaries are not Z-Anatomy** (its body is male). They are the HuBMAP CCF 3D reference ovaries — Visible Human
+  female, **CC BY 4.0**, files unmodified (`models/hra-ovary-*.glb`, 9 KB each) — and are **placed by hand** on the
+  lateral pelvic wall (`PLACE` in data-more.js). Right organ, approximate position; the app says so in the fact line and help.
+- **Brain** — `models/brain.glb` (1.9 MB): cortex, cerebellum, brainstem, diencephalon, ventricles, deep nuclei and all
+  twelve cranial nerves. Lobe membership is the source's own: Z-Anatomy files every gyrus and sulcus under a material named
+  for its lobe, so items match on `{ mat }`. Boundary furrows (central sulcus, lateral fissure, parieto-occipital sulcus)
+  are `also`-accepted for both lobes they divide. The cortex is one colour on purpose — tinting lobes would leak the answer.
+  Wernicke's area is a zone on the back 42 % of the superior temporal gyrus (checked: its vertices average 4 cm behind the rest).
+- **The cut**: hemispheres are separate `.l`/`.r` meshes, so hiding every left-side mesh and looking from the left IS a
+  mid-sagittal section. Items flagged `cut:1` are asked that way. Ventricles are drawn as glass and a tap passes through
+  them unless a ventricle is what was asked (otherwise the third ventricle hides the thalamus).
+- **The multi-primitive trap, met for real**: every gyrus is a node with two primitives (outer skin + a "Brain-Inner" face).
+  three turns that into a Group whose child meshes carry no source name and no side — the loader now walks up to the parent
+  for the name and gives both siblings the outer material's identity.
+- Cranial nerves are long tubes (the vagus reaches the abdomen): on stage only when they are the question, or in Explore.
+
+`docs/source/` lists every object in the Z-Anatomy source; note it is MESH objects only — the source also has 951 CURVE
+objects (nerves, vessels), all of which are already in the exported models (checked by name).

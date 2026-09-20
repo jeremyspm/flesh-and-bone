@@ -1,0 +1,51 @@
+## LCR (4)
+Fourth ventricle ; Aqueduct of midbrain ; Third ventricle ; Lateral ventricle
+
+## Nucleus (20)
+Olive ; Pyramid of medulla oblongata ; Red nucleus ; Inferior colliculus ; Superior colliculus ; Habenula ; Lateral geniculate body ; Mamillary body ; Medial geniculate body ; Thalamus ; Amygdaloid body ; Septal nuclei ; Caudate nucleus ; Putamen ; Globus pallidus ; Lentiform nucleus ; Hippocampus ; Adenohypophysis ; Neurohypophysis ; Pineal gland
+
+## Brain (4)
+Medulla oblongata ; Base of peduncle ; Interpeduncular fossa ; Pons
+
+## Nucleus (afferent fibers) (2)
+Anterior cochlear nucleus ; Vestibular nuclei
+
+## Nucleus (efferent fibers) (5)
+Accessory nucleus of oculomotor nerve ; Nucleus of oculomotor nerve ; Motor nucleus of facial nerve ; Nucleus of abducens nerve ; Superior salivatory nucleus
+
+## Frontal lobe (23)
+Midbrain ; Lat_Fis-ant-Horizont ; Lat_Fis-ant-Vertical ; Middle frontal gyrus ; Orbital gyri (Frontomarginal gyrus and sulcus*) ; Orbital gyri ; Orbital part of  inferior frontal gyrus ; Orbital sulci (H-shaped orbital sulci*) ; Orbital sulci (Lateral Orbital sulcus*) ; Paracentral gyrus and sulcus* ; Precentral gyrus ; Inferior frontal sulcus ; Olfactory sulcus ; Opercular part of inferior frontal gyrus ; Paracentral sulcus ; Precentral sulcus (inferior part)* ; Precentral sulcus (Superior part)* ; Straight gyrus (Gyrus rectus) ; Superior frontal gyrus ; Superior frontal sulcus ; Transverse frontopolar gyrus and sulcus* ; Triangular part of inferior frontal gyrus ; Corpus callosum
+
+## Cerebellum (20)
+Anterior quadrangular lobule ; Biventral lobule ; Central lobule ; Culmen ; Declive ; Flocculus ; Folium of vermis ; Gracile lobule ; Inferior semilunar lobule ; Lingula of cerebellum ; Nodule of vermis ; Peduncle of flocculus ; Posterior quadrangular lobule ; Pyramis of vermis ; Superior cerebellar peduncle ; Superior semilunar lobule ; Tonsil of cerebellum ; Tuber of vermis ; Uvula of vermis ; Wing of central lobule
+
+## White matter (8)
+Hypothalamus ; Posterior commissure ; Stria medullaris thalami ; Septum pellucidum ; Anterior commissure ; Hippocampal commissure ; Fornix ; White matter of telencephalon
+
+## Nerve (2)
+Optic chiasm ; Stria terminalis
+
+## Insula (1)
+Insula (Subcentral gyrus and ant. and post. sulci*)
+
+## Interlobar sulci (10)
+ Posterior transverse collateral sulcus ; Anterior occipital sulcus* ; Central sulcus ; Circular sulcus of insula ; Collateral sulcus ; Lat_Fis-post ; Parieto-occipital sulcus ; Subparietal sulcus ; Sulcus interm_prim-Jensen ; Cingulate sulcus (Marginal part*)
+
+## Limbic lobe (4)
+Cingulate gyrus (Posteroventral part*) ; Cingulate gyrus and sulcus (Middle anterior part) ; Cingulate gyrus and sulcus (Middle posterior part) ; Cingulate gyrus and sulcus (Posterior dorsal part)
+
+## Occipital lobe (9)
+Calcarine sulcus ; Cuneus ; Inferior occipital gyrus and sulcus* ; Lateral occipital gyrus (Middle occipital gyrus*) ; Lingual gyrus ; Lunate sulcus ; Occipital pole ; Superior occipital gyri ; Transverse occipital sulcus
+
+## Parietal lobe (7)
+Angular gyrus ; Postcentral gyrus ; Precuneus ; Intraparietal sulcus ; Postcentral sulcus ; Superior parietal lobule ; Supramarginal gyrus
+
+## Temporal lobe (11)
+Inferior temporal gyrus ; Lateral occipitotemporal gyrus ; Medial occipitotemporal gyrus (Parahippocampal*) ; Middle temporal gyrus ; Occipitotemporal sulcus (Lateral part*) ; Inferior temporal sulcus ; Superior temporal gyrus (Lateral part) ; Superior temporal sulcus ; Temporal plane ; Temporal pole ; Transverse temporal gyri
+
+## Cartilage (2)
+Falx cerebri ; Tentorium cerebelli
+
+## Artery (1)
+Choroid plexus
+

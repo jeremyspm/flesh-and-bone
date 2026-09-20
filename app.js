@@ -5,7 +5,9 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { BONES, MUSCLES, HIDE, REGIONS, SETS, NEUTRAL, CLIP } from './data.js';
+import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
+import { GLANDS, BRAIN, PLACE, MORE_REGIONS, MORE_SETS } from './data-more.js';
+const REGIONS = { ...REGIONS0, ...MORE_REGIONS }, SETS = { ...SETS0, ...MORE_SETS };
 
 const $ = s => document.querySelector(s);
 const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -28,7 +30,13 @@ const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch
 const mast = id => S.m[id] || (S.m[id] = { b:0, s:0, r:0, w:0, t:0 });
 const LOCK = 2;
 
-const DECK = { bones:{ label:'Bones', items:BONES, model:'skeletal' }, muscles:{ label:'Muscles', items:MUSCLES, model:'muscular' } };
+/* a deck = which models are on stage (solid, or a ghost for context) and which of them its items are bound to */
+const DECK = {
+  bones:  { label:'Bones',   acc:'#f2b84b', ink:'#1b1303', items:BONES,   models:{ skeletal:'solid' }, bind:['skeletal'], noun:'bone' },
+  muscles:{ label:'Muscles', acc:'#ff7d68', ink:'#220804', items:MUSCLES, models:{ skeletal:'solid', muscular:'solid' }, bind:['muscular'], noun:'muscle' },
+  glands: { label:'Glands',  acc:'#5fd4c0', ink:'#03211c', items:GLANDS,  models:{ skeletal:'ghost', glands:'solid', ovary:'solid' }, bind:['glands', 'ovary'], noun:'gland' },
+  brain:  { label:'Brain',   acc:'#b9a2ff', ink:'#140b2e', items:BRAIN,   models:{ brain:'solid' }, bind:['brain'], noun:'part of the brain', home:'brain' },
+};
 const ITEM = {};
 for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
 
@@ -89,9 +97,22 @@ const groups = {};                    // model name → THREE.Group
 const loaded = {};
 const draco = new DRACOLoader().setDecoderPath('./vendor/three/jsm/libs/draco/');
 const loader = new GLTFLoader().setDRACOLoader(draco);
-const matchAny = (ms, base) => ms.some(m => typeof m === 'string' ? m === base : m.test(base));
+/* a matcher is an exact lower-case base name, a RegExp on the base name, or { mat, not } on the SOURCE material name */
+const matchAny = (ms, base, mat = '') => ms.some(m => typeof m === 'string' ? m === base : m instanceof RegExp ? m.test(base) : (m.mat.test(mat) && !(m.not && m.not.test(base))));
+
+/* every 3D file the app can load, and what kind of thing its meshes are */
+const MODELS = {
+  skeletal:{ kind:'bone',   noun:'bone',      note:'Unpacking the skeleton…' },
+  muscular:{ kind:'muscle', noun:'muscle',    note:'Wrapping it in muscle…' },
+  glands:  { kind:'organ',  noun:'gland',     note:'Placing the glands…' },
+  ovary:   { kind:'organ',  noun:'gland',     note:'Placing the glands…', files:['hra-ovary-l', 'hra-ovary-r'], rename:{ VH_F_left_ovary:'Ovary.l', VH_F_right_ovary:'Ovary.r' } },
+  brain:   { kind:'brain',  noun:'structure', note:'Opening the skull…' },
+};
+const HIDE_BRAIN = [/^falx cerebri$/, /^tentorium cerebelli$/, /root of spinal nerve$/, /^nerve to /, /^central canal/];      // the dura folds stand in front of the medial cut and the cerebellum
 
 const BONE_C = new THREE.Color('#e7dcc6'), CART_C = new THREE.Color('#9fb6c4'), TOOTH_C = new THREE.Color('#f4f0e6'), TENDON_C = new THREE.Color('#dacdb4');
+const BRAIN_C = { 'LCR':'#6fb6ff', 'Nucleus':'#b48ccf', 'Nucleus (afferent fibers)':'#b48ccf', 'Nucleus (efferent fibers)':'#b48ccf', 'Brain':'#d8c2a8', 'Cerebellum':'#c9958a',
+  'White matter':'#ece5d6', 'Brain-Inner':'#ece5d6', 'Nerve':'#f0d66b', 'Artery':'#d9534f', 'Interlobar sulci':'#b98b84' };
 function colourFor(kind, base, matName) {
   const h = hash01(base.replace(/^(long|short|lateral|medial|clavicular|sternocostal|acromial|ascending|descending|transverse|superficial|deep) (head|part) of /, ''));
   if (kind === 'bone') {
@@ -99,24 +120,37 @@ function colourFor(kind, base, matName) {
     if (matName === 'Teeth') return TOOTH_C.clone();
     return BONE_C.clone().offsetHSL(0, 0, (h - .5) * .05);
   }
+  if (kind === 'organ') return new THREE.Color('#c9a08f');                                     // an item's own colour (`c`) replaces this at bind time
+  if (kind === 'brain') {                                                                       // the cortex is ONE colour on purpose: tinting by lobe would hand over the answer
+    if (/^(midbrain|corpus callosum)$/.test(base)) return new THREE.Color(base === 'midbrain' ? '#d8c2a8' : '#ece5d6');   // the source files these two under "Frontal lobe"
+    if (BRAIN_C[matName]) return new THREE.Color(BRAIN_C[matName]).offsetHSL(0, 0, (h - .5) * .04);
+    return new THREE.Color('#d8a79d').offsetHSL((h - .5) * .012, 0, (h - .5) * (/sulc|fis/.test(base) ? .03 : .09) - (/sulc|fis/.test(base) ? .07 : 0));
+  }
   if (/^(Tendon|Ligament|Trapezius)$/.test(matName) && !/muscle|extensor carpi/.test(base)) return TENDON_C.clone().offsetHSL(0, 0, (h - .5) * .04);
   return new THREE.Color().setHSL(0.004 + h * 0.03, 0.58 + hash01(base + 's') * 0.14, 0.29 + hash01(base + 'l') * 0.13);
 }
 
 async function loadModel(name, onProg) {
   if (loaded[name]) return;
-  const gltf = await loader.loadAsync(`./models/${name}.glb`, e => onProg && onProg(e.loaded, e.total));
-  const kind = name === 'skeletal' ? 'bone' : 'muscle';
-  const root = gltf.scene; root.updateMatrixWorld(true);
+  const M = MODELS[name], kind = M.kind, root = new THREE.Group();
+  for (const file of M.files || [name]) { const gltf = await loader.loadAsync(`./models/${file}.glb`, e => onProg && onProg(e.loaded, e.total)); root.add(gltf.scene); }
+  root.updateMatrixWorld(true);
   const kill = [];
   root.traverse(o => {
     if (!o.isMesh) return;
-    const raw = (o.userData && o.userData.name) || o.name || '';
+    // A node with several primitives (every gyrus: an outer "lobe" skin + a "Brain-Inner" cut face) arrives as a Group whose
+    // child meshes carry NO source name — the real name, and the .l/.r side, live on the parent. Walk up for it.
+    let src = o; while (src && !(src.userData && src.userData.name)) src = src.parent;
+    let raw = (src && src.userData.name) || o.name || ''; if (M.rename) raw = M.rename[raw] || M.rename[o.name] || (o.parent && M.rename[o.parent.name]) || raw;
+    const sibs = src && src !== o ? src.children.filter(c => c.isMesh) : [o];             // …and the siblings share ONE identity: the first non-inner material
+    const srcMat = c => c.userData.srcMat != null ? c.userData.srcMat : ((c.material && c.material.name) || '');            // (we overwrite materials as we go, so remember the source's)
+    sibs.forEach(c => { c.userData.srcMat = srcMat(c); });
+    const ownerMat = srcMat(sibs.find(c => srcMat(c) && srcMat(c) !== 'Brain-Inner') || o);
     const side = /\.l\.?$/i.test(raw) ? 'L' : /\.r\.?$/i.test(raw) ? 'R' : '';
     const orig = raw.replace(/\.[lr]\.?$/i, '').trim();
     const base = orig.toLowerCase();
-    const matName = (o.material && o.material.name) || '';
-    const hide = kind === 'bone' ? matchAny(HIDE.bone, base) : (HIDE.muscleMaterial.test(matName) || matchAny(HIDE.muscle, base));
+    const matName = srcMat(o);
+    const hide = kind === 'bone' ? matchAny(HIDE.bone, base) : kind === 'muscle' ? (HIDE.muscleMaterial.test(matName) || matchAny(HIDE.muscle, base)) : kind === 'brain' ? matchAny(HIDE_BRAIN, base) : false;
     if (hide) { kill.push(o); return; }      // not removed: a hidden node may still parent a visible one
     const colour = colourFor(kind, base, matName);
     const soft = kind === 'muscle' && colour.r > .7 && colour.g > .7;
@@ -124,29 +158,36 @@ async function loadModel(name, onProg) {
     const clip = kind === 'muscle' && CLIP.find(c => matchAny(c.m, base));      // the rectus sheath, cut away (see data.js)
     if (clip) { o.material.clippingPlanes = [new THREE.Plane(new THREE.Vector3(side === 'R' ? -1 : 1, 0, 0), -clip.x)]; o.material.side = THREE.DoubleSide; }
     if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
-    const info = { mesh:o, base, side, model:name, kind:soft ? 'tendon' : kind, colour:colour.clone(), clipX:clip ? clip.x : 0,
-      pretty:orig.replace(/ muscles?$/i, '').replace(/^\((.*)\)$/, '$1'), box:new THREE.Box3().setFromObject(o), items:[], ghost:false };
+    const want = PLACE[base + (side ? '.' + side.toLowerCase() : '')];          // a structure borrowed from another reference body: put it where it belongs in this one
+    if (want) { const c = new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3()); o.position.add(new THREE.Vector3(...want).sub(c)); o.updateMatrixWorld(true); }
+    const info = { mesh:o, base, side, mat:ownerMat || matName, model:name, kind:soft ? 'tendon' : kind, colour:colour.clone(), clipX:clip ? clip.x : 0,
+      pretty:orig.replace(/ muscles?$/i, '').replace(/^\((.*)\)$/, '$1'), box:new THREE.Box3().setFromObject(o), items:[], ghost:false,
+      soft:kind === 'brain' && (ownerMat || matName) === 'LCR' };      // a ventricle is a fluid space: drawn as glass, and a tap passes through it unless it is what was asked
     o.userData.info = info; REG.push(info);
   });
   const NONE = new THREE.MeshBasicMaterial({ visible:false }); kill.forEach(o => { o.material = NONE; });
   groups[name] = root; scene.add(root); loaded[name] = true;
-  bindItems(name);
+  bindItems();
 }
 
-function bindItems(model) {
-  const pool = REG.filter(i => i.model === model);
+/* (re)bind every item to the meshes of its deck's own models — cheap, and run after each model arrives */
+function bindItems() {
+  for (const i of REG) i.items = [];
   for (const it of Object.values(ITEM)) {
-    if (DECK[it.deck].model !== model && !(it.on && model === 'skeletal')) continue;
-    if (it.on && model !== 'skeletal') continue;
-    it.infos = it.on ? pool.filter(i => i.base === it.on) : pool.filter(i => matchAny(it.m, i.base));
+    const D = DECK[it.deck]; it.infos = []; it.alsoInfos = []; it.bases = new Set(); it.ok = false;
+    if (!D.bind.every(m => loaded[m])) continue;
+    const pool = REG.filter(i => D.bind.includes(i.model));
+    it.infos = it.on ? pool.filter(i => i.base === it.on) : pool.filter(i => matchAny(it.m, i.base, i.mat));
+    if (it.also) it.alsoInfos = pool.filter(i => matchAny(it.also, i.base, i.mat) && !it.infos.includes(i));
     it.bases = new Set(it.infos.map(i => i.base));
     it.ok = it.infos.length > 0 && !(it.on && it.p.every(x => x === .5));
     it.box = new THREE.Box3(); it.infos.forEach(i => it.box.union(i.box));
     if (!it.infos.length) console.warn('[fab] item matches nothing:', it.id);
     if (!it.on) it.infos.forEach(i => i.items.push(it));
+    if (it.c && !it.on) it.infos.forEach(i => { i.colour.set(it.c); if (!glows.has(i)) i.mesh.material.color.copy(i.colour); });
   }
 }
-const POINTS = base => BONES.filter(i => i.on === base && i.ok);
+const POINTS = (base, model) => Object.values(ITEM).filter(i => i.on === base && i.ok && DECK[i.deck].bind.includes(model));
 const _v = new THREE.Vector3();
 function pointWorld(it, info) {
   const bb = info.mesh.geometry.boundingBox;
@@ -160,13 +201,13 @@ function nLocal(info, pt) { const bb = info.mesh.geometry.boundingBox, p = info.
  * Without this a tap on the neck was accepted as "greater trochanter" (caught 20 Sep by measuring the overlaps). */
 function nearestSphere(info, pt, slack = 1) {
   let best = null;
-  for (const it of POINTS(info.base)) { if (it.zone) continue; const k = pt.distanceTo(pointWorld(it, info)) / it.r; if (k <= slack && (!best || k < best.k)) best = { it, k }; }
+  for (const it of POINTS(info.base, info.model)) { if (it.zone) continue; const k = pt.distanceTo(pointWorld(it, info)) / it.r; if (k <= slack && (!best || k < best.k)) best = { it, k }; }
   return best && best.it;
 }
 
 /* What did they just touch? — the most specific thing we can honestly say. */
 function describe(info, pt) {
-  let lm = null; const pts = pt ? POINTS(info.base) : [];
+  let lm = null; const pts = pt ? POINTS(info.base, info.model) : [];
   if (pts.length) {
     const n = nLocal(info, pt), neutral = NEUTRAL[info.base] && NEUTRAL[info.base](n);
     if (neutral) return { ...neutral, neutral:true, item:null, her:false };
@@ -177,12 +218,12 @@ function describe(info, pt) {
   const grp = info.items.filter(i => i.bases.size > 1).sort((a, b) => a.bases.size - b.bases.size)[0];
   const bone = own ? own.name : info.pretty;
   if (lm) return { title:lm.it.name, sub:bone, item:lm.it, her:!!lm.it.her };
-  return { title:bone, sub:grp && grp.name !== bone ? grp.name : (info.kind === 'bone' && info.model === 'skeletal' && G.deck === 'muscles' ? 'bone' : ''), item:own || grp || null, her:!!((own && own.her) || (grp && grp.her)) };
+  return { title:bone, sub:grp && grp.name !== bone ? grp.name : (!DECK[G.deck].bind.includes(info.model) ? MODELS[info.model].noun : ''), item:own || grp || null, her:!!((own && own.her) || (grp && grp.her)) };
 }
 function isCorrect(it, hit) {
   const info = hit.object.userData.info;
   if (it.on) { if (info.base !== it.on) return false; if (it.zone) { const n = nLocal(info, hit.point); return !(NEUTRAL[info.base] && NEUTRAL[info.base](n)) && it.zone(n); } return nearestSphere(info, hit.point) === it; }
-  if (it.infos.includes(info)) return true;
+  if (it.infos.includes(info) || it.alsoInfos.includes(info)) return true;
   return (it.accept || []).some(id => ITEM[id].infos && ITEM[id].infos.includes(info));
 }
 
@@ -191,17 +232,22 @@ const glows = new Map();
 function glow(infos, hex, mode = 'pulse', dur = 900) { const c = new THREE.Color(hex); for (const i of infos) glows.set(i, { c, mode, t0:performance.now(), dur }); invalidate(); }
 const rest = i => { i.mesh.material.emissive.setRGB(0, 0, 0); i.mesh.material.color.copy(i.colour).multiplyScalar(i.dimK || 1); };
 function unglow(infos) { for (const i of infos || [...glows.keys()]) { glows.delete(i); rest(i); } invalidate(); }
+/* one painter for both kinds of see-through: a deck's ghost context (the skeleton around the glands) and the x-ray round a deep target */
+function paint(i) { const g = i.baseGhost || i.xr, m = i.mesh.material, was = m.transparent, glass = i.soft && !(xray && xray.has(i));
+  m.transparent = !!g || glass; m.opacity = i.baseGhost ? .11 : i.xr ? (i.kind === 'bone' ? .16 : .07) : glass ? .42 : 1; m.depthWrite = !(g || glass); if (was !== m.transparent) m.needsUpdate = true; i.ghost = !!g; }
 let xray = null;
-function setXray(keep) {
-  clearXray(); xray = new Set(keep);
-  for (const i of REG) { if (xray.has(i) || !i.mesh.visible) continue; const m = i.mesh.material; m.transparent = true; m.opacity = i.kind === 'bone' ? .16 : .07; m.depthWrite = false; m.needsUpdate = true; i.ghost = true; }
-  refreshPickables(); invalidate();
-}
-function clearXray() {
-  if (!xray) return; xray = null;
-  for (const i of REG) { if (!i.ghost) continue; const m = i.mesh.material; m.transparent = false; m.opacity = 1; m.depthWrite = true; m.needsUpdate = true; i.ghost = false; }
-  refreshPickables(); invalidate();
-}
+function setXray(keep) { xray = new Set(keep); for (const i of REG) { i.xr = !xray.has(i); paint(i); } refreshPickables(); invalidate(); }
+function clearXray() { if (!xray) return; xray = null; for (const i of REG) { i.xr = false; paint(i); } refreshPickables(); invalidate(); }
+/* the brain cut in half: the left hemisphere's meshes go, midline structures stay, and you look in from the left */
+/* the twelve cranial nerves are long tubes (the vagus reaches the abdomen): on stage only when they are the question, or in Explore */
+let nervesOn = true;
+function setNerves(on) { if (on === nervesOn) return; nervesOn = on; for (const i of REG) if (i.model === 'brain' && i.base.includes(' nerve (')) i.mesh.visible = on && !(cutOn && i.side === 'L'); refreshPickables(); invalidate(); }
+let cutOn = false;
+function setCut(on) { if (on === cutOn) return; cutOn = on; for (const i of REG) if (i.model === 'brain' && i.side === 'L') i.mesh.visible = !on && (nervesOn || !i.base.includes(' nerve (')); refreshPickables(); invalidate(); }
+/* put a deck on stage: which models show, which are ghosts, and the accent colour */
+function applyDeck() { const D = DECK[G.deck]; for (const m of Object.keys(groups)) groups[m].visible = m in D.models;
+  for (const i of REG) { i.baseGhost = D.models[i.model] === 'ghost'; paint(i); }
+  document.body.style.setProperty('--acc', D.acc); document.body.style.setProperty('--acc-ink', D.ink); refreshPickables(); invalidate(); }
 function setDim(keepFn) { for (const i of REG) { i.dimK = !keepFn || keepFn(i) ? 1 : .3; if (!glows.has(i)) rest(i); } invalidate(); }
 
 let pickables = [];
@@ -233,8 +279,8 @@ function frameBox(box, az = 0, elv = 6, pad = 1.2, minSize = 0.26) {
 const regionBox = {};
 function regionFrame(name, az, elv) {
   const R = REGIONS[name] || REGIONS.whole;
-  if (!regionBox[name]) { const b = new THREE.Box3(); REG.filter(i => i.model === 'skeletal' && (!R.side || i.side === R.side || !i.side) && matchAny(R.m, i.base)).forEach(i => b.union(i.box)); regionBox[name] = b; }
-  return frameBox(regionBox[name], az, elv, R.pad || 1.15);
+  if (!regionBox[name]) { const b = new THREE.Box3(); REG.filter(i => i.model === (R.model || 'skeletal') && (!R.side || i.side === R.side || !i.side) && matchAny(R.m, i.base, i.mat)).forEach(i => b.union(i.box)); regionBox[name] = b; }
+  return frameBox(regionBox[name], az, elv, R.pad || 1.15, R.min || 0.26);
 }
 const sph = new THREE.Spherical();
 function flyTo(f, dur = 850) {
@@ -270,7 +316,7 @@ const buzz = p => { try { navigator.vibrate && navigator.vibrate(p); } catch {} 
 
 /* ───────────── picking ───────────── */
 const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
-function cast(x, y) { const r = canvas.getBoundingClientRect(); ndc.set(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, camera); return ray.intersectObjects(pickables, false).find(h => { const i = h.object.userData.info; return !(i.clipX && Math.abs(h.point.x) < i.clipX); }) || null; }
+function cast(x, y) { const r = canvas.getBoundingClientRect(); ndc.set(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, camera); return ray.intersectObjects(pickables, false).find(h => { const i = h.object.userData.info; return !(i.clipX && Math.abs(h.point.x) < i.clipX) && !(i.soft && G.cur && !G.cur.it.infos.includes(i)); }) || null; }
 function pickAt(x, y, wantItem) {
   let hit = cast(x, y);
   const named = h => { if (!h) return false; const i = h.object.userData.info, d = describe(i, h.point);      // did the finger land ON something with a name of its own?
@@ -303,15 +349,15 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, xHer:false, xPee
 
   async setDeck(deck) {
     this.deck = S.o.deck = deck; document.body.dataset.deck = deck; save();
-    if (deck === 'muscles' && !loaded.muscular) { showLoader('Wrapping it in muscle…'); await loadModel('muscular', loadProg); hideLoader(); }
-    if (groups.muscular) groups.muscular.visible = deck === 'muscles';
-    refreshPickables(); renderHome(); invalidate();
+    const need = Object.keys(DECK[deck].models).filter(m => !loaded[m]);
+    if (need.length) { showLoader(MODELS[need[need.length - 1]].note); for (const m of need) await loadModel(m, loadProg); hideLoader(); }
+    setCut(false); setNerves(false); applyDeck(); renderHome();
   },
 
   start(only) {
     const pool = only || this.pool(); if (!pool.length) return;
     unglow(); clearXray(); setDim(null); callout.hide(); ring.hide(); toast();
-    if (groups.muscular) groups.muscular.visible = this.deck === 'muscles'; this.xHer = this.xPeel = false; refreshPickables();
+    this.xHer = this.xPeel = false; setCut(false); setNerves(this.mode === 'explore'); applyDeck();
     document.body.dataset.mode = this.mode; controls.autoRotate = false;
     if (this.mode === 'explore') { this.round = null; setState('play'); return this.explore(); }
     const len = only ? pool.length : (S.o.len === 'all' ? pool.length : Math.min(S.o.len, pool.length));
@@ -331,20 +377,20 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, xHer:false, xPee
   next() {
     const R = this.round; unglow(); clearXray(); ring.hide(); callout.hide(); toast();
     if (!R.queue.length) return this.finish();
-    const q = R.queue.shift(), it = q.it; this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
+    const q = R.queue.shift(), it = q.it; setNerves(/^br-cn/.test(it.id)); setCut(!!it.cut); this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
     $('#barTitle').textContent = `${innerWidth > 520 ? DECK[this.deck].label + ' · ' : ''}${this.mode === 'find' ? 'Find it' : 'Name it'} · ${Math.min(R.done + 1, R.total)} of ${R.total}${q.first ? '' : ' · again'}`;
     $('#prog i').style.width = (R.done / R.total * 100) + '%';
     const P = $('#prompt'); P.classList.remove('swap'); void P.offsetWidth; P.classList.add('swap');
     if (this.mode === 'find') {
       const st = this.cur.style, text = st === 'clue' ? it.clue.t : st === 'common' ? it.common : it.name;
-      P.querySelector('.k').textContent = st === 'clue' ? (it.clue.hers ? 'Find it · clue from her quiz' : 'Find it · clue') : it.on ? `On the ${it.on} · find the` : 'Find the';
+      P.querySelector('.k').textContent = st === 'clue' ? (it.clue.hers ? 'Find it · clue from her quiz' : 'Find it · clue') : it.on && it.deck !== 'brain' ? `On the ${it.on} · find the` : 'Find the';
       const n = P.querySelector('.n'); n.textContent = text; n.classList.toggle('long', st === 'clue');
-      P.querySelector('.s').textContent = st === 'name' ? (it.sub ? `(${it.sub})` : '') : st === 'common' ? 'Tap the bone — what is its proper name?' : '';
+      P.querySelector('.s').textContent = st === 'name' ? (it.sub ? `(${it.sub})` : '') : st === 'common' ? 'Tap it — what is its proper name?' : it.cut ? 'cut in half · seen from the left' : '';
       dock(`<div class="acts"><button class="act" data-a="hint">Zoom me in</button><button class="act" data-a="show">Show me</button></div>`);
       flyTo(regionFrame(it.region, it.az, it.el));
     } else {
       P.querySelector('.k').textContent = it.deep ? 'Name it · x-ray' : 'Name it';
-      const n = P.querySelector('.n'); n.textContent = it.on ? `Which part of the ${it.on}?` : 'What is glowing?'; n.classList.remove('long'); P.querySelector('.s').textContent = '';
+      const n = P.querySelector('.n'); n.textContent = it.on ? (it.zone && it.deck === 'brain' ? 'Which area is ringed?' : `Which part of the ${it.on}?`) : 'What is glowing?'; n.classList.remove('long'); P.querySelector('.s').textContent = '';
       dock(`<div class="opts">${this.options(it).map(o => `<button class="opt" data-id="${o.id}">${esc(o.name)}${o.sub ? `<small>${esc(o.sub)}</small>` : ''}</button>`).join('')}</div>`);
       if (it.deep) setXray(it.infos);
       this.spot(it, ACC(), 'pulse');
@@ -361,7 +407,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, xHer:false, xPee
     const lastWord = s => s.toLowerCase().split(' ').pop(), firstWord = s => s.toLowerCase().split(' ')[0];
     const cand = DECK[this.deck].items.filter(o => o.ok && o !== it && o.name !== it.name && !(o.accept || []).includes(it.id)
       && !(!it.on && !o.on && [...o.bases].some(b => it.bases.has(b))) && !(!!it.on !== !!o.on && (it.on || o.on) && (it.on ? o.bases.has(it.on) : it.bases.has(o.on))));
-    const score = o => (o.on && it.on ? (o.on === it.on ? 6 : 2) : 0) + (!!o.on === !!it.on ? 3 : 0) + (lastWord(o.name) === lastWord(it.name) ? 3 : 0) + (firstWord(o.name) === firstWord(it.name) ? 3 : 0)
+    const score = o => (o.kind && o.kind === it.kind ? 5 : 0) + (o.on && it.on ? (o.on === it.on ? 6 : 2) : 0) + (!!o.on === !!it.on ? 3 : 0) + (lastWord(o.name) === lastWord(it.name) ? 3 : 0) + (firstWord(o.name) === firstWord(it.name) ? 3 : 0)
       + (o.region === it.region ? 3 : zoneOf(o.region) === zoneOf(it.region) ? 1.5 : 0) + (o.name[0] === it.name[0] ? 2 : 0)      // same first letter is HER trap: cranium/carpal/clavicle/condyle
       + (Math.abs(((o.az - it.az + 540) % 360) - 180) < 60 ? 1 : 0) + (this.round.poolIds.has(o.id) ? 1.5 : 0) + Math.random() * 2.2;
     const seen = new Set([it.name]), out = [];
@@ -429,7 +475,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, xHer:false, xPee
   },
 
   finish() {
-    const R = this.round; $('#prog i').style.width = '100%'; unglow(); clearXray(); ring.hide(); callout.hide(); toast();
+    const R = this.round; $('#prog i').style.width = '100%'; unglow(); clearXray(); setCut(false); ring.hide(); callout.hide(); toast();
     const secs = Math.round((performance.now() - R.t0) / 1000), pct = Math.round(R.right / R.total * 100), prev = S.best[R.key] || 0, best = R.score > prev; if (best) { S.best[R.key] = R.score; save(); }
     const misses = R.log.filter(l => !l.ok), verdict = pct === 100 ? 'Flawless.' : pct >= 80 ? 'Solid.' : pct >= 50 ? 'Getting there.' : 'First pass done.';
     const tip = pct === 100 ? 'Every one first time. Lengthen the round or switch the mode.' : misses.length ? `${misses.length} to tighten — they come back first next round.` : '';
@@ -439,15 +485,15 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, xHer:false, xPee
       <div class="acts">${misses.length ? `<button class="act pri" data-r="misses">Drill the ${misses.length} I missed</button>` : `<button class="act pri" data-r="again">Another round</button>`}</div>
       <div class="acts" style="margin-top:8px">${misses.length ? `<button class="act" data-r="again">New round</button>` : ''}<button class="act" data-r="home">Menu</button></div>`;
     this.lastMisses = misses.map(l => l.it); this.cur = null; sfx.done(); setState('results');
-    controls.autoRotate = true; flyTo(regionFrame('whole', 20, 4), 1200);
+    controls.autoRotate = true; flyTo(regionFrame(DECK[G.deck].home || 'whole', 20, 4), 1200);
   },
 
   /* explore */
   explore() {
     const P = $('#prompt'); P.querySelector('.k').textContent = 'Explore'; const n = P.querySelector('.n'); n.textContent = 'Tap anything'; n.classList.remove('long'); P.querySelector('.s').textContent = 'Drag to turn · pinch to zoom';
-    $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
-    dock(`<div class="xcard"><p class="quiet">Nothing selected. Tap a ${this.deck === 'bones' ? 'bone' : 'muscle'} to see what it is${this.deck === 'bones' ? ' — on the femur and hip bone the landmarks are live too' : ''}.</p></div>`);
-    flyTo(regionFrame('whole', 15, 4));
+    $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xCut').hidden = this.deck !== 'brain'; $('#xCut').setAttribute('aria-pressed', 'false'); $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
+    dock(`<div class="xcard"><p class="quiet">Nothing selected. Tap a ${DECK[this.deck].noun} to see what it is${this.deck === 'bones' ? ' — on the femur and hip bone the landmarks are live too' : ''}.</p></div>`);
+    flyTo(regionFrame(DECK[this.deck].home || 'whole', this.deck === 'brain' ? 60 : 15, 4));
   },
   inspect(hit) {
     const info = hit.object.userData.info, d = describe(info, hit.point), it = d.item; unglow();
@@ -456,10 +502,11 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, xHer:false, xPee
     dock(`<div class="xcard"><h3>${esc(d.title)}</h3><div class="tags">${tags}</div>${it && it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it && it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`);
   },
   toggle(which) {
-    if (which === 'her') { this.xHer = !this.xHer; $('#xHer').setAttribute('aria-pressed', this.xHer); const model = DECK[this.deck].model; setDim(this.xHer ? (i => i.model !== model || i.items.some(x => x.her)) : null); }
+    if (which === 'her') { this.xHer = !this.xHer; $('#xHer').setAttribute('aria-pressed', this.xHer); const bind = DECK[this.deck].bind; setDim(this.xHer ? (i => !bind.includes(i.model) || i.items.some(x => x.her)) : null); }
+    if (which === 'cut') { setCut(!cutOn); $('#xCut').setAttribute('aria-pressed', cutOn); unglow(); callout.hide(); flyTo(regionFrame('brain', cutOn ? 90 : 60, 8)); }
     if (which === 'peel') { this.xPeel = !this.xPeel; $('#xPeel').setAttribute('aria-pressed', this.xPeel); groups.muscular.visible = !this.xPeel; unglow(); callout.hide(); refreshPickables(); invalidate(); }
   },
-  reframe() { const st = document.body.dataset.state; if (st === 'home' || st === 'results') flyTo(regionFrame('whole', 20, 4), 500); else if (this.cur) flyTo(this.mode === 'find' && !this.cur.revealed ? regionFrame(this.cur.it.region, this.cur.it.az, this.cur.it.el) : this.itemFrame(this.cur.it), 400); },
+  reframe() { const st = document.body.dataset.state; if (st === 'home' || st === 'results') flyTo(regionFrame(DECK[G.deck].home || 'whole', 20, 4), 500); else if (this.cur) flyTo(this.mode === 'find' && !this.cur.revealed ? regionFrame(this.cur.it.region, this.cur.it.az, this.cur.it.el) : this.itemFrame(this.cur.it), 400); },
 };
 
 /* ───────────── UI plumbing ───────────── */
@@ -474,9 +521,9 @@ function loadProg(got, total) { const t = total || (got > 3e6 ? 5.2e6 : 2e6); $(
 
 const MODES = [['find', 'Find it', 'A name or a clue — you tap it on the body.'], ['name', 'Name it', 'It glows — you pick the name from four. Her test\'s own shape; deep muscles live here.'], ['explore', 'Explore', 'No questions. Tap anything to see what it is.']];
 function renderHome() {
-  const deckCard = d => { const her = DECK[d].items.filter(i => i.her && (i.ok || !loaded[DECK[d].model])), seen = her.some(i => S.m[i.id] && S.m[i.id].s), locked = her.filter(i => S.m[i.id] && S.m[i.id].b >= LOCK).length, p = her.length ? locked / her.length * 100 : 0;
-    return `<button class="deck" data-deck="${d}" aria-pressed="${G.deck === d}"><span class="donut" style="--p:${p};--dc:${d === 'bones' ? '#f2b84b' : '#ff7d68'}"><span>${seen ? locked : '–'}</span></span><span><b>${DECK[d].label}</b><small>${seen ? `${locked} of ${her.length} locked` : `${her.length} on her list · not started`}</small></span></button>`; };
-  $('#decks').innerHTML = deckCard('bones') + deckCard('muscles');
+  const deckCard = d => { const her = DECK[d].items.filter(i => i.her && (i.ok || !DECK[d].bind.every(m => loaded[m]))), seen = her.some(i => S.m[i.id] && S.m[i.id].s), locked = her.filter(i => S.m[i.id] && S.m[i.id].b >= LOCK).length, p = her.length ? locked / her.length * 100 : 0;
+    return `<button class="deck" data-deck="${d}" aria-pressed="${G.deck === d}"><span class="donut" style="--p:${p};--dc:${DECK[d].acc}"><span>${seen ? locked : '–'}</span></span><span><b>${DECK[d].label}</b><small>${seen ? `${locked} of ${her.length} locked` : `${her.length} on her list · not started`}</small></span></button>`; };
+  $('#decks').innerHTML = Object.keys(DECK).map(deckCard).join('');
   $('#modes').innerHTML = MODES.map(m => `<button data-mode="${m[0]}" aria-pressed="${G.mode === m[0]}">${m[1]}</button>`).join('');
   $('#modeNote').textContent = MODES.find(m => m[0] === G.mode)[2];
   const sets = SETS[G.deck]; if (!sets.some(s => s.id === S.o.set[G.deck])) S.o.set[G.deck] = sets[0].id;
@@ -503,13 +550,13 @@ $('#home').addEventListener('click', e => {
 });
 $('#dock').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.id) G.choose(b); else if (b.dataset.a) G.act(b.dataset.a); });
 $('#results').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const r = b.dataset.r; if (r === 'home') goHome(); else if (r === 'misses') G.start(G.lastMisses); else if (r === 'again') G.start(); });
-function goHome() { G.round = null; G.cur = null; unglow(); clearXray(); setDim(null); ring.hide(); callout.hide(); toast(); if (groups.muscular) groups.muscular.visible = G.deck === 'muscles'; refreshPickables(); setState('home'); controls.autoRotate = true; renderHome(); }
+function goHome() { G.round = null; G.cur = null; unglow(); clearXray(); setDim(null); ring.hide(); callout.hide(); toast(); setCut(false); setNerves(false); applyDeck(); setState('home'); controls.autoRotate = true; renderHome(); }
 $('#btnHome').onclick = goHome;
 $('#btnHelp').onclick = () => $('#help').classList.add('on');
 $('#helpClose').onclick = () => $('#help').classList.remove('on');
 $('#help').addEventListener('click', e => { if (e.target.id === 'help') $('#help').classList.remove('on'); });
 $('#btnSound').onclick = () => { S.o.sound = !S.o.sound; save(); $('#btnSound').style.opacity = S.o.sound ? 1 : .4; if (S.o.sound) sfx.tick(); };
-$('#xHer').onclick = () => G.toggle('her'); $('#xPeel').onclick = () => G.toggle('peel');
+$('#xHer').onclick = () => G.toggle('her'); $('#xPeel').onclick = () => G.toggle('peel'); $('#xCut').onclick = () => G.toggle('cut');
 addEventListener('keydown', e => { if (document.body.dataset.state !== 'play') return; if (e.key === 'Escape') goHome(); if (G.mode === 'name' && /^[1-4]$/.test(e.key)) { const b = document.querySelectorAll('#dock .opt')[+e.key - 1]; if (b && !b.disabled) G.choose(b); } if ((e.key === 'Enter' || e.key === ' ') && $('#dock [data-a=skip]')) { e.preventDefault(); G.act('skip'); } });
 
 /* ───────────── loop ───────────── */
@@ -534,15 +581,15 @@ const perf = { last:0, t:0, n:0, downs:0 };
 /* ───────────── boot ───────────── */
 (async function boot() {
   resize();
-  try { await loadModel('skeletal', loadProg); if (G.deck === 'muscles') { $('#loader p').textContent = 'Wrapping it in muscle…'; await loadModel('muscular', loadProg); } }
+  if (!DECK[G.deck]) G.deck = S.o.deck = 'bones';
+  try { for (const m of Object.keys(DECK[G.deck].models)) { $('#loader p').textContent = MODELS[m].note; await loadModel(m, loadProg); } }
   catch (err) { console.error(err); $('#loader p').textContent = 'The 3D model did not load.'; $('#loadNote').textContent = location.protocol === 'file:' ? 'Open it through a web server (or the live site) — browsers block 3D files on file://.' : String(err.message || err); return; }
-  if (groups.muscular) groups.muscular.visible = G.deck === 'muscles';
-  document.body.dataset.deck = G.deck; refreshPickables(); setState('home'); renderHome();
-  const f = regionFrame('whole', 20, 4); if (f) { controls.target.copy(f.target); camera.position.copy(f.pos); } controls.autoRotate = true;
+  document.body.dataset.deck = G.deck; setNerves(false); applyDeck(); setState('home'); renderHome();
+  const f = regionFrame(DECK[G.deck].home || 'whole', 20, 4); if (f) { controls.target.copy(f.target); camera.position.copy(f.pos); } controls.autoRotate = true;
   requestAnimationFrame(frame); setTimeout(hideLoader, 150);
 })();
 
 /* debug + calibration: ?debug logs every tap as mesh-local 0..1 coordinates */
-window.FB = { S, G, REG, ITEM, THREE, camera, controls, scene, groups, flyTo, frameBox, regionFrame, pointWorld, cast, toScreen, invalidate,
+window.FB = { S, G, REG, ITEM, DECK, THREE, setCut, setXray, clearXray, applyDeck, camera, controls, scene, groups, flyTo, frameBox, regionFrame, pointWorld, cast, toScreen, invalidate,
   local(hit) { const i = hit.object.userData.info, bb = i.mesh.geometry.boundingBox, p = i.mesh.worldToLocal(hit.point.clone()); return { base:i.base, side:i.side, p:[(p.x - bb.min.x) / (bb.max.x - bb.min.x), (p.y - bb.min.y) / (bb.max.y - bb.min.y), (p.z - bb.min.z) / (bb.max.z - bb.min.z)].map(x => +x.toFixed(3)) }; } };
 if (DEBUG) canvas.addEventListener('click', e => { const h = cast(e.clientX, e.clientY); if (h) console.log('[fab]', JSON.stringify(window.FB.local(h))); });
