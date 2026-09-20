@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
-import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
+import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
 import { buildMeninges } from './made.js';
 import { buildNeuron } from './made-neuron.js';
 import { buildTissues } from './made-tissues.js';
@@ -47,6 +47,7 @@ const DECK = {
   neuron: { label:'Neuron',  acc:'#ff8fd6', ink:'#2b0620', items:NEURON,  models:{ neuron:'solid', glia:'solid' }, bind:['neuron', 'glia'], noun:'part', home:'neuron', view:[0, 4], frame:{ pad:1.5, min:.09 }, schematic:'schematic · not to scale' },   // BUILT, not loaded: made-neuron.js
   tissues:{ label:'Tissues', acc:'#9be38a', ink:'#0c2407', items:TISSUES, models:{ tissues:'solid' }, bind:['tissues'], noun:'part', home:'tissues', view:[0, 12], frame:{ pad:1.5, min:.06 }, schematic:'schematic · not to scale' },   // three of her figures, built: made-tissues.js
   heart:  { label:'Heart',   acc:'#fff0b3', ink:'#2a2205', items:HEART,   models:{ heart:'solid' }, bind:['heart'], noun:'structure', home:'heart', view:[15, 4], frame:{ pad:1.45, min:.09 }, extra:'Conduction system' },   // Module 1. Chambers turn to glass when what is asked is inside them
+  airway: { label:'Airway',  acc:'#a9c4ff', ink:'#0a1230', items:AIRWAY,  models:{ skeletal:'ghost', airway:'solid' }, bind:['airway'], noun:'structure', openLabel:'Glass lungs', home:'airway', view:[15, 4], frame:{ pad:1.4, min:.1 } },   // Module 1. The lobes turn to glass when a bronchus is asked
 };
 const ITEM = {};
 for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
@@ -123,6 +124,7 @@ const MODELS = {
   neuron:  { kind:'cell',   noun:'part',      note:'Growing a neuron…', make:buildNeuron },      // no file: the parts are generated
   tissues: { kind:'cell',   noun:'part',      note:'Building the tissues…', make:buildTissues },
   heart:   { kind:'heart',  noun:'structure', note:'Opening the chest…' },
+  airway:  { kind:'airway', noun:'structure', note:'Filling the lungs…' },
   glia:    { kind:'cell',   noun:'cell',      note:'Growing a neuron…', make:buildGlia },
 };
 const HIDE_BRAIN = [/^falx cerebri$/, /^tentorium cerebelli$/, /root of spinal nerve$/, /^nerve to /, /^central canal/];      // the dura folds stand in front of the medial cut and the cerebellum
@@ -130,6 +132,7 @@ const HIDE_BRAIN = [/^falx cerebri$/, /^tentorium cerebelli$/, /root of spinal n
 const BONE_C = new THREE.Color('#e7dcc6'), CART_C = new THREE.Color('#9fb6c4'), TOOTH_C = new THREE.Color('#f4f0e6'), TENDON_C = new THREE.Color('#dacdb4');
 const BRAIN_C = { 'LCR':'#6fb6ff', 'Nucleus':'#b48ccf', 'Nucleus (afferent fibers)':'#b48ccf', 'Nucleus (efferent fibers)':'#b48ccf', 'Brain':'#d8c2a8', 'Cerebellum':'#c9958a',
   'White matter':'#ece5d6', 'Brain-Inner':'#ece5d6', 'Nerve':'#f0d66b', 'Artery':'#d9534f', 'Vein':'#4f7fe0', 'Interlobar sulci':'#b98b84' };
+const AIR_C = { 'Lung-base':'#e6a39b', 'Mucosa':'#d98f8f', 'Cartilage':'#9fb6c4', 'Diaphragm':'#a8453c' };
 const HEART_C = { 'Artery':'#e2504c', 'Vein':'#4f7fe0', 'Pulmonary artery':'#5b86e6', 'Pulmonary vein':'#e2605c', 'Ligament':'#f3e9d2', 'Cartilage':'#f3e9d2', 'Lung-base':'#e9a9a2' };      // pulmonary ARTERY blue, pulmonary VEINS red: by what they carry
 function colourFor(kind, base, matName) {
   const h = hash01(base.replace(/^(long|short|lateral|medial|clavicular|sternocostal|acromial|ascending|descending|transverse|superficial|deep) (head|part) of /, ''));
@@ -139,6 +142,7 @@ function colourFor(kind, base, matName) {
     return BONE_C.clone().offsetHSL(0, 0, (h - .5) * .05);
   }
   if (kind === 'nerve') return new THREE.Color('#ffe27a').offsetHSL((h - .5) * .03, 0, (h - .5) * .08);
+  if (kind === 'airway') return new THREE.Color(/^Bronchi/.test(matName) ? '#cfe3ee' : AIR_C[matName] || '#e7dcc6').offsetHSL(0, 0, (h - .5) * (matName === 'Lung-base' ? .12 : .04));
   if (kind === 'heart') return new THREE.Color(HEART_C[matName] || '#b5554a').offsetHSL(0, 0, (h - .5) * .05);      // all four chambers ONE colour: red left / blue right would hand over the answer
   if (kind === 'artery') return new THREE.Color('#e2504c').offsetHSL((h - .5) * .02, 0, (h - .5) * .1);
   if (kind === 'organ') return new THREE.Color('#c9a08f');                                     // an item's own colour (`c`) replaces this at bind time
@@ -188,7 +192,7 @@ async function loadModel(name, onProg) {
     const info = { mesh:o, base, side, mat:ownerMat || matName, model:name, kind:soft ? 'tendon' : kind, colour:colour.clone(), clipX:clip ? clip.x : 0,
       pretty:orig.replace(/ muscles?$/i, '').replace(/^\((.*)\)$/, '$1'), box:new THREE.Box3().setFromObject(o), items:[], ghost:false,
       soft:(kind === 'brain' && (ownerMat || matName) === 'LCR') || (kind === 'heart' && /lobe of/.test(base)),        // …the lungs round the heart likewise
-      openable:kind === 'heart' && /^(left|right) (atrium|ventricle)$|^ascending aorta$|^pulmonary trunk$/.test(base),      // turns to glass when the question is about what is inside it        // a ventricle is a fluid space: drawn as glass, and a tap passes through it unless it is what was asked
+      openable:(kind === 'heart' && /^(left|right) (atrium|ventricle)$|^ascending aorta$|^pulmonary trunk$/.test(base)) || (kind === 'airway' && /lobe of/.test(base)),      // turns to glass when the question is about what is inside it        // a ventricle is a fluid space: drawn as glass, and a tap passes through it unless it is what was asked
       men:kind === 'brain' && base === 'superior sagittal sinus' };      // on stage with the meninges only
     o.userData.info = info; REG.push(info);
   });
@@ -621,7 +625,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
   /* explore */
   explore() {
     const P = $('#prompt'); P.querySelector('.k').textContent = 'Explore'; const n = P.querySelector('.n'); n.textContent = 'Tap anything'; n.classList.remove('long'); P.querySelector('.s').textContent = 'Drag to turn · pinch to zoom';
-    $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xCut').hidden = this.deck !== 'brain'; $('#xMen').hidden = !REG.some(i => i.men && DECK[this.deck].bind.includes(i.model)); $('#xMen').textContent = DECK[this.deck].extra || 'Meninges'; $('#xOpen').hidden = !REG.some(i => i.openable && DECK[this.deck].bind.includes(i.model)); $('#xOpen').setAttribute('aria-pressed', 'false'); $('#xCut').setAttribute('aria-pressed', 'false'); $('#xMen').setAttribute('aria-pressed', 'false'); $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
+    $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xCut').hidden = this.deck !== 'brain'; $('#xMen').hidden = !REG.some(i => i.men && DECK[this.deck].bind.includes(i.model)); $('#xMen').textContent = DECK[this.deck].extra || 'Meninges'; $('#xOpen').hidden = !REG.some(i => i.openable && DECK[this.deck].bind.includes(i.model)); $('#xOpen').setAttribute('aria-pressed', 'false'); $('#xOpen').textContent = DECK[this.deck].openLabel || 'Glass chambers'; $('#xCut').setAttribute('aria-pressed', 'false'); $('#xMen').setAttribute('aria-pressed', 'false'); $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
     dock(`<div class="xcard"><p class="quiet">Nothing selected. Tap a ${DECK[this.deck].noun} to see what it is${this.deck === 'bones' ? ' — on the femur and hip bone the landmarks are live too' : ''}.</p></div>`);
     flyTo(homeFrame(this.deck === 'brain' ? 60 : 15));
   },

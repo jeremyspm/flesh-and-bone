@@ -201,3 +201,15 @@ objects (nerves, vessels), all of which are already in the exported models (chec
 
 **Gate trap found here: `node --check file.js` is a FALSE PASS for these ES modules** (exit 0 on a file with a swallowed brace - a `//`
 comment added mid-line ate the rest of the line and the app would not boot). Use `node --input-type=module --check < file.js`.
+
+## Added 21 Sep: Airway (Module 1)
+
+- `models/airway.glb` (832 KB): the respiratory model + pharynx, soft palate, uvula, epiglottis, tongue (from digestive), thyroid and
+  cricoid cartilage + hyoid (skeletal) and the diaphragm (muscular), in a ghost skeleton. Her figure keys are the list: larynx,
+  oropharynx, palate, trachea, right/left primary bronchus, middle lobe of right lung, left lung, diaphragm, and the carina
+  (a measured point: the centroid of the trachea mesh's lowest 3 % of vertices). **Nostril, nasal cavity, bronchioles and alveoli are
+  not in the source** and the deck says so rather than faking them.
+- The lobes reuse the heart's glass switch (`openable`): when a bronchus is asked they turn to glass and pass the tap.
+- Trace "A breath in": pharynx -> larynx -> trachea -> primary -> lobar -> segmental bronchi. Declared in its note as standard
+  anatomical order: she has NO ordering question on this in the Module 1 bank.
+- Find it 19/19 + Name it 20/20 by real taps at 375x812; the epiglottis is inside the throat, so it is `deep:1`.

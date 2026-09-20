@@ -386,6 +386,43 @@ export const HEART = [
   HT('lungs', 'context', 'Lungs', 10, 5, [/lobe of (left|right) lung$/], { region:'heartAll', fact:'Where the pulmonary circulation drops its carbon dioxide and picks up oxygen. (Drawn as glass here: a tap passes through unless the lungs are what was asked.)' }),
 ];
 
+/* ── Airway (Module 1): airway.glb (832 KB) = the source's respiratory model + pharynx, palate, epiglottis, tongue (digestive),
+ *    larynx cartilages + hyoid (skeletal), diaphragm (muscular). Her figure keys: Nostril · Nasal cavity · Larynx · Oropharynx ·
+ *    Right primary bronchus · Middle lobe of right lung · Palate · Trachea · Left primary bronchus · Left lung · Diaphragm, and
+ *    "Location of Carina". Nostril and nasal cavity are spaces the source does not model; alveoli and bronchioles likewise. ── */
+const AW = (id, kind, name, region, az, el, m, extra) => ({ id:'aw-' + id, kind, name, region, az, el, m, ...extra });
+export const AIRWAY = [
+  AW('nasoph', 'upper', 'Nasopharynx', 'awUpper', 90, 0, ['nasopharynx'], { fact:'Behind the nasal cavity, above the soft palate. Air only. The auditory (Eustachian) tubes open here.' }),
+  AW('oroph', 'upper', 'Oropharynx', 'awUpper', 90, 0, ['oropharynx'], { her:1, fact:'Behind the mouth, from the soft palate down to the epiglottis. Shared by air and food.' }),
+  AW('laryngoph', 'upper', 'Laryngopharynx', 'awUpper', 90, 0, ['laryngopharynx'], { fact:'Behind the larynx. Here the two paths divide: air forward into the larynx, food back into the oesophagus.' }),
+  AW('palate', 'upper', 'Palate', 'awUpper', 90, 0, ['soft palate', 'uvula of palate'], { her:1, sub:'soft palate + uvula',
+    fact:'Separates the nasal cavity from the mouth. The soft palate and uvula lift to close the nasopharynx when you swallow. (The hard palate is bone.)' }),
+  AW('epiglottis', 'upper', 'Epiglottis', 'awUpper', 120, 5, ['epiglottis'], { deep:1, fact:'(Hidden inside the throat, so it is asked x-rayed.) The elastic-cartilage flap that tips over the larynx when you swallow, so food goes down the oesophagus.' }),
+  AW('larynx', 'upper', 'Larynx', 'awUpper', 30, 0, ['thyroid cartilage', 'cricoid cartilage'], { her:1, also:['epiglottis'], alt:'voice box',
+    clue:{ t:'The structure that helps to maintain a patent — open — airway.', hers:1 }, fact:'Thyroid cartilage (the Adam\'s apple) over the cricoid ring. Holds the airway open, routes air and food, and houses the vocal cords.' }),
+  AW('trachea', 'tree', 'Trachea', 'awTree', 0, 5, ['trachea'], { her:1,
+    fact:'The windpipe. Its cartilage rings are C-shaped — open at the back, joined by the trachealis muscle — and it is lined with ciliated, pseudostratified epithelium: the mucociliary escalator.' }),
+  { id:'aw-carina', kind:'tree', name:'Carina', her:1, on:'trachea', p:[.5, .02, .16], r:.013,      // measured: the centroid of the trachea mesh's lowest 3 % of vertices is (.50, .01, .14)
+    region:'awTree', az:0, el:5,
+    clue:{ t:'The most sensitive area of the trachea and larynx for triggering the cough reflex.', hers:1 },
+    fact:'The ridge where the trachea divides into the two primary bronchi.' },
+  AW('rmain', 'tree', 'Right primary bronchus', 'awTree', 0, 5, ['right main bronchus'], { her:1, open:1, alt:'right main bronchus',
+    fact:'Wider, shorter and more vertical than the left — so an inhaled object usually goes RIGHT.' }),
+  AW('lmain', 'tree', 'Left primary bronchus', 'awTree', 0, 5, ['left main bronchus'], { her:1, open:1, alt:'left main bronchus', fact:'Longer and more horizontal: it has to pass under the aortic arch to reach the left lung.' }),
+  AW('lobar', 'tree', 'Lobar bronchi', 'awTree', 0, 5, [/lobar bronchus$/, 'intermediate bronchus'], { open:1, alt:'secondary bronchi', fact:'One to each LOBE: three on the right, two on the left.' }),
+  AW('segmental', 'tree', 'Segmental bronchi', 'awTree', 0, 5, [/segmental bronchus/], { open:1, alt:'tertiary bronchi',
+    fact:'One to each bronchopulmonary segment. Beyond them come the bronchioles (no cartilage, cuboidal epithelium) and the alveoli — too small for this model.' }),
+  AW('rlung', 'lung', 'Right lung', 'airway', 330, 5, [/lobe of right lung$/], { fact:'THREE lobes: superior, middle, inferior.' }),
+  AW('llung', 'lung', 'Left lung', 'airway', 30, 5, [/lobe of left lung$/], { her:1, fact:'TWO lobes — it gives up room to the heart (the cardiac notch).' }),
+  AW('rmid', 'lung', 'Middle lobe of right lung', 'airway', 340, 0, ['middle lobe of right lung'], { her:1, fact:'Only the right lung has a middle lobe.' }),
+  AW('rsup', 'lung', 'Superior lobe of right lung', 'airway', 340, 10, ['superior lobe of right lung'], { fact:'The top lobe of the three.' }),
+  AW('rinf', 'lung', 'Inferior lobe of right lung', 'airway', 200, 0, ['inferior lobe of right lung'], { fact:'The biggest part of the BACK of the lung.' }),
+  AW('lsup', 'lung', 'Superior lobe of left lung', 'airway', 20, 10, ['superior lobe of left lung'], { fact:'Carries the lingula, the left lung\'s counterpart of a middle lobe.' }),
+  AW('linf', 'lung', 'Inferior lobe of left lung', 'airway', 160, 0, ['inferior lobe of left lung'], { fact:'Most of the back of the left lung.' }),
+  AW('diaphragm', 'lung', 'Diaphragm', 'airway', 0, -20, ['diaphragm'], { her:1,
+    clue:{ t:'In the bell-jar model of ventilation, the rubber sheet at the bottom stands for this.', hers:1 }, fact:'The main muscle of inspiration: it contracts and flattens, the thoracic volume rises, pressure falls, air flows in.' }),
+];
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -406,11 +443,21 @@ export const MORE_REGIONS = {
   heart:    { model:'heart', m:[/^(left|right) (atrium|ventricle)$/, 'ascending aorta', 'pulmonary trunk', 'superior vena cava', 'aortic arch'], pad:1.12, min:0.05 },
   heartTop: { model:'heart', m:['aortic arch', 'brachiocephalic trunk', /subclavian|common carotid|brachiocephalic vein/, 'superior vena cava', 'right atrium'], pad:1.05, min:0.05 },
   heartAll: { model:'heart', m:[/lobe of/, 'aortic arch'], pad:1.05, min:0.05 },
+  airway:  { model:'airway', m:[/lobe of/, 'trachea', 'diaphragm'], pad:1.08, min:0.05 },
+  awUpper: { model:'airway', m:[/pharynx$/, 'soft palate', 'thyroid cartilage', 'cricoid cartilage', 'epiglottis'], pad:1.25, min:0.05 },
+  awTree:  { model:'airway', m:['trachea', /bronchus/], pad:1.1, min:0.05 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
 export const MORE_SETS = {
+  airway: [
+    { id:'her', name:'Her list', hint:'Her airway figure (nostril and nasal cavity are not in the 3D source)', f:i => i.her },
+    { id:'upper', name:'Pharynx & larynx', hint:'Above the trachea', f:i => i.kind === 'upper' },
+    { id:'tree', name:'Bronchial tree', hint:'Trachea, carina, bronchi — the lobes turn to glass', f:i => i.kind === 'tree' },
+    { id:'lung', name:'Lungs', hint:'Five lobes and the diaphragm', f:i => i.kind === 'lung' },
+    { id:'all', name:'Everything', hint:'All of it', f:() => true },
+  ],
   heart: [
     { id:'her', name:'Her list', hint:'Every heart structure that is a key in her Module 1 bank', f:i => i.her },
     { id:'inside', name:'Chambers & valves', hint:'Four chambers, four valves, papillary muscles', f:i => /chamber|valve/.test(i.kind) },
@@ -460,6 +507,21 @@ export const MORE_SETS = {
  *    keys "choroid plexuses; arachnoidal villi … into the sagittal sinus"). The foramina and apertures between the
  *    ventricles are not steps she asks, so they are not steps here. `context` = on stage and tappable, but not a step. ── */
 export const TRACES = {
+  airway: [
+    { id:'tr-air', name:'A breath in', short:'Trace the air', ask:'from the back of the nose to the segments of the lung', open:1, xray:false, region:'awTree', az:0, el:5,
+      hint:'Pharynx → larynx → trachea → bronchial tree',
+      note:'Standard anatomical order — she has no ordering question on this in the Module 1 bank. The nasal cavity before it and the bronchioles and alveoli after it are not in the 3D source.',
+      steps:[
+        { it:'aw-nasoph',    region:'awUpper', az:90, el:0, q:'Air has come through the nasal cavity. Which part of the pharynx first?', say:'Nasopharynx (air only).' },
+        { it:'aw-oroph',     region:'awUpper', az:90, el:0, q:'Then?', say:'Oropharynx (shared with food).' },
+        { it:'aw-laryngoph', region:'awUpper', az:90, el:0, q:'Then?', say:'Laryngopharynx — where air and food part ways.' },
+        { it:'aw-larynx',    region:'awUpper', az:30, el:0, q:'Forward into which structure, which keeps the airway open?', say:'Larynx.' },
+        { it:'aw-trachea',   q:'Down which tube?', say:'Trachea, to the carina.' },
+        { it:'aw-rmain',     q:'Into a primary bronchus — tap the one an inhaled peanut usually takes.', say:'Primary (main) bronchus — the right is wider and more vertical.' },
+        { it:'aw-lobar',     q:'Which bronchi next — one to each lobe?', say:'Lobar (secondary) bronchi.' },
+        { it:'aw-segmental', q:'And then?', say:'Segmental (tertiary) bronchi → bronchioles → alveoli, where gas exchange happens.' },
+      ] },
+  ],
   heart: [
     { id:'tr-blood', name:'Blood through the heart', short:'Trace the blood', ask:'from the vena cava to the aorta', open:1, xray:false, region:'heart', az:20, el:5,
       hint:'Her thirteen-step sequence: right side → lungs → left side',
