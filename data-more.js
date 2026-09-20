@@ -152,11 +152,44 @@ export const BRAIN = [
   CN(11, 'XI', 'Accessory', 'sternocleidomastoid and trapezius.'), CN(12, 'XII', 'Hypoglossal', 'moves the tongue.'),
 ];
 
+/* ── Nerves: the big named peripheral nerves, inside a ghost skeleton. nerves.glb (358 KB) = the source's CURVE objects.
+ *    The PHRENIC nerve (cervical plexus → diaphragm) is the one her plexus question keys that the source does not model. ── */
+const NV = (id, name, region, az, extra) => ({ id:'nv-' + id, name, region, az, c:'#ffe27a', m:[name.toLowerCase()], ...extra });
+export const NERVES = [
+  NV('sciatic', 'Sciatic nerve', 'lower', 180, { her:1,
+    clue:{ t:'The nerve that could be damaged by an injection into the gluteus maximus.', hers:1 },
+    fact:'The major nerve of the SACRAL plexus and the thickest nerve in the body; down the back of the thigh, then splits into tibial and common fibular.' }),
+  NV('femoral', 'Femoral nerve', 'lower', 0, { her:1,
+    clue:{ t:'The major nerve of the lumbar plexus.', hers:1 },
+    fact:'Major nerve of the LUMBAR plexus. Front of the thigh — supplies the quadriceps.' }),
+  NV('ulnar', 'Ulnar nerve', 'upper', 160, { her:1,
+    clue:{ t:'The "funny bone" is really this nerve, running over the medial epicondyle of the humerus.', hers:1 },
+    fact:'Brachial plexus. Little-finger side of the arm; unprotected behind the medial epicondyle.' }),
+  { id:'nv-vagus', name:'Vagus nerve', sub:'CN X', her:1, region:'upper', az:25, c:'#ffe27a', m:[/^vagus nerve \(/],
+    clue:{ t:'Cranial nerve X — the cranial parasympathetic outflow to the heart, lungs and gut.', hers:1 },
+    fact:'"The wanderer": leaves the skull and runs down through the neck and chest to the abdomen. Parasympathetic (with III, VII, IX).' },
+  { id:'nv-brachial-plexus', name:'Brachial plexus', region:'upper', az:0, c:'#ffc857', m:[/brachial plexus$/],
+    fact:'Roots → trunks → divisions → cords, C5–T1, passing under the clavicle to the arm. Gives the median, ulnar, radial, axillary and musculocutaneous nerves.' },
+  NV('median', 'Median nerve', 'upper', 0, { fact:'Brachial plexus. Down the middle of the forearm, through the carpal tunnel.' }),
+  NV('radial', 'Radial nerve', 'upper', 180, { fact:'Brachial plexus. Spirals round the back of the humerus — extensors of the arm and forearm.' }),
+  NV('axillary', 'Axillary nerve', 'upper', 160, { fact:'Brachial plexus. Wraps the neck of the humerus to the deltoid — the nerve to keep clear of in a deltoid injection.' }),
+  NV('musculocutaneous', 'Musculocutaneous nerve', 'upper', 0, { fact:'Brachial plexus. Biceps brachii and brachialis.' }),
+  NV('tibial', 'Tibial nerve', 'lower', 180, { fact:'The larger branch of the sciatic nerve, down the back of the leg to the sole.' }),
+  NV('common-fibular', 'Common fibular nerve', 'lower', 150, { fact:'The smaller branch of the sciatic nerve; winds round the neck of the fibula.' }),
+  NV('obturator', 'Obturator nerve', 'lower', 0, { fact:'Lumbar plexus. Through the obturator foramen to the adductors of the thigh.' }),
+  NV('pudendal', 'Pudendal nerve', 'pelvis', 180, { fact:'Sacral plexus (S2–S4). The perineum.' }),
+  { id:'nv-intercostal', name:'Intercostal nerves', region:'trunk', az:30, c:'#ffe27a', m:['intercostal nerves'], fact:'Run under each rib — the thoracic spinal nerves; they do not form a plexus.' },
+];
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
 };
 
 export const MORE_SETS = {
+  nerves: [
+    { id:'her', name:'Her list', hint:'Sciatic · femoral · ulnar · vagus (the phrenic nerve is not in the 3D source)', f:i => i.her },
+    { id:'all', name:'Everything', hint:'All of it', f:() => true },
+  ],
   glands: [
     { id:'her', name:'Her list', hint:'The glands on her label-the-glands figure, and their hormones', f:i => i.her },
     { id:'all', name:'Everything', hint:'All of it', f:() => true },

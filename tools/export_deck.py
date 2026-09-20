@@ -15,6 +15,8 @@ DECKS = {
                           r'^(adenohypophysis|neurohypophysis|pineal gland)$'],
                    drop=[r'^spinal dura$', r'spinal cord', r'(spino|spinal|cortico|reticulo|vestibulo|tecto|rubro)[a-z]*(spinal|thalamic|cerebellar|tectal)? tract', r'tract$',
                          r'fasciculus', r'horn of spinal', r'funiculus', r'^cauda equina$', r'nucleus of accessory nerve']),
+    'nerves': dict(names=[r'^(sciatic|femoral|tibial|common fibular|obturator|pudendal|median|ulnar|radial|axillary|musculocutaneous) nerve$',
+                          r'^intercostal nerves$', r'brachial plexus$', r'^vagus nerve \(']),
     'willis': dict(names=[r'^(anterior|posterior) communicating artery$', r'^(anterior|middle|posterior) cerebral artery', r'^internal carotid artery$',
                           r'^vertebral artery$', r'^basilar artery$']),
 }

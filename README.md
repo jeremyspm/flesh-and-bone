@@ -94,3 +94,7 @@ Rendering: [three.js](https://threejs.org/) (MIT). A study aid, not a clinical r
 
 `docs/source/` lists every object in the Z-Anatomy source; note it is MESH objects only — the source also has 951 CURVE
 objects (nerves, vessels), all of which are already in the exported models (checked by name).
+- **Nerves** (added the same night) — `models/nerves.glb`, 358 KB: sciatic, femoral, tibial, common fibular, obturator, pudendal,
+  median, ulnar, radial, axillary, musculocutaneous, intercostal nerves, the brachial plexus and the vagus, in a ghost skeleton.
+  They are CURVE objects in the source; `tools/export_deck.py` exports curves as tubes. Her plexus question keys phrenic, femoral
+  and sciatic — **the phrenic nerve is the one the source does not model**, and the deck's hint says so.

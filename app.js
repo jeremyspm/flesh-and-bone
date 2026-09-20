@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
-import { GLANDS, BRAIN, PLACE, MORE_REGIONS, MORE_SETS } from './data-more.js';
+import { GLANDS, BRAIN, NERVES, PLACE, MORE_REGIONS, MORE_SETS } from './data-more.js';
 const REGIONS = { ...REGIONS0, ...MORE_REGIONS }, SETS = { ...SETS0, ...MORE_SETS };
 
 const $ = s => document.querySelector(s);
@@ -36,6 +36,7 @@ const DECK = {
   muscles:{ label:'Muscles', acc:'#ff7d68', ink:'#220804', items:MUSCLES, models:{ skeletal:'solid', muscular:'solid' }, bind:['muscular'], noun:'muscle' },
   glands: { label:'Glands',  acc:'#5fd4c0', ink:'#03211c', items:GLANDS,  models:{ skeletal:'ghost', glands:'solid', ovary:'solid' }, bind:['glands', 'ovary'], noun:'gland' },
   brain:  { label:'Brain',   acc:'#b9a2ff', ink:'#140b2e', items:BRAIN,   models:{ brain:'solid' }, bind:['brain'], noun:'part of the brain', home:'brain' },
+  nerves: { label:'Nerves',  acc:'#ffd95e', ink:'#231a02', items:NERVES,  models:{ skeletal:'ghost', nerves:'solid' }, bind:['nerves'], noun:'nerve' },
 };
 const ITEM = {};
 for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
@@ -107,6 +108,7 @@ const MODELS = {
   glands:  { kind:'organ',  noun:'gland',     note:'Placing the glands…' },
   ovary:   { kind:'organ',  noun:'gland',     note:'Placing the glands…', files:['hra-ovary-l', 'hra-ovary-r'], rename:{ VH_F_left_ovary:'Ovary.l', VH_F_right_ovary:'Ovary.r' } },
   brain:   { kind:'brain',  noun:'structure', note:'Opening the skull…' },
+  nerves:  { kind:'nerve',  noun:'nerve',     note:'Threading the nerves…' },
 };
 const HIDE_BRAIN = [/^falx cerebri$/, /^tentorium cerebelli$/, /root of spinal nerve$/, /^nerve to /, /^central canal/];      // the dura folds stand in front of the medial cut and the cerebellum
 
@@ -120,6 +122,7 @@ function colourFor(kind, base, matName) {
     if (matName === 'Teeth') return TOOTH_C.clone();
     return BONE_C.clone().offsetHSL(0, 0, (h - .5) * .05);
   }
+  if (kind === 'nerve') return new THREE.Color('#ffe27a').offsetHSL((h - .5) * .03, 0, (h - .5) * .08);
   if (kind === 'organ') return new THREE.Color('#c9a08f');                                     // an item's own colour (`c`) replaces this at bind time
   if (kind === 'brain') {                                                                       // the cortex is ONE colour on purpose: tinting by lobe would hand over the answer
     if (/^(midbrain|corpus callosum)$/.test(base)) return new THREE.Color(base === 'midbrain' ? '#d8c2a8' : '#ece5d6');   // the source files these two under "Frontal lobe"
