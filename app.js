@@ -155,6 +155,15 @@ function pointWorld(it, info) {
 
 function nLocal(info, pt) { const bb = info.mesh.geometry.boundingBox, p = info.mesh.worldToLocal(pt.clone()); return [(p.x - bb.min.x) / (bb.max.x - bb.min.x), (p.y - bb.min.y) / (bb.max.y - bb.min.y), (p.z - bb.min.z) / (bb.max.z - bb.min.z)]; }
 
+/* Sphere landmarks on one bone overlap (head / neck / greater trochanter sit within 3 cm of each other), so a
+ * tap belongs to ONE of them: the sphere it is deepest inside, measured in units of that sphere's own radius.
+ * Without this a tap on the neck was accepted as "greater trochanter" (caught 20 Sep by measuring the overlaps). */
+function nearestSphere(info, pt, slack = 1) {
+  let best = null;
+  for (const it of POINTS(info.base)) { if (it.zone) continue; const k = pt.distanceTo(pointWorld(it, info)) / it.r; if (k <= slack && (!best || k < best.k)) best = { it, k }; }
+  return best && best.it;
+}
+
 /* What did they just touch? — the most specific thing we can honestly say. */
 function describe(info, pt) {
   let lm = null; const pts = pt ? POINTS(info.base) : [];
@@ -162,7 +171,7 @@ function describe(info, pt) {
     const n = nLocal(info, pt), neutral = NEUTRAL[info.base] && NEUTRAL[info.base](n);
     if (neutral) return { ...neutral, neutral:true, item:null, her:false };
     for (const it of pts.filter(i => i.zone).sort((a, b) => (b.prio || 0) - (a.prio || 0))) if (it.zone(n)) { lm = { it, d:0 }; break; }
-    if (!lm) for (const it of pts.filter(i => !i.zone)) { const d = pt.distanceTo(pointWorld(it, info)); if (d <= it.r * 1.3 && (!lm || d < lm.d)) lm = { it, d }; }
+    if (!lm) { const s = nearestSphere(info, pt, 1.3); if (s) lm = { it:s, d:0 }; }
   }
   const own = info.items.filter(i => i.bases.size === 1)[0];
   const grp = info.items.filter(i => i.bases.size > 1).sort((a, b) => a.bases.size - b.bases.size)[0];
@@ -172,7 +181,7 @@ function describe(info, pt) {
 }
 function isCorrect(it, hit) {
   const info = hit.object.userData.info;
-  if (it.on) { if (info.base !== it.on) return false; if (it.zone) { const n = nLocal(info, hit.point); return !(NEUTRAL[info.base] && NEUTRAL[info.base](n)) && it.zone(n); } return hit.point.distanceTo(pointWorld(it, info)) <= it.r; }
+  if (it.on) { if (info.base !== it.on) return false; if (it.zone) { const n = nLocal(info, hit.point); return !(NEUTRAL[info.base] && NEUTRAL[info.base](n)) && it.zone(n); } return nearestSphere(info, hit.point) === it; }
   if (it.infos.includes(info)) return true;
   return (it.accept || []).some(id => ITEM[id].infos && ITEM[id].infos.includes(info));
 }
@@ -264,8 +273,9 @@ const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
 function cast(x, y) { const r = canvas.getBoundingClientRect(); ndc.set(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, camera); return ray.intersectObjects(pickables, false).find(h => { const i = h.object.userData.info; return !(i.clipX && Math.abs(h.point.x) < i.clipX); }) || null; }
 function pickAt(x, y, wantItem) {
   let hit = cast(x, y);
-  const poolHit = h => h && h.object.userData.info.items.some(i => G.round && G.round.poolIds.has(i.id));
-  if (wantItem && !(hit && isCorrect(wantItem, hit)) && !poolHit(hit)) {       // fat-finger forgiveness, never at a neighbour's expense
+  const named = h => { if (!h) return false; const i = h.object.userData.info, d = describe(i, h.point);      // did the finger land ON something with a name of its own?
+    if (d.neutral || !d.item) return false; return !(wantItem.on && !d.item.on && i.base === wantItem.on); };  // (the bare shaft of the bone a landmark sits on does not count as a rival)
+  if (wantItem && !(hit && isCorrect(wantItem, hit)) && !named(hit)) {          // fat-finger forgiveness — only for a tap on nothing (or on unnamed context), never at a neighbour's expense: a tap on the neck is not "close enough" to the trochanter
     for (let k = 0; k < 8; k++) { const h = cast(x + Math.cos(k * Math.PI / 4) * 13, y + Math.sin(k * Math.PI / 4) * 13); if (h && isCorrect(wantItem, h)) return h; }
   }
   if (!hit) for (let k = 0; k < 8 && !hit; k++) hit = cast(x + Math.cos(k * Math.PI / 4) * 10, y + Math.sin(k * Math.PI / 4) * 10);

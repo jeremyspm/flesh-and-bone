@@ -29,7 +29,7 @@ export const BONES = [
   // ── skull & neck ──
   { id:'cranium', name:'Cranium', common:'Skull (braincase)', her:1, region:'head', az:25,
     m:[/^(frontal|parietal|occipital|temporal|sphenoid|ethmoid) bone$/],
-    fact:'The braincase: frontal, parietal, temporal, occipital, sphenoid, ethmoid. Flat bones, axial skeleton.' },
+    fact:'The braincase: frontal, parietal, temporal, occipital, sphenoid, ethmoid. Her quiz: the skull is made of flat bones; it is axial skeleton.' },
   { id:'mandible', name:'Mandible', common:'Lower jaw', her:1, region:'head', az:25,
     m:['mandible', /^lower (canine|lateral incisor|medial incisor|first|second)/],
     fact:'Lower jaw — the only skull bone that moves freely.' },
@@ -161,7 +161,8 @@ export const BONES = [
     fact:'The curved top edge of the ilium — what your hands rest on at your hips.' },
   { id:'femur-head', name:'Head of femur', her:1, on:'femur', p:[0.544,0.945,0.696], r:0.027, region:'femur', az:0,
     fact:'The ball that fits the hip socket (acetabulum) — a ball-and-socket joint.' },
-  { id:'femur-neck', name:'Neck of femur', her:1, on:'femur', p:[0.311,0.935,0.629], r:0.016, region:'femur', az:0,
+  // neck = the waist of the head→trochanter axis: slices perpendicular to it are roundest and narrowest (r 16.8 mm) 20–24 mm from the head centre
+  { id:'femur-neck', name:'Neck of femur', her:1, on:'femur', p:[0.405,0.909,0.667], r:0.021, region:'femur', az:0,
     fact:'The narrowed part below the head — where a "broken hip" usually breaks.' },
   { id:'greater-trochanter', name:'Greater trochanter', her:1, on:'femur', p:[0.135,0.911,0.58], r:0.03, region:'femur', az:0,
     fact:'The big lateral bump at the top of the femur. A trochanter is a very large process for muscle attachment — only the femur has them.' },
@@ -333,7 +334,7 @@ export const REGIONS = {
 
 export const SETS = {
   bones: [
-    { id:'her',       name:'Her list',      hint:'Every bone her Module 2 quizzes key', f:i => i.her && !i.on },
+    { id:'her',       name:'Her list',      hint:'Every bone her Module 2 quizzes key', f:i => i.her && (!i.on || /^(ilium|ischium|pubis)$/.test(i.id)) },   // her 22-label figure asks ilium, ischium and pubis by name
     { id:'landmarks', name:'Femur & hip',   hint:'Ilium · ischium · pubis · trochanters · condyles', f:i => !!i.on },
     { id:'axial',     name:'Skull & spine', hint:'Cranial bones, vertebrae, sternum parts', f:i => !i.on && /^(cranium|mandible|maxilla|hyoid|frontal|parietal|temporal|occipital|zygomatic|nasal|cervical|thoracic|lumbar|sacrum|coccyx|atlas|axis|manubrium|xiphoid|true-ribs|false-ribs|floating-ribs)$/.test(i.id) },
     { id:'all',       name:'Everything',    hint:'All of it', f:() => true },

@@ -8,8 +8,7 @@ A 3D bone and muscle trainer. One real body you can turn and zoom; three modes.
   spinae, vastus intermedius, rotator cuff) are asked here only, with the body x-rayed around them.
 - **Explore** — no questions. Tap anything; landmarks on the femur and hip bone are live too.
 
-Built 20 Sep 2026, five days before HS2 Test 2, because the only anatomy games on the web are
-Flash-era. No build step, no account, no network at runtime: open `index.html` from any static host.
+Built September 2026 because the only anatomy games on the web are Flash-era. No build step, no account, no network at runtime: open `index.html` from any static host.
 
 ## "Her list"
 
