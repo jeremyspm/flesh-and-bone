@@ -183,7 +183,7 @@ objects (nerves, vessels), all of which are already in the exported models (chec
 
 ## Added 21 Sep: Heart (Module 1) - real heart, glass chambers, a built conduction system, two traces
 
-- `models/heart.glb` (604 KB, `tools/export_deck.py heart`): four chambers, valve leaflets, papillary muscles, the aorta and its arch
+- `models/heart.glb` (832 KB, `tools/export_deck.py heart`): four chambers, valve leaflets, papillary muscles, the aorta and its arch
   branches, pulmonary trunk/arteries/veins, venae cavae, jugular/subclavian/brachiocephalic veins, coronaries + coronary sinus, and
   the lung lobes as context. "Her list" = the heart keys of the 363-question Module 1 bank, read by hand (see the header in data-more.js).
 - **Glass chambers** (`openable` + `setOpen`): when what is asked lies INSIDE (a valve, the papillary muscles: `open:1`) the four
@@ -204,7 +204,7 @@ comment added mid-line ate the rest of the line and the app would not boot). Use
 
 ## Added 21 Sep: Airway (Module 1)
 
-- `models/airway.glb` (832 KB): the respiratory model + pharynx, soft palate, uvula, epiglottis, tongue (from digestive), thyroid and
+- `models/airway.glb` (604 KB): the respiratory model + pharynx, soft palate, uvula, epiglottis, tongue (from digestive), thyroid and
   cricoid cartilage + hyoid (skeletal) and the diaphragm (muscular), in a ghost skeleton. Her figure keys are the list: larynx,
   oropharynx, palate, trachea, right/left primary bronchus, middle lobe of right lung, left lung, diaphragm, and the carina
   (a measured point: the centroid of the trachea mesh's lowest 3 % of vertices). **Nostril, nasal cavity, bronchioles and alveoli are

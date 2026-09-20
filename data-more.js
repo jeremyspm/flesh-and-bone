@@ -321,7 +321,7 @@ export const TISSUES = [
   TS('myofibrils', 'muscle', 'Myofibrils', 'tsFibre', 0, 15, ['myofibrils'], { fact:'The contractile threads inside the fibre, made of sarcomeres (actin + myosin) end to end.' }),
 ];
 
-/* ── Heart (Module 1): heart.glb (604 KB) cut from the source's cardiovascular model. "Her list" = the keys of the 363-question
+/* ── Heart (Module 1): heart.glb (832 KB) cut from the source's cardiovascular model. "Her list" = the keys of the 363-question
  *    M1 bank, read by hand: her four valve labels (pulmonary semilunar, tricuspid, aortic semilunar, mitral), her numbered-diagram
  *    matches (aortic arch, left ventricle, right atrium, aorta, pulmonary artery, left pulmonary vein, SVC, IVC, brachiocephalic
  *    artery, left common carotid, pulmonary veins, papillary muscle), her MCQ keys (right subclavian; jugular → subclavian vein) and
@@ -386,7 +386,7 @@ export const HEART = [
   HT('lungs', 'context', 'Lungs', 10, 5, [/lobe of (left|right) lung$/], { region:'heartAll', fact:'Where the pulmonary circulation drops its carbon dioxide and picks up oxygen. (Drawn as glass here: a tap passes through unless the lungs are what was asked.)' }),
 ];
 
-/* ── Airway (Module 1): airway.glb (832 KB) = the source's respiratory model + pharynx, palate, epiglottis, tongue (digestive),
+/* ── Airway (Module 1): airway.glb (604 KB) = the source's respiratory model + pharynx, palate, epiglottis, tongue (digestive),
  *    larynx cartilages + hyoid (skeletal), diaphragm (muscular). Her figure keys: Nostril · Nasal cavity · Larynx · Oropharynx ·
  *    Right primary bronchus · Middle lobe of right lung · Palate · Trachea · Left primary bronchus · Left lung · Diaphragm, and
  *    "Location of Carina". Nostril and nasal cavity are spaces the source does not model; alveoli and bronchioles likewise. ── */
