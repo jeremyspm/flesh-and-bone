@@ -175,8 +175,8 @@ export const BRAIN = [
 
   // ── the twelve cranial nerves (her ANS question keys III, VII, IX and X as the cranial parasympathetic outflow) ──
   CN(1, 'I', 'Olfactory', 'smell.'), CN(2, 'II', 'Optic', 'vision.'), CN(3, 'III', 'Oculomotor', 'most eye movements; pupil constriction (parasympathetic).'),
-  CN(4, 'IV', 'Trochlear', 'one eye muscle (superior oblique).'), CN(5, 'V', 'Trigeminal', 'sensation of the face; chewing.'), CN(6, 'VI', 'Abducens', 'turns the eye outward.'),
-  CN(7, 'VII', 'Facial', 'facial expression, taste; tears and saliva (parasympathetic).'), CN(8, 'VIII', 'Vestibulocochlear', 'hearing and balance.'),
+  CN(4, 'IV', 'Trochlear', 'one eye muscle (superior oblique).'), { ...CN(5, 'V', 'Trigeminal', 'sensation of the face; chewing.'), clue:{ t:'Numbness in lips, jaw, tongue and cheek after a tooth extraction is the effect on this nerve.', hers:1 } }, CN(6, 'VI', 'Abducens', 'turns the eye outward.'),
+  { ...CN(7, 'VII', 'Facial', 'facial expression, taste; tears and saliva (parasympathetic).'), clue:{ t:'Bell\'s palsy is linked to this nerve.', hers:1 } }, CN(8, 'VIII', 'Vestibulocochlear', 'hearing and balance.'),
   CN(9, 'IX', 'Glossopharyngeal', 'swallowing, taste; parotid saliva (parasympathetic).'), CN(10, 'X', 'Vagus', 'the wanderer — parasympathetic supply to heart, lungs and gut.'),
   CN(11, 'XI', 'Accessory', 'sternocleidomastoid and trapezius.'), CN(12, 'XII', 'Hypoglossal', 'moves the tongue.'),
 ];
@@ -202,12 +202,12 @@ export const NERVES = [
     fact:'"The wanderer": leaves the skull and runs down through the neck and chest to the abdomen. Parasympathetic (with III, VII, IX).' },
   { id:'nv-brachial-plexus', name:'Brachial plexus', region:'upper', az:0, c:'#ffc857', m:[/brachial plexus$/],
     fact:'Roots → trunks → divisions → cords, C5–T1, passing under the clavicle to the arm. Gives the median, ulnar, radial, axillary and musculocutaneous nerves.' },
-  NV('median', 'Median nerve', 'upper', 0, { fact:'Brachial plexus. Down the middle of the forearm, through the carpal tunnel.' }),
-  NV('radial', 'Radial nerve', 'upper', 180, { fact:'Brachial plexus. Spirals round the back of the humerus — extensors of the arm and forearm.' }),
+  NV('median', 'Median nerve', 'upper', 0, { her:1, clue:{ t:'Carpal tunnel syndrome is linked to pressure on this nerve.', hers:1 }, fact:'Brachial plexus (C5–T1). Her table: ulnar = medial, MEDIAN = in the middle, radial = lateral. Down the middle of the forearm, through the carpal tunnel.' }),
+  NV('radial', 'Radial nerve', 'upper', 180, { her:1, clue:{ t:'Wrist drop is an indication of damage to this nerve.', hers:1 }, fact:'Brachial plexus (C5–T1) — the LATERAL one of her three. Spirals round the back of the humerus — extensors of the arm and forearm.' }),
   NV('axillary', 'Axillary nerve', 'upper', 160, { fact:'Brachial plexus. Wraps the neck of the humerus to the deltoid — the nerve to keep clear of in a deltoid injection.' }),
   NV('musculocutaneous', 'Musculocutaneous nerve', 'upper', 0, { fact:'Brachial plexus. Biceps brachii and brachialis.' }),
   NV('tibial', 'Tibial nerve', 'lower', 180, { fact:'The larger branch of the sciatic nerve, down the back of the leg to the sole.' }),
-  NV('common-fibular', 'Common fibular nerve', 'lower', 150, { fact:'The smaller branch of the sciatic nerve; winds round the neck of the fibula.' }),
+  NV('common-fibular', 'Common fibular nerve', 'lower', 150, { her:1, alt:'Peroneal nerve — HER name for it', clue:{ t:'This nerve branch of the sciatic nerve is affected in foot drop.', hers:1 }, fact:'The smaller branch of the sciatic nerve; winds round the neck of the fibula.' }),
   NV('obturator', 'Obturator nerve', 'lower', 0, { fact:'Lumbar plexus. Through the obturator foramen to the adductors of the thigh.' }),
   NV('pudendal', 'Pudendal nerve', 'pelvis', 180, { fact:'Sacral plexus (S2–S4). The perineum.' }),
   { id:'nv-intercostal', name:'Intercostal nerves', region:'trunk', az:30, c:'#ffe27a', m:['intercostal nerves'], fact:'Run under each rib — the thoracic spinal nerves; they do not form a plexus.' },
@@ -680,6 +680,28 @@ REPRO.push(
   RX('albicans', 'ovarysec', 'female', 'Corpus albicans', 'rpOvary', ['corpus albicans'], null, 'The white scar a corpus luteum leaves behind.', { her:0 }),
 );
 
+/* ── Her PERIPHERAL NERVOUS SYSTEM quiz (Module 2.2, graded keys read 21 Sep 2026): two figures no whole-body model shows (made-pns.js). ── */
+const PN = (id, kind, name, region, m, clue, fact, extra) => ({ id:'pn-' + id, kind, name, her:1, region, az:0, el:0, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+NERVES.push(
+  PN('canal', 'cord', 'Central canal', 'pnCord', ['central canal'], 'In the middle of the grey matter, with CSF.', 'Her label figure keys it as number 1. It is continuous with the fourth ventricle.'),
+  PN('dhorn', 'cord', 'Dorsal horn', 'pnCord', ['dorsal horn'], null, 'The posterior limb of the grey-matter butterfly: SENSORY fibres come in here and synapse on interneurons. Her label figure keys it.'),
+  PN('vhorn', 'cord', 'Ventral horn', 'pnCord', ['ventral horn'], 'The portion of the spinal cord that controls muscle movement.', 'The anterior limb: the cell bodies of the MOTOR neurons (lower motor neurons) sit here.'),
+  PN('droot', 'cord', 'Dorsal root', 'pnCord', ['dorsal root', 'dorsal root ganglion'], 'The SENSORY nerve of her spinal cord figure.', 'Carries impulses IN. The swelling on it is the dorsal root ganglion: the cell bodies of the sensory neurons.', { sub:'sensory' }),
+  PN('drg', 'cord', 'Dorsal root ganglion', 'pnCord', ['dorsal root ganglion'], null, 'The cell bodies of the sensory (unipolar) neurons — outside the cord. Only the dorsal root has one.', { her:0 }),
+  PN('vroot', 'cord', 'Ventral root', 'pnCord', ['ventral root'], 'The MOTOR nerve of her spinal cord figure.', 'Carries impulses OUT to the effector. Her key: "Ventral root - motor".', { sub:'motor' }),
+  PN('spinal', 'cord', 'Spinal nerve', 'pnCord', ['spinal nerve'], 'The MIXED nerve of her spinal cord figure.', 'Where the dorsal and ventral roots join: sensory and motor fibres together. 31 pairs; all spinal nerves are mixed.', { sub:'mixed' }),
+  PN('receptor', 'arc', 'Receptor', 'pnCord', ['receptor'], 'The first component of a reflex arc. For pain it is a nociceptor.', 'Her table: mechano-, chemo-, photo-, thermo- and nociceptors. Drawn here as a patch of skin.'),
+  PN('sensory', 'arc', 'Sensory neuron', 'pnCord', ['sensory neuron'], null, 'Afferent: from the receptor, in through the DORSAL root (cell body in the ganglion), into the dorsal horn.'),
+  PN('inter', 'arc', 'Interneuron', 'pnCord', ['interneuron'], null, 'Inside the grey matter, between the sensory and the motor neuron. The integration centre of the reflex — the brain is not involved.'),
+  PN('motor', 'arc', 'Motor neuron', 'pnCord', ['motor neuron'], null, 'Efferent: cell body in the VENTRAL horn, out through the ventral root to the effector. A lower motor neuron; it releases acetylcholine.'),
+  PN('effector', 'arc', 'Effector', 'pnCord', ['effector'], 'The last component of a reflex arc.', 'Somatic reflex: a skeletal muscle. Autonomic reflex: smooth or cardiac muscle, or a gland.'),
+  PN('endo', 'nervecut', 'Endoneurium', 'pnNerve', ['endoneurium'], 'Surrounds each nerve fibre (axon), outside its myelin.', 'Endo = within. The same three-wrapping plan as a muscle: endomysium, perimysium, epimysium.'),
+  PN('peri', 'nervecut', 'Perineurium', 'pnNerve', ['perineurium'], 'Surrounds each fascicle — a bundle of nerve fibres.', 'Peri = around.'),
+  PN('epi', 'nervecut', 'Epineurium', 'pnNerve', ['epineurium'], 'Surrounds the nerve as a whole.', 'Epi = upon. It also carries the blood vessels of the nerve.'),
+  PN('fascicle', 'nervecut', 'Fascicle', 'pnNerve', ['fascicle'], null, 'A bundle of nerve fibres inside its perineurium.', { her:0 }),
+  PN('fibre', 'nervecut', 'Nerve fibre', 'pnNerve', ['nerve fibre', 'myelin sheath of the nerve fibre'], null, 'An axon (with its myelin, if myelinated). A NERVE is many fibres bundled; a nerve FIBRE is one axon — her question is the difference.', { alt:'axon', her:0 }),
+);
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -709,6 +731,8 @@ export const MORE_REGIONS = {
   earMid:   { model:'ear', m:['tympanic membrane', 'malleus', 'incus', 'stapes', 'oval window'], pad:1.5, min:0.05 },
   earIn:    { model:'ear', m:['vestibule', 'cochlea', 'semicircular canals', 'vestibulocochlear nerve'], pad:1.12, min:0.05 },
   rpFemale: { model:'female', m:[/./], pad:1.25, min:0.05 },
+  pnCord:   { model:'cord', m:[/./], pad:1.1, min:0.05 },
+  pnNerve:  { model:'nervecut', m:[/./], pad:1.15, min:0.05 },
   rpSperm:  { model:'sperm', m:[/./], pad:1.12, min:0.05 },
   rpTubule: { model:'tubule', m:[/./], pad:1.12, min:0.05 },
   rpOvary:  { model:'ovarysec', m:[/./], pad:1.15, min:0.05 },
@@ -790,7 +814,9 @@ export const MORE_SETS = {
     { id:'all', name:'Everything', hint:'Adds the middle cerebral artery', f:() => true },
   ],
   nerves: [
-    { id:'her', name:'Her list', hint:'Her plexus question: phrenic (cervical) · femoral (lumbar) · sciatic (sacral) — plus ulnar and vagus', f:i => i.her },
+    { id:'her', name:'Her list', hint:'Her plexus table: cervical C1–C4 → phrenic · brachial C5–T1 → ulnar, median, radial · lumbar L1–L4 → femoral · sacral L5–S4 → sciatic', f:i => i.her && !i.kind },
+    { id:'cord', name:'Spinal cord & reflex arc', hint:'Her label figure: sensory in by the DORSAL root, motor out by the VENTRAL root, mixed in the spinal nerve', f:i => i.kind === 'cord' || i.kind === 'arc' },
+    { id:'nervecut', name:'Inside a nerve', hint:'Endo- round a fibre · peri- round a fascicle · epi- round the whole nerve', f:i => i.kind === 'nervecut' },
     { id:'all', name:'Everything', hint:'All of it', f:() => true },
   ],
   glands: [
@@ -813,6 +839,18 @@ export const MORE_SETS = {
  *    keys "choroid plexuses; arachnoidal villi … into the sagittal sinus"). The foramina and apertures between the
  *    ventricles are not steps she asks, so they are not steps here. `context` = on stage and tappable, but not a step. ── */
 export const TRACES = {
+  nerves: [
+    { id:'tr-reflex', name:'The reflex arc', short:'Trace the reflex', ask:'from the stimulus to the response', xray:false, region:'pnCord', az:0, el:0,
+      hint:'Her five components, in order — the brain is not in it',
+      note:'A withdrawal reflex drawn over a cross-section of the spinal cord. Schematic, not to scale.',
+      steps:[
+        { it:'pn-receptor', q:'A pin pricks the skin. What detects it?', say:'The RECEPTOR — for pain, a nociceptor.' },
+        { it:'pn-sensory',  q:'What carries the impulse to the spinal cord?', say:'The SENSORY neuron, in through the dorsal root (its cell body is in the dorsal root ganglion).' },
+        { it:'pn-inter',    q:'What does it synapse with inside the grey matter?', say:'An INTERNEURON — the integration centre. No conscious thought is involved.' },
+        { it:'pn-motor',    q:'What carries the impulse back out?', say:'The MOTOR neuron, from the ventral horn out through the ventral root.' },
+        { it:'pn-effector', q:'And what responds?', say:'The EFFECTOR: here a skeletal muscle pulls the hand away — a somatic reflex.' },
+      ] },
+  ],
   repro: [
     { id:'tr-sperm', name:'The sperm\'s path', short:'Trace the sperm', ask:'from where it is made to the outside', sex:'male', xray:false, region:'rpMale', az:100, el:0,
       hint:'Her duct sequence: testis → epididymis → vas deferens → ejaculatory duct → urethra',

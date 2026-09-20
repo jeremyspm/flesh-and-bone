@@ -17,6 +17,7 @@ import { buildEar } from './made-ear.js';
 import { buildVessels, buildHeartWall, buildUterusWall, buildECG, buildSpirogram } from './made-figures.js';
 import { buildLongBone, buildAdrenal, buildAirwayWall, buildCochlea, buildRetina } from './made-sections.js';
 import { buildSperm, buildTubule, buildOvarySection } from './made-repro.js';
+import { buildSpinalCord, buildNerveSection } from './made-pns.js';
 const REGIONS = { ...REGIONS0, ...MORE_REGIONS }, SETS = { ...SETS0, ...MORE_SETS };
 
 const $ = s => document.querySelector(s);
@@ -50,7 +51,7 @@ const DECK = {
     only:{ muscular:[/head of gastrocnemius$/, 'soleus muscle', 'calcaneal tendon', /head of biceps brachii$/, 'brachialis muscle', 'sternocleidomastoid muscle', 'descending part of trapezius muscle', 'splenius capitis muscle'] } },
   glands: { label:'Glands',  acc:'#5fd4c0', ink:'#03211c', items:GLANDS,  models:{ skeletal:'ghost', glands:'solid', ovary:'solid', adrenalcut:'solid' }, bind:['glands', 'ovary', 'adrenalcut'], noun:'gland' },
   brain:  { label:'Brain',   acc:'#b9a2ff', ink:'#140b2e', items:BRAIN,   models:{ brain:'solid' }, bind:['brain'], noun:'part of the brain', home:'brain', frame:{ pad:1.3, min:.13 } },      // a 34 cm frame (right for a body) left the brain 75 px wide on a phone
-  nerves: { label:'Nerves',  acc:'#ffd95e', ink:'#231a02', items:NERVES,  models:{ skeletal:'ghost', nerves:'solid' }, bind:['nerves'], noun:'nerve' },
+  nerves: { label:'Nerves',  acc:'#ffd95e', ink:'#231a02', items:NERVES,  models:{ skeletal:'ghost', nerves:'solid', cord:'solid', nervecut:'solid' }, bind:['nerves', 'cord', 'nervecut'], noun:'nerve' },
   willis: { label:'Circle of Willis', acc:'#7fe3ff', ink:'#03222b', items:WILLIS, models:{ brain:'ghost', willis:'solid' }, bind:['willis'], noun:'artery', home:'brain', view:[12, -52], frame:{ pad:1.45, min:.08 } },   // under a ghost brain, seen from below: it is on the VENTRAL side. The accent is ice blue because a red glow on a red artery cannot be seen
   neuron: { label:'Neuron',  acc:'#ff8fd6', ink:'#2b0620', items:NEURON,  models:{ neuron:'solid', glia:'solid' }, bind:['neuron', 'glia'], noun:'part', home:'neuron', view:[0, 4], frame:{ pad:1.5, min:.09 }, schematic:'schematic · not to scale' },   // BUILT, not loaded: made-neuron.js
   tissues:{ label:'Tissues', acc:'#9be38a', ink:'#0c2407', items:TISSUES, models:{ tissues:'solid', walls:'solid', longbone:'solid' }, bind:['tissues', 'walls', 'longbone'], noun:'part', home:'tissues', view:[0, 12], frame:{ pad:1.5, min:.06 }, schematic:'schematic · not to scale' },   // three of her figures, built: made-tissues.js
@@ -159,6 +160,8 @@ const MODELS = {
   awwall:  { kind:'cell',   noun:'part',      note:'Filling the lungs…', make:buildAirwayWall },
   cochlea: { kind:'cell',   noun:'part',      note:'Building the ear…', make:buildCochlea },
   retina:  { kind:'cell',   noun:'part',      note:'Building the eye…', make:buildRetina },
+  cord:    { kind:'cell',   noun:'part',      note:'Threading the nerves…', make:buildSpinalCord },
+  nervecut:{ kind:'cell',   noun:'part',      note:'Threading the nerves…', make:buildNerveSection },
   sperm:   { kind:'cell',   noun:'part',      note:'Placing the organs…', make:buildSperm },
   tubule:  { kind:'cell',   noun:'cell',      note:'Placing the organs…', make:buildTubule },
   ovarysec:{ kind:'cell',   noun:'part',      note:'Placing the organs…', make:buildOvarySection },

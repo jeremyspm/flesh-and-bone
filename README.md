@@ -350,3 +350,11 @@ against the trainer's items (196 terms; misses read by hand). Most misses are pr
 | "ear canal", "auditory nerve" | accepted as alternative names |
 
 Still absent because no source has them: vagina (keyed twice), uterine ligaments. 452 items, 0 unbound; real tapped rounds on each new set at 375×812.
+
+## Her Peripheral Nervous System quiz → the Nerves deck (21 Sep 2026)
+
+MODULE 2.2: PNS (quiz 213444) was never in the Test 2 sim or here: all 12 questions new. Its two label figures are built (`made-pns.js`):
+the **spinal cord in cross-section** (central canal · dorsal horn · ventral horn · dorsal root = sensory, with its ganglion · ventral root = motor · spinal nerve = mixed) with a
+**reflex arc** over it, which is also a Trace-it pathway (`tr-reflex`: receptor → sensory neuron → interneuron → motor neuron → effector — her essay asks for the components in order);
+and a **nerve cut across** (endoneurium · perineurium · epineurium). Her nerve–condition match became clues on real nerves: radial (wrist drop), median (carpal tunnel),
+common fibular = her "peroneal nerve" (foot drop), trigeminal (tooth extraction), facial (Bell's palsy). 469 items, 0 unbound.
