@@ -308,3 +308,10 @@ section, now fixed:
   an empty box. This was live and could have hit him on a phone.
 - `men:1` on items vs `men:true` on meshes: the named-stage switch compared with `===`, so meninges and conduction parts stayed
   hidden when asked. Normalised.
+
+**Clue provenance check (21 Sep).** All 170 clues marked `hers:1` were scored by script for word overlap against the best-matching
+question in her M1 + M2 banks or slide of her M3 revision deck: 130 at >= 0.8, 26 between 0.6 and 0.8, 14 below 0.6. Every one under
+0.7 was then read against the bank by hand. All trace to a real question of hers (the two lowest, axial / appendicular, are
+her true/false pair "The clavicle is part of the axial skeleton - False" and "The skull and mandible are part of the appendicular
+skeleton - False"; low overlap only because the clue states the answer rather than the statement). One clue of mine was looser
+than her wording and was replaced by her own MCQ stem (tunica media = "most critical in regulating systemic blood pressure").
