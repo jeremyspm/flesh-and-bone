@@ -6,12 +6,14 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
-import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
+import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, SENSES, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
 import { buildMeninges } from './made.js';
 import { buildNeuron } from './made-neuron.js';
 import { buildTissues } from './made-tissues.js';
 import { buildGlia } from './made-glia.js';
 import { buildConduction } from './made-heart.js';
+import { buildEye } from './made-eye.js';
+import { buildEar } from './made-ear.js';
 const REGIONS = { ...REGIONS0, ...MORE_REGIONS }, SETS = { ...SETS0, ...MORE_SETS };
 
 const $ = s => document.querySelector(s);
@@ -48,6 +50,7 @@ const DECK = {
   tissues:{ label:'Tissues', acc:'#9be38a', ink:'#0c2407', items:TISSUES, models:{ tissues:'solid' }, bind:['tissues'], noun:'part', home:'tissues', view:[0, 12], frame:{ pad:1.5, min:.06 }, schematic:'schematic · not to scale' },   // three of her figures, built: made-tissues.js
   heart:  { label:'Heart',   acc:'#fff0b3', ink:'#2a2205', items:HEART,   models:{ heart:'solid' }, bind:['heart'], noun:'structure', home:'heart', view:[15, 4], frame:{ pad:1.45, min:.09 }, extra:'Conduction system' },   // Module 1. Chambers turn to glass when what is asked is inside them
   airway: { label:'Airway',  acc:'#a9c4ff', ink:'#0a1230', items:AIRWAY,  models:{ skeletal:'ghost', airway:'solid' }, bind:['airway'], noun:'structure', openLabel:'Glass lungs', home:'airway', view:[15, 4], frame:{ pad:1.4, min:.1 } },   // Module 1. The lobes turn to glass when a bronchus is asked
+  senses: { label:'Eye & Ear', acc:'#ffc46b', ink:'#2a1a02', items:SENSES,  models:{ eye:'solid', ear:'solid' }, bind:['eye', 'ear'], noun:'part', home:'eye', view:[38, 22], frame:{ pad:1.35, min:.05 }, schematic:'schematic · not to scale' },   // Module 3. Both BUILT: made-eye.js, made-ear.js
 };
 const ITEM = {};
 for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
@@ -78,7 +81,8 @@ const rim = new THREE.DirectionalLight(0xffffff, 1.1); rim.position.set(0, 1.2, 
 
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true; controls.dampingFactor = 0.09;
-controls.minDistance = 0.12; controls.maxDistance = 16;      // a phone's home sheet leaves ~250px of stage: the whole body needs ~11 m controls.zoomSpeed = 0.9; controls.rotateSpeed = 0.85; controls.panSpeed = 0.8;
+controls.minDistance = 0.12; controls.maxDistance = 16;      // a phone's home sheet leaves ~250px of stage: the whole body needs ~11 m
+controls.zoomSpeed = 0.9; controls.rotateSpeed = 0.85; controls.panSpeed = 0.8;      // (these three sat behind the comment above, switched off, from v1 until 21 Sep)
 controls.touches = { ONE:THREE.TOUCH.ROTATE, TWO:THREE.TOUCH.DOLLY_PAN };
 controls.target.set(0, 0.9, 0);
 controls.autoRotateSpeed = 0.9;
@@ -125,6 +129,8 @@ const MODELS = {
   tissues: { kind:'cell',   noun:'part',      note:'Building the tissues…', make:buildTissues },
   heart:   { kind:'heart',  noun:'structure', note:'Opening the chest…' },
   airway:  { kind:'airway', noun:'structure', note:'Filling the lungs…' },
+  eye:     { kind:'cell',   noun:'part',      note:'Building the eye…', make:buildEye },
+  ear:     { kind:'cell',   noun:'part',      note:'Building the ear…', make:buildEar },
   glia:    { kind:'cell',   noun:'cell',      note:'Growing a neuron…', make:buildGlia },
 };
 const HIDE_BRAIN = [/^falx cerebri$/, /^tentorium cerebelli$/, /root of spinal nerve$/, /^nerve to /, /^central canal/];      // the dura folds stand in front of the medial cut and the cerebellum
@@ -209,7 +215,7 @@ function addLines(root, p) { const o = new THREE.LineSegments(new THREE.BufferGe
 function register(root, model, kind, part, extra) {
   const colour = new THREE.Color(part.colour), mesh = new THREE.Mesh(part.geometry, new THREE.MeshStandardMaterial({ color:colour, roughness:.55, metalness:0, emissive:0x000000, side:THREE.DoubleSide }));
   mesh.geometry.computeBoundingBox(); root.add(mesh); mesh.updateMatrixWorld(true);
-  const info = { mesh, base:part.name.toLowerCase(), side:'', mat:'Schematic', model, kind, colour:colour.clone(), clipX:0, pretty:part.name, box:new THREE.Box3().setFromObject(mesh), items:[], ghost:false, soft:false, made:true, glassy:part.glassy || 0, anchor:part.anchor || null, ...extra };
+  const info = { mesh, base:part.name.toLowerCase(), side:'', mat:'Schematic', model, kind, colour:colour.clone(), clipX:0, pretty:part.name, box:new THREE.Box3().setFromObject(mesh), items:[], ghost:false, soft:!!part.soft, made:true, glassy:part.glassy || 0, anchor:part.anchor || null, ...extra };
   mesh.userData.info = info; REG.push(info); return info;
 }
 function makeMeninges(root) {
@@ -375,7 +381,7 @@ const buzz = p => { try { navigator.vibrate && navigator.vibrate(p); } catch {} 
 const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
 /* What lies INSIDE a glass structure wins the tap — the plexus hangs in the ventricle, the nucleus sits in the soma — unless the container is what was asked. [container, how far behind its wall] */
 const INSIDE = { 'choroid plexus':['lateral ventricle', .03], 'nucleus':['soma', .08], 'synaptic vesicles':['axon terminals', .09],
-  'articular cartilage':['synovial fluid', .12], 'osteocytes':['lacunae', .01] };
+  'articular cartilage':['synovial fluid', .12], 'osteocytes':['lacunae', .01], 'utricle':['vestibule', .05], 'saccule':['vestibule', .05] };
 function cast(x, y) { const r = canvas.getBoundingClientRect(); ndc.set(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, camera);
   const hits = ray.intersectObjects(pickables, false).filter(h => { const i = h.object.userData.info; return !(i.clipX && Math.abs(h.point.x) < i.clipX) && !(i.soft && !(xray && xray.has(i)) && G.cur && !G.cur.it.infos.includes(i)); });
   const h0 = hits[0]; if (!h0) return null; const i0 = h0.object.userData.info;

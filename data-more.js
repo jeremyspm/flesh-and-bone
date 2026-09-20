@@ -423,6 +423,45 @@ export const AIRWAY = [
     clue:{ t:'In the bell-jar model of ventilation, the rubber sheet at the bottom stands for this.', hers:1 }, fact:'The main muscle of inspiration: it contracts and flattens, the thoracic volume rises, pressure falls, air flows in.' }),
 ];
 
+/* ── Eye & Ear (Module 3): both BUILT (made-eye.js, made-ear.js). The parts and the clues are HER Module 3 revision deck
+ *    ("2019 Revision mod 3 22 slide2.pptx", slides 15-21, read 21 Sep 2026): the three tunics and what is in each; outer, middle
+ *    and inner ear; her numbered sound path (1 ear canal · 2 tympanic membrane · 3 ossicles · 4 oval window · 5 cochlea).
+ *    Her Canvas quizzes on these were not yet sat on 21 Sep, so `her:1` here means "on her revision slides". ── */
+const SE = (id, kind, name, region, az, el, m, clue, fact, extra) => ({ id:'se-' + id, kind, name, her:1, region, az, el, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+export const SENSES = [
+  SE('cornea', 'eye', 'Cornea', 'eye', 38, 22, ['cornea'], 'Clear — it does about 80 % of the refraction (bending of the light).', 'Fibrous tunic, the transparent front. Most of the focusing happens here, not in the lens.'),
+  SE('sclera', 'eye', 'Sclera', 'eye', 38, 22, ['sclera'], 'White — the protective container.', 'Fibrous tunic: the white of the eye. The eye muscles attach to it.'),
+  SE('choroid', 'eye', 'Choroid', 'eye', 38, 22, ['choroid'], 'The layer of blood vessels.', 'Vascular tunic, between sclera and retina. Dark pigment stops light reflecting around inside the eye.'),
+  SE('ciliary', 'eye', 'Ciliary body', 'eyeFront', 38, 22, ['ciliary body'], 'Its muscle contracts to make the lens more biconvex; it also produces the aqueous humor.', 'Vascular tunic: ciliary muscle + ciliary processes + the suspensory ligaments that hold the lens.'),
+  SE('ligaments', 'eye', 'Suspensory ligaments', 'eyeFront', 38, 22, ['suspensory ligaments'], 'They pull the lens flat when the ciliary muscle relaxes.', 'Fine fibres from the ciliary body to the edge of the lens. Distant object: muscle relaxed, ligaments tight, lens flat.'),
+  SE('iris', 'eye', 'Iris', 'eyeFront', 38, 22, ['iris'], 'The coloured part — it dilates and constricts the pupil.', 'Vascular tunic. Dilator muscle = sympathetic (more light in); sphincter muscle = parasympathetic (less light in).'),
+  SE('pupil', 'eye', 'Pupil', 'eyeFront', 20, 12, ['pupil'], 'Dilates in poor light, constricts in bright light.', 'Not a structure — the HOLE in the iris that the light goes through.'),
+  SE('lens', 'eye', 'Lens', 'eyeFront', 38, 22, ['lens'], 'Biconvex and flexible — about 20 % of the refraction; it accommodates to focus the image on the retina.', 'Near object: ciliary muscle contracts, lens bulges. Cloudy lens = cataract.'),
+  SE('retina', 'eye', 'Retina', 'eye', 38, 22, ['retina'], 'The neural tunic: photoreceptors (rods and cones), bipolar cells and ganglion cells.', 'Rods = dim light, no colour (scotopic). Cones = bright light, colour (photopic).'),
+  SE('macula', 'eye', 'Macula lutea', 'eye', 30, 30, ['macula lutea'], 'The spot with ONLY cones.', 'With the fovea at its centre: sharpest vision, straight behind the lens. Macular degeneration destroys it.', { alt:'fovea' }),
+  SE('disc', 'eye', 'Optic disc', 'eye', 30, 30, ['optic disc'], 'No cones or rods — the nerve fibres leave the eye here.', 'The blind spot. It lies to the NASAL side of the macula.', { alt:'blind spot' }),
+  SE('optic-nerve', 'eye', 'Optic nerve', 'eye', 150, 10, ['optic nerve'], null, 'Cranial nerve II: the ganglion-cell axons, leaving at the optic disc for the optic chiasm and the visual cortex in the occipital lobe.', { sub:'CN II' }),
+  SE('aqueous', 'eye', 'Aqueous humor', 'eyeFront', 38, 22, ['aqueous humor'], 'The fluid in the ANTERIOR segment of the eye.', 'Made by the ciliary body, drained by the canal of Schlemm. If it cannot drain, pressure rises: glaucoma.'),
+  SE('vitreous', 'eye', 'Vitreous humor', 'eye', 38, 22, ['vitreous humor'], 'Fills the POSTERIOR segment of the eye.', 'A clear gel behind the lens; it holds the retina against the choroid.'),
+  SE('schlemm', 'eye', 'Canal of Schlemm', 'eyeFront', 38, 22, ['canal of schlemm'], 'Drains the aqueous fluid.', 'A ring-shaped channel at the junction of cornea and sclera (through the trabecular mesh). Blocked → glaucoma.'),
+
+  SE('pinna', 'ear', 'Pinna', 'ear', 0, 5, ['pinna'], 'Collects the sound.', 'External ear: the flap of elastic cartilage and skin.', { alt:'auricle' }),
+  SE('canal', 'ear', 'External auditory canal', 'ear', 0, 12, ['external auditory canal'], 'With ceruminous glands, which make the brown wax.', 'External ear. Ear wax here is a REVERSIBLE cause of conduction deafness. (Opened along its length so you can see the eardrum.)'),
+  SE('drum', 'ear', 'Tympanic membrane', 'earMid', 0, 12, ['tympanic membrane'], null, 'The eardrum: the boundary between external and middle ear. Sound waves make it vibrate. Perforated → conduction deafness.', { alt:'eardrum' }),
+  SE('ossicles', 'ear', 'Ossicles', 'earMid', 0, 8, ['malleus', 'incus', 'stapes'], 'They transfer sound from the tympanic membrane to the oval window — and amplify it.', 'Malleus, incus, stapes: three tiny bones with synovial joints. Otosclerosis or arthritis of them = conduction deafness.'),
+  SE('malleus', 'ear', 'Malleus', 'earMid', 0, 8, ['malleus'], null, 'The hammer: its handle is fixed to the eardrum. FIRST of the three.'),
+  SE('incus', 'ear', 'Incus', 'earMid', 0, 8, ['incus'], null, 'The anvil: the MIDDLE one.'),
+  SE('stapes', 'ear', 'Stapes', 'earMid', 0, 8, ['stapes'], null, 'The stirrup: its footplate sits in the oval window. LAST of the three — and the smallest bone in the body.'),
+  SE('oval', 'ear', 'Oval window', 'earMid', 0, 8, ['oval window'], null, 'The membrane-covered opening into the inner ear that the stapes pushes on: vibration in air becomes waves in fluid (perilymph).'),
+  SE('tube', 'ear', 'Eustachian tube', 'ear', 0, 5, ['eustachian tube'], 'Connects the middle ear to the nasopharynx, to equalise pressure.', 'Also the road by which a throat infection reaches the middle ear.', { alt:'pharyngotympanic (auditory) tube' }),
+  SE('cochlea', 'ear', 'Cochlea', 'earIn', 0, 8, ['cochlea'], 'Houses the organ of Corti, whose hair cells transduce mechanical waves into electrical impulses.', 'Three chambers: scala vestibuli and scala tympani (perilymph) either side of the scala media (endolymph) with the organ of Corti. Damage here = sensorineural deafness.'),
+  SE('vestibule', 'ear', 'Vestibule', 'earIn', 0, 8, ['vestibule'], null, 'The middle chamber of the bony labyrinth, between the cochlea and the semicircular canals. It holds the utricle and the saccule.'),
+  SE('utricle', 'ear', 'Utricle', 'earIn', 0, 8, ['utricle'], null, 'Membranous sac in the vestibule, with otoliths in its macula: head position and straight-line movement.'),
+  SE('saccule', 'ear', 'Saccule', 'earIn', 0, 8, ['saccule'], null, 'The smaller membranous sac in the vestibule, also with otoliths in its macula.'),
+  SE('canals', 'ear', 'Semicircular canals', 'earIn', 0, 8, ['semicircular canals'], 'For balance and spatial orientation.', 'Three, at right angles to one another, each with an ampulla: they sense ROTATION of the head. With the utricle and saccule they make the vestibular apparatus.', { alt:'semicircular ducts' }),
+  SE('nerve8', 'ear', 'Vestibulocochlear nerve', 'earIn', 0, 8, ['vestibulocochlear nerve'], 'Takes the electrical impulses to the auditory cortex in the temporal lobe.', 'Cranial nerve VIII: a cochlear part (hearing) and a vestibular part (balance).', { sub:'CN VIII' }),
+];
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -446,11 +485,21 @@ export const MORE_REGIONS = {
   airway:  { model:'airway', m:[/lobe of/, 'trachea', 'diaphragm'], pad:1.08, min:0.05 },
   awUpper: { model:'airway', m:[/pharynx$/, 'soft palate', 'thyroid cartilage', 'cricoid cartilage', 'epiglottis'], pad:1.25, min:0.05 },
   awTree:  { model:'airway', m:['trachea', /bronchus/], pad:1.1, min:0.05 },
+  eye:      { model:'eye', m:[/./], pad:1.1, min:0.05 },
+  eyeFront: { model:'eye', m:['cornea', 'lens', 'ciliary body'], pad:1.05, min:0.05 },
+  ear:      { model:'ear', m:[/./], pad:1.06, min:0.05 },
+  earMid:   { model:'ear', m:['tympanic membrane', 'malleus', 'incus', 'stapes', 'oval window'], pad:1.5, min:0.05 },
+  earIn:    { model:'ear', m:['vestibule', 'cochlea', 'semicircular canals', 'vestibulocochlear nerve'], pad:1.12, min:0.05 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
 export const MORE_SETS = {
+  senses: [
+    { id:'her', name:'Her list', hint:'The parts on her Module 3 revision slides. Schematics, not to scale', f:i => i.her },
+    { id:'eye', name:'Eye', hint:'Three tunics, the lens, two humors', f:i => i.kind === 'eye' },
+    { id:'ear', name:'Ear', hint:'Outer, middle and inner ear', f:i => i.kind === 'ear' },
+  ],
   airway: [
     { id:'her', name:'Her list', hint:'Her airway figure (nostril and nasal cavity are not in the 3D source)', f:i => i.her },
     { id:'upper', name:'Pharynx & larynx', hint:'Above the trachea', f:i => i.kind === 'upper' },
@@ -507,6 +556,32 @@ export const MORE_SETS = {
  *    keys "choroid plexuses; arachnoidal villi … into the sagittal sinus"). The foramina and apertures between the
  *    ventricles are not steps she asks, so they are not steps here. `context` = on stage and tappable, but not a step. ── */
 export const TRACES = {
+  senses: [
+    { id:'tr-sound', name:'Sound to the cochlea', short:'Trace the sound', ask:'from the air to the hair cells', xray:false, region:'ear', az:0, el:8,
+      hint:'Her numbered path: ear canal → tympanic membrane → ossicles → oval window → cochlea',
+      note:'The five middle steps are numbered exactly so on her revision slide 19; pinna and nerve are the ends she gives in the text around it.',
+      steps:[
+        { it:'se-pinna',    q:'What COLLECTS the sound?', say:'Pinna (auricle) collects the sound waves.' },
+        { it:'se-canal',    q:'Down which passage?', say:'External auditory canal.' },
+        { it:'se-drum',     q:'What do the waves set vibrating?', say:'Tympanic membrane vibrates.', region:'earMid' },
+        { it:'se-ossicles', q:'What carries the vibration across the middle ear — and amplifies it?', say:'Ossicles — malleus, incus, stapes — transmit and amplify.', region:'earMid' },
+        { it:'se-oval',     q:'Onto which opening does the stapes push?', say:'Oval window: vibration passes into the fluid of the inner ear.', region:'earMid' },
+        { it:'se-cochlea',  q:'Where is it turned into nerve impulses?', say:'Cochlea: hair cells of the organ of Corti transduce the waves into electrical impulses.', region:'earIn' },
+        { it:'se-nerve8',   q:'…carried to the brain by?', say:'Vestibulocochlear nerve (VIII) → auditory cortex in the temporal lobe.', region:'earIn' },
+      ] },
+    { id:'tr-light', name:'Light to the retina', short:'Trace the light', ask:'from the front of the eye to the brain', xray:false, region:'eye', az:38, el:22,
+      hint:'Cornea → aqueous humor → pupil → lens → vitreous humor → retina → optic nerve',
+      note:'Standard order through the refractive media; the percentages are from her slide 16 (cornea 80 %, lens 20 %).',
+      steps:[
+        { it:'se-cornea',      q:'What does light pass through FIRST — and bend most at?', say:'Cornea — about 80 % of the refraction.', region:'eyeFront' },
+        { it:'se-aqueous',     q:'Then which fluid?', say:'Aqueous humor, in the anterior segment.', region:'eyeFront' },
+        { it:'se-pupil',       q:'Through which opening?', say:'Pupil — its size is set by the iris.', region:'eyeFront', az:20, el:12 },
+        { it:'se-lens',        q:'What fine-focuses it?', say:'Lens — about 20 % of the refraction, and accommodation.', region:'eyeFront' },
+        { it:'se-vitreous',    q:'Then which gel?', say:'Vitreous humor, in the posterior segment.' },
+        { it:'se-retina',      q:'Where is it turned into nerve impulses?', say:'Retina: rods and cones transduce light; bipolar then ganglion cells carry it on.' },
+        { it:'se-optic-nerve', q:'…and leaves the eye by?', say:'Optic nerve (II), from the optic disc → visual cortex in the occipital lobe.', az:150, el:10 },
+      ] },
+  ],
   airway: [
     { id:'tr-air', name:'A breath in', short:'Trace the air', ask:'from the back of the nose to the segments of the lung', open:1, xray:false, region:'awTree', az:0, el:5,
       hint:'Pharynx → larynx → trachea → bronchial tree',

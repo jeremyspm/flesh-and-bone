@@ -213,3 +213,25 @@ comment added mid-line ate the rest of the line and the app would not boot). Use
 - Trace "A breath in": pharynx -> larynx -> trachea -> primary -> lobar -> segmental bronchi. Declared in its note as standard
   anatomical order: she has NO ordering question on this in the Module 1 bank.
 - Find it 19/19 + Name it 20/20 by real taps at 375x812; the epiglottis is inside the throat, so it is `deep:1`.
+
+## Added 21 Sep: Eye & Ear (Module 3) - both built, from HER revision slides
+
+- Source of the list: her Module 3 revision deck ("2019 Revision mod 3 22 slide2.pptx", posted 20 Sep; slides 15-21), read as text.
+  Her Canvas quizzes on these had not been sat yet, so `her:1` in this deck means "on her revision slides", and the header says so.
+- [made-eye.js](made-eye.js): the source lacks the choroid, ciliary body, pupil, macula, optic disc and canal of Schlemm, so the whole
+  eye is generated. Every coat is a body of revolution about the optical axis with ONE quarter removed toward the viewer
+  (`PHI0`/`LEN`), and each body gets flat caps on both cut planes (`ShapeGeometry` of its own profile) - LatheGeometry leaves them open.
+  So the two cut faces show sclera > choroid > retina in order and you look in at the macula and optic disc. The lens is whole.
+  The humors are `soft` (fluid: glass, and a tap passes through unless a humor was asked). **The coats are 8-10 mm thick on a 10 cm
+  eye** - the first build used 4 mm and the reach scan put the choroid at 4 %: a phone finger cannot hit a 7 px strip.
+  `grow` lets a part stand proud of the cut faces: the canal of Schlemm lies INSIDE the sclera's profile, so its caps were coplanar
+  with the sclera's and it could not be seen or tapped at all.
+- [made-ear.js](made-ear.js): left to right = outside to inside = her numbered sound path. The canal is opened along its length so
+  the eardrum shows; the vestibule is glass with utricle and saccule inside (`INSIDE`); three canals with ampullae; a 2.6-turn cochlea.
+- Traces: sound (her slide 19 numbering) and light through the refractive media (her 80 % / 20 % split).
+- 30/30 Find it + 30/30 Name it + both traces by real taps at 375x812.
+
+**Second trap of the day, same family as the false `node --check`: a `//` comment inserted MID-LINE by a search-and-replace comments out
+the rest of that line.** It broke the app once (a swallowed brace) and silently dropped a statement twice (valid syntax, so no parser
+can catch it) - one of them had been live since v1: `controls.zoomSpeed/rotateSpeed/panSpeed` sat behind a comment. Rule: a
+replacement never ends in `// ...` unless it replaces a whole line; and the files were scanned for code after `//`.
