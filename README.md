@@ -139,3 +139,21 @@ objects (nerves, vessels), all of which are already in the exported models (chec
   wanted value, so a brain that loaded AFTER boot (open on Bones, switch to Brain) never heard "nerves off" and the twelve cranial
   nerves stayed on stage in every question. The stage toggles no longer trust their own memory.
 - Six decks: on a phone the deck cards are one swipeable row, which gives ~150 px of stage back.
+
+## Added 21 Sep: Neuron (a built schematic) and the impulse trace
+
+- [made-neuron.js](made-neuron.js) builds a neuron and one synapse from three.js primitives: soma (glass, nucleus inside), seven
+  forking dendrite trunks (seeded, so it is the same neuron every load), axon hillock, axon, five Schwann cells with nuclei, the
+  nodes of Ranvier as the bare axon between them, four terminal buttons, and ONE terminal repeated enlarged beside them as the
+  synapse: vesicles, presynaptic membrane, cleft (glass), receptors on the postsynaptic membrane, the next cell. 15 named meshes,
+  ~34k triangles, 50 ms to build, no download. `MODELS.neuron.make` instead of a file; parts go through `register()`.
+- The parts are **her ten-point match** and every clue is her own definition of that part. The tenth term, *action potential*,
+  is a process, not a place: it is the **Trace** (dendrites -> soma -> hillock -> axon -> node of Ranvier -> terminals ->
+  presynaptic membrane -> cleft -> postsynaptic membrane), each line in her words. `xray:false` on a trace = nothing is ghosted.
+- One cell, one colour: soma, dendrites, hillock, axon, nodes and terminals share a colour so the boundaries are shape, not paint.
+  Nothing is lettered (her figure letters its parts its own way). The prompt and help say **schematic - not to scale**.
+- "What is inside glass wins the tap" is now a table (`INSIDE`: plexus in ventricle, nucleus in soma, vesicles in terminal) and
+  has an exception that matters: **not when the container is what was asked** (a tap on the soma over its nucleus is the soma).
+- Reach at 375x812: dendrites 91, soma 85, nucleus 97, hillock 41 (its top is inside the soma), Schwann 92, node 68, terminals 90,
+  presynaptic 61, cleft 56, postsynaptic 31 (its face is under the cleft; the rim and edge are what you tap). The axon's own mesh is
+  8 % because it runs inside the Schwann cells - the nodes are `also`-accepted for it, and the bare ends are tappable.

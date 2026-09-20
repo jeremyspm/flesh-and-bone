@@ -134,7 +134,7 @@ body:not([data-state=play]) #dock{transform:translateY(140%);opacity:0;pointer-e
 #ring.good i{border-color:var(--good);box-shadow:0 0 18px var(--good)}
 @keyframes ping{0%,100%{transform:scale(.82);opacity:1}50%{transform:scale(1.12);opacity:.75}}
 /* Trace it: a numbered pin on every step already locked */
-.pin{position:fixed;z-index:11;left:0;top:0;pointer-events:none;will-change:transform}
+.pin{position:fixed;z-index:9;left:0;top:0;pointer-events:none;will-change:transform}
 .pin b{display:grid;place-items:center;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font-size:12px;font-weight:900;box-shadow:0 2px 8px rgba(0,0,0,.55),0 0 0 2px rgba(10,12,17,.75)}
 body:not([data-mode=trace]) #pins{display:none}
 body[data-mode=trace] #streak{display:none}
@@ -305,6 +305,8 @@ body[data-mode=explore] #stats,body[data-mode=explore] #prog{visibility:hidden}
   <p>The ring on each deck is how many of her list you have <b>locked</b>: answered right first time, twice in a row. A miss unlocks it. Rounds deal what you have not locked first. Nothing is due, nothing expires, nothing leaves this browser.</p>
   <h3>Glands and Brain</h3>
   <p><b>Glands</b> shows the endocrine glands inside a ghost skeleton — her label-the-glands figure in 3D; with "Mix" on, a hormone or an action is the clue and the gland is the answer. <b>Brain</b>: the cortex is one colour on purpose (tinting the lobes would give them away). Questions about the inside are asked on the brain <b>cut in half</b>, seen from the left. Lobe membership is the 3D source's own classification; a boundary furrow (central sulcus, lateral fissure) counts for both lobes it separates. Wernicke's area is ringed on the back of the superior temporal gyrus.</p>
+  <h3>Neuron</h3>
+  <p>No 3D scan models a cell — every textbook neuron is a drawing, hers included — so this one is <b>built from shapes and is a schematic, not to scale</b>. Its parts are the ones her ten-point match asks: soma, dendrites, axon hillock, axon, Schwann cell, node of Ranvier, axon terminals, pre- and postsynaptic membrane. One terminal is repeated <b>enlarged</b> beside it to show the synapse. Nothing is lettered, because her figure letters its parts its own way. <b>Trace it</b> here follows a nerve impulse from dendrite to the next cell.</p>
   <h3>Circle of Willis</h3>
   <p>The ring of arteries on the <b>ventral</b> (under) side of the brain, shown under a ghost brain and seen from below, frontal lobes at the top. "Her list" is the vessels her question names: anterior communicating, anterior cerebral, internal carotid, posterior communicating, posterior cerebral and basilar, fed by the carotids from the front and the vertebrals from the back. The middle cerebral artery is in "Everything": the biggest branch, but not part of the ring.</p>
   <h3>The meninges are a schematic</h3>

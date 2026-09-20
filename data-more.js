@@ -225,15 +225,53 @@ export const WILLIS = [
     fact:'The biggest branch of the internal carotid: the lateral surface of the hemisphere — face and arm motor/sensory cortex, Broca and Wernicke. NOT part of the ring, but the artery most often blocked in a stroke.' },
 ];
 
+/* ── Neuron: BUILT (made-neuron.js), a declared schematic. Parts and clues are her ten-point match ("Link the definitions to the
+ *    terms"): soma · Schwann cell · node of Ranvier · dendrites · axons · axon hillock · presynaptic membrane · postsynaptic membrane ·
+ *    axon terminals (+ action potential, which is a process, not a place — it is the Trace). The synaptic cleft is a key in her cloze. ── */
+const NR = (id, name, region, m, extra) => ({ id:'nr-' + id, name, region, az:0, el:4, m, ...extra });
+export const NEURON = [
+  NR('dendrites', 'Dendrites', 'nrTop', ['dendrites'], { her:1,
+    clue:{ t:'A short branched extension of a nerve cell.', hers:1 }, fact:'Short and branched — the receiving end. They carry the signal TOWARD the soma.' }),
+  NR('soma', 'Soma', 'nrTop', ['soma'], { her:1, alt:'cell body',
+    clue:{ t:'Contains a nucleus, mitochondria and endoplasmic reticulum.', hers:1 }, fact:'The cell body. Grey matter is grey because it is made of these (white matter = myelinated axons).' }),
+  NR('nucleus', 'Nucleus', 'nrTop', ['nucleus'], { fact:'Inside the soma. Mature neurons do not divide, which is why damage is so often permanent.' }),
+  NR('hillock', 'Axon hillock', 'nrTop', ['axon hillock'], { her:1,
+    clue:{ t:'The region where nerve impulses are generated.', hers:1 }, fact:'The cone where the axon leaves the soma: the action potential starts here.' }),
+  NR('axon', 'Axon', 'nrAxon', ['axon'], { her:1, also:['node of ranvier'],
+    clue:{ t:'Usually long and single — it conducts impulses AWAY from the soma.', hers:1 }, fact:'One per neuron, and it can be a metre long. Away from the soma, toward the terminals.' }),
+  NR('schwann', 'Schwann cell', 'nrAxon', ['schwann cell', 'schwann cell nucleus'], { her:1, alt:'myelin sheath',
+    clue:{ t:'Contains a nucleus and produces the myelin sheath in the PNS.', hers:1 }, fact:'Wraps the axon in myelin in the PNS. In the CNS the same job is done by oligodendrocytes.' }),
+  NR('node', 'Node of Ranvier', 'nrAxon', ['node of ranvier'], { her:1,
+    clue:{ t:'A periodic gap in the insulating myelin sheath on the axon.', hers:1 }, fact:'The bare axon between two Schwann cells. The impulse leaps node to node — saltatory conduction, which is why myelinated axons are fast.' }),
+  NR('terminals', 'Axon terminals', 'nrEnd', ['axon terminals'], { her:1, alt:'telodendria',
+    clue:{ t:'Button-like endings of axons through which they make synaptic contact with other cells.', hers:1 }, fact:'When the impulse arrives, calcium channels open here. (The big one beside them is one terminal, enlarged.)' }),
+  NR('presyn', 'Presynaptic membrane', 'synapse', ['presynaptic membrane'], { her:1, el:10,
+    clue:{ t:'Releases neurotransmitters through exocytosis.', hers:1 }, fact:'The terminal\'s face at the synapse. Calcium in → vesicles fuse with it → neurotransmitter out (exocytosis).' }),
+  NR('cleft', 'Synaptic cleft', 'synapse', ['synaptic cleft'], { her:1, el:10,
+    clue:{ t:'The gap the neurotransmitter diffuses across.', hers:1 }, fact:'The fluid-filled gap between the two cells. Neurotransmitter crosses it by diffusion.' }),
+  NR('postsyn', 'Postsynaptic membrane', 'synapse', ['postsynaptic membrane', 'receptors'], { her:1, el:10,
+    clue:{ t:'Neurotransmitter receptors are present here.', hers:1 }, fact:'The receiving cell\'s membrane. Its receptors bind the neurotransmitter, which excites or inhibits the cell.' }),
+  NR('vesicles', 'Synaptic vesicles', 'synapse', ['synaptic vesicles'], { el:10, fact:'Little bags of neurotransmitter waiting in the terminal — acetylcholine at parasympathetic endings and neuromuscular end-plates.' }),
+];
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
   willisAll: { model:'willis', m:[/./], pad:1.1, min:0.05 },
+  neuron:  { model:'neuron', m:[/./], pad:1.06, min:0.05 },
+  nrTop:   { model:'neuron', m:['soma', 'dendrites', 'axon hillock'], pad:1.08, min:0.05 },
+  nrAxon:  { model:'neuron', m:['axon', 'schwann cell', 'axon hillock'], pad:1.12, min:0.05 },
+  nrEnd:   { model:'neuron', m:['axon terminals', 'postsynaptic cell'], pad:1.2, min:0.05 },
+  synapse: { model:'neuron', m:[/synaptic|^receptors$|^postsynaptic cell$/], pad:1.7, min:0.05 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
 export const MORE_SETS = {
+  neuron: [
+    { id:'her', name:'Her list', hint:'Her ten-point match. A schematic, not to scale', f:i => i.her },
+    { id:'all', name:'Everything', hint:'Adds the nucleus and the vesicles', f:() => true },
+  ],
   willis: [
     { id:'her', name:'Her list', hint:'On the ventral side of the brain. Berry aneurysms form here → haemorrhagic stroke', f:i => i.her },
     { id:'all', name:'Everything', hint:'Adds the middle cerebral artery', f:() => true },
@@ -262,6 +300,22 @@ export const MORE_SETS = {
  *    keys "choroid plexuses; arachnoidal villi … into the sagittal sinus"). The foramina and apertures between the
  *    ventricles are not steps she asks, so they are not steps here. `context` = on stage and tappable, but not a step. ── */
 export const TRACES = {
+  neuron: [
+    { id:'tr-impulse', name:'A nerve impulse', short:'Trace the impulse', ask:'from where the signal arrives to the next cell', xray:false, region:'neuron', az:0, el:4,
+      hint:'Dendrites → soma → axon → terminals → across the synapse',
+      note:'A schematic neuron, not to scale; one terminal is repeated enlarged to show the synapse. Each line is her own definition of that part.',
+      steps:[
+        { it:'nr-dendrites', region:'nrTop',  q:'Where does the signal ARRIVE?', say:'Dendrites — short branched extensions — receive the signal and carry it toward the cell body.' },
+        { it:'nr-soma',      region:'nrTop',  q:'Where does it travel to?', say:'To the soma (cell body): nucleus, mitochondria, endoplasmic reticulum.' },
+        { it:'nr-hillock',   region:'nrTop',  q:'Where is the nerve impulse GENERATED?', say:'At the axon hillock the action potential is generated — a rapid sequence of voltage changes across the membrane.' },
+        { it:'nr-axon',      region:'nrAxon', q:'Which long, single process carries it away from the soma?', say:'Along the axon, which conducts impulses AWAY from the soma.' },
+        { it:'nr-node',      region:'nrAxon', q:'On a myelinated axon the impulse LEAPS. From where to where?', say:'It leaps from one node of Ranvier to the next (saltatory conduction): the myelin insulates in between, so it is fast.' },
+        { it:'nr-terminals', region:'nrEnd',  q:'Where does the axon end?', say:'At the axon terminals (telodendria), where calcium channels open as the impulse arrives.' },
+        { it:'nr-presyn',    region:'synapse', el:10, q:'Which membrane releases the neurotransmitter?', say:'The presynaptic membrane releases neurotransmitter from its vesicles by exocytosis.' },
+        { it:'nr-cleft',     region:'synapse', el:10, q:'What does the neurotransmitter diffuse across?', say:'It diffuses across the synaptic cleft.' },
+        { it:'nr-postsyn',   region:'synapse', el:10, q:'Where does it bind?', say:'It binds to receptors on the postsynaptic membrane, exciting or inhibiting the next cell.' },
+      ] },
+  ],
   brain: [
     { id:'tr-csf', name:'CSF pathway', short:'Trace the CSF', ask:'from where it is made to where it re-enters the blood', men:1, region:'brain', az:75, el:14,
       hint:'Made → four ventricles → subarachnoid space → back into blood',

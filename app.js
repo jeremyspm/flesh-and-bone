@@ -6,8 +6,9 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
-import { GLANDS, BRAIN, NERVES, WILLIS, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
+import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
 import { buildMeninges } from './made.js';
+import { buildNeuron } from './made-neuron.js';
 const REGIONS = { ...REGIONS0, ...MORE_REGIONS }, SETS = { ...SETS0, ...MORE_SETS };
 
 const $ = s => document.querySelector(s);
@@ -40,6 +41,7 @@ const DECK = {
   brain:  { label:'Brain',   acc:'#b9a2ff', ink:'#140b2e', items:BRAIN,   models:{ brain:'solid' }, bind:['brain'], noun:'part of the brain', home:'brain', frame:{ pad:1.3, min:.13 } },      // a 34 cm frame (right for a body) left the brain 75 px wide on a phone
   nerves: { label:'Nerves',  acc:'#ffd95e', ink:'#231a02', items:NERVES,  models:{ skeletal:'ghost', nerves:'solid' }, bind:['nerves'], noun:'nerve' },
   willis: { label:'Circle of Willis', acc:'#7fe3ff', ink:'#03222b', items:WILLIS, models:{ brain:'ghost', willis:'solid' }, bind:['willis'], noun:'artery', home:'brain', view:[12, -52], frame:{ pad:1.45, min:.08 } },   // under a ghost brain, seen from below: it is on the VENTRAL side. The accent is ice blue because a red glow on a red artery cannot be seen
+  neuron: { label:'Neuron',  acc:'#ff8fd6', ink:'#2b0620', items:NEURON,  models:{ neuron:'solid' }, bind:['neuron'], noun:'part of the neuron', home:'neuron', view:[0, 4], frame:{ pad:1.5, min:.09 }, schematic:'schematic · not to scale' },   // BUILT, not loaded: made-neuron.js
 };
 const ITEM = {};
 for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
@@ -113,6 +115,7 @@ const MODELS = {
   brain:   { kind:'brain',  noun:'structure', note:'Opening the skull…' },
   nerves:  { kind:'nerve',  noun:'nerve',     note:'Threading the nerves…' },
   willis:  { kind:'artery', noun:'artery',    note:'Filling the arteries…' },
+  neuron:  { kind:'cell',   noun:'part',      note:'Growing a neuron…', make:buildNeuron },      // no file: the parts are generated
 };
 const HIDE_BRAIN = [/^falx cerebri$/, /^tentorium cerebelli$/, /root of spinal nerve$/, /^nerve to /, /^central canal/];      // the dura folds stand in front of the medial cut and the cerebellum
 
@@ -141,6 +144,10 @@ function colourFor(kind, base, matName) {
 async function loadModel(name, onProg) {
   if (loaded[name]) return;
   const M = MODELS[name], kind = M.kind, root = new THREE.Group();
+  if (M.make) {                                   // a model we build: every part registers like a loaded mesh; `context` parts are drawn but never tappable
+    for (const p of M.make()) { if (p.context) root.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(p.lines), new THREE.LineBasicMaterial({ color:0xffffff, transparent:true, opacity:.3 }))); else register(root, name, kind, p); }
+    groups[name] = root; scene.add(root); loaded[name] = true; return bindItems();
+  }
   for (const file of M.files || [name]) { const gltf = await loader.loadAsync(`./models/${file}.glb`, e => onProg && onProg(e.loaded, e.total)); root.add(gltf.scene); }
   root.updateMatrixWorld(true);
   const kill = [];
@@ -344,11 +351,13 @@ const buzz = p => { try { navigator.vibrate && navigator.vibrate(p); } catch {} 
 
 /* ───────────── picking ───────────── */
 const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
-const INSIDE = { 'choroid plexus':'lateral ventricle' };      // what lies INSIDE a glass structure wins the tap: the plexus hangs in the ventricle
+/* What lies INSIDE a glass structure wins the tap — the plexus hangs in the ventricle, the nucleus sits in the soma — unless the container is what was asked. [container, how far behind its wall] */
+const INSIDE = { 'choroid plexus':['lateral ventricle', .03], 'nucleus':['soma', .08], 'synaptic vesicles':['axon terminals', .09] };
 function cast(x, y) { const r = canvas.getBoundingClientRect(); ndc.set(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, camera);
   const hits = ray.intersectObjects(pickables, false).filter(h => { const i = h.object.userData.info; return !(i.clipX && Math.abs(h.point.x) < i.clipX) && !(i.soft && !(xray && xray.has(i)) && G.cur && !G.cur.it.infos.includes(i)); });
   const h0 = hits[0]; if (!h0) return null; const i0 = h0.object.userData.info;
-  return (i0.soft && hits.find(h => INSIDE[h.object.userData.info.base] === i0.base && h.distance - h0.distance < .03)) || h0; }
+  if (!(i0.soft || i0.glassy) || (G.cur && G.cur.it.infos.includes(i0))) return h0;
+  return hits.find(h => { const w = INSIDE[h.object.userData.info.base]; return w && w[0] === i0.base && h.distance - h0.distance < w[1]; }) || h0; }
 function pickAt(x, y, wantItem) {
   let hit = cast(x, y);
   const named = h => { if (!h) return false; const i = h.object.userData.info, d = describe(i, h.point);      // did the finger land ON something with a name of its own?
@@ -418,11 +427,11 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
       const st = this.cur.style, text = st === 'clue' ? it.clue.t : st === 'common' ? it.common : it.name;
       P.querySelector('.k').textContent = st === 'clue' ? (it.clue.hers ? 'Find it · clue from her quiz' : 'Find it · clue') : it.on && it.deck !== 'brain' ? `On the ${it.on} · find the` : 'Find the';
       const n = P.querySelector('.n'); n.textContent = text; n.classList.toggle('long', st === 'clue');
-      P.querySelector('.s').textContent = st === 'name' ? (it.sub ? `(${it.sub})` : '') : st === 'common' ? 'Tap it — what is its proper name?' : it.cut ? 'cut in half · seen from the left' : it.men ? 'schematic layers · thickness exaggerated' : '';
+      P.querySelector('.s').textContent = st === 'name' ? (it.sub ? `(${it.sub})` : '') : st === 'common' ? 'Tap it — what is its proper name?' : it.cut ? 'cut in half · seen from the left' : it.men ? 'schematic layers · thickness exaggerated' : DECK[this.deck].schematic || '';
       dock(`<div class="acts"><button class="act" data-a="hint">Zoom me in</button><button class="act" data-a="show">Show me</button></div>`);
       flyTo(regionFrame(it.region, it.az, it.el));
     } else {
-      P.querySelector('.k').textContent = it.deep ? 'Name it · x-ray' : it.men ? 'Name it · schematic layers' : 'Name it';
+      P.querySelector('.k').textContent = it.deep ? 'Name it · x-ray' : it.men ? 'Name it · schematic layers' : DECK[this.deck].schematic ? 'Name it · schematic' : 'Name it';
       const n = P.querySelector('.n'); n.textContent = it.on ? (it.zone && it.deck === 'brain' ? 'Which area is ringed?' : `Which part of the ${it.on}?`) : 'What is glowing?'; n.classList.remove('long'); P.querySelector('.s').textContent = '';
       dock(`<div class="opts">${this.options(it).map(o => `<button class="opt" data-id="${o.id}">${esc(o.name)}${o.sub ? `<small>${esc(o.sub)}</small>` : ''}</button>`).join('')}</div>`);
       if (it.deep) setXray(it.infos);
@@ -537,7 +546,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
     this.xHer = this.xPeel = false; setCut(false); setNerves(false); setMeninges(!!T.men); applyDeck();
     document.body.dataset.mode = 'trace'; controls.autoRotate = false;
     this.tr = { T, i:-1, right:0, log:[], locked:new Set(), t0:performance.now() };
-    setXray([...T.steps.map(s => s.it), ...(T.context || [])].flatMap(id => ITEM[id] && ITEM[id].ok ? ITEM[id].infos : []));
+    if (T.xray !== false) setXray([...T.steps.map(s => s.it), ...(T.context || [])].flatMap(id => ITEM[id] && ITEM[id].ok ? ITEM[id].infos : []));
     $('#score').textContent = '0';
     setState('play'); this.traceStep();
   },
