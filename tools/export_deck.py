@@ -26,6 +26,9 @@ DECKS = {
     # Module 1. The airway from the pharynx down, the lungs, and the diaphragm under them.
     'airway': dict(names=[r'lobe of (left|right) lung$', r'^trachea$', r'bronchus', r'^(naso|oro|laryngo)pharynx$', r'^(soft palate|uvula of palate|epiglottis|tongue)$',
                           r'^(thyroid|cricoid) cartilage$', r'^hyoid', r'^diaphragm$']),
+    # Module 3. The male organs (the source body is male) + bladder and urethra, which the sperm path ends in.
+    'male':   dict(names=[r'^(testis|epididymis|ductus deferens|ejaculatory duct|seminal gland|prostate|glans penis)$', r'^corpus (cavernosum|spongiosum) of penis$',
+                          r'^(urethra|urinary bladder)$']),
     'willis': dict(names=[r'^(anterior|posterior) communicating artery$', r'^(anterior|middle|posterior) cerebral artery', r'^internal carotid artery$',
                           r'^vertebral artery$', r'^basilar artery$', r'^insular branches of middle cerebral artery']),
 }

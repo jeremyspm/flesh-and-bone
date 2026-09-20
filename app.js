@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
-import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, SENSES, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
+import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, SENSES, REPRO, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
 import { buildMeninges } from './made.js';
 import { buildNeuron } from './made-neuron.js';
 import { buildTissues } from './made-tissues.js';
@@ -51,6 +51,7 @@ const DECK = {
   heart:  { label:'Heart',   acc:'#fff0b3', ink:'#2a2205', items:HEART,   models:{ heart:'solid' }, bind:['heart'], noun:'structure', home:'heart', view:[15, 4], frame:{ pad:1.45, min:.09 }, extra:'Conduction system' },   // Module 1. Chambers turn to glass when what is asked is inside them
   airway: { label:'Airway',  acc:'#a9c4ff', ink:'#0a1230', items:AIRWAY,  models:{ skeletal:'ghost', airway:'solid' }, bind:['airway'], noun:'structure', openLabel:'Glass lungs', home:'airway', view:[15, 4], frame:{ pad:1.4, min:.1 } },   // Module 1. The lobes turn to glass when a bronchus is asked
   senses: { label:'Eye & Ear', acc:'#ffc46b', ink:'#2a1a02', items:SENSES,  models:{ eye:'solid', ear:'solid' }, bind:['eye', 'ear'], noun:'part', home:'eye', view:[38, 22], frame:{ pad:1.35, min:.05 }, schematic:'schematic · not to scale' },   // Module 3. Both BUILT: made-eye.js, made-ear.js
+  repro:  { label:'Reproductive', acc:'#ff9ecb', ink:'#2b0618', items:REPRO, models:{ skeletal:'ghost', female:'solid', male:'solid' }, bind:['female', 'male'], sex:{ female:'female', male:'male' }, noun:'structure', home:'rpFemale', view:[0, 10], frame:{ pad:1.5, min:.08 } },   // Module 3. Two bodies share one pelvis: only one is on stage at a time
 };
 const ITEM = {};
 for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
@@ -129,6 +130,15 @@ const MODELS = {
   tissues: { kind:'cell',   noun:'part',      note:'Building the tissues…', make:buildTissues },
   heart:   { kind:'heart',  noun:'structure', note:'Opening the chest…' },
   airway:  { kind:'airway', noun:'structure', note:'Filling the lungs…' },
+  male:    { kind:'organ',  noun:'structure', note:'Placing the organs…' },
+  /* The female organs are NOT Z-Anatomy (its body is male): HuBMAP CCF reference organs, Visible Human female, CC BY 4.0, files unmodified. They share one
+   * frame, so ONE shift seats them all: the midpoint of the two ovaries goes to the midpoint the ovaries were given by hand in the Glands deck. */
+  female:  { kind:'organ',  noun:'structure', note:'Placing the organs…', files:['hra-ovary-l', 'hra-ovary-r', 'hra-uterus', 'hra-tube-l', 'hra-tube-r'], shift:[.0131, .8541, .0275],
+    hide:[/wall of uterus$/, /^cornua$/, /^ostium of uterine tube$/, /^lower uterine segment$/, /^cervicovaginal junction$/],      // sub-regions that overlap the body and the cervix
+    rename:{ VH_F_left_ovary:'Ovary.l', VH_F_right_ovary:'Ovary.r', VH_F_body_of_uterus:'Body of uterus', VH_F_fundus_of_uterus:'Fundus of uterus', VH_F_cervix:'Cervix', VH_F_internal_cervical_os:'Internal os', VH_F_external_cervical_os:'External os',
+      VH_F_lower_uterine_segment:'Lower uterine segment', VH_F_cornua:'Cornua', VH_F_posterior_wall_of_uterus:'Posterior wall of uterus', VH_F_anterior_wall_of_uterus:'Anterior wall of uterus', VH_F_cervicovaginal_junction:'Cervicovaginal junction',
+      VH_F_abdominal_ostium_of_uterine_tube:'Ostium of uterine tube', VH_F_uterine_tube_infundibulum_L:'Infundibulum.l', VH_F_uterine_tube_infundibulum_R:'Infundibulum.r', VH_F_fibria_of_uterine_tube_L:'Fimbriae.l', VH_F_fibria_of_uterine_tube_R:'Fimbriae.r',
+      VH_F_isthmus_of_fallopian_tube_L:'Isthmus of fallopian tube.l', VH_F_isthmus_of_fallopian_tube_R:'Isthmus of fallopian tube.r', VH_F_ampulla_of_uterine_tube_L:'Ampulla of fallopian tube.l', VH_F_ampulla_of_uterine_tube_R:'Ampulla of fallopian tube.r' } },
   eye:     { kind:'cell',   noun:'part',      note:'Building the eye…', make:buildEye },
   ear:     { kind:'cell',   noun:'part',      note:'Building the ear…', make:buildEar },
   glia:    { kind:'cell',   noun:'cell',      note:'Growing a neuron…', make:buildGlia },
@@ -169,6 +179,7 @@ async function loadModel(name, onProg) {
     groups[name] = root; scene.add(root); loaded[name] = true; return bindItems();
   }
   for (const file of M.files || [name]) { const gltf = await loader.loadAsync(`./models/${file}.glb`, e => onProg && onProg(e.loaded, e.total)); root.add(gltf.scene); }
+  if (M.shift) root.position.set(...M.shift);
   root.updateMatrixWorld(true);
   const kill = [];
   root.traverse(o => {
@@ -185,7 +196,7 @@ async function loadModel(name, onProg) {
     const orig = raw.replace(/\.[lr]\.?$/i, '').trim();
     const base = orig.toLowerCase();
     const matName = srcMat(o);
-    const hide = kind === 'bone' ? matchAny(HIDE.bone, base) : kind === 'muscle' ? (HIDE.muscleMaterial.test(matName) || matchAny(HIDE.muscle, base)) : kind === 'brain' ? matchAny(HIDE_BRAIN, base) : false;
+    const hide = kind === 'bone' ? matchAny(HIDE.bone, base) : kind === 'muscle' ? (HIDE.muscleMaterial.test(matName) || matchAny(HIDE.muscle, base)) : kind === 'brain' ? matchAny(HIDE_BRAIN, base) : M.hide ? matchAny(M.hide, base) : false;
     if (hide) { kill.push(o); return; }      // not removed: a hidden node may still parent a visible one
     const colour = colourFor(kind, base, matName);
     const soft = kind === 'muscle' && colour.r > .7 && colour.g > .7;
@@ -193,7 +204,7 @@ async function loadModel(name, onProg) {
     const clip = kind === 'muscle' && CLIP.find(c => matchAny(c.m, base));      // the rectus sheath, cut away (see data.js)
     if (clip) { o.material.clippingPlanes = [new THREE.Plane(new THREE.Vector3(side === 'R' ? -1 : 1, 0, 0), -clip.x)]; o.material.side = THREE.DoubleSide; }
     if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
-    const want = PLACE[base + (side ? '.' + side.toLowerCase() : '')];          // a structure borrowed from another reference body: put it where it belongs in this one
+    const want = !M.shift && PLACE[base + (side ? '.' + side.toLowerCase() : '')];      // (a model moved as one set keeps its parts where they are relative to each other)          // a structure borrowed from another reference body: put it where it belongs in this one
     if (want) { const c = new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3()); o.position.add(new THREE.Vector3(...want).sub(c)); o.updateMatrixWorld(true); }
     const info = { mesh:o, base, side, mat:ownerMat || matName, model:name, kind:soft ? 'tendon' : kind, colour:colour.clone(), clipX:clip ? clip.x : 0,
       pretty:orig.replace(/ muscles?$/i, '').replace(/^\((.*)\)$/, '$1'), box:new THREE.Box3().setFromObject(o), items:[], ghost:false,
@@ -306,7 +317,7 @@ function setOpen(on) { openOn = on; for (const i of REG) if (i.openable) { i.sof
 let cutOn = false;
 function setCut(on) { cutOn = on; for (const i of REG) if (i.model === 'brain' && i.side === 'L') i.mesh.visible = !on && (nervesOn || !i.base.includes(' nerve (')); refreshPickables(); invalidate(); }
 /* put a deck on stage: which models show, which are ghosts, and the accent colour */
-function applyDeck() { const D = DECK[G.deck]; for (const m of Object.keys(groups)) groups[m].visible = m in D.models;
+function applyDeck() { const D = DECK[G.deck]; for (const m of Object.keys(groups)) groups[m].visible = m in D.models && !(D.sex && D.sex[m] && D.sex[m] !== G.sex);
   for (const i of REG) { i.baseGhost = D.models[i.model] === 'ghost'; paint(i); }
   document.body.style.setProperty('--acc', D.acc); document.body.style.setProperty('--acc-ink', D.ink); refreshPickables(); invalidate(); }
 function setDim(keepFn) { for (const i of REG) { i.dimK = !keepFn || keepFn(i) ? 1 : .3; if (!glows.has(i)) rest(i); } invalidate(); }
@@ -414,7 +425,7 @@ canvas.addEventListener('pointermove', e => {
 
 /* ───────────── game ───────────── */
 const ACC = () => getComputedStyle(document.body).getPropertyValue('--acc').trim() || '#f2b84b';
-const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:false, xPeel:false,
+const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'female', xHer:false, xPeel:false,
 
   pool(deck = this.deck, setId = S.o.set[deck], mode = this.mode) { const set = SETS[deck].find(s => s.id === setId) || SETS[deck][0]; return DECK[deck].items.filter(i => i.ok && set.f(i) && (mode !== 'find' || !i.deep)); },
 
@@ -449,7 +460,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
   next() {
     const R = this.round; unglow(); clearXray(); ring.hide(); callout.hide(); toast();
     if (!R.queue.length) return this.finish();
-    const q = R.queue.shift(), it = q.it; setNerves(/^br-cn/.test(it.id)); setCut(!!it.cut); setMeninges(!!it.men); setOpen(!!it.open); this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
+    const q = R.queue.shift(), it = q.it; setNerves(/^br-cn/.test(it.id)); setCut(!!it.cut); setMeninges(!!it.men); setOpen(!!it.open); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); } this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
     $('#barTitle').textContent = `${innerWidth > 520 ? DECK[this.deck].label + ' · ' : ''}${this.mode === 'find' ? 'Find it' : 'Name it'} · ${Math.min(R.done + 1, R.total)} of ${R.total}${q.first ? '' : ' · again'}`;
     $('#prog i').style.width = (R.done / R.total * 100) + '%';
     const P = $('#prompt'); P.classList.remove('swap'); void P.offsetWidth; P.classList.add('swap');
@@ -573,7 +584,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
   startTrace() {
     const T = this.trace(); if (!T) return;
     this.round = null; this.tr = null; pins.clear(); unglow(); clearXray(); setDim(null); callout.hide(); ring.hide(); toast();
-    this.xHer = this.xPeel = false; setCut(false); setNerves(false); setMeninges(!!T.men); setOpen(!!T.open); applyDeck();
+    this.xHer = this.xPeel = false; if (T.sex) this.sex = T.sex; setCut(false); setNerves(false); setMeninges(!!T.men); setOpen(!!T.open); applyDeck();
     document.body.dataset.mode = 'trace'; controls.autoRotate = false;
     this.tr = { T, i:-1, right:0, log:[], locked:new Set(), t0:performance.now() };
     if (T.xray !== false) setXray([...T.steps.map(s => s.it), ...(T.context || [])].flatMap(id => ITEM[id] && ITEM[id].ok ? ITEM[id].infos : []));
@@ -631,7 +642,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
   /* explore */
   explore() {
     const P = $('#prompt'); P.querySelector('.k').textContent = 'Explore'; const n = P.querySelector('.n'); n.textContent = 'Tap anything'; n.classList.remove('long'); P.querySelector('.s').textContent = 'Drag to turn · pinch to zoom';
-    $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xCut').hidden = this.deck !== 'brain'; $('#xMen').hidden = !REG.some(i => i.men && DECK[this.deck].bind.includes(i.model)); $('#xMen').textContent = DECK[this.deck].extra || 'Meninges'; $('#xOpen').hidden = !REG.some(i => i.openable && DECK[this.deck].bind.includes(i.model)); $('#xOpen').setAttribute('aria-pressed', 'false'); $('#xOpen').textContent = DECK[this.deck].openLabel || 'Glass chambers'; $('#xCut').setAttribute('aria-pressed', 'false'); $('#xMen').setAttribute('aria-pressed', 'false'); $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
+    $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xCut').hidden = this.deck !== 'brain'; $('#xMen').hidden = !REG.some(i => i.men && DECK[this.deck].bind.includes(i.model)); $('#xMen').textContent = DECK[this.deck].extra || 'Meninges'; $('#xOpen').hidden = !REG.some(i => i.openable && DECK[this.deck].bind.includes(i.model)); $('#xSex').hidden = !DECK[this.deck].sex; $('#xSex').textContent = this.sex === 'female' ? 'Show male' : 'Show female'; $('#xOpen').setAttribute('aria-pressed', 'false'); $('#xOpen').textContent = DECK[this.deck].openLabel || 'Glass chambers'; $('#xCut').setAttribute('aria-pressed', 'false'); $('#xMen').setAttribute('aria-pressed', 'false'); $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
     dock(`<div class="xcard"><p class="quiet">Nothing selected. Tap a ${DECK[this.deck].noun} to see what it is${this.deck === 'bones' ? ' — on the femur and hip bone the landmarks are live too' : ''}.</p></div>`);
     flyTo(homeFrame(this.deck === 'brain' ? 60 : 15));
   },
@@ -645,6 +656,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
     if (which === 'her') { this.xHer = !this.xHer; $('#xHer').setAttribute('aria-pressed', this.xHer); const bind = DECK[this.deck].bind; setDim(this.xHer ? (i => !bind.includes(i.model) || i.items.some(x => x.her)) : null); }
     if (which === 'cut') { setCut(!cutOn); $('#xCut').setAttribute('aria-pressed', cutOn); unglow(); callout.hide(); flyTo(regionFrame('brain', cutOn ? 90 : 60, 8)); }
     if (which === 'men') { setMeninges(!menOn); $('#xMen').setAttribute('aria-pressed', menOn); unglow(); callout.hide(); if (this.deck === 'brain') { if (menOn) flyTo(regionFrame('meninges', 60, 35)); } else { setOpen(menOn); $('#xOpen').setAttribute('aria-pressed', openOn); } }
+    if (which === 'sex') { this.sex = this.sex === 'female' ? 'male' : 'female'; applyDeck(); $('#xSex').textContent = this.sex === 'female' ? 'Show male' : 'Show female'; unglow(); callout.hide(); flyTo(regionFrame(this.sex === 'female' ? 'rpFemale' : 'rpMale', this.sex === 'female' ? 0 : 100, 8)); }
     if (which === 'open') { setOpen(!openOn); $('#xOpen').setAttribute('aria-pressed', openOn); unglow(); callout.hide(); }
     if (which === 'peel') { this.xPeel = !this.xPeel; $('#xPeel').setAttribute('aria-pressed', this.xPeel); groups.muscular.visible = !this.xPeel; unglow(); callout.hide(); refreshPickables(); invalidate(); }
   },
@@ -703,7 +715,7 @@ $('#btnHelp').onclick = () => $('#help').classList.add('on');
 $('#helpClose').onclick = () => $('#help').classList.remove('on');
 $('#help').addEventListener('click', e => { if (e.target.id === 'help') $('#help').classList.remove('on'); });
 $('#btnSound').onclick = () => { S.o.sound = !S.o.sound; save(); $('#btnSound').style.opacity = S.o.sound ? 1 : .4; if (S.o.sound) sfx.tick(); };
-$('#xHer').onclick = () => G.toggle('her'); $('#xPeel').onclick = () => G.toggle('peel'); $('#xCut').onclick = () => G.toggle('cut'); $('#xMen').onclick = () => G.toggle('men'); $('#xOpen').onclick = () => G.toggle('open');
+$('#xHer').onclick = () => G.toggle('her'); $('#xPeel').onclick = () => G.toggle('peel'); $('#xCut').onclick = () => G.toggle('cut'); $('#xMen').onclick = () => G.toggle('men'); $('#xOpen').onclick = () => G.toggle('open'); $('#xSex').onclick = () => G.toggle('sex');
 addEventListener('keydown', e => { if (document.body.dataset.state !== 'play') return; if (e.key === 'Escape') goHome(); if (G.mode === 'name' && /^[1-4]$/.test(e.key)) { const b = document.querySelectorAll('#dock .opt')[+e.key - 1]; if (b && !b.disabled) G.choose(b); } if ((e.key === 'Enter' || e.key === ' ') && $('#dock [data-a=skip]')) { e.preventDefault(); G.act('skip'); } });
 
 /* ───────────── loop ───────────── */

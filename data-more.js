@@ -462,6 +462,34 @@ export const SENSES = [
   SE('nerve8', 'ear', 'Vestibulocochlear nerve', 'earIn', 0, 8, ['vestibulocochlear nerve'], 'Takes the electrical impulses to the auditory cortex in the temporal lobe.', 'Cranial nerve VIII: a cochlear part (hearing) and a vestibular part (balance).', { sub:'CN VIII' }),
 ];
 
+/* ── Reproductive (Module 3). MALE = male.glb (72 KB) from the source body. FEMALE = HuBMAP CCF reference organs (CC BY 4.0), one
+ *    shared shift (see MODELS.female). Parts and clues: her Module 3 revision deck, slide 2 (female parts and functions) and slide 5
+ *    (male glands with their share of the semen, and the duct sequence). `sex` decides which body is on stage for the question. ── */
+const RP = (id, sex, name, az, el, m, clue, fact, extra) => ({ id:'rp-' + id, kind:sex, sex, name, her:1, region:sex === 'female' ? 'rpFemale' : 'rpMale', az, el, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+export const REPRO = [
+  RP('ovary', 'female', 'Ovary', 0, 10, ['ovary'], 'Produces the eggs — and the hormones oestrogen and progesterone.', 'Follicular phase → ovulation → luteal phase, under FSH and LH from the pituitary.', { c:'#ff8fc7' }),
+  RP('fimbriae', 'female', 'Fimbriae', 0, 10, ['fimbriae'], 'They stroke over the ovary to catch the secondary oocyte.', 'The fingers on the end of the infundibulum. The tube is NOT attached to the ovary: the egg has to be caught.', { c:'#ffd27a' }),
+  RP('tube', 'female', 'Fallopian tube', 0, 10, ['infundibulum', 'fimbriae', 'ampulla of fallopian tube', 'isthmus of fallopian tube'], 'Cilia on its inside help the egg or embryo move toward the uterus — and it is where fertilisation happens.', 'Uterine tube: infundibulum with fimbriae → ampulla → isthmus → uterus. An embryo that implants here is an ectopic pregnancy.', { alt:'uterine tube' }),
+  RP('infundibulum', 'female', 'Infundibulum', 0, 10, ['infundibulum'], null, 'The funnel at the ovarian end of the tube; the fimbriae hang from it.', { her:0, c:'#ffb38a' }),
+  RP('ampulla', 'female', 'Ampulla of the tube', 0, 10, ['ampulla of fallopian tube'], null, 'The wide middle stretch — where fertilisation usually takes place.', { her:0, c:'#f59aa6' }),
+  RP('isthmus', 'female', 'Isthmus of the tube', 0, 10, ['isthmus of fallopian tube'], null, 'The narrow stretch that enters the uterus.', { her:0, c:'#e57f98' }),
+  RP('uterus', 'female', 'Uterus', 0, 10, ['body of uterus', 'fundus of uterus', 'cervix'], 'It houses the embryo.', 'Three layers, inside out: endometrium (its functional layer is shed in menstruation, the basal layer rebuilds it), myometrium (smooth muscle), perimetrium. The layers are not separate in this model.'),
+  RP('fundus', 'female', 'Fundus of the uterus', 0, 20, ['fundus of uterus'], null, 'The dome above the openings of the two tubes.', { her:0, c:'#d9708a' }),
+  RP('body', 'female', 'Body of the uterus', 0, 5, ['body of uterus'], null, 'The main part, where the embryo implants.', { her:0, c:'#c9607c' }),
+  RP('cervix', 'female', 'Cervix', 0, -10, ['cervix', 'internal os', 'external os'], null, 'The neck of the uterus, opening into the vagina (the vagina is not in this model).', { c:'#b9a2ff' }),
+
+  RP('testis', 'male', 'Testis', 100, 0, ['testis'], 'Makes the sperm (in the seminiferous tubules, under FSH) and testosterone (Leydig cells, under LH) — about 5–10 % of the semen.', 'Sertoli cells in the tubules make inhibin. Kept outside the body because sperm need it cooler than 37 °C.', { c:'#8fb8ff' }),
+  RP('epididymis', 'male', 'Epididymis', 100, 0, ['epididymis'], null, 'Coiled on the back of the testis: sperm mature and are stored here. FIRST duct after the rete testis.', { c:'#ffd27a' }),
+  RP('vas', 'male', 'Vas deferens', 100, 5, ['ductus deferens'], null, 'Ductus deferens: up from the epididymis, over the bladder, to its ampulla behind it. This is what a vasectomy cuts.', { alt:'ductus deferens', c:'#9be38a' }),
+  RP('seminal', 'male', 'Seminal vesicles', 160, 5, ['seminal gland'], 'The glands that give about 60 % of the semen — alkaline, with fructose and prostaglandins.', 'Behind the bladder. Their duct joins the vas deferens to make the ejaculatory duct.', { alt:'seminal glands', c:'#ffb347' }),
+  RP('ejac', 'male', 'Ejaculatory duct', 160, 0, ['ejaculatory duct'], null, 'Vas deferens + the seminal vesicle\'s duct. It runs through the prostate into the urethra.', { deep:1, c:'#ff8f6e' }),
+  RP('prostate', 'male', 'Prostate', 120, 0, ['prostate'], 'The gland that gives about 30 % of the semen — acidic, with citric acid and PSA.', 'Round the urethra just under the bladder, which is why an enlarged prostate obstructs urine.', { c:'#c58cff' }),
+  RP('urethra', 'male', 'Urethra', 100, -5, ['urethra'], null, 'The last duct, shared with urine: prostatic → membranous → penile. (It runs INSIDE the corpus spongiosum, so a tap on that counts.)', { also:['corpus spongiosum of penis', 'glans penis'], c:'#f7d06b' }),
+  RP('cavernosum', 'male', 'Corpus cavernosum', 100, 0, ['corpus cavernosum of penis'], 'In an erection, blood flow increases into these — and squashes the veins that would drain them.', 'Parasympathetic → nitric oxide → the deep artery dilates → the corpora cavernosa fill.', { c:'#e57f98' }),
+  RP('spongiosum', 'male', 'Corpus spongiosum', 100, -10, ['corpus spongiosum of penis', 'glans penis'], null, 'Surrounds the urethra and ends as the glans; it stays softer so the urethra is not squeezed shut.', { her:0, c:'#f59aa6' }),
+  RP('bladder', 'male', 'Urinary bladder', 100, 5, ['urinary bladder'], null, 'Not reproductive — it is here because the vas deferens loops over it and the prostate sits under it.', { her:0, c:'#d9c27a' }),
+];
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -490,11 +518,18 @@ export const MORE_REGIONS = {
   ear:      { model:'ear', m:[/./], pad:1.06, min:0.05 },
   earMid:   { model:'ear', m:['tympanic membrane', 'malleus', 'incus', 'stapes', 'oval window'], pad:1.5, min:0.05 },
   earIn:    { model:'ear', m:['vestibule', 'cochlea', 'semicircular canals', 'vestibulocochlear nerve'], pad:1.12, min:0.05 },
+  rpFemale: { model:'female', m:[/./], pad:1.25, min:0.05 },
+  rpMale:   { model:'male', m:[/./], pad:1.12, min:0.05 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
 export const MORE_SETS = {
+  repro: [
+    { id:'her', name:'Her list', hint:'The parts on her Module 3 revision slides (no vagina, ligaments or bulbo-urethral glands in the 3D sources)', f:i => i.her },
+    { id:'female', name:'Female', hint:'HuBMAP reference organs, placed as one set in this pelvis', f:i => i.sex === 'female' },
+    { id:'male', name:'Male', hint:'Testis, ducts and glands — with their share of the semen', f:i => i.sex === 'male' },
+  ],
   senses: [
     { id:'her', name:'Her list', hint:'The parts on her Module 3 revision slides. Schematics, not to scale', f:i => i.her },
     { id:'eye', name:'Eye', hint:'Three tunics, the lens, two humors', f:i => i.kind === 'eye' },
@@ -556,6 +591,29 @@ export const MORE_SETS = {
  *    keys "choroid plexuses; arachnoidal villi … into the sagittal sinus"). The foramina and apertures between the
  *    ventricles are not steps she asks, so they are not steps here. `context` = on stage and tappable, but not a step. ── */
 export const TRACES = {
+  repro: [
+    { id:'tr-sperm', name:'The sperm\'s path', short:'Trace the sperm', ask:'from where it is made to the outside', sex:'male', xray:false, region:'rpMale', az:100, el:0,
+      hint:'Her duct sequence: testis → epididymis → vas deferens → ejaculatory duct → urethra',
+      note:'Her slide gives: rete testis → epididymis → vas deferens → ampulla → ejaculatory duct → urethra (prostatic → membranous → penile). The rete testis and the ampulla are not separate structures in the 3D model, so they ride in the lines, not as taps.',
+      steps:[
+        { it:'rp-testis',     q:'Where are sperm MADE?', say:'Testis: seminiferous tubules (FSH) → rete testis.' },
+        { it:'rp-epididymis', q:'Which duct first — where they mature and are stored?', say:'Epididymis.' },
+        { it:'rp-vas',        q:'Then up and over the bladder in which duct?', say:'Vas (ductus) deferens → its ampulla, behind the bladder.', el:5 },
+        { it:'rp-seminal',    q:'Which glands add about 60 % of the semen here?', say:'Seminal vesicles: alkaline, fructose, prostaglandins.', az:160, el:5 },
+        { it:'rp-prostate',   q:'The duct now runs through which gland, which adds about 30 %?', say:'Ejaculatory duct, through the prostate: acidic, citric acid, PSA.', az:120 },
+        { it:'rp-urethra',    q:'…and out through?', say:'Urethra: prostatic → membranous → penile.', el:-5 },
+      ] },
+    { id:'tr-egg', name:'The egg\'s path', short:'Trace the egg', ask:'from the ovary to where an embryo is housed', sex:'female', xray:false, region:'rpFemale', az:0, el:10,
+      hint:'Ovary → fimbriae → fallopian tube → uterus',
+      note:'From her female parts-and-functions slide. The female organs are HuBMAP reference organs placed in this pelvis as one set.',
+      steps:[
+        { it:'rp-ovary',    q:'Where is the secondary oocyte released from?', say:'Ovary, at ovulation (the LH peak).' },
+        { it:'rp-fimbriae', q:'What catches it?', say:'Fimbriae on the infundibulum stroke over the ovary and catch it.' },
+        { it:'rp-ampulla',  q:'Where is it usually fertilised?', say:'In the fallopian tube (its ampulla); cilia move it along.' },
+        { it:'rp-isthmus',  q:'Through which narrow stretch next?', say:'The isthmus of the tube.' },
+        { it:'rp-uterus',   q:'…to be housed where?', say:'Uterus: the embryo implants in the endometrium.' },
+      ] },
+  ],
   senses: [
     { id:'tr-sound', name:'Sound to the cochlea', short:'Trace the sound', ask:'from the air to the hair cells', xray:false, region:'ear', az:0, el:8,
       hint:'Her numbered path: ear canal → tympanic membrane → ossicles → oval window → cochlea',

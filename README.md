@@ -235,3 +235,18 @@ comment added mid-line ate the rest of the line and the app would not boot). Use
 the rest of that line.** It broke the app once (a swallowed brace) and silently dropped a statement twice (valid syntax, so no parser
 can catch it) - one of them had been live since v1: `controls.zoomSpeed/rotateSpeed/panSpeed` sat behind a comment. Rule: a
 replacement never ends in `// ...` unless it replaces a whole line; and the files were scanned for code after `//`.
+
+## Added 21 Sep: Reproductive (Module 3) - two bodies, one pelvis
+
+- **Male** = `models/male.glb` (72 KB, `tools/export_deck.py male`): the source body's own organs + bladder and urethra.
+  **Female** = HuBMAP CCF 3D reference organs (Visible Human female, **CC BY 4.0**, files unmodified, downloaded 21 Sep with his OK
+  from `cdn.humanatlas.io/digital-objects/ref-organ/<organ>/v1.2/assets/`): `hra-uterus.glb` (980 KB), `hra-tube-l/r.glb`, and
+  the two ovaries already in the repo. The HuBMAP organs share one frame, so `MODELS.female.shift` moves them as ONE set: the
+  midpoint of the two ovaries goes to the midpoint the Glands deck gave them by hand. Relative positions real, pelvic position
+  approximate - the help sheet says exactly that. (`PLACE` is skipped for a shifted model: it had pulled the ovaries out of the set.)
+  `MODELS.x.hide` drops the uterus sub-regions that overlap its body (walls, cornua, lower segment).
+- Only one body is on stage at a time (`DECK.repro.sex` + `G.sex`): the question's `sex` decides, Explore has a Show male/female switch.
+- Her list = her Module 3 revision slides 2 and 5. Not in either source, and said so: vagina, uterine ligaments, the three uterine
+  layers, bulbo-urethral glands. The urethra runs inside the corpus spongiosum (1 % reach), so the spongiosum is `also`-accepted.
+- Traces: the sperm's path (her duct sequence, with the glands' shares of the semen) and the egg's path.
+- 19/19 Find it, 13/13 Name it (her list), both traces by real taps at 375x812.
