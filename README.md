@@ -157,3 +157,17 @@ objects (nerves, vessels), all of which are already in the exported models (chec
 - Reach at 375x812: dendrites 91, soma 85, nucleus 97, hillock 41 (its top is inside the soma), Schwann 92, node 68, terminals 90,
   presynaptic 61, cleft 56, postsynaptic 31 (its face is under the cleft; the rim and edge are what you tap). The axon's own mesh is
   8 % because it runs inside the Schwann cells - the nodes are `also`-accepted for it, and the bare ends are tappable.
+
+## Added 21 Sep: Tissues - three of her labelled figures, built
+
+- [made-tissues.js](made-tissues.js): a **synovial joint** (lathe-turned bone ends, cartilage shells, glass synovial fluid, the capsule
+  opened 124 degrees at the front with the synovial membrane as its inner surface, a ligament strap, epiphyseal plates), **compact bone**
+  (three osteons as telescopes of lamellae round a central canal; lacunae as glass pits with an osteocyte inside, canaliculi radiating;
+  artery + vein in the big one) and **skeletal muscle** pulled apart level by level (epimysium > perimysium/fascicle > endomysium/fibre >
+  sarcolemma > myofibrils). 23 named meshes, ~39k triangles, ~70 ms, no download. The three stand side by side; each question flies to
+  its own figure (regions `tsJoint`, `tsBone`, `tsOsteon`, `tsMuscle`, `tsFibre`).
+- The parts are the blanks of HER figures: joint = her six-blank label question; bone = her six-key cloze; muscle = her four-key cloze.
+  The synovial membrane is in "Everything" because it is the wrong option in her MCQ (it, not the cartilage, secretes the fluid).
+- `Fascicle` also accepts the perimysium and `Muscle fibre` also accepts the sarcolemma: tapping the wrapped bundle IS finding the bundle.
+- Reach at 375x812 (own + accepted meshes): 17-99 %. The low ones are honest: bone 17 % (most of its vertices lie under cartilage; the
+  shafts are the target), sarcolemma 19 % (a 3.6 cm band on a pulled-out fibre, framed close), canaliculi 22 % (hair-thin, but dozens).

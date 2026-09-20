@@ -254,6 +254,55 @@ export const NEURON = [
   NR('vesicles', 'Synaptic vesicles', 'synapse', ['synaptic vesicles'], { el:10, fact:'Little bags of neurotransmitter waiting in the terminal — acetylcholine at parasympathetic endings and neuromuscular end-plates.' }),
 ];
 
+/* ── Tissues: three of her figures, BUILT (made-tissues.js), declared schematics.
+ *    Synovial joint — her six blanks: articular cartilage · epiphyseal plate · synovial fluid · ligament · joint capsule · bone
+ *      (her MCQ: A = "hyaline cartilage; facilitates smooth frictionless movement"; D = "joint capsule strengthened by a ligament").
+ *    Compact bone — her cloze keys: Haversian canal · lacunae · osteocytes · arteries · veins · canaliculi.
+ *    Skeletal muscle — her cloze keys: sarcolemma · endomysium · fascicle · epimysium. ── */
+const TS = (id, kind, name, region, az, el, m, extra) => ({ id:'ts-' + id, kind, name, region, az, el, m, ...extra });
+export const TISSUES = [
+  TS('cartilage', 'joint', 'Articular cartilage', 'tsJoint', 0, 4, ['articular cartilage'], { her:1, alt:'hyaline cartilage',
+    clue:{ t:'Hyaline cartilage on the bone ends — it facilitates smooth, frictionless movement.', hers:1 }, fact:'Hyaline cartilage capping both bone ends. It is what wears away in osteoarthritis, exposing the vascular bone beneath.' }),
+  TS('plate', 'joint', 'Epiphyseal plate', 'tsJoint', 0, 4, ['epiphyseal plate'], { her:1, alt:'growth plate',
+    fact:'The band of hyaline cartilage across the end of a growing long bone — where it lengthens. Testosterone and oestrogen close it at the end of puberty.' }),
+  TS('fluid', 'joint', 'Synovial fluid', 'tsJoint', 0, 4, ['synovial fluid'], { her:1,
+    fact:'Fills the joint cavity and lubricates the joint. It is secreted by the synovial membrane — not by the cartilage.' }),
+  TS('ligament', 'joint', 'Ligament', 'tsJoint', 50, 4, ['ligament'], { her:1,
+    clue:{ t:'The band that strengthens the joint capsule, bone to bone.', hers:1 }, fact:'Bone to BONE (a tendon is muscle to bone). It reinforces the capsule.' }),
+  TS('capsule', 'joint', 'Joint capsule', 'tsJoint', 105, 4, ['joint capsule'], { her:1,
+    fact:'The fibrous sleeve enclosing the whole joint, strengthened by ligaments. Opened at the front here so you can see inside.' }),
+  TS('jbone', 'joint', 'Bone', 'tsJoint', 0, 4, ['bone'], { her:1, fact:'The two articulating bones. A synovial joint (diarthrosis) is freely movable.' }),
+  TS('membrane', 'joint', 'Synovial membrane', 'tsJoint', 0, 4, ['synovial membrane'], {
+    fact:'The inner lining of the capsule. IT secretes the synovial fluid — the wrong option in her MCQ gives that job to the cartilage.' }),
+
+  TS('osteon', 'bone', 'Osteon', 'tsBone', 20, 38, ['lamellae', 'central canal'], { her:1, alt:'Haversian system',
+    fact:'The unit of compact bone: lamellae in concentric circles around a central canal.' }),
+  TS('canal', 'bone', 'Central canal', 'tsBone', 20, 50, ['central canal'], { her:1, alt:'Haversian canal',
+    clue:{ t:'The canal at the centre of each osteon, which the lamellae circle.', hers:1 }, fact:'Haversian canal. It carries the arteries, veins (and nerves) that supply the osteon.' }),
+  TS('lamellae', 'bone', 'Lamellae', 'tsBone', 20, 38, ['lamellae'], { fact:'Concentric rings of bone matrix — a very orderly tissue. Drawn here as a telescope so each ring shows.' }),
+  TS('lacunae', 'bone', 'Lacunae', 'tsOsteon', 20, 55, ['lacunae'], { her:1,
+    clue:{ t:'The small spaces in which the bone cells are found.', hers:1 }, fact:'Little spaces between the lamellae. Each one holds an osteocyte.' }),
+  TS('osteocytes', 'bone', 'Osteocytes', 'tsOsteon', 20, 55, ['osteocytes'], { her:1,
+    clue:{ t:'The bone cells, sitting in their spaces, tasked with maintaining bone tissue.', hers:1 }, fact:'Mature bone cells, one in each lacuna. (Osteoblasts build, osteoclasts resorb, osteocytes maintain.)' }),
+  TS('canaliculi', 'bone', 'Canaliculi', 'tsOsteon', 20, 55, ['canaliculi'], { her:1,
+    clue:{ t:'The small canals in the lamellae that keep the bone tissue connected and perfused.', hers:1 }, fact:'Hair-fine canals joining lacuna to lacuna and to the central canal, so every osteocyte is fed.' }),
+  TS('artery', 'bone', 'Artery', 'tsOsteon', 20, 30, ['artery'], { her:1, sub:'in the central canal',
+    fact:'In the Haversian canal: brings nutrients and oxygen to the osteocytes.' }),
+  TS('vein', 'bone', 'Vein', 'tsOsteon', 20, 30, ['vein'], { her:1, sub:'in the central canal', fact:'In the Haversian canal: takes waste away.' }),
+
+  TS('epimysium', 'muscle', 'Epimysium', 'tsMuscle', 0, 22, ['epimysium'], { her:1,
+    clue:{ t:'The sheath that holds the various fascicles together — around the whole muscle.', hers:1 }, fact:'EPI = upon: the outer wrapping of the whole muscle.' }),
+  TS('perimysium', 'muscle', 'Perimysium', 'tsMuscle', 0, 22, ['perimysium'], { fact:'PERI = around: the wrapping of each fascicle.' }),
+  TS('fascicle', 'muscle', 'Fascicle', 'tsMuscle', 0, 40, ['fascicle'], { her:1, also:['perimysium'],
+    clue:{ t:'A bundle of muscle fibres held together.', hers:1 }, fact:'A bundle of muscle fibres. Many fascicles make the muscle. (One is pulled out here.)' }),
+  TS('endomysium', 'muscle', 'Endomysium', 'tsFibre', 0, 25, ['endomysium'], { her:1,
+    clue:{ t:'The fine sheath that holds the individual muscle fibres together within a fascicle.', hers:1 }, fact:'ENDO = within: the wrapping of each single muscle fibre.' }),
+  TS('fibre', 'muscle', 'Muscle fibre', 'tsFibre', 0, 50, ['muscle fibre'], { alt:'muscle cell', also:['sarcolemma'], fact:'One muscle CELL — long, cylindrical, many nuclei. It is packed with myofibrils.' }),
+  TS('sarcolemma', 'muscle', 'Sarcolemma', 'tsFibre', 0, 15, ['sarcolemma'], { her:1,
+    clue:{ t:'The cell membrane that surrounds a skeletal muscle fibre.', hers:1 }, fact:'The muscle fibre\'s own cell membrane — inside the endomysium.' }),
+  TS('myofibrils', 'muscle', 'Myofibrils', 'tsFibre', 0, 15, ['myofibrils'], { fact:'The contractile threads inside the fibre, made of sarcomeres (actin + myosin) end to end.' }),
+];
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -263,11 +312,24 @@ export const MORE_REGIONS = {
   nrAxon:  { model:'neuron', m:['axon', 'schwann cell', 'axon hillock'], pad:1.12, min:0.05 },
   nrEnd:   { model:'neuron', m:['axon terminals', 'postsynaptic cell'], pad:1.2, min:0.05 },
   synapse: { model:'neuron', m:[/synaptic|^receptors$|^postsynaptic cell$/], pad:1.7, min:0.05 },
+  tissues:  { model:'tissues', m:[/./], pad:1.04, min:0.05 },
+  tsJoint:  { model:'tissues', m:['bone', 'joint capsule', 'ligament'], pad:1.08, min:0.05 },
+  tsBone:   { model:'tissues', m:['compact bone', 'lamellae', 'artery'], pad:1.15, min:0.05 },
+  tsOsteon: { model:'tissues', m:['artery', 'vein'], pad:2.3, min:0.05 },      // the big middle osteon, from close in: a lacuna is 7 mm
+  tsMuscle: { model:'tissues', m:['epimysium', 'perimysium', 'myofibrils'], pad:1.08, min:0.05 },
+  tsFibre:  { model:'tissues', m:['sarcolemma', 'myofibrils', 'muscle fibre'], pad:1.25, min:0.05 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
 export const MORE_SETS = {
+  tissues: [
+    { id:'her', name:'Her list', hint:'The blanks of her three figures. Schematics, not to scale', f:i => i.her },
+    { id:'joint', name:'Synovial joint', hint:'Her six-blank label question', f:i => i.kind === 'joint' },
+    { id:'bone', name:'Compact bone', hint:'The osteon: her six-blank cloze', f:i => i.kind === 'bone' },
+    { id:'muscle', name:'Muscle', hint:'Muscle, fascicle, fibre and their three wrappings', f:i => i.kind === 'muscle' },
+    { id:'all', name:'Everything', hint:'All of it', f:() => true },
+  ],
   neuron: [
     { id:'her', name:'Her list', hint:'Her ten-point match. A schematic, not to scale', f:i => i.her },
     { id:'all', name:'Everything', hint:'Adds the nucleus and the vesicles', f:() => true },
