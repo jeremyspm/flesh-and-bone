@@ -1,0 +1,132 @@
+# regions.glb — 0.7 MB, 131 unique structures (name <tab> sides <tab> source material)
+Epigastric region	[LR]	Skin-7
+Hypochondriac region	[LR]	Skin-8
+Hypogastric region	[LR]	Skin-2
+Inguinal region	[LR]	Skin-2
+Lateral region of abdomen	[LR]	Skin-8
+Umbilicus	[LR]	Skin-7
+Umbilical region	[LR]	Skin-7
+Infrascapular region	[LR]	Skin-7
+Interscapular region	[LR]	Skin-7
+Lumbar region	[LR]	Skin-7
+Sacral region	[LR]	Skin-1
+Scapular region	[LR]	Skin-3
+Triangle of auscultation	[LR]	Skin-7
+Vertebral region	[LR]	Skin-1
+Femoral triangle	[LR]	Skin-1
+Anterior region of thigh	[LR]	Skin-1
+Posterior region of thigh	[LR]	Skin-2
+Gluteal fold	[LR]	Skin-2
+Gluteal region	[LR]	Skin-1
+Anterior region of knee	[LR]	Skin-1
+Popliteal fossa	[LR]	Skin-1
+Posterior region of knee	[LR]	Skin-2
+Hip region	[LR]	Skin-4
+Anterior region of leg	[LR]	Skin-2
+Posterior region of leg	[LR]	Skin-3
+Dorsum of foot	[LR]	Skin-2
+Heel region	[LR]	Skin-1
+Lateral border of foot	[LR]	Skin-6
+Medial border of foot	[LR]	Skin-1
+Hallucial eminence	[LR]	Skin-2
+Metatarsal region	[LR]	Skin-2
+Dorsal surfaces of digits of foot	[LR]	Skin-2
+Plantar surfaces of digits of foot	[LR]	Skin-1
+Distal transverse arch of foot	[LR]	Skin-1
+Medial part of longitudinal arch of foot	[LR]	Skin-1
+Proximal transverse arch of foot	[LR]	Skin-1
+Lateral part of longitudinal arch of foot	[LR]	Skin-1
+Sole	[LR]	Skin-1
+Anterior region of ankle	[LR]	Skin-2
+Lateral malleolus	[LR]	Skin-2
+Medial malleolus	[LR]	Skin-2
+Lateral retromalleolar region	[LR]	Skin-3
+Medial retromalleolar region	[LR]	Skin-6
+Anal region	[LR]	Skin-2
+Urogenital region	[LR]	Skin-1
+Deltopectoral triangle	[LR]	Skin-4
+Infraclavicular fossa	[LR]	Skin-4
+Inframammary region	[LR]	Skin-7
+Mammary region	[LR]	Skin-7
+Pectoral region	[LR]	Skin-7
+Presternal region	[LR]	Skin-4
+Lateral region of thorax	[LR]	Skin-8
+Anterior region of forearm	[LR]	Skin-1
+Lateral border of forearm	[LR]	Skin-1
+Posterior region of forearm	[LR]	Skin-1
+Medial border of forearm	[LR]	Skin-5''
+Lateral bicipital groove	[LR]	Skin-1
+Medial bicipital groove	[LR]	Skin-5
+Anterior region of arm	[LR]	Skin-1
+Posterior region of arm	[LR]	Skin-1
+Anterior region of wrist	[LR]	Skin-6
+Posterior region of wrist	[LR]	Skin-1
+Radial foveola	[LR]	Skin-1
+Cubital fossa	[LR]	Skin-3
+Anterior region of elbow	[LR]	Skin-1
+Posterior region of elbow	[LR]	Skin-1
+Deltoid region	[LR]	Skin-3
+Dorsum of hand	[LR]	Skin-1
+Dorsal surfaces of digits of hand	[LR]	Skin-1
+Palmar surfaces of digits of hand	[LR]	Skin-2
+Palm	[LR]	Skin-2
+Anterior notch of auricle	[LR]	Skin-2
+Antihelix	[LR]	Skin-2
+Antitragus	[LR]	Skin-2
+Apex of auricle	[LR]	Skin-2
+Auricular region	[LR]	Skin-2
+Auricular tubercle	[LR]	Skin-2
+Cavity of concha	[LR]	Skin-2
+Concha of auricle	[LR]	Skin-2
+Crura of antihelix	[LR]	Skin-2
+Cymba conchae	[LR]	Skin-2
+Eminentia conchae	[LR]	Skin-2
+Eminentia fossae triangularis	[LR]	Skin-2
+Eminentia scaphae	[LR]	Skin-2
+Fossa antihelica	[LR]	Skin-2
+Helix	[LR]	Skin-2
+Intertragic incisure	[LR]	Skin-2
+Lobule of auricle	[LR]	Skin-2
+Posterior auricular groove	[LR]	Skin-2
+Scapha	[LR]	Skin-2
+Tragus	[LR]	Skin-2
+Triangular fossa	[LR]	Skin-2
+Buccal region	[LR]	Skin-5'
+Infra-orbital region	[LR]	Skin-5'
+Mental region	[LR]	Skin-5''
+Nasal region	[LR]	Skin-5
+Angle of mouth	[LR]	Skin-5'
+Labial commissure	[LR]	Skin-5'
+Philtrum	[LR]	Skin-5'
+Tubercle of upper lip	[LR]	Skin-5'
+Oral region	[LR]	Skin-5'
+Orbital region	[LR]	Skin-5
+Parotideomasseteric region	[LR]	Skin-5''
+Mentolabial sulcus	[LR]	Skin-5''
+Nasolabial sulcus	[LR]	Skin-5'
+Zygomatic region	[LR]	Skin-5'
+Eyebrow	[LR]	Skin-5
+Frontal region	[LR]	Skin-5
+Mastoid region	[LR]	Skin-2
+Occipital region	[LR]	Skin-3
+Parietal region	[LR]	Skin-5
+Temporal region	[LR]	Skin-2
+Carotid triangle	[LR]	Skin-2
+Muscular triangle	[LR]	Skin-2
+Submandibular triangle	[LR]	Skin-2
+Submental triangle	[LR]	Skin-2
+Greater supraclavicular fossa	[LR]	Skin-4
+Lateral region of neck	[LR]	Skin-4
+Posterior region of neck	[LR]	Skin-3
+Lesser supraclavicular fossa	[LR]	Skin-4
+Sternocleidomastoid region	[LR]	Skin-2
+Anterior axillary line	[LR]	Lines
+Anterior median line	[-]	
+Mamillary line	[LR]	
+Midclavicular line	[LR]	
+Parasternal line	[LR]	
+Paravertebral line	[LR]	
+Posterior axillary line	[LR]	Skin-2
+Posterior median line	[-]	
+Scapular line	[LR]	
+Sternal line	[LR]	

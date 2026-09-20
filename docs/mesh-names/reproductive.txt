@@ -1,0 +1,10 @@
+# reproductive.glb — 0.1 MB, 9 unique structures (name <tab> sides <tab> source material)
+Corpus cavernosum of penis	[-]	Mucosa
+Corpus spongiosum of penis	[-]	Mucosa
+Glans penis	[-]	Mucosa
+Ductus deferens	[LR]	Ductus
+Ejaculatory duct	[LR]	Ductus
+Epididymis	[LR]	Gland
+Prostate	[-]	Gland
+Seminal gland	[LR]	Gland
+Testis	[LR]	Mucosa

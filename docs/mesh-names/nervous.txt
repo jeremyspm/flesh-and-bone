@@ -1,0 +1,458 @@
+# nervous.glb — 6.2 MB, 457 unique structures (name <tab> sides <tab> source material)
+Fourth ventricle	[-]	LCR
+Olive	[LR]	Nucleus
+Pyramid of medulla oblongata	[LR]	Nucleus
+Medulla oblongata	[LR]	Brain
+Anterior cochlear nucleus	[LR]	Nucleus (afferent fibers)
+Inferior salivatory nucleus	[LR]	Nucleus (efferent fibers)
+Nucleus ambiguus	[LR]	Nucleus (efferent fibers)
+Nucleus of hypoglossal nerve	[LR]	Nucleus (efferent fibers)
+Nucleus of solitary tract	[LR]	Nucleus (afferent fibers)
+Posterior cochlear nucleus	[LR]	Nucleus (afferent fibers)
+Posterior nucleus of vagus nerve	[LR]	Nucleus (efferent fibers)
+Aqueduct of midbrain	[-]	LCR
+Base of peduncle	[LR]	Brain
+Nucleus of trochlear nerve	[LR]	Nucleus (efferent fibers)
+Accessory nucleus of oculomotor nerve	[LR]	Nucleus (efferent fibers)
+Nucleus of oculomotor nerve	[LR]	Nucleus (efferent fibers)
+Red nucleus	[LR]	Nucleus
+Interpeduncular fossa	[LR]	Brain
+Midbrain	[LR]	Frontal lobe
+Inferior colliculus	[LR]	Nucleus
+Superior colliculus	[LR]	Nucleus
+Pons	[LR]	Brain
+Motor nucleus of facial nerve	[LR]	Nucleus (efferent fibers)
+Nucleus of abducens nerve	[LR]	Nucleus (efferent fibers)
+Superior salivatory nucleus	[LR]	Nucleus (efferent fibers)
+Vestibular nuclei	[LR]	Nucleus (afferent fibers)
+Anterior quadrangular lobule	[LR]	Cerebellum
+Biventral lobule	[LR]	Cerebellum
+Central lobule	[-]	Cerebellum
+Culmen	[-]	Cerebellum
+Declive	[-]	Cerebellum
+Flocculus	[LR]	Cerebellum
+Folium of vermis	[-]	Cerebellum
+Gracile lobule	[LR]	Cerebellum
+Inferior semilunar lobule	[LR]	Cerebellum
+Lingula of cerebellum	[-]	Cerebellum
+Nodule of vermis	[-]	Cerebellum
+Peduncle of flocculus	[LR]	Cerebellum
+Posterior quadrangular lobule	[LR]	Cerebellum
+Pyramis of vermis	[-]	Cerebellum
+Superior cerebellar peduncle	[LR]	Cerebellum
+Superior semilunar lobule	[LR]	Cerebellum
+Tonsil of cerebellum	[LR]	Cerebellum
+Tuber of vermis	[-]	Cerebellum
+Uvula of vermis	[-]	Cerebellum
+Wing of central lobule	[LR]	Cerebellum
+Habenula	[-]	Nucleus
+Hypothalamus	[-]	White matter
+Lateral geniculate body	[LR]	Nucleus
+Mamillary body	[LR]	Nucleus
+Medial geniculate body	[LR]	Nucleus
+Optic chiasm	[LR]	Nerve
+Optic tract	[LR]	Nerve
+Thalamus	[LR]	Nucleus
+Third ventricle	[-]	LCR
+Posterior commissure	[-]	White matter
+Stria medullaris thalami	[LR]	White matter
+Amygdaloid body	[LR]	Nucleus
+Septal nuclei	[-]	Nucleus
+Caudate nucleus	[LR]	Nucleus
+Putamen	[LR]	Nucleus
+Globus pallidus	[LR]	Nucleus
+Lentiform nucleus	[LR]	Nucleus
+Lat_Fis-ant-Horizont	[LR]	Frontal lobe
+Lat_Fis-ant-Vertical	[LR]	Frontal lobe
+Middle frontal gyrus	[LR]	Frontal lobe
+Orbital gyri (Frontomarginal gyrus and sulcus*)	[LR]	Frontal lobe
+Orbital gyri	[LR]	Frontal lobe
+Orbital part of  inferior frontal gyrus	[LR]	Frontal lobe
+Orbital sulci (H-shaped orbital sulci*)	[LR]	Frontal lobe
+Orbital sulci (Lateral Orbital sulcus*)	[LR]	Frontal lobe
+Paracentral gyrus and sulcus*	[LR]	Frontal lobe
+Precentral gyrus	[LR]	Frontal lobe
+Inferior frontal sulcus	[LR]	Frontal lobe
+Olfactory sulcus	[LR]	Frontal lobe
+Opercular part of inferior frontal gyrus	[LR]	Frontal lobe
+Paracentral sulcus	[LR]	Frontal lobe
+Precentral sulcus (inferior part)*	[LR]	Frontal lobe
+Precentral sulcus (Superior part)*	[LR]	Frontal lobe
+Straight gyrus (Gyrus rectus)	[LR]	Frontal lobe
+Superior frontal gyrus	[LR]	Frontal lobe
+Superior frontal sulcus	[LR]	Frontal lobe
+Transverse frontopolar gyrus and sulcus*	[LR]	Frontal lobe
+Triangular part of inferior frontal gyrus	[LR]	Frontal lobe
+Insula (Subcentral gyrus and ant. and post. sulci*)	[LR]	Insula
+Posterior transverse collateral sulcus	[LR]	Interlobar sulci
+Anterior occipital sulcus*	[LR]	Interlobar sulci
+Central sulcus	[LR]	Interlobar sulci
+Circular sulcus of insula	[LR]	Interlobar sulci
+Collateral sulcus	[LR]	Interlobar sulci
+Lat_Fis-post	[LR]	Interlobar sulci
+Parieto-occipital sulcus	[LR]	Interlobar sulci
+Subparietal sulcus	[LR]	Interlobar sulci
+Sulcus interm_prim-Jensen	[LR]	Interlobar sulci
+Lateral ventricle	[LR]	LCR
+Cingulate gyrus (Posteroventral part*)	[LR]	Limbic lobe
+Cingulate gyrus and sulcus (Middle anterior part)	[LR]	Limbic lobe
+Cingulate gyrus and sulcus (Middle posterior part)	[LR]	Limbic lobe
+Cingulate gyrus and sulcus (Posterior dorsal part)	[LR]	Limbic lobe
+Cingulate sulcus (Marginal part*)	[LR]	Interlobar sulci
+Hippocampus	[LR]	Nucleus
+Calcarine sulcus	[LR]	Occipital lobe
+Cuneus	[LR]	Occipital lobe
+Inferior occipital gyrus and sulcus*	[LR]	Occipital lobe
+Lateral occipital gyrus (Middle occipital gyrus*)	[LR]	Occipital lobe
+Lingual gyrus	[LR]	Occipital lobe
+Lunate sulcus	[LR]	Occipital lobe
+Occipital pole	[LR]	Occipital lobe
+Superior occipital gyri	[LR]	Occipital lobe
+Transverse occipital sulcus	[LR]	Occipital lobe
+Angular gyrus	[LR]	Parietal lobe
+Postcentral gyrus	[LR]	Parietal lobe
+Precuneus	[LR]	Parietal lobe
+Intraparietal sulcus	[LR]	Parietal lobe
+Postcentral sulcus	[LR]	Parietal lobe
+Superior parietal lobule	[LR]	Parietal lobe
+Supramarginal gyrus	[LR]	Parietal lobe
+Inferior temporal gyrus	[LR]	Temporal lobe
+Lateral occipitotemporal gyrus	[LR]	Temporal lobe
+Medial occipitotemporal gyrus (Parahippocampal*)	[LR]	Temporal lobe
+Middle temporal gyrus	[LR]	Temporal lobe
+Occipitotemporal sulcus (Lateral part*)	[LR]	Temporal lobe
+Inferior temporal sulcus	[LR]	Temporal lobe
+Superior temporal gyrus (Lateral part)	[LR]	Temporal lobe
+Superior temporal sulcus	[LR]	Temporal lobe
+Temporal plane	[LR]	Temporal lobe
+Temporal pole	[LR]	Temporal lobe
+Transverse temporal gyri	[LR]	Temporal lobe
+Septum pellucidum	[-]	White matter
+Stria terminalis	[LR]	Nerve
+Anterior commissure	[-]	White matter
+Corpus callosum	[-]	Frontal lobe
+Hippocampal commissure	[-]	White matter
+Fornix	[LR]	White matter
+White matter of telencephalon	[LR]	White matter
+Falx cerebri	[-]	Cartilage
+Tentorium cerebelli	[LR]	Cartilage
+Spinal dura	[-]	Fascia
+Choroid plexus	[LR]	Artery
+Central canal	[-]	LCR
+Central canal'	[-]	LCR
+Anterior horn of spinal cord	[-]	Brain-Inner
+Nucleus of accessory nerve	[LR]	Brain-Inner
+Intermediolateral nucleus	[-]	White matter
+Intermediomedial nucleus	[-]	White matter
+Lateral intermediate substance	[-]	Brain-Inner
+Nucleus proprius	[-]	White matter
+Posterior horn of spinal cord	[-]	Brain-Inner
+Spinal reticular process	[-]	White matter
+Anterior corticospinal tract	[-]	White matter
+Anterior fasciculus proprius	[-]	Brain
+Lateral vestibulospinal tract	[-]	White matter
+Medial reticulospinal tract	[-]	White matter
+Medial vestibulospinal tract	[-]	White matter
+Tectospinal tract	[-]	White matter
+Anterior spinothalamic tract	[-]	White matter
+Lateral spinothalamic tract	[-]	White matter
+Spinotectal tract	[-]	White matter
+Anterior spinocerebellar tract	[-]	White matter
+Lateral corticospinal tract	[-]	White matter
+Lateral fasciculus proprius	[-]	Brain
+Lateral reticulospinal tract	[-]	White matter
+Posterior spinocerebellar tract	[-]	White matter
+Rubrospinal tract	[-]	White matter
+Cuneate fasciculus	[-]	White matter
+Gracile fasciculus	[-]	White matter
+Posterior fasciculus proprius	[-]	Brain
+Posterolateral tract	[-]	White matter
+White matter of spinal cord	[-]	White matter
+Sympathetic nerves	[LR]	Nerve-4
+Ganglia of sympathetic trunk	[LR]	Nerve-4
+Sympathetic trunk	[LR]	Nerve-4
+Abducens nerve (VI)	[LR]	Nerve-6
+Chorda tympani	[LR]	Nerve
+Facial nerve (VII)	[LR]	Nerve-4
+Glossopharyngeal nerve (IX)	[LR]	Nerve-1
+Hypoglossal nerve (XII)	[LR]	Bone-4
+Oculomotor nerve (III)	[LR]	Nerve-3
+Olfactory nerve (I)	[LR]	Nerve-1
+Optic nerve (II)	[LR]	Nerve-2
+Meningeal branch of maxillary nerve	[LR]	Nerve-5
+Maxillary nerve	[LR]	Nerve-5
+Motor root of trigeminal nerve	[LR]	Nerve-5
+Ophthalmic nerve	[LR]	Nerve-5
+Sensory root of trigeminal nerve	[LR]	Nucleus (afferent fibers)
+Trigeminal nerve (V)	[LR]	Nerve-5
+Buccal nerve	[LR]	Nerve-5
+Anterior division of mandibular nerve	[LR]	Nerve-5
+Mental nerve	[LR]	Nerve-5
+Nerve to mylohyoid muscle	[LR]	Nerve-5
+Inferior alveolar nerve	[LR]	Nerve-5
+Lingual nerve	[LR]	Nerve-5
+Posterior division of mandibular nerve	[LR]	Nerve-5
+Trochlear nerve (IV)	[LR]	Nerve-4
+Vagus nerve (X)	[LR]	Nerve-2
+Cochlear nerve	[-L]	Nerve-8
+Vestibular nerve	[LR]	Nerve-8
+Vestibulocochlear nerve (VIII)	[LR]	Nerve-8
+Spinal ganglion	[LR]	Nerve
+Cauda equina	[-]	Nerve
+Anterior root of spinal nerve	[LR]	Nerve
+Lateral pectoral nerve	[LR]	Nerve-3
+Lateral antebrachial cutaneous nerve	[LR]	Nerve-4
+Musculocutaneous nerve	[LR]	Nerve-4
+Anterior branch of medial antebrachial cutaneous nerve	[LR]	Nerve-5
+Posterior branch of medial antebrachial cutaneous nerve	[LR]	Nerve-5
+Medial antebrachial cutaneous nerve	[LR]	Nerve-5
+Medial brachial cutaneous nerve	[LR]	Nerve-8
+Medial pectoral nerve	[LR]	Nerve
+Deep branch of ulnar nerve	[LR]	Nerve-6
+Dorsal digital branches of ulnar nerve	[LR]	Nerve-6
+Dorsal branch of ulnar nerve	[LR]	Nerve-6
+Muscular branches of ulnar nerve	[LR]	Nerve-6
+Palmar branch of ulnar nerve	[LR]	Nerve-6
+Proper palmar digital branches of ulnar nerve	[LR]	Nerve-6
+Common palmar digital branches of ulnar nerve	[LR]	Nerve-6
+Superficial branch of ulnar nerve	[LR]	Nerve-6
+Ulnar nerve	[LR]	Nerve-6
+Muscular branches of axillary nerve	[LR]	Nerve-3
+Superior lateral brachial cutaneous nerve	[LR]	Nerve-3
+Axillary nerve	[LR]	Nerve-3
+Inferior subscapular nerve	[LR]	Nerve-1
+Posterior interosseous nerve of forearm	[LR]	Nerve-1
+Deep branch of radial nerve	[LR]	Nerve-1
+Inferior lateral brachial cutaneous nerve	[LR]	Nerve-1
+Muscular branches of radial nerve	[LR]	Nerve-1
+Posterior antebrachial cutaneous nerve	[LR]	Nerve-1
+Dorsal digital branches of radial nerve	[LR]	Nerve-2
+Superficial branch of radial nerve	[LR]	Nerve-1
+Radial nerve	[LR]	Nerve-1
+Superior subscapular nerve	[LR]	Nerve-1
+Thoracodorsal nerve	[LR]	Nerve-1
+(Communicating branch of median nerve with ulnar nerve)	[LR]	Nerve-2
+Anterior interosseous nerve of forearm	[LR]	Nerve-2
+Proper palmar digital branches of median nerve	[LR]	Nerve-2
+Common palmar digital branches of median nerve	[LR]	Nerve-2
+Muscular branches of median nerve	[LR]	Nerve-2
+Palmar branch of median nerve	[LR]	Nerve-2
+Median nerve	[LR]	Nerve-2
+Posterior cord of brachial plexus	[LR]	Nerve-1
+Dorsal scapular nerve	[LR]	Nerve-5
+Long thoracic nerve	[LR]	Nerve-4
+Subclavian nerve	[LR]	Nerve
+Suprascapular nerve	[LR]	Nerve-4
+Anterior division of inferior trunk of brachial plexus	[LR]	Nerve-6
+Posterior division of inferior trunk of brachial plexus	[LR]	Nerve-3
+Inferior trunk of brachial plexus	[LR]	Nerve
+Anterior division of middle trunk of brachial plexus	[LR]	Nerve-3
+Posterior division of middle trunk of brachial plexus	[LR]	Nerve-1
+Middle trunk of brachial plexus	[LR]	Nerve
+Roots of brachial plexus	[LR]	Nerve
+Anterior division of superior trunk of brachial plexus	[LR]	Nerve-3
+Posterior division of superior trunk of brachial plexus	[LR]	Nerve-1
+Superior trunk of brachial plexus	[LR]	Nerve
+Accessory nerve (XI)	[LR]	Nerve-3
+Ilio-inguinal nerve	[LR]	Nerve-5
+Iliohypogastric nerve	[LR]	Nerve-2
+Femoral branch of genitofemoral nerve	[LR]	Nerve-8
+Genital branch of genitofemoral nerve	[LR]	Nerve-8
+Genitofemoral nerve	[LR]	Nerve-8
+Anterior branch of obturator nerve	[LR]	Nerve-6
+Posterior branch of obturator nerve	[LR]	Nerve-6
+Obturator nerve	[LR]	Nerve-6
+Anterior cutaneous branches of femoral nerve	[LR]	Nerve-2
+Infrapatellar branch of saphenous nerve	[LR]	Nerve-5
+Medial crural cutaneous branches of saphenous nerve	[LR]	Nerve-3
+Saphenous nerve	[LR]	Nerve-5
+Femoral nerve	[LR]	Nerve-2
+Lateral femoral cutaneous nerve	[LR]	Nerve-4
+Anterior root of posterior femoral cutaneous nerve	[LR]	Nerve-1
+Nerve to piriformis muscle	[LR]	Nerve-1
+Nerve to quadratus femoris muscle	[LR]	Nerve
+Posterior femoral cutaneous nerve	[LR]	Nerve-1
+Posterior root of posterior femoral cutaneous nerve	[LR]	Nerve
+Dorsal digital branches of deep fibular nerve	[LR]	Nerve-2
+Muscular branches of deep fibular nerve	[LR]	Nerve-2
+Deep fibular nerve	[LR]	Nerve-2
+Dorsal digital branches of superficial fibular nerve	[LR]	Nerve-2
+Intermediate dorsal cutaneous nerve of foot	[LR]	Nerve-2
+Medial dorsal cutaneous nerve of foot	[LR]	Nerve-2
+Superficial fibular nerve	[LR]	Nerve-2
+Sural communicating branch of common fibular nerve	[LR]	Nerve-2
+Common fibular nerve	[LR]	Nerve-2
+Proper plantar digital branches of lateral plantar nerve	[LR]	Nerve-1
+Common plantar digital branches of lateral plantar nerve	[LR]	Nerve-1
+Lateral plantar nerve	[LR]	Nerve-1
+Proper plantar digital branches of medial plantar nerve	[LR]	Nerve-1
+Common plantar digital branches of medial plantar nerve	[-L]	Nerve-1
+Medial plantar nerve	[LR]	Nerve-1
+Sural nerve	[LR]	Nerve-8
+Medial sural cutaneous nerve	[LR]	Nerve-6
+Tibial nerve	[LR]	Nerve-6
+Sciatic nerve	[LR]	Nerve-1
+Pudendal nerve	[LR]	Nerve
+Superior gluteal nerve	[LR]	Nerve-1
+Posterior root of spinal nerve	[LR]	Nerve
+Intercostal nerves	[LR]	Nerve-8
+Tympanic membrane	[LR]	Ligament
+Cochlea	[LR]	Bone-1
+Vestibule	[LR]	Bone-1
+Auditory tube	[LR]	Cartilage
+Ampulla of lacrimal canaliculus	[LR]	Mucosa
+Lacrimal canaliculus	[LR]	Mucosa
+Lacrimal gland	[LR]	Gland
+Lacrimal sac	[LR]	Mucosa
+Nasolacrimal duct	[LR]	Mucosa
+Suspensory ligament of eyeball	[LR]	Ligament
+Anterior chamber of eyeball	[LR]	Cornea
+Zonular fibres	[LR]	Orbicularis/Constrictor
+Anterior segment of eyeball	[LR]	Eye
+Cornea	[LR]	Cornea
+Iris	[LR]	Iris
+Lens	[LR]	Cornea
+Vitreous body	[LR]	Cornea
+Posterior segment of eyeball	[LR]	Eye
+Retina	[LR]	Iris
+Sclera	[LR]	Eye
+Nervous system & Sense organs.g	[-]	Text
+Sternocleidomastoid muscle	[LR]	Internal rotator
+Anterior belly of digastric muscle	[LR]	Ingestion
+Posterior belly of digastric muscle	[LR]	Ingestion
+Mylohyoid muscle	[LR]	Masticator
+Stylohyoid muscle	[LR]	Levator
+Common tendinous ring	[LR]	Tendon
+Inferior oblique muscle	[LR]	Adductor
+Inferior rectus muscle	[LR]	Flexion
+Inferior tarsus	[LR]	Cartilage
+Levator palpebrae superioris	[LR]	Levator
+Medial rectus muscle	[LR]	Internal rotator
+Superior rectus muscle	[LR]	Extension
+Superior tarsus	[LR]	Cartilage
+Deep part of masseter	[LR]	Flexion
+Inferior head of lateral pterygoid muscle	[LR]	Adductor
+Medial pterygoid muscle	[LR]	Flexion
+Superficial part of masseter	[LR]	Flexion
+Superior head of lateral pterygoid muscle	[LR]	Adductor
+Temporalis muscle	[LR]	Flexion
+Genioglossus muscle	[LR]	Ingestion
+Hyoglossus muscle	[LR]	Ingestion
+Epicranial aponeurosis	[LR]	Tendon
+Frontalis muscle	[LR]	Superficial
+Occipitalis muscle	[LR]	Superficial
+Temporoparietalis muscle	[LR]	Superficial
+Bucinator	[LR]	Adductor
+Corrugator supercilii	[LR]	Adductor
+Depressor anguli oris	[LR]	Depressor
+Depressor labii inferioris	[LR]	Depressor
+Depressor septi nasi	[LR]	Depressor
+Levator anguli oris	[LR]	Levator
+Levator labii superioris	[LR]	Levator
+Levator nasolabialis	[LR]	Levator
+Mentalis muscle	[LR]	Depressor
+Nasalis muscle	[LR]	Superficial
+Orbicularis oris muscle	[LR]	Orbicularis/Constrictor
+Procerus muscle	[LR]	Depressor
+Risorius muscle	[LR]	Abductor
+Orbital part of orbicularis oculi	[LR]	Orbicularis/Constrictor
+Palpebral part of orbicularis oculi	[LR]	Orbicularis/Constrictor
+Zygomaticus major muscle	[LR]	Abductor
+Zygomaticus minor muscle	[LR]	Abductor
+Levator scapulae	[LR]	Levator
+Rhomboid major muscle	[LR]	Adductor
+Rhomboid minor muscle	[LR]	Adductor
+Ascending part of trapezius muscle	[LR]	Abductor
+Descending part of trapezius muscle	[LR]	External rotation
+Transverse part of trapezius muscle	[LR]	External rotation
+Tendon of extensor digitorum longus	[LR]	Tendon
+Extensor digitorum longus	[LR]	Extensor extremities
+Extensor hallucis longus	[LR]	Extensor extremities
+Fibularis tertius muscle	[LR]	Extension hand/foot
+Tibialis anterior muscle	[LR]	Flexion hand/foot
+Rectus femoris muscle	[LR]	Biarticular
+Sartorius muscle	[LR]	Adductor
+Vastus intermedius muscle	[LR]	Extension
+Vastus lateralis muscle	[LR]	Extension
+Vastus medialis muscle	[LR]	Extension
+Obturator internus	[LR]	Internal rotator
+Iliacus muscle	[LR]	Flexion
+Fibularis brevis muscle	[LR]	Extension hand/foot
+Fibularis longus muscle	[LR]	External rotation
+Adductor brevis	[LR]	Adductor
+Adductor longus	[LR]	Adductor
+Adductor magnus	[LR]	Adductor
+Gracilis muscle	[LR]	Adductor
+Pectineus muscle	[LR]	External rotation
+(Opponens digiti minimi muscle of foot)	[LR]	Adductor
+Abductor digiti minimi of foot	[LR]	Abductor
+Abductor hallucis	[LR]	Abductor
+Oblique head of adductor hallucis	[LR]	Adductor
+Transverse head of adductor hallucis	[LR]	Adductor
+Dorsal interossei muscles of foot	[LR]	Abductor
+Extensor digitorum brevis	[LR]	Extensor extremities
+Extensor hallucis brevis	[LR]	Extensor extremities
+Flexor digiti minimi of foot	[LR]	Flexion fingers
+Flexor digitorum brevis	[LR]	Flexion fingers
+Lateral head of flexor hallucis brevis	[LR]	Flexion fingers
+Medial head of flexor hallucis brevis	[LR]	Flexion fingers
+Lumbrical muscles of foot	[LR]	Flexion fingers
+Plantar interossei muscles	[LR]	Adductor
+Quadratus plantae muscle	[LR]	Flexion fingers
+Flexor digitorum longus	[LR]	Flexion fingers
+Flexor hallucis longus	[LR]	Flexion fingers
+Popliteus muscle	[LR]	External rotation
+Tibialis posterior muscle	[LR]	Extension hand/foot
+Calcaneal tendon	[LR]	Tendon
+Lateral head of gastrocnemius	[LR]	Biarticular
+Medial head of gastrocnemius	[LR]	Biarticular
+Plantaris muscle	[LR]	Biarticular
+Soleus muscle	[LR]	Extension hand/foot
+Long head of biceps femoris	[LR]	Flexion
+Semimembranosus muscle	[LR]	Flexion
+Semitendinosus muscle	[LR]	Flexion
+Short head of biceps femoris	[LR]	Flexion
+Long head of biceps brachii	[LR]	Biarticular
+Short head of biceps brachii	[LR]	Biarticular
+Brachialis muscle	[LR]	Flexion
+Coracobrachialis muscle	[LR]	Flexion
+Flexor digitorum profundus	[LR]	Flexion fingers
+Flexor pollicis longus	[LR]	Flexion fingers
+Pronator quadratus	[LR]	Internal rotator
+Deep head of pronator teres	[LR]	Internal rotator
+Flexor carpi radialis	[LR]	Flexion hand/foot
+Humeral head of flexor carpi ulnaris	[LR]	Flexion hand/foot
+Humero-ulnar head of flexor digitorum superficialis	[LR]	Flexion fingers
+Palmaris longus muscle	[LR]	Flexion hand/foot
+Superficial head of pronator teres	[LR]	Internal rotator
+Ulnar head of flexor carpi ulnaris	[LR]	Flexion hand/foot
+Abductor digiti minimi of hand	[LR]	Abductor
+Abductor pollicis brevis	[LR]	Abductor
+Deep head of flexor pollicis brevis	[LR]	Flexion fingers
+Dorsal interossei muscles of hand	[LR]	Abductor
+Flexor digiti minimi of hand	[LR]	Flexion fingers
+Lumbrical muscles of hand	[LR]	Flexion fingers
+Oblique head of adductor pollicis	[LR]	Adductor
+Opponens digiti minimi muscle of hand	[LR]	Adductor
+Opponens pollicis muscle	[LR]	Adductor
+Palmar interossei muscles	[LR]	Adductor
+Superficial head of flexor pollicis brevis	[LR]	Flexion fingers
+Transverse head of adductor pollicis	[LR]	Adductor
+Lateral head of triceps brachii	[LR]	Extension
+Long head of triceps brachii	[LR]	Extension
+Medial head of triceps brachii	[LR]	Extension
+Anconeus muscle	[LR]	Extension
+Brachioradialis muscle	[LR]	Flexion
+Extensor carpi radialis brevis	[LR]	Extension hand/foot
+Extensor carpi radialis longus	[LR]	Extension hand/foot
+Acromial part of deltoid muscle	[LR]	Abductor
+Clavicular part of deltoid muscle	[LR]	Abductor
+Scapular spinal part of deltoid muscle	[LR]	Abductor
+Infraspinatus muscle	[LR]	External rotation
+Supraspinatus muscle	[LR]	Abductor
+Teres minor muscle	[LR]	External rotation
+(Abdominal part of pectoralis major muscle)	[LR]	Adductor
+Clavicular head of pectoralis major muscle	[LR]	Adductor
+Sternocostal head of pectoralis major muscle	[LR]	Adductor
+Serratus anterior muscle	[LR]	Internal rotator
+Subclavius muscle	[LR]	Depressor

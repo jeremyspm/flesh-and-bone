@@ -1,0 +1,8 @@
+# endocrine.glb — 0.0 MB, 7 unique structures (name <tab> sides <tab> source material)
+Adenohypophysis	[-]	Nucleus
+Neurohypophysis	[-]	Nucleus
+Inferior parathyroid gland	[LR]	Gland
+Superior parathyroid gland	[LR]	Gland
+Pineal gland	[-]	Nucleus
+Suprarenal gland	[LR]	Gland
+Thyroid gland	[-]	Gland

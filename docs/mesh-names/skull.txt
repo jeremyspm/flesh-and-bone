@@ -1,0 +1,29 @@
+# skull.glb — 1.1 MB, 28 unique structures (name <tab> sides <tab> source material)
+Ethmoid Bone	[-]	Ethmoid Bone.002
+Frontal bone	[-]	Frontal bone.003
+Mandible bone	[-]	Mandible bone.r.002
+Occipital bone	[-]	Occipital bone.002
+Parietal bone	[LR]	Parietal bone.l.002
+Sphenoid bone	[-]	Sphenoid bone.001
+Vomer	[-]	Vomer.002
+Inferior nasal concha bone	[R]	Inferior nasal concha bone.r.002
+Lacrimal bone	[R]	Lacrimal bone.r.002
+Lower canine	[R]	Lower canine.r
+Lower first molar tooth	[R]	Lower first molar tooth.r
+Lower first premolar	[R]	Lower first premolar.r
+Lower lateral incisor	[R]	Lower lateral incisor.r
+Lower medial incisor	[R]	Lower medial incisor.r
+Lower second molar tooth	[R]	Lower second molar tooth.r
+Lower second premolar	[R]	Lower second premolar.r
+Maxilla bone	[R]	Maxilla bone_r.002
+Nasal bone	[R]	Nasal bone_r
+Palatine bone	[R]	Palatine bone.r
+Temporal bone	[R]	Temporal bone.r.002
+Upper canine	[R]	Upper canine.r
+Upper first molar tooth	[R]	Upper first molar tooth.r
+Upper first premolar	[R]	Upper first premolar.r
+Upper lateral incisor	[R]	Upper lateral incisor.r
+Upper medial incisor	[R]	Upper medial incisor.r
+Upper second molar tooth	[R]	Upper second molar tooth.r
+Upper second premolar	[R]	Upper second premolar.r
+Zygomatic bone	[R]	Zygomatic bone.r.002

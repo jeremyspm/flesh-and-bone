@@ -1,0 +1,237 @@
+# joints.glb — 1.7 MB, 236 unique structures (name <tab> sides <tab> source material)
+Interosseous membrane of leg	[LR]	Ligament
+Anterior tibiofibular ligament	[LR]	Ligament
+Posterior tibiofibular ligament	[LR]	Ligament
+Transverse tibiofibular ligament	[LR]	Ligament
+Anterior talofibular ligament	[LR]	Ligament
+Calcaneofibular ligament	[LR]	Ligament
+Posterior talofibular ligament	[LR]	Ligament
+Posterior tibiotalar ligament	[LR]	Ligament
+Tibiocalcaneal ligament	[LR]	Ligament
+Tibionavicular ligament	[LR]	Ligament
+Acetabular labrum	[LR]	Cartilage
+Articular capsule of hip joint	[LR]	Articular capsule
+Descending part of iliofemoral ligament	[LR]	Ligament
+Frenula capsulae	[LR]	Ligament
+Ischiofemoral ligament	[LR]	Ligament
+Ligament of head of femur	[LR]	Ligament
+Pubofemoral ligament	[LR]	Ligament
+Transverse acetabular ligament	[LR]	Ligament
+Transverse part of iliofemoral ligament	[LR]	Ligament
+Zona orbicularis	[LR]	Ligament
+Dorsal metatarsal ligaments	[LR]	Ligament
+Intersesamoid ligament	[LR]	Ligament
+Metatarsal interosseous ligaments	[LR]	Ligament
+Plantar metatarsal ligaments	[LR]	Ligament
+Articular capsule of interphalangeal joint of great toe	[LR]	Articular capsule
+Articular capsules of distal interphalangeal joints of foot	[LR]	Articular capsule
+Articular capsules of proximal interphalangeal joints of foot	[LR]	Articular capsule
+Collateral interphalangeal ligaments of foot	[LR]	Ligament
+Plantar interphalangeal ligaments	[LR]	Ligament
+Anterior talocalcaneal ligament	[LR]	Ligament
+Calcaneocuboid ligament	[LR]	Ligament
+Calcaneonavicular ligament	[LR]	Ligament
+Cuneocuboid interosseous ligament	[LR]	Ligament
+Dorsal calcaneocuboid ligament	[LR]	Ligament
+Dorsal cuboideonavicular ligament	[LR]	Ligament
+Dorsal cuneocuboid ligament	[LR]	Ligament
+Dorsal cuneonavicular ligaments	[LR]	Ligament
+Dorsal intercuneiform ligaments	[LR]	Ligament
+Intercuneiform interosseous ligaments	[LR]	Ligament
+Lateral talocalcaneal ligament	[LR]	Ligament
+Long plantar ligament	[LR]	Ligament
+Medial talocalcaneal ligament	[LR]	Ligament
+Plantar calcaneocuboid ligament	[LR]	Ligament
+Plantar cuneocuboid ligament	[LR]	Ligament
+Plantar cuneonavicular ligaments	[LR]	Ligament
+Plantar intercuneiform ligaments	[LR]	Ligament
+Posterior talocalcaneal ligament	[LR]	Ligament
+Plantar calcaneonavicular ligament	[LR]	Ligament
+Plantar cuboideonavicular ligament	[LR]	Ligament
+Talocalcaneal interosseous ligament	[LR]	Ligament
+Talonavicular ligament	[LR]	Ligament
+Articular capsules of metatarsophalangeal joints	[LR]	Articular capsule
+Collateral metatarsophalangeal ligaments	[LR]	Ligament
+Deep transverse metatarsal ligament	[LR]	Ligament
+Plantar metatarsophalangeal ligaments	[LR]	Ligament
+Cuneometatarsal interosseous ligaments	[LR]	Ligament
+Dorsal tarsometatarsal ligaments	[LR]	Ligament
+Plantar tarsometatarsal ligaments	[LR]	Ligament
+Anterior cruciate ligament	[LR]	Ligament
+Anterior meniscotibial ligament (Lateral meniscus)	[LR]	Ligament
+Anterior meniscotibial ligament (Medial meniscus)	[LR]	Ligament
+Arcuate popliteal ligament	[LR]	Ligament
+Articular capsule of knee joint	[LR]	Articular capsule
+Deep part of tibial collateral ligament	[LR]	Ligament
+Fibular collateral ligament	[LR]	Ligament
+Infrapatellar fat pad	[LR]	Fat
+Lateral meniscus	[LR]	Cartilage
+Medial meniscus	[LR]	Cartilage
+Meniscopatellar ligament	[LR]	Ligament
+Oblique popliteal ligament	[LR]	Ligament
+Popliteofibular ligament	[LR]	Ligament
+Posterior cruciate ligament	[LR]	Ligament
+Posterior meniscotibial ligament (Lateral meniscus)	[LR]	Ligament
+Posterior meniscotibial ligament (Medial meniscus)	[LR]	Ligament
+Superficial part of tibial collateral ligament	[LR]	Ligament
+Transverse ligament of knee	[LR]	Ligament
+Anterior ligament of fibular head	[LR]	Ligament
+Articular capsule of superior tibiofibular joint	[LR]	Articular capsule
+Posterior ligament of fibular head	[LR]	Ligament
+Inferior pubic ligament	[-]	Ligament
+Interpubic disc	[-]	Cartilage
+Superior pubic ligament	[-]	Ligament
+Pubic symphysis	[-]	Cartilage
+Triradiate cartilage	[LR]	Cartilage
+Iliolumbar ligament	[LR]	Ligament
+Obturator membrane	[LR]	Ligament
+Sacrospinous ligament	[LR]	Ligament
+Sacrotuberous ligament	[LR]	Ligament
+Anterior sacro-iliac ligament	[LR]	Ligament
+Interosseous sacro-iliac ligament	[LR]	Ligament
+Posterior sacro-iliac ligament	[LR]	Ligament
+Pterygospinous ligament	[LR]	Ligament
+Sphenomandibular ligament	[LR]	Ligament
+Stylohyoid ligament	[LR]	Ligament
+Stylomandibular ligament	[LR]	Ligament
+Articular capsule of temporomandibular joint	[LR]	Articular capsule
+Articular disc of temporomandibular joint	[LR]	Cartilage
+Lateral temporomandibular ligament	[LR]	Ligament
+Interosseous membrane of forearm	[LR]	Ligament
+Oblique cord	[LR]	Ligament
+Articular disc of distal radio-ulnar joint	[LR]	Ligament
+Dorsal radio-ulnar ligament	[LR]	Ligament
+Palmar radio-ulnar ligament	[LR]	Ligament
+Annular ligament of radius	[LR]	Ligament
+Articular capsule of elbow joint	[LR]	Articular capsule
+Quadrate ligament	[LR]	Ligament
+Radial collateral ligament	[LR]	Ligament
+Ulnar collateral ligament	[LR]	Ligament
+Articular capsule of glenohumeral joint	[LR]	Articular capsule
+Coracohumeral ligament	[LR]	Ligament
+Glenoid labrum	[LR]	Cartilage
+Inferior glenohumeral ligament	[LR]	Ligament
+Middle glenohumeral ligament	[LR]	Ligament
+Superior glenohumeral ligament	[LR]	Ligament
+Transverse humeral ligament	[LR]	Ligament
+Dorsal carpometacarpal ligaments	[LR]	Ligament
+Palmar carpometacarpal ligaments	[LR]	Ligament
+Capitohamate interosseous ligament	[LR]	Ligament
+Dorsal scaphotriquetral ligament	[LR]	Ligament
+Dorsal intercarpal ligaments	[LR]	Ligament
+Dorsal ulnocarpal ligament	[LR]	Ligament
+Lunotriquetral interosseous ligament	[LR]	Ligament
+Palmar capitohamate ligament	[LR]	Ligament
+Palmar lunotriquetral ligament	[LR]	Ligament
+Palmar scaphotriquetral ligament	[LR]	Ligament
+Palmar trapezoideocapitate ligament	[LR]	Ligament
+Pisohamate ligament	[LR]	Ligament
+Pisometacarpal ligament	[LR]	Ligament
+Pisotriquetral ligament	[LR]	Ligament
+Radial collateral ligament of wrist joint	[LR]	Ligament
+Radiate carpal ligament	[LR]	Ligament
+Scaphocapitate ligament	[LR]	Ligament
+Scaphotrapeziotrapezoidal ligament	[LR]	Ligament
+Scapholunate interosseous ligament	[LR]	Ligament
+Trapeziotrapezoidal interosseous ligament	[LR]	Ligament
+Trapezoideocapitate interosseous ligament	[LR]	Ligament
+Triquetrocapitate ligament	[LR]	Ligament
+Triquetrohamate ligament	[LR]	Ligament
+Ulnar collateral ligament of wrist joint	[LR]	Ligament
+Dorsal metacarpal ligaments	[LR]	Ligament
+Interosseous metacarpal ligaments	[LR]	Ligament
+Palmar metacarpal ligaments	[LR]	Ligament
+Articular capsules of distal interphalangeal joints	[LR]	Articular capsule
+Articular capsules of proximal interphalangeal joints	[LR]	Articular capsule
+Collateral interphalangeal ligaments of hand	[LR]	Ligament
+Palmar interphalangeal ligaments	[LR]	Ligament
+Articular capsules of metacarpophalangeal joints	[LR]	Articular capsule
+Collateral metacarpophalangeal ligaments	[LR]	Ligament
+Deep transverse metacarpal ligament	[LR]	Ligament
+Articular capsule of radiocarpal joint	[LR]	Articular capsule
+Dorsal radiocarpal ligament	[LR]	Ligament
+Radioscaphocapitate ligament	[LR]	Ligament
+Radiocapitate ligament	[LR]	Ligament
+Ulnocapitate ligament	[LR]	Ligament
+Ulnolunate ligament	[LR]	Ligament
+Ulnopisiform ligament	[-L]	Ligament
+Ulnotriquetral ligament	[LR]	Ligament
+Coraco-acromial ligament	[LR]	Ligament
+Inferior transverse scapular ligament	[LR]	Ligament
+Superior transverse scapular ligament	[LR]	Ligament
+Acromioclavicular ligament	[LR]	Ligament
+Articular capsule of acromioclavicular joint	[LR]	Ligament
+Articular disc of acromioclavicular joint	[LR]	Cartilage
+Conoid ligament	[LR]	Ligament
+Trapezoid ligament	[LR]	Ligament
+Anterior sternoclavicular ligament	[LR]	Ligament
+Articular capsule of sternoclavicular joint	[LR]	Articular capsule
+Articular disc of sternoclavicular joint	[LR]	Cartilage
+Costoclavicular ligament	[LR]	Ligament
+Interclavicular ligament	[LR]	Ligament
+Posterior sternoclavicular ligament	[LR]	Ligament
+Intervertebral disc C2-C3	[-]	Cartilage
+Intervertebral disc C3-C4	[-]	Cartilage
+Intervertebral disc C4-C5	[-]	Cartilage
+Intervertebral disc C5-C6	[-]	Cartilage
+Intervertebral disc C6-C7	[-]	Cartilage
+Intervertebral disc C7-T1	[-]	Cartilage
+Intervertebral disc L1-L2	[-]	Cartilage
+Intervertebral disc L2-L3	[-]	Cartilage
+Intervertebral disc L3-L4	[-]	Cartilage
+Intervertebral disc L4-L5	[-]	Cartilage
+Intervertebral disc L5-S1	[-]	Cartilage
+Intervertebral disc T1-T2	[-]	Cartilage
+Intervertebral disc T10-T11	[-]	Cartilage
+Intervertebral disc T11-T12	[-]	Cartilage
+Intervertebral disc T12-L1	[-]	Cartilage
+Intervertebral disc T2-T3	[-]	Cartilage
+Intervertebral disc T3-T4	[-]	Cartilage
+Intervertebral disc T4-T5	[-]	Cartilage
+Intervertebral disc T5-T6	[-]	Cartilage
+Intervertebral disc T6-T7	[-]	Cartilage
+Intervertebral disc T7-T8	[-]	Cartilage
+Intervertebral disc T8-T9	[-]	Cartilage
+Intervertebral disc T9-T10	[-]	Cartilage
+Nucleus pulposus C2-C3	[-]	Cartilage
+Nucleus pulposus C3-C4	[-]	Cartilage
+Nucleus pulposus C4-C5	[-]	Cartilage
+Nucleus pulposus C5-C6	[-]	Cartilage
+Nucleus pulposus C6-C7	[-]	Cartilage
+Nucleus pulposus C7-T1	[-]	Cartilage
+Nucleus pulposus L1-L2	[-]	Cartilage
+Nucleus pulposus L2-L3	[-]	Cartilage
+Nucleus pulposus L3-L4	[-]	Cartilage
+Nucleus pulposus L4-L5	[-]	Cartilage
+Nucleus pulposus L5-S1	[-]	Cartilage
+Nucleus pulposus T1-T2	[-]	Cartilage
+Nucleus pulposus T10-T11	[-]	Cartilage
+Nucleus pulposus T11-T12	[-]	Cartilage
+Nucleus pulposus T12-L1	[-]	Cartilage
+Nucleus pulposus T2-T3	[-]	Cartilage
+Nucleus pulposus T3-T4	[-]	Cartilage
+Nucleus pulposus T4-T5	[-]	Cartilage
+Nucleus pulposus T5-T6	[-]	Cartilage
+Nucleus pulposus T6-T7	[-]	Cartilage
+Nucleus pulposus T7-T8	[-]	Cartilage
+Nucleus pulposus T8-T9	[-]	Cartilage
+Nucleus pulposus T9-T10	[-]	Cartilage
+Sacrococcygeal symphysis	[-]	Cartilage
+Anterior longitudinal ligament	[-]	Ligament
+Intercornual ligament	[LR]	Ligament
+Interspinous ligaments	[-]	Ligament
+Intertransverse ligaments	[LR]	Ligament
+Ligamenta flava	[-]	Ligament
+Nuchal ligament	[-]	Ligament
+Posterior longitudinal ligament	[-]	Ligament
+Supraspinous ligament	[-]	Ligament
+Quadrangular membrane	[LR]	Ligament
+Median cricothyroid ligament	[-]	Ligament
+Lateral thyrohyoid ligament	[LR]	Ligament
+Median thyrohyoid ligament	[-]	Ligament
+Cricopharyngeal ligament	[LR]	Ligament
+External intercostal membrane	[LR]	Ligament
+Internal intercostal membrane	[LR]	Ligament
+Costotransverse ligament	[LR]	Ligament
+Intra-articular ligament of head of rib	[-R]	Ligament
+Radiate ligament of head of rib	[LR]	Ligament

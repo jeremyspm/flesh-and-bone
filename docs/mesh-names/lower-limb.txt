@@ -1,0 +1,452 @@
+# lower-limb.glb — 6.2 MB, 451 unique structures (name <tab> sides <tab> source material)
+Calcaneus	[R]	calcaneus
+Coccyx	[-]	Coccyx
+Cuboid bone	[R]	Cuboid bone
+Distal phalanx of fifth finger of foot	[R]	Distal phalanx of fifth finger of foot
+Distal phalanx of first finger of foot	[R]	Distal phalanx of first finger of foot
+Distal phalanx of fourth finger of foot	[R]	Distal phalanx of fourth finger of foot
+Distal phalanx of second finger of foot	[R]	Distal phalanx of second finger of foot
+Distal phalanx of third finger of foot	[R]	Distal phalanx of third finger of foot
+Femur	[R]	femur
+Fibula	[R]	Fibula
+Fifth metatarsal bone	[R]	5th metatarsal bone
+First metatarsal bone	[R]	1st Metatarsal bone
+Fourth metatarsal bone	[R]	4th Metatarsal bone
+Hip bone	[R]	Hip bone
+Intermediate cuneiform bone	[R]	Intermediate cuneiform
+Lateral cuneiform bone	[R]	Lateral cuneiform
+Lumbar vertebra (L1)	[-]	Vertebra_L1
+Lumbar vertebra (L2)	[-]	Vertebra_L2
+Lumbar vertebra (L3)	[-]	Vertebra_L3
+Lumbar vertebra (L4)	[-]	Vertebra_L4
+Lumbar vertebra (L5)	[-]	Vertebra_L5
+Medial cuneiform bone	[R]	Medial cuneiform
+Middle phalanx of fifth finger of foot	[R]	Middle phalanx of fifth finger of foot
+Middle phalanx of fourth finger of foot	[R]	Middle phalanx of fourth finger of foot
+Middle phalanx of second finger of foot	[R]	Middle phalanx of second finger of foot
+Middle phalanx of third finger of foot	[R]	Middle phalanx of third finger of foot
+Navicular bone	[R]	Navicular bone
+Patella	[R]	Patella
+Proximal phalanx of fifth finger of foot	[R]	Proximal phalanx of fifth finger of foot
+Proximal phalanx of first finger of foot	[R]	Proximal phalanx of first finger of foot
+Proximal phalanx of fourth finger of foot	[R]	Proximal phalanx of fourth finger of foot
+Proximal phalanx of second finger of foot	[R]	Proximal phalanx of second finger of foot
+Proximal phalanx of third finger of foot	[R]	Proximal phalanx of third finger of foot
+Sacrum	[-]	sacrum
+Second metatarsal bone	[R]	2nd Metatarsal bone
+Sesamoid bones of foot	[R]	Sesamoid bones of foot
+Talus	[R]	Talus
+Third metatarsal bone	[R]	3rd metatarsal bone
+Thoracic vertebra (T12)	[-]	Vertebra_T12
+Tibia	[R]	Tibia
+Acetabular labrum	[R]	tendon
+Annulus fibrosus L1 L2	[-]	Articular cartilage
+Annulus fibrosus L2 L3	[-]	Articular cartilage
+Annulus fibrosus L3 L4	[-]	Articular cartilage
+Annulus fibrosus L4 L5	[-]	Articular cartilage
+Annulus fibrosus L5 S1	[-]	Articular cartilage
+Annulus fibrosus T12 L1	[-]	Articular cartilage
+Art cart of calcaneus.r	[-]	Articular cartilage
+Art cart of cuboid bone	[R]	Articular cartilage
+Art cart of femur distal end	[R]	Articular cartilage
+Art cart of femur head	[R]	Articular cartilage
+Art cart of fibula proximal tibiofibular joint	[R]	Articular cartilage
+Art cart of fibula talofibular joint	[R]	Articular cartilage
+Art cart of hip bone pubis.r	[-]	Articular cartilage
+Art cart of intermediate cuneiform bone	[R]	Articular cartilage
+Art cart of lateral cuneiform bone	[R]	Articular cartilage
+Art cart of medial cuneiform bone.r	[-]	Articular cartilage
+Art cart of navicular bone	[R]	Articular cartilage
+Art cart of patella	[R]	Articular cartilage
+Art cart of sacrococcygeal joint on coccyx	[-]	Articular cartilage
+Art cart of sacrococcygeal joint on sacrum	[-]	Articular cartilage
+Art cart of sacroiliac joint on hip bone	[-]	Articular cartilage
+Art cart of sacroiliac joint on sacrum	[-]	Articular cartilage
+Art cart of Sesamoid bones	[R]	Articular cartilage
+Art cart of talus.r ​	[-]	Articular cartilage
+Art cart of tibia distal end.r	[-]	Articular cartilage
+Art cart of tibia proximal end	[R]	Articular cartilage
+Art cart of tibia proximal tibiofibular joint.r​	[-]	Articular cartilage
+Art carts of distal phalanges of foot	[R]	Articular cartilage
+Art carts of metatarsal bones	[R]	Articular cartilage
+Art carts of middle phalanges of foot	[R]	Articular cartilage
+Art carts of proximal phalanges of foot	[R]	Articular cartilage
+Lateral meniscus	[R]	Disc.001
+Medial meniscus	[R]	Disc.001
+Symphysis of sacrococcygeal joint	[-]	Articular cartilage
+Synovial membranes of knee	[R]	overlay.001
+Anterior cruciate ligament	[R]	Tendon only
+Anterior horn of Lateral meniscus	[R]	Tendon only
+Anterior horn of Medial meniscus	[R]	Tendon only
+Anterior sacro-iliac ligament	[R]	Tendon only
+Anterior talocalcaneal ligament	[R]	Tendon only
+Anterior talofibular ligament	[R]	Tendon only
+Anterior tibiofibular ligament	[R]	Tendon only
+Anterior tibiotalar ligament (Tibiospring lig.)	[R]	Tendon only
+Articular capsule of knee joint	[R]	Articular capsule of knee joint
+Articular capsules of distal interphalangeal joints	[-]	Tendon only
+Articular capsules of metatarsophalangeal joints	[R]	Tendon only
+Articular capsules of proximal interphalangeal	[R]	Tendon only
+Articular cartilage of hip bone acetabulum	[R]	Articular cartilage
+Bifurcatum ligament	[-]	Tendon only
+Calcaneofibular ligament	[R]	Tendon only
+Capsule of talocrural joint	[R]	Capsule of talocrural joint
+Cervical ligament (anterior talocalcaneal ligament)	[R]	Tendon only
+Cuneometatarsal interosseus ligaments	[R]	Tendon only
+Deep transverse metatarsal ligament	[R]	Tendon only
+Dorsal calcaneocuboid ligament	[R]	Tendon only
+Dorsal cuboidonavicular ligament	[R]	Tendon only
+Dorsal cuneocuboid ligament	[R]	Tendon only
+Dorsal cuneonavicular ligaments	[R]	Tendon only
+Dorsal intercuneiform ligaments	[R]	Tendon only
+Dorsal metatarsal ligaments	[R]	Tendon only
+Dorsal tarsometatarsal ligaments	[R]	Tendon only
+Extensor apparatus of 1st toe	[R]	Extensor hoods toe
+Extensor apparatus of 2nd toe	[R]	Extensor hoods toe
+Extensor apparatus of 3rd toe	[R]	Extensor hoods toe
+Extensor apparatus of 4th toe	[R]	Extensor hoods toe
+Extensor apparatus of 5th toe	[R]	Extensor hoods toe
+Fibular collateral ligament	[R]	Tendon only
+Hip joint capsule	[R]	Hip joint capsule
+Iliolumbar ligament	[R]	Tendon only
+Intercornual ligament	[R]	tendon
+Intercuneiform interosseus ligaments	[R]	Tendon only
+Interossea / Posterior sacro-iliac ligament	[R]	Interossea / Posterior sacro-iliac ligament.r
+Interosseous membrane of leg	[R]	Tendon only
+Interosseus talocalcaneal ligament	[R]	Tendon only
+Interpubic disc	[-]	Disc
+Intersesamoid ligament	[R]	Tendon only
+Ligament of head of femur	[R]	Tendon only
+Ligaments of fibular head	[R]	Tendon only
+Long plantar ligament	[R]	Tendon only
+Medial talocalcaneal ligament	[R]	Tendon only
+Metatarsal interosseous ligaments	[R]	Tendon only
+Obturator membrane	[R]	Tendon only
+Plantar calcaneocuboid ligament	[R]	Tendon only
+Plantar calcaneonavicular ligament	[R]	Tendon only
+Plantar cuboideonavicular ligament	[R]	Tendon only
+Plantar cuneocuboid ligament	[R]	Tendon only
+Plantar cuneonavicular ligaments	[R]	Tendon only
+Plantar intercuneiform ligaments	[R]	Tendon only
+Plantar metatarsal ligaments	[R]	Tendon only
+Plantar tarsometatarsal ligaments	[R]	Tendon only
+Posterior cruciate ligament	[R]	Tendon only
+Posterior horn of Lateral meniscus	[R]	Tendon only
+Posterior horn of Medial meniscus	[R]	Tendon only
+Posterior meniscofemoral ligament	[R]	Tendon only
+Posterior talocalcaneal ligament	[R]	Tendon only
+Posterior tibiofibular ligament	[R]	Tendon only
+Posterior tibiotalar ligament	[R]	Tendon only
+Sacrospinous ligament	[R]	Tendon only
+Sacrotuberal ligament	[R]	Sacrotuberal ligament.r
+Sup, Inf, Ant, Post, Pubic ligaments	[-]	Tendon only
+Superficial transverse metatarsal ligament	[R]	Tendon only
+Talonavicular ligament	[R]	Tendon only
+Tibiocalcaneal ligament	[R]	Tendon only
+Tibionavicular ligament	[R]	Tendon only
+Transverse acetabular ligament	[R]	Tendon only
+Transverse ligament of knee	[R]	Tendon only
+Transverse tibiofibular ligament	[R]	Tendon only
+1st Dorsal interossei muscles of foot	[R]	Muscle tile plain
+2nd Dorsal interossei muscles of foot	[R]	Muscle tile plain
+3rd Dorsal interossei muscles of foot	[R]	Muscle tile plain
+4th Dorsal interossei muscles of foot	[R]	Muscle tile plain
+Abductor digiti minimi of foot	[R]	Muscle tile plain
+Abductor hallucis	[R]	Muscle tile plain
+Adductor brevis	[R]	Muscle tile plain
+Adductor longus	[R]	Muscle tile plain
+Adductor magnus	[R]	Muscle tile plain
+Articularis genus	[R]	Muscle tile plain
+Calcaneal tendon	[R]	Tendon only
+Coccygeus muscle	[R]	Muscle tile plain.001
+Common tendon of biceps femoris	[R]	Tendon only
+Common tendon of Semitendinosus and Long head of biceps femoris	[-]	Tendon only
+Extensor digitorum brevis	[R]	Muscle long tendons
+Extensor digitorum longus tendons	[R]	Tendon only
+Extensor digitorum longus	[R]	Muscle tile plain
+Extensor hallucis brevis	[R]	Muscle long tendons
+Extensor hallucis longus	[R]	Muscle long tendons
+Fibularis brevis muscle	[R]	Humeral head of pronator teres
+Fibularis longus muscle	[R]	Humeral head of pronator teres
+Fibularis tertius muscle	[R]	Muscle long tendons
+Flexor digiti minimi brevis of foot	[R]	Muscle tile plain
+Flexor digitorum brevis	[R]	Humeral head of pronator teres
+Flexor digitorum longus	[R]	Muscle long tendons
+Flexor hallucis longus	[R]	Muscle long tendons
+Gluteus maximus muscle	[R]	Muscle tile plain
+Gluteus medius muscle	[R]	Muscle long tendons
+Gluteus minimus muscle	[R]	Muscle long tendons
+Gracilis muscle	[R]	Muscle tile plain
+Iliacus muscle	[R]	Muscle tile plain
+Inferior gemellus muscle	[R]	Muscle tile plain
+Infrapatellar fat pad	[R]	Fat
+Lateral head of flexor hallucis brevis	[R]	Muscle tile plain
+Lateral head of gastrocnemius	[R]	Muscle tile plain
+Long head of biceps femoris	[R]	Muscle tile plain
+Lumbrical muscles of foot	[R]	Muscle tile plain
+Medial head of flexor hallucis brevis	[R]	Muscle tile plain
+Medial head of gastrocnemius	[R]	Muscle tile plain
+Oblique head of adductor hallucis	[R]	Humeral head of pronator teres
+Obturator externus	[R]	Muscle long tendons.001
+Obturator internus	[R]	Muscle long tendons
+Opponens digiti minimi muscle of foot	[R]	Muscle tile plain
+Pectineus muscle	[R]	Muscle tile plain
+Pes anserinus common tendon	[R]	Tendon only
+Piriformis muscle	[R]	Muscle long tendons
+Plantar aponeurosis	[R]	Plantar aponeurosis.r
+Plantar interossei muscles	[R]	Muscle tile plain
+Plantaris muscle	[R]	Muscle long tendons
+Popliteus muscle	[R]	Muscle long tendons
+Psoas major	[R]	Muscle tile plain
+Psoas minor	[R]	Muscle long tendons
+Quadratus femoris muscle	[R]	Humeral head of pronator teres
+Quadratus plantae muscle	[R]	Muscle tile plain
+Quadriceps common tendon and patellar ligament	[-R]	Tendon only
+Rectus femoris	[R]	Muscle tile plain
+Sartorius muscle	[R]	Muscle tile plain
+Semimembranosus muscle tendon	[R]	Tendon only
+Semimembranosus muscle	[R]	Muscle tile plain
+Semitendinosus muscle	[R]	Muscle tile plain
+Short head of biceps femoris	[R]	Muscle tile plain
+Soleus muscle	[R]	Humeral head of pronator teres
+Superior gemellus muscle	[R]	Muscle tile plain
+Synovial sheaths of toes	[R]	sheath
+Tensor fasciae latae	[R]	Muscle tile plain
+Tibialis anterior muscle	[R]	Humeral head of pronator teres
+Tibialis posterior muscle	[R]	Muscle long tendons
+Transverse head of adductor hallucis	[R]	Muscle tile plain
+Vastus intermedius muscle	[R]	Humeral head of pronator teres
+Vastus lateralis muscle	[R]	Muscle tile plain
+Vastus medialis muscle	[R]	Muscle tile plain
+Anterior intermuscular septum of leg	[R]	fascia_mat
+Crural fascia	[R]	fascia_mat
+Fascia lata	[R]	fascia_mat
+Flexor retinaculum of ankle	[R]	Retinaculum
+Gluteal aponeurosis	[R]	fascia_mat
+Iliotibial tract	[R]	Tendon only
+Inferior extensor retinaculum	[R]	Retinaculum
+Inferior fibular retinaculum	[R]	Retinaculum
+Lateral femoral intermuscular septum	[R]	fascia_mat
+Medial femoral intermuscular septum	[R]	fascia_mat
+Posterior intermuscular septum of leg	[R]	fascia_mat
+Superior extensor retinaculum of ankle	[R]	Retinaculum
+Superior fibular retinaculum	[R]	Tendon only
+Transverse intermuscular septum of leg	[R]	fascia_mat
+1th to 4th perforating branches of the deep femoral artery	[R]	Artery
+Anterior lateral malleolar artery	[R]	Artery
+Anterior medial malleolar artery	[R]	Artery
+Anterior tibial artery	[R]	Artery
+Anterior tibial recurrent artery	[R]	Artery
+Arcuate artery	[R]	Artery
+Ascending branch of lateral circumflex femoral artery	[R]	Artery
+Communicating br.of Posterior tibial a. and Femoral a.	[R]	Artery
+Deep artery of the thigh	[R]	Artery
+Deep branch of Medial plantar artery	[R]	Artery
+Deep plantar arch	[R]	Artery
+Deep plantar artery	[R]	Artery
+Descending branch of lateral circumflex femoral artery	[R]	Artery
+Descending genicular artery	[R]	Artery
+Dorsal digital arteries of foot	[R]	Artery
+Dorsal metatarsal arteries	[R]	Artery
+Dorsal pedis artery	[R]	Artery
+Femoral artery	[R]	Artery
+Femoral neck vessels	[R]	Artery
+Fibular artery	[R]	Artery
+Inferior lateral genicular artery	[R]	Artery
+Inferior medial genicular artery	[R]	Artery
+Lateral calcaneal branch of fibular artery	[R]	Artery
+Lateral circumflex femoral artery	[R]	Artery
+Lateral malleolar branches of Fibular artery	[R]	Artery
+Lateral plantar artery	[R]	Artery
+Lateral tarsal artery	[R]	Artery
+Medial calcaneal artery	[R]	Artery
+Medial circumflex femoral artery	[R]	Artery
+Medial malleolar artery of Posterior tibial artery	[R]	Artery
+Medial plantar artery	[R]	Artery
+Medial tarsal arteries	[R]	Artery
+Middle genicular artery	[R]	Artery
+Perforating br. between Arcuate a. and Deep plantar arch	[R]	Artery
+Perforating branches of fibular artery	[R]	Artery
+Plantar metatarsal arteries	[R]	Artery
+Popliteal artery	[R]	Artery
+Posterior tibial artery	[R]	Artery
+Posterior tibial recurrent artery	[R]	Artery
+Superficial branch of Medial planter artery	[R]	Artery
+Superficial circumflex iliac artery	[R]	Artery
+Superficial epigastric artery	[R]	Artery
+Superficial external pudendal artery	[R]	Artery
+Superior lateral genicular artery	[R]	Artery
+Superior medial genicular artery	[R]	Artery
+Sural artery	[R]	Artery
+1th to 4th perforating branches of the deep femoral vein	[R]	Vein
+Accessory saphenous vein	[R]	Vein
+Accompanying veins of arcuate and dorsal arteries	[R]	Vein
+Accompanying veins of dorsal digital metatarsal arteries	[R]	Vein
+Anterior femoral cutaneous vein	[R]	Vein
+Anterior tibial vein	[R]	Vein
+Deep femoral vein	[R]	Vein
+Dorsal digital vein of medial side of great toe	[R]	Vein
+Dorsal digital veins	[R]	Vein
+Dorsal metatarsal veins	[R]	Vein
+Dorsal venous arch of foot	[R]	Vein
+Dorsal venous network of foot	[R]	Vein
+Femoral vein	[R]	Vein
+Fibular vein	[R]	Vein
+Great saphenous vein	[R]	Vein
+Inferior lateral genicular vein	[R]	Vein
+Inferior medial genicular vein	[R]	Vein
+Intercapitular veins of foot	[R]	Vein
+Lateral circumflex femoral vein	[R]	Vein
+Lateral marginal vein	[R]	Vein
+Lateral plantar vein	[R]	Vein
+Medial circumflex femoral vein	[R]	Vein
+Medial marginal vein	[R]	Vein
+Medial plantar vein	[R]	Vein
+Middle genicular vein	[R]	Vein
+Perforating branches (Boyd's veins)	[R]	Vein
+Perforating branches (Cockett's veins)	[R]	Vein
+Perforating branches (Dodd's veins)	[R]	Vein
+Plantar digital veins	[R]	Vein
+Plantar metatarsal veins	[R]	Vein
+Plantar venous arch	[R]	Vein
+Popliteal vein	[R]	Vein
+Posterior arch veins	[R]	Vein
+Posterior tibial vein	[R]	Vein
+Small saphenous vein	[R]	Vein
+Superficial circumflex iliac vein	[R]	Vein
+Superficial epigastric vein	[R]	Vein
+Superficial external pudendal vein	[R]	Vein
+Superior lateral genicular vein	[R]	Vein
+Superior medial genicular vein	[R]	Vein
+Sural vein	[R]	Vein
+Tributary veins of Great and small saphenous veins	[R]	Vein
+Anterior branch of Iliohypogastric nerve	[R]	Nerves
+Anterior branch of Obturator nerve	[R]	Nerves
+Anterior cutaneous branches of Femoral nerve	[R]	Nerves
+Common fibular nerve	[R]	Nerves
+Common plantar digital nerves	[R]	Nerves
+Cutaneous br of Anterior br of Obturator nerve	[R]	Nerves
+Deep branch of Lateral plantar nerve	[R]	Nerves
+Deep fibular nerve	[R]	Nerves
+Dorsal digital branches of deep fibular nerve	[R]	Nerves
+Dorsal digital branches of superficial fibular nerve	[R]	Nerves
+Femoral branch of Genitofemoral nerve	[R]	Nerves
+Femoral nerve	[R]	Nerves
+Genital branch of Genitofemoral nerve	[R]	Nerves
+Ilioinguinal nerve	[R]	Nerves
+Inferior clunial br of post cutaneous nerve of the thigh	[R]	Nerves
+Inferior gluteal nerve	[R]	Nerves
+Infrapatellar branch of Saphenous nerve	[R]	Nerves
+Lateral branch of deep fibular nerve	[R]	Nerves
+Lateral calcaneal nerves	[R]	Nerves
+Lateral cutaneous branch of Iliohypogaticus nerve	[R]	Nerves
+Lateral dorsal cutaneous nerve (Sural n)	[R]	Nerves
+Lateral dorsal cutaneous nerve	[R]	Nerves
+Lateral femoral cuteneous nerve	[R]	Nerves
+Lateral plantar cutaneous nerve (Sural n)	[R]	Nerves
+Lateral plantar nerve	[R]	Nerves
+Lateral sural cutaneous nerve	[R]	Nerves
+Medial branch of deep fibular nerve	[R]	Nerves
+Medial calcaneal branches of Tibial nerve	[R]	Nerves
+Medial dorsal cutaneous nerve	[R]	Nerves
+Medial plantar nerve	[R]	Nerves
+Medial sural cutaneous nerve	[R]	Nerves
+Muscular branches of the Femoral nerve	[R]	Nerves
+Obturator nerve	[R]	Nerves
+Plexus lumbaris	[R]	Nerves
+Posterior branch of Obturator nerve	[R]	Nerves
+Posterior cutaneous nerve of the thigh	[R]	Nerves
+Proper plantar digital branches (Lateral plantar nerve)	[R]	Nerves
+Proper plantar digital branches (Medial plantar nerve)	[R]	Nerves
+Saphenous branch of Femoralis nerve	[R]	Nerves
+Saphenous nerve (Medial crural cutaneous branches)	[R]	Nerves
+Schiatic nerve	[R]	Nerves
+Superficial branch of Lateral plantar nerve	[R]	Nerves
+Superficial fibular nerve	[R]	Nerves
+Superior clunial nerve (posterior rami)	[R]	Nerves
+Superior gluteal nerve	[R]	Nerves
+Sural nerve	[R]	Nerves
+Tibial nerve	[R]	Nerves
+Bursa of piriformis	[R]	Bursae
+Common tendon sheath of fibularis muscles	[R]	sheath
+Deep Infrapatellar bursa	[R]	Bursae
+Extensor digitorum longus-fibularis tertius vaginae tendinum	[R]	sheath
+Extensor hallucis longus tendon sheath	[R]	sheath
+Flexor digitorum longus tendon sheath	[R]	sheath
+Flexor hallucis longus tendon sheath	[R]	sheath
+Iliopectineal bursa	[R]	Bursae
+Inferior subtendinous bursa of biceps femoris	[R]	Bursae
+Intermuscular gluteal bursae	[R]	Bursae
+Lateral subtendinous bursa of gastrocnemius muscle	[R]	Bursae
+Medial subtendinous bursa of gastrocnemius muscle	[R]	Bursae
+Pes anserine bursa	[R]	Bursae
+Plantar tendinous sheath of fibularis longus	[R]	sheath
+Sciatic bursa of gluteus maximus (Ischiogluteal bursa)	[R]	Bursae
+Sciatic bursa of obturator internus	[R]	Bursae
+Semimembranosus bursa deep to tendon	[R]	Bursae
+Subcutaneous bursa of  medial malleolus	[R]	Bursae
+Subcutaneous bursa of lateral malleolus	[R]	Bursae
+Subcutaneous bursa of tuberosity of tibia	[R]	Bursae
+Subcutaneous calcaneal bursa	[R]	Bursae
+Subcutaneous Infrapatellar bursa	[R]	Bursae
+Subcutaneous prepatellar bursa	[R]	Bursae
+Subcutaneous trochanteric bursa	[R]	Bursae
+Subfascial prepatellar bursa	[R]	Bursae
+Subpopliteal recess	[R]	Bursae
+Subtendinous bursa of iliacus	[R]	Bursae
+Subtendinous bursa of obturator internus	[R]	Bursae
+Subtendinous bursa of sartorius	[R]	Bursae
+Subtendinous bursa of tibialis anterior	[R]	Bursae
+Subtendinous calcaneal bursa	[R]	Bursae
+Subtendinous prepatellar bursa	[R]	Bursae
+Superior bursa of biceps femoris	[R]	Bursae
+Tibialis anterior tendon sheath	[R]	sheath
+Tibialis posterior tendon sheath	[R]	sheath
+Trochanteric bursa of gluteus maximus	[R]	Bursae
+Trochanteric bursa of gluteus minimus	[R]	Bursae
+Trochanteric bursae of gluteus medius	[R]	Bursae
+Adductor canal	[R]	Overlays
+Adductor hiatus	[R]	Overlays
+Adductor minimus overlay	[R]	Overlays
+Annular ligaments of 1st toe A1-A5	[R]	Overlays
+Annular ligaments of 2nd toe A1-A5	[R]	Overlays
+Annular ligaments of 3rd toe A1-A5	[R]	Overlays
+Annular ligaments of 4th toe A1-A5	[R]	Overlays
+Annular ligaments of 5th toe A1-A5	[R]	Overlays
+Anterior ligament of fibular head	[R]	Overlays
+Anterior pubic ligament	[-]	Overlays
+Arcuate ligament	[R]	Overlays
+Calcaneocuboid ligament	[R]	Overlays
+Calcaneonavicular ligament	[R]	Overlays
+Collateral ligament of proximal interphalangeal joints	[R]	Overlays
+Collateral ligaments of distal interphalangeal joints	[R]	Overlays
+Collateral ligaments of metatarsophalangeal joints	[R]	Overlays
+Cruciform ligaments or 1st toe	[R]	Overlays
+Cruciform ligaments or 2nd toe	[R]	Overlays
+Cruciform ligaments or 3rd toe	[R]	Overlays
+Cruciform ligaments or 4th toe	[R]	Overlays
+Cruciform ligaments or 5th toe	[R]	Overlays
+Descending part of Iliofemoral ligament	[R]	Overlays
+Femoral canal	[R]	Overlays
+Femoral ring	[R]	Overlays
+Femoral triangle	[R]	Overlays
+Fibrous sheath of toes	[R]	Fibrous sheath of toes
+Ishciofemoral ligament	[R]	Overlays
+Lateral patellar retinaculum (horizontal part)	[R]	Overlays
+Lateral patellar retinaculum (vertical part)	[R]	Overlays
+Medial collatertal ligament	[R]	Overlays
+Medial patellar retinaculum (horizontal part)	[R]	Overlays
+Medial patellar retinaculum (vertical part)	[R]	Overlays
+Oblique popliteal ligament	[R]	Overlays
+Palmar ligament of proximal interphalangeal joints	[R]	Overlays
+Palmar ligaments of distal interphalangeal joints	[R]	Overlays
+Palmar ligaments of metatarsophalangeal joints	[R]	Overlays
+Posterior ligament of fibular head	[R]	Overlays
+Posterior pubic ligament	[-]	Overlays
+Posterior talofibular ligament	[R]	Overlays
+Pubofemoral ligament	[R]	Overlays
+Saphenous opening	[R]	Overlays
+Suprapatellar bursa overlay	[R]	Overlays
+Tendinous arch of soleus	[R]	Overlays
+Transverse part of Iliofemoral ligament	[R]	Overlays
+Zona orbicularis of hip joint	[R]	Overlays

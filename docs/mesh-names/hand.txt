@@ -1,0 +1,224 @@
+# hand.glb — 3.3 MB, 223 unique structures (name <tab> sides <tab> source material)
+1st metacarpal bone	[-]	1st metacarpal bone.001
+2nd metacarpal bone	[-]	2nd metacarpal bone.001
+3rd metacarpal bone	[-]	3rd metacarpal bone.001
+4th metacarpal bone	[-]	4th metacarpal bone.001
+5th metacarpal bone	[-]	5th metacarpal bone
+Capitate	[-]	Capitate.001
+Distal phalanx of 1st finger	[-]	Distal phalanx of 1st finger.001
+Distal phalanx of 2d finger	[-]	Distal phalanx of 2d finger.001
+Distal phalanx of 3d finger	[-]	Distal phalanx of 3d finger.001
+Distal phalanx of 4th finger	[-]	Distal phalanx of 4th finger.001
+Distal phalanx of 5th finger	[-]	Distal phalanx of 5th finger.001
+Hamate	[-]	Hamate.001
+Lunate bone	[-]	Lunate bone.001
+Middle phalanx of 2d finger	[-]	Middle phalanx of 2d finger.001
+Middle phalanx of 3rd finger	[-]	Middle phalanx of 3rd finger.001
+Middle phalanx of 4th finger	[-]	Middle phalanx of 4th finger.001
+Middle phalanx of 5th finger	[-]	Middle phalanx of 5th finger.001
+Pisiform	[-]	Pisiform.001
+Proximal phalanx of 1st finger	[-]	Proximal phalanx of 1st finger.002
+Proximal phalanx of 2d finger	[-]	Proximal phalanx of 2d finger.001
+Proximal phalanx of 3rd finger	[-]	Proximal phalanx of 3rd fingerProximal phalanx of 3rd finge
+Proximal phalanx of 4th finger	[-]	Proximal phalanx of 4th finger.001
+Proximal phalanx of 5th finger	[-]	Proximal phalanx of 5th finger.001
+Radius	[-]	radius.001
+Scaphoid	[-]	Scaphoid.001
+Sesamoid bones	[-]	Bone
+Trapezium	[-]	Trapezium.001
+Trapezoid	[-]	Trapezoid.002
+Triquetrum	[-]	Triquetrum.001
+Ulna	[-]	ulna.001
+Synovial sheaths of fingers	[-]	sheathmat
+1st dorsal interosseus of hand	[-]	Muscle texture basic
+1st lumbrical of hand	[-]	Muscle tile plain
+1st palmar interosseus of hand	[-]	Muscle texture basic
+2nd dorsal interosseus of hand	[-]	Muscle texture basic
+2nd lumbrical of hand	[-]	Muscle tile plain
+2nd palmar interosseus of hand	[-]	Muscle texture basic
+3rd dorsal interosseus of hand	[-]	Muscle texture basic
+3rd lumbrical of hand	[-]	Muscle texture basic
+3rd palmar interosseus of hand	[-]	Muscle tile plain
+4th dorsal interosseus of hand	[-]	Muscle texture basic
+4th lumbrical of hand	[-]	Muscle texture basic
+Abductor digiti minimi	[-]	Muscle tile plain
+Abductor pollicis brevis	[-]	Muscle texture basic
+Abductor pollicis longus	[-]	Muscle texture basic
+Abductor pollicis longus tendon sheath	[-]	sheathmat
+Adductor pollicis	[-]	Muscle texture basic
+Aponeurosis palmaris	[-]	Tendon only
+Articular capsules of metacarpophalangeal joints	[-]	Tendon only
+Brachioradialis muscle	[-]	Muscle texture basic
+Common flexor tendon sheath	[-]	sheathmat
+Common tendon of extensor carpi ulnaris	[-]	Tendon only
+Common tendon of flexor carpi ulnaris	[-]	Tendon only
+Deep head of flexor pollicis brevis	[-]	Muscle tile plain
+Extensor carpi radialis brevis	[-]	Muscle texture basic
+Extensor carpi radialis brevis tendon sheath	[-]	sheathmat
+Extensor carpi radialis longus	[-]	Muscle texture basic
+Extensor carpi radialis longus tendon sheath	[-]	sheathmat
+Extensor carpi ulnaris tendon sheath	[-]	sheathmat
+Extensor digiti minimi	[-]	Muscle texture basic
+Extensor digiti minimi tendon sheath	[-]	sheathmat
+Extensor digitorum	[-]	Muscle texture basic
+Extensor digitorum - Extensor indicis tendon sheath	[-]	sheathmat
+Extensor indicis	[-]	Muscle texture basic
+Extensor pollicis brevis	[-]	Muscle texture basic
+Extensor pollicis brevis tendon sheath	[-]	sheathmat
+Extensor pollicis longus	[-]	Muscle texture basic
+Extensor pollicis longus tendon sheath	[-]	sheathmat
+Flexor carpi radialis	[-]	Muscle texture basic
+Flexor carpi radialis tendon sheath	[-]	sheathmat
+Flexor digiti minimi brevis of hand	[-]	Muscle tile plain
+Flexor digitorum profundus	[-]	Muscle texture basic
+Flexor digitorum superficialis humeral head	[-]	Muscle texture basic
+Flexor pollicis longus	[-]	Muscle texture basic
+Flexor pollicis longus tendon sheath	[-]	sheathmat
+Opponens digiti minimi muscle of hand	[-]	Muscle tile plain
+Opponens pollicis muscle	[-]	Muscle tile plain
+Palmaris brevis muscle	[-]	Muscle texture basic
+Palmaris longus muscle	[-]	Muscle texture basic
+Pronator quadratus	[-]	Muscle texture basic
+Superficial head of flexor pollicis brevis	[-]	Muscle tile plain
+Superficial transverse metacarpal ligament	[-]	Tendon only
+Antebrachial fascia	[-]	fascia_material
+Extensor retinaculum of wrist	[-]	retinaculum_wrist
+Flexor retinaculum of wrist	[-]	retinaculum_wrist
+Annular ligament(A1) of 1st finger	[-]	Overlays
+Annular ligament(A2) of 1st finger	[-]	Overlays
+Annular ligaments of 2nd finger A1-A5	[-]	Overlays
+Annular ligaments of 3rd finger A1-A5	[-]	Overlays
+Annular ligaments of 4th finger A1-A5	[-]	Overlays
+Annular ligaments of 5th finger A1-A5	[-]	Overlays
+Collateral ligaments of distal phalangeal joints	[-]	Overlays
+Collateral ligaments of interphalangeal joint	[-]	Overlays
+Collateral ligaments of metacarpal joints	[-]	Overlays
+Cruciform ligaments of 2nd finger	[-]	Overlays
+Cruciform ligaments or 3rd finger	[-]	Overlays
+Cruciform ligaments or 4th finger	[-]	Overlays
+Cruciform ligaments or 5th finger	[-]	Overlays
+Dorsal intercarpal ligaments	[-]	Overlays
+Dorsal radiocarpal ligament	[-]	Overlays
+Oblique head of adductor pollicis	[-]	Overlays
+Oblique ligament of 1st finger	[-]	Overlays
+Palmar ligaments of distal phalangeal joints	[-]	Overlays
+Palmar ligaments of interphalangeal joints	[-]	Overlays
+Palmar ligaments of metacarpophalangeal joints	[-]	Overlays
+Palmar radiocarpal ligament	[-]	Overlays
+Palmar ulnocarpal ligament	[-]	Overlays
+Pisometacarpal ligament	[-]	Overlays
+Radial collateral ligament	[-]	Overlays
+Transverse head of adductor pollicis	[-]	Overlays
+Ulnar collateral ligament	[-]	Overlays
+Articular cartiage of ulna distal end	[-]	Articular cartilage
+Articular cartilage of capitate bone​	[-]	Articular cartilage
+Articular cartilage of hamate bone​	[-]	Articular cartilage
+Articular cartilage of lunate bone	[-]	Articular cartilage
+Articular cartilage of pisiform bone ​	[-]	Articular cartilage
+Articular cartilage of radius distal end​	[-]	Articular cartilage
+Articular cartilage of scaphoid bone​	[-]	Articular cartilage
+Articular cartilage of trapezium bone​	[-]	Articular cartilage
+Articular cartilage of trapezoid bone​	[-]	Articular cartilage
+Articular cartilage of triquetrum bone	[-]	Articular cartilage
+Articular cartilages of distal phalanges	[-]	Articular cartilage
+Articular cartilages of metacarpal bones	[-]	Articular cartilage
+Articular cartilages of middle phalanges	[-]	Articular cartilage
+Articular cartilages of proximal phalanges	[-]	Articular cartilage
+Triangular fibro cartilage disc	[-]	Disc
+Articular capsule of radiocarpal joint	[-]	radiocarpaljoint
+Articular capsules of distal interphalangeal joints	[-]	Tendon only
+Articular capsules of proximal interphalangeal joints	[-]	Tendon only
+Capitohamate interosseus ligament	[-]	Tendon only
+Deep transverse metacarpal ligament	[-]	Tendon only
+Dorsal carpometacarpal ligaments	[-]	Tendon only
+Dorsal intercarpal ligaments.001	[-]	Tendon only
+Dorsal metacarpal ligaments	[-]	Tendon only
+Dorsal radio-ulnar ligament	[-]	Tendon only
+Dorsal scaphotriquetral ligament	[-]	Tendon only
+Dorsal ulnocarpal ligament	[-]	Tendon only
+Extensor hood of 2nd finger	[-]	Extensor hoods.001
+Extensor hood of 3rd finger	[-]	Extensor hoods.001
+Extensor hood of 4th finger	[-]	Extensor hoods.001
+Extensor hood of 5th finger	[-]	Extensor hoods.001
+Fibrous sheath of digits of hand	[-]	fibroussheathhand
+Fibrous sheath of digits of hand thumb	[-]	Tendon only
+Interosseous metacarpal ligaments	[-]	Tendon only
+Intertendinous connections of extensor digitorum	[-]	Tendon only
+Lateral band of 2nd finger	[-]	Tendon only
+Lateral band of 3rd finger	[-]	Tendon only
+Lateral band of 4th finger	[-]	Tendon only
+Lateral band of 5th finger	[-]	Tendon only
+Lunotriquetral interosseous ligament	[-]	Tendon only
+Palmar capitohamate ligament	[-]	Tendon only
+Palmar carpometacarpal ligaments	[-]	Tendon only
+Palmar lunotriquetral ligament	[-]	Tendon only
+Palmar metacarpal ligaments	[-]	Tendon only
+Palmar radio-ulnar ligament	[-]	Tendon only
+Palmar scaphotriquetral ligament	[-]	Tendon only
+Palmar trapezoideocapitate ligament	[-]	Tendon only
+Pisohamate ligament	[-]	Tendon only
+Pisotriquetral ligament	[-]	Tendon only
+Radiate carpal ligament	[-]	Tendon only
+Radioscaphocapitate ligament	[-]	Tendon only
+Scaphocapitate ligament	[-]	Tendon only
+Scapholunate interosseus ligament	[-]	Tendon only
+Scaphotrapeziotrapezoidal ligament	[-]	Tendon only
+Transverse carpal ligament	[-]	Tendon only
+Trapeziotrapezoidal interosseous ligament	[-]	Tendon only
+Trapezoideocapitate interosseous ligament	[-]	Tendon only
+Triquetrocapitate ligament	[-]	Tendon only
+Triquetrohamate ligament	[-]	Tendon only
+Ulnopisiform ligament	[-]	Tendon only
+Ulnotriquetral_ligament	[-]	Tendon only
+Basilic vein	[-]	Vein
+Cephalic vein	[-]	Vein
+Deep venous palmar arch	[-]	Vein
+Dorsal digital veins	[-]	Vein
+Dorsal metatarsal veins	[-]	Vein
+Dorsal venous network of hand	[-]	Vein
+Intercapitular veins of hand	[-]	Vein
+Median antebrachial vein	[-]	Vein
+Palmal digital veins	[-]	Vein
+Palmar metacarpal veins	[-]	Vein
+Palmar venous network of hand	[-]	Vein
+Posterior interosseous veins	[-]	Vein
+Radial veins	[-]	Vein
+Superficial palmar venous arch	[-]	Vein
+Superficial veins of upper limb	[-]	Vein
+Ulnar veins	[-]	Vein
+Anterior interosseous artery	[-]	Artery
+Common palmar digital arteries	[-]	Artery
+Deep palmar arch	[-]	Artery
+Dorsal carpal arch	[-]	Artery
+Dorsal carpal network	[-]	Artery
+Dorsal digital arteries of hand	[-]	Artery
+Dorsal metacarpal artery	[-]	Artery
+Dorsalis indicis	[-]	Artery
+Dorsalis pollicis	[-]	Artery
+Palmar carpal branches	[-]	Artery
+Palmar metacarpal arteries	[-]	Artery
+Perforating arteries of hand	[-]	Artery
+Posterior interosseous artery	[-]	Artery
+Princeps pollicis artery	[-]	Artery
+Proper palmar digital arteries	[-]	Artery
+Radial artery	[-]	Artery
+Radialis indicis	[-]	Artery
+Superficial palmar arch	[-]	Artery
+Ulnar artery	[-]	Artery
+Ulnar artery (dorsal carpal br)	[-]	Artery
+Median nerve	[-]	Nerves
+Median nerve Common palmar digital nerve of the thumb	[-]	Nerves
+Median nerve Common palmar digital nerves	[-]	Nerves
+Median nerve Palmar br	[-]	Nerves
+Median nerve Proper palmar digital nerves	[-]	Nerves
+Median nerve Proper palmar digital nerves of the thumb	[-]	Nerves
+Median nerve Recurrent br	[-]	Nerves
+Radial nerve Dorsal digital nn	[-]	Nerves
+Radial nerve Superficial br	[-]	Nerves
+Ulnar nerve	[-]	Nerves
+Ulnar nerve Communicating br	[-]	Nerves
+Ulnar nerve Deep br	[-]	Nerves
+Ulnar nerve Dorsal cutaneous br	[-]	Nerves
+Ulnar nerve Palmar cutaneous br	[-]	Nerves
+Ulnar nerve Superficial br Common palmar digital n	[-]	Nerves
+Ulnar nerve Superficial br Proper palmar digital nn	[-]	Nerves

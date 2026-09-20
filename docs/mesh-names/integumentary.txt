@@ -1,0 +1,9 @@
+# integumentary.glb — 0.1 MB, 8 unique structures (name <tab> sides <tab> source material)
+Eyelashes	[LR]	Black
+Hairs of eyebrow	[LR]	Black
+Hairs of head	[-]	Black
+Pubic hairs	[-]	Black
+Perionyx (foot)	[LR]	Ligament
+Nail plate (foot)	[LR]	Nail
+Perionyx	[LR]	Ligament
+Nail plate	[LR]	Nail

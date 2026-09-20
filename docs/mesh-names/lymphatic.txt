@@ -1,0 +1,108 @@
+# lymphatic.glb — 0.5 MB, 107 unique structures (name <tab> sides <tab> source material)
+Left lobe of thymus	[-]	Gland
+Right lobe of thymus	[-]	Gland
+Inferior diaphragmatic nodes	[-]	Lymph-1
+Inferior epigastric nodes	[LR]	Lymph-5
+Lateral aortic nodes	[-]	Lymph-5
+Pre-aortic nodes	[-]	Lymph-1
+Retro-aortic nodes	[-]	Lymph-1
+Lateral caval nodes	[-]	Lymph-5
+Precaval nodes	[-]	Lymph-8
+Retrocaval nodes	[-]	Lymph-4
+Coeliac nodes	[-]	Lymph-2
+Cystic node	[-]	Lymph-1
+Left colic nodes	[-]	Lymph-4
+Sigmoid nodes	[-]	Lymph-1
+Intermediate lumbar nodes	[-]	Lymph-3
+Inferior pancreatic nodes	[-]	Lymph-6
+Superior pancreatic nodes	[-]	Lymph-3
+Superior pancreaticoduodenal nodes	[-]	Lymph-2
+(Retropyloric nodes)	[-]	Lymph-5
+(Subpyloric nodes)	[-]	Lymph-3
+(Suprapyloric node)	[-]	Lymph-2
+Right gastric nodes	[-]	Lymph-1
+Right gastro-omental nodes	[-]	Lymph-7
+Splenic nodes	[-]	Lymph-5
+Appendicular nodes	[-]	Lymph-4
+Central superior mesenteric nodes	[-]	Lymph-2
+Ileocolic nodes	[-]	Lymph-7
+Juxta-intestinal mesenteric nodes	[-]	Lymph-5
+Middle colic nodes	[-]	Lymph-4
+Paracolic superior mesenteric nodes	[-]	Lymph-6
+Precaecal nodes	[-]	Lymph-1
+Retrocaecal nodes	[-]	Lymph-7
+Right colic nodes	[-]	Lymph-1
+Infra-auricular nodes	[LR]	Lymph-5
+Intraglandular parotid nodes	[LR]	Lymph-2
+Pre-auricular nodes	[LR]	Lymph-4
+Bucinator node	[LR]	Lymph-5
+Mandibular node	[LR]	Lymph-2
+Nasolabial node	[LR]	Lymph-6
+Mastoid nodes	[LR]	Lymph-7
+Occipital nodes	[LR]	Lymph-1
+Superficial parotid nodes	[LR]	Lymph-1
+(Anterior tibial node)	[LR]	Lymph-4
+(Fibular node)	[LR]	Lymph-7
+(Posterior tibial node)	[LR]	Lymph-1
+(Intermediate deep inguinal node)	[LR]	Lymph-1
+(Proximal deep inguinal node)	[LR]	Lymph-3
+Inferior superficial inguinal nodes	[LR]	Lymph-2
+Superolateral superficial inguinal nodes	[LR]	Lymph-3
+Superomedial superficial inguinal nodes	[LR]	Lymph-6
+Deep popliteal nodes	[LR]	Lymph-5
+Superficial popliteal nodes	[LR]	Lymph-2
+Paratracheal cervical nodes	[-]	Lymph-1
+Pretracheal nodes	[LR]	Lymph-2
+Thyroid nodes	[LR]	Lymph-1
+Superficial anterior cervical nodes	[-]	Lymph-7
+Anterior inferior jugular nodes	[LR]	Lymph-3
+Inferior deep lateral cervical nodes	[LR]	Lymph-1
+Superficial lateral cervical nodes	[LR]	Lymph-8
+Jugulodigastric node	[LR]	Lymph-1
+Lateral superior jugular node	[LR]	Lymph-6
+Retropharyngeal nodes	[LR]	Lymph-2
+Submandibular nodes	[LR]	Lymph-5
+Submental nodes	[LR]	Lymph-3
+Supraclavicular nodes	[LR]	Lymph-5
+Anterior axillary nodes	[LR]	Lymph-5
+Apical axillary nodes	[LR]	Lymph-2
+Central axillary nodes	[LR]	Lymph-6
+Lateral axillary nodes	[LR]	Lymph-1
+Posterior axillary nodes	[LR]	Lymph-4
+Brachial nodes	[LR]	Lymph-7
+Supratrochlear nodes	[LR]	Lymph-7
+Cubital nodes	[LR]	Lymph-4
+Infraclavicular nodes	[LR]	Lymph-1
+Interpectoral nodes	[LR]	Lymph-3
+Intermediate common iliac nodes	[-]	Lymph-2
+Lateral common iliac nodes	[-]	Lymph-7
+Medial common iliac nodes	[-]	Lymph-4
+Median sacral nodes	[-]	Lymph-1
+Subaortic nodes	[-]	Lymph-5
+(Lateral lacunar node)	[LR]	Lymph-4
+Intermediate external iliac nodes	[LR]	Lymph-2
+Medial external iliac nodes	[LR]	Lymph-8
+Obturator nodes	[LR]	Lymph-1
+Inferior gluteal nodes	[LR]	Lymph-1
+Superior gluteal nodes	[LR]	Lymph-4
+Lateral sacral nodes	[LR]	Lymph-3
+Pararectal nodes	[-]	Lymph-5
+Lateral vesical nodes	[LR]	Lymph-4
+Postvesical nodes	[-]	Lymph-7
+Prevesical nodes	[-]	Lymph-2
+Brachiocephalic nodes	[-]	Lymph-1
+Inferior tracheobronchial nodes	[-]	Lymph-8
+Juxta-oesophageal nodes	[-]	Lymph-4
+Lateral pericardial nodes	[-]	Lymph-1
+Node of arch of azygos vein	[-]	Lymph-2
+Node of ligamentum arteriosum	[-]	Lymph-1
+Paratracheal thoracic nodes	[-]	Lymph-4
+Prepericardial nodes	[-]	Lymph-6
+Superior tracheobronchial nodes	[-]	Lymph-2
+Intercostal nodes	[LR]	Lymph-7
+Parasternal nodes	[LR]	Lymph-5
+Prevertebral nodes	[-]	Lymph-2
+Superior diaphragmatic nodes	[-]	Lymph-3
+Intrapulmonary nodes	[-]	Lymph-4
+Palatine tonsil	[LR]	Lymph-2
+Spleen	[-]	Organ

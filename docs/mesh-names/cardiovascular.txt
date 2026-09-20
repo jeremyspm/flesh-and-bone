@@ -1,0 +1,421 @@
+# cardiovascular.glb — 6.3 MB, 420 unique structures (name <tab> sides <tab> source material)
+Septal branches of anterior interventricular artery	[-]	Artery
+Anterior interventricular artery	[-]	Artery
+Circumflex artery of heart	[-]	Artery
+Left coronary artery	[-]	Artery
+Right inferolateral branch of right coronary artery	[-]	Artery
+Right coronary artery	[-]	Artery
+Left atrium	[-]	Trapezius
+Inferior papillary muscle of left ventricle	[-]	Trapezius
+Left ventricle	[-]	Trapezius
+Right atrium	[-]	Trapezius
+Anterior papillary muscle of right ventricle	[-]	Trapezius
+Inferior papillary muscle of right ventricle	[-]	Trapezius
+Septal papillary muscle of right ventricle	[-]	Trapezius
+Right ventricle	[-]	Trapezius
+Inferior leaflet of right atrioventricular valve	[-]	Ligament
+Posterior leaflet of left atrioventricular valve	[-]	Ligament
+Septal leaflet of right atrioventricular valve	[-]	Ligament
+Left coronary leaflet	[-]	Cartilage
+Non-coronary leaflet	[-]	Cartilage
+Right coronary leaflet	[-]	Cartilage
+Anterior semilunar leaflet of pulmonary valve	[-]	Cartilage
+Left semilunar leaflet of pulmonary valve	[-]	Cartilage
+Right semilunar leaflet of pulmonary valve	[-]	Cartilage
+Anterior basal segmental artery of left lung	[-]	Pulmonary artery
+Lateral basal segmental artery of left lung	[-]	Pulmonary artery
+Medial basal segmental artery of left lung	[-]	Pulmonary artery
+Posterior basal segmental artery of left lung	[-]	Pulmonary artery
+Superior segmental artery of left lung	[-]	Pulmonary artery
+Anterior segmental artery of left lung	[-]	Pulmonary artery
+Apical segmental artery of left lung	[-]	Pulmonary artery
+Inferior lingular artery of left lung	[-]	Pulmonary artery
+Posterior segmental artery of left lung	[-]	Pulmonary artery
+Superior lingular artery of left lung	[-]	Pulmonary artery
+Left pulmonary artery	[-]	Pulmonary artery
+Bifurcation of pulmonary trunk	[-]	Pulmonary artery
+Pulmonary trunk	[-]	Pulmonary artery
+Anterior basal segmental artery of right lung	[-]	Pulmonary artery
+Lateral basal segmental artery of right lung	[-]	Pulmonary artery
+Medial basal segmental artery of right lung	[-]	Pulmonary artery
+Posterior basal segmental artery of right lung	[-]	Pulmonary artery
+Superior segmental artery of right lung	[-]	Pulmonary artery
+Inferior lobar artery of right lung	[-]	Pulmonary artery
+Lateral segmental artery of right lung	[-]	Pulmonary artery
+Medial segmental artery of right lung	[-]	Pulmonary artery
+Middle lobar artery of right lung	[-]	Pulmonary artery
+Anterior segmental artery of right lung	[-]	Pulmonary artery
+Apical segmental artery of right lung	[-]	Pulmonary artery
+Posterior segmental artery of right lung	[-]	Pulmonary artery
+Superior lobar artery of right lung	[-]	Pulmonary artery
+Right pulmonary artery	[-]	Pulmonary artery
+Gastroduodenal artery	[-]	Artery
+Proper hepatic artery	[-]	Artery
+Common hepatic artery	[-]	Artery
+Left gastric artery	[-]	Artery
+Splenic artery	[-]	Artery
+Coeliac trunk	[-]	Artery
+Ascending branch of left colic artery	[-]	Artery
+Descending branch of left colic artery	[-]	Artery
+Left colic artery	[-]	Artery
+Sigmoid arteries	[-]	Artery
+Superior anorectal artery	[-]	Artery
+Inferior mesenteric artery	[-]	Artery
+Inferior phrenic artery	[-]	Artery
+Anterior branch of renal artery	[LR]	Artery
+Inferior suprarenal artery	[LR]	Artery
+Intrarenal arteries of left kidney	[-]	Artery
+Posterior branch of renal artery	[LR]	Artery
+Left renal artery	[-]	Artery
+Left testicular artery	[-]	Artery
+Lumbar arteries	[LR]	Artery
+Intrarenal arteries of right kidney	[-]	Artery
+Right renal artery	[-]	Artery
+Right testicular artery	[R]	Artery
+Appendicular artery	[-]	Artery
+Colic branch of ileocolic artery	[-]	Artery
+Ileal branch of ileocolic artery	[-]	Artery
+Ileocolic artery	[-]	Artery
+Anterior inferior pancreaticoduodenal artery	[-]	Artery
+Inferior pancreaticoduodenal artery	[-]	Artery
+Marginal artery	[-]	Artery
+Middle colic artery	[-]	Artery
+Right colic artery	[-]	Artery
+Superior mesenteric artery	[-]	Artery
+Abdominal aorta	[-]	Artery
+Brachiocephalic trunk	[-]	Artery
+Aortic arch	[-]	Artery
+Inferior epigastric artery	[LR]	Artery
+External iliac artery	[LR]	Artery
+Inferior gluteal artery	[LR]	Artery
+Deep artery of penis	[LR]	Artery
+Dorsal artery of penis	[LR]	Artery
+Internal pudendal artery	[LR]	Artery
+Anterior division of internal iliac artery	[LR]	Artery
+Iliacus branch of iliolumbar artery	[LR]	Artery
+Lumbar branch of iliolumbar artery	[LR]	Artery
+Spinal branch of iliolumbar artery	[LR]	Artery
+Iliolumbar artery	[LR]	Artery
+Superior gluteal artery	[LR]	Artery
+Posterior division of internal iliac artery	[LR]	Artery
+Internal iliac artery	[LR]	Artery
+Common iliac artery	[LR]	Artery
+Obturator artery	[LR]	Artery
+Median sacral artery	[-]	Artery
+Ascending aorta	[-]	Artery
+Posterior intercostal arteries	[LR]	Artery
+Subcostal artery	[LR]	Artery
+Superior phrenic arteries	[-]	Artery
+Thoracic aorta	[-]	Artery
+Anterior spinal artery	[LR]	Artery
+Anterior communicating artery	[-]	Artery
+Posterior communicating artery	[LR]	Artery
+Deep external pudendal artery	[LR]	Artery
+Descending branch of lateral circumflex femoral artery	[-L]	Artery
+Lateral circumflex femoral artery	[LR]	Artery
+Medial circumflex femoral artery	[LR]	Artery
+Perforating femoral arteries	[LR]	Artery
+Deep femoral artery	[LR]	Artery
+Dorsal digital arteries of foot	[LR]	Artery
+Dorsal metatarsal arteries	[LR]	Artery
+Arcuate artery	[LR]	Artery
+Deep plantar artery	[LR]	Artery
+Lateral tarsal artery	[LR]	Artery
+Dorsalis pedis artery	[LR]	Artery
+Anterior tibial artery	[LR]	Artery
+Inferior lateral genicular artery	[LR]	Artery
+Inferior medial genicular artery	[LR]	Artery
+Middle genicular artery	[LR]	Artery
+Patellar anastomosis	[LR]	Artery
+Calcaneal branches of posterior tibial artery	[LR]	Artery
+Calcaneal branches of fibular artery	[LR]	Artery
+Fibular artery	[LR]	Artery
+Proper plantar digital arteries	[LR]	Artery
+Common plantar digital arteries	[LR]	Artery
+Perforating branches of plantar metatarsal arteries	[LR]	Artery
+Plantar metatarsal arteries	[LR]	Artery
+Plantar arch	[LR]	Artery
+Lateral plantar artery	[LR]	Artery
+Superficial branch of medial plantar artery	[LR]	Artery
+Medial plantar artery	[LR]	Artery
+Posterior tibial artery	[LR]	Artery
+Superior lateral genicular artery	[LR]	Artery
+Superior medial genicular artery	[LR]	Artery
+Popliteal artery	[LR]	Artery
+Superficial epigastric artery	[LR]	Artery
+Superficial external pudendal artery	[LR]	Artery
+Femoral artery	[LR]	Artery
+Ascending pharyngeal artery	[LR]	Artery
+Angular artery	[LR]	Artery
+Inferior labial artery	[LR]	Artery
+Submental artery	[LR]	Artery
+Superior labial artery	[LR]	Artery
+Facial artery	[LR]	Artery
+Anterior deep temporal artery	[LR]	Artery
+?x	[LR]	Artery
+Artery of pterygoid canal	[LR]	Artery
+Buccal artery	[LR]	Artery
+Greater palatine artery	[LR]	Artery
+Descending palatine artery	[LR]	Artery
+Mental branch of inferior alveolar artery	[LR]	Artery
+Mylohyoid branch of inferior alveolar artery	[LR]	Artery
+Inferior alveolar artery	[LR]	Artery
+Infra-orbital artery	[LR]	Artery
+Accessory branch of middle meningeal artery	[LR]	Artery
+Middle meningeal artery	[LR]	Artery
+Posterior deep temporal artery	[LR]	Artery
+Posterior septal branches of sphenopalatine artery	[LR]	Artery
+Posterior superior alveolar artery	[LR]	Artery
+Posterior lateral nasal branches of sphenopalatine artery.	[LR]	Artery
+Maxillary artery	[LR]	Artery
+Occipital artery	[LR]	Artery
+Frontal branch of superficial temporal artery	[LR]	Artery
+Transverse facial artery	[LR]	Artery
+Superficial temporal artery	[LR]	Artery
+External carotid artery	[LR]	Artery
+Distal lateral striate branches	[LR]	Artery
+Anterior temporal branch	[LR]	Artery
+Artery of precentral sulcus	[LR]	Artery
+Artery of central sulcus	[LR]	Artery
+Parietal branches of middle cerebral artery	[LR]	Artery
+Postcentral arterial branch	[LR]	Artery
+Posterior parietal artery	[LR]	Artery
+Posterior temporal branch	[LR]	Artery
+Temporal branches of middle cerebral artery	[LR]	Artery
+Branch to angular gyrus	[LR]	Artery
+Temporo-occipital branch	[LR]	Artery
+Middle cerebral artery (M3 segment)	[L]	Artery
+Lateral frontobasal artery	[LR]	Artery
+Prefrontal artery	[LR]	Artery
+Insular branches of middle cerebral artery (M2-segment)	[L]	Artery
+Proximal lateral striate branches	[LR]	Artery
+Middle cerebral artery (M1-segment)	[LR]	Artery
+Anterior septal branches of anterior ethmoidal artery	[LR]	Artery
+Anterior ethmoidal artery	[LR]	Artery
+Central retinal artery	[LR]	Artery
+Lacrimal artery	[LR]	Artery
+Septal branches of posterior ethmoidal artery	[LR]	Artery
+Posterior ethmoidal artery	[LR]	Artery
+Long posterior ciliary arteries	[LR]	Artery
+Short posterior ciliary arteries	[LR]	Artery
+Supra-orbital artery	[LR]	Artery
+Supratrochlear artery	[LR]	Artery
+Ophthalmic artery	[LR]	Artery
+Internal carotid artery	[LR]	Artery
+Left common carotid artery	[-]	Artery
+Anterior circumflex humeral artery	[LR]	Artery
+Middle collateral artery	[LR]	Artery
+Radial collateral artery	[LR]	Artery
+Deep brachial artery	[LR]	Artery
+Inferior ulnar collateral artery	[LR]	Artery
+Palmar metacarpal arteries	[LR]	Artery
+Deep palmar arch	[LR]	Artery
+Dorsal digital arteries of hand	[LR]	Artery
+Dorsal metacarpal arteries	[LR]	Artery
+Dorsal carpal anastomosis	[LR]	Artery
+Palmar carpal branch of radial artery	[LR]	Artery
+Radial artery	[LR]	Artery
+Superior ulnar collateral artery	[LR]	Artery
+(Ulnar recurrent artery)	[LR]	Artery
+Posterior interosseous artery	[LR]	Artery
+Recurrent interosseous artery	[LR]	Artery
+Common interosseous artery	[LR]	Artery
+Dorsal carpal branch of ulnar artery	[LR]	Artery
+Proper palmar digital arteries	[LR]	Artery
+Common palmar digital arteries	[LR]	Artery
+Superficial palmar arch	[LR]	Artery
+Ulnar artery	[LR]	Artery
+Brachial artery	[LR]	Artery
+Lateral thoracic artery	[LR]	Artery
+Posterior circumflex humeral artery	[LR]	Artery
+Circumflex scapular artery	[LR]	Artery
+Thoracodorsal artery	[LR]	Artery
+Subscapular artery	[LR]	Artery
+Pectoral branches of thoraco-acromial artery	[LR]	Artery
+Thoraco-acromial artery	[LR]	Artery
+Axillary artery	[LR]	Artery
+Deep cervical artery	[LR]	Artery
+First posterior intercostal artery	[LR]	Artery
+Second posterior intercostal artery	[LR]	Artery
+Supreme intercostal artery	[LR]	Artery
+Costocervical trunk	[LR]	Artery
+Musculophrenic artery	[LR]	Artery
+Superior epigastric artery	[LR]	Artery
+Internal thoracic artery	[LR]	Artery
+Inferior thyroid artery	[LR]	Artery
+Suprascapular artery	[LR]	Artery
+(Deep branch of transverse cervical artery)	[LR]	Artery
+(Superficial branch of transverse cervical artery)	[LR]	Artery
+Transverse cervical artery	[LR]	Artery
+Thyrocervical trunk	[LR]	Artery
+Posterior inferior cerebellar artery	[LR]	Artery
+Vertebral artery	[LR]	Artery
+Left subclavian artery	[-]	Artery
+Frontal branches of callosomarginal artery	[LR]	Artery
+Callosomarginal artery	[LR]	Artery
+Orbitofrontal branches of anterior cerebral artery	[LR]	Artery
+Pericallosal artery	[LR]	Artery
+Anterior cerebral artery	[LR]	Artery
+Middle cerebral artery (M3-segment)	[R]	Artery
+Insular branches of middle cerebral artery (M2)	[R]	Artery
+Right common carotid artery	[-]	Artery
+Anterior inferior cerebellar artery	[LR]	Artery
+Lateral pontine branches of basilar artery	[LR]	Artery
+Medial pontine branches of basilar artery	[LR]	Artery
+Lateral occipital artery	[LR]	Artery
+Medial occipital artery	[LR]	Artery
+Parieto-occipital artery	[LR]	Artery
+Posterior cerebral artery	[LR]	Artery
+Superior cerebellar artery	[LR]	Artery
+Basilar artery	[-]	Artery
+Right subclavian artery	[-]	Artery
+????????	[-]	Vein
+Great cardiac vein	[-]	Vein
+Inferior vein of left ventricle	[-]	Vein
+Inferior vein of left ventricle (//Posterior '')	[-]	Vein
+Middle cardiac vein	[-]	Vein
+Coronary sinus	[-]	Vein
+Inferior basal vein of left lung	[-]	Pulmonary vein
+Superior basal vein of left lung	[-]	Pulmonary vein
+Superior vein of left lung	[-]	Pulmonary vein
+Left inferior pulmonary vein	[-]	Pulmonary vein
+Anterior vein of left lung	[-]	Pulmonary vein
+Apicoposterior vein of left lung	[-]	Pulmonary vein
+Inferior lingular vein of left lung	[-]	Pulmonary vein
+Superior lingular vein of left lung	[-]	Pulmonary vein
+Lingular vein of left lung	[-]	Pulmonary vein
+Left superior pulmonary vein	[-]	Pulmonary vein
+Inferior basal vein of right lung	[-]	Pulmonary vein
+Superior basal vein of right lung	[-]	Pulmonary vein
+Superior vein of right lung	[-]	Pulmonary vein
+Right inferior pulmonary vein	[-]	Pulmonary vein
+Anterior vein of right lung	[-]	Pulmonary vein
+Apical vein of right lung	[-]	Pulmonary vein
+Lateral vein of right lung	[-]	Pulmonary vein
+Medial vein of right lung	[-]	Pulmonary vein
+Posterior vein of right lung	[-]	Pulmonary vein
+Right superior pulmonary vein	[-]	Pulmonary vein
+Inferior petrosal sinus	[LR]	Vein
+Anterior intercavernous sinus	[-]	Vein
+Posterior intercavernous sinus	[-]	Vein
+Basilar venous plexus	[-]	Vein
+Cavernous sinus	[LR]	Vein
+Superior petrosal sinus	[LR]	Vein
+Transverse sinus	[LR]	Vein
+Sigmoid sinus	[LR]	Vein
+Inferior sagittal sinus	[-]	Vein
+Occipital sinus	[-]	Vein
+Straight sinus	[-]	Vein
+Superior sagittal sinus	[-]	Vein
+Inferior ophthalmic vein	[LR]	Vein
+Superior ophthalmic vein	[LR]	Vein
+Perforating veins	[LR]	Vein
+Deep femoral vein	[LR]	Vein
+External pudendal veins	[LR]	Vein
+Superficial epigastric vein	[LR]	Vein
+Great saphenous vein	[LR]	Vein
+Lateral circumflex femoral veins	[LR]	Vein
+Medial circumflex femoral veins	[LR]	Vein
+Anterior tibial veins	[LR]	Vein
+Genicular veins	[LR]	Vein
+Fibular veins	[LR]	Vein
+Plantar digital veins	[LR]	Vein
+Plantar metatarsal veins	[LR]	Vein
+Plantar venous arch	[LR]	Vein
+Lateral plantar veins	[LR]	Vein
+Medial plantar veins	[LR]	Vein
+Posterior tibial veins	[LR]	Vein
+Dorsal digital veins of foot	[LR]	Vein
+Dorsal metatarsal veins	[LR]	Vein
+Intercapitular veins of foot	[LR]	Vein
+Dorsal venous arch of foot	[LR]	Vein
+Small saphenous vein	[LR]	Vein
+Popliteal vein	[LR]	Vein
+Femoral vein	[LR]	Vein
+Superficial dorsal veins of penis	[-]	Vein
+Hepatic portal vein	[-]	Vein
+Sigmoid veins	[-]	Vein
+Inferior mesenteric vein	[-]	Vein
+Left gastro-omental vein	[-]	Vein
+Splenic vein	[-]	Vein
+Middle colic vein	[-]	Vein
+Right colic vein	[-]	Vein
+Right gastro-omental vein	[-]	Vein
+Superior mesenteric vein	[-]	Vein
+Hepatic veins	[-]	Vein
+Inferior epigastric vein	[LR]	Vein
+External iliac vein	[LR]	Vein
+Iliolumbar vein	[LR]	Vein
+Inferior gluteal veins	[LR]	Vein
+Internal pudendal vein	[LR]	Vein
+Lateral sacral veins	[LR]	Vein
+Superior gluteal veins	[LR]	Vein
+Internal iliac vein	[LR]	Vein
+Common iliac vein	[LR]	Vein
+Deep dorsal vein of penis	[-]	Vein
+Intrarenal veins of left kidney	[-]	Vein
+Left testicular vein	[-]	Vein
+Left renal vein	[-]	Vein
+Lumbar veins	[LR]	Vein
+Intrarenal veins of right kidney	[-]	Vein
+Right renal vein	[-]	Vein
+Right testicular vein	[-]	Vein
+Inferior vena cava (abdominal part)	[-]	Vein
+Inferior vena cava (thoracic part)	[-]	Vein
+Maxillary veins	[LR]	Vein
+Superficial temporal veins	[LR]	Vein
+Retromandibular vein	[LR]	Vein
+Anterior division of retromandibular vein	[LR]	Vein
+Angular vein	[LR]	Vein
+Inferior labial veins	[LR]	Vein
+Submental vein	[LR]	Vein
+Superior labial vein	[LR]	Vein
+Facial vein	[LR]	Vein
+Common facial vein	[LR]	Vein
+Lingual vein	[LR]	Vein
+Superior thyroid vein	[LR]	Vein
+Internal jugular vein	[LR]	Vein
+Anterior circumflex humeral vein	[LR]	Vein
+Median antebrachial vein	[LR]	Vein
+Median cubital vein	[LR]	Vein
+Basilic vein	[LR]	Vein
+Deep venous palmar arch	[LR]	Vein
+Radial veins	[LR]	Vein
+Palmar digital veins	[LR]	Vein
+Superficial venous palmar arch	[LR]	Vein
+Ulnar veins	[LR]	Vein
+Brachial veins	[LR]	Vein
+Dorsal digital veins of hand	[LR]	Vein
+Dorsal venous network of hand	[LR]	Vein
+Cephalic vein	[LR]	Vein
+Lateral thoracic vein	[LR]	Vein
+Posterior circumflex humeral vein	[LR]	Vein
+Circumflex scapular vein	[LR]	Vein
+Thoracodorsal vein	[LR]	Vein
+Subscapular vein	[LR]	Vein
+Axillary vein	[LR]	Vein
+Anterior jugular vein	[LR]	Vein
+Posterior auricular vein	[LR]	Vein
+Posterior division of retromandibular vein	[LR]	Vein
+Suprascapular vein	[LR]	Vein
+External jugular vein	[LR]	Vein
+Left subclavian vein	[-]	Vein
+Right subclavian vein	[-]	Vein
+Accessory hemi-azygos vein	[-]	Vein
+Left ascending lumbar vein	[-]	Vein
+Left subcostal vein	[-]	Vein
+Hemi-azygos vein	[-]	Vein
+Right ascending lumbar vein	[-]	Vein
+Right subcostal vein	[-]	Vein
+Right superior intercostal vein	[-]	Vein
+Right superior phrenic vein	[-]	Vein
+Azygos vein	[-]	Vein
+Musculophrenic veins	[LR]	Vein
+Superior epigastric veins	[LR]	Vein
+Internal thoracic veins	[LR]	Vein
+Left superior intercostal vein	[-]	Vein
+Occipital vein	[LR]	Vein
+Vertebral vein	[LR]	Vein
+Left brachiocephalic vein	[-]	Vein
+Right brachiocephalic vein	[-]	Vein
+Superior vena cava	[-]	Vein

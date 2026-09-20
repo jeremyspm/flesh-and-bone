@@ -1,0 +1,160 @@
+# skeletal.glb — 1.9 MB, 159 unique structures (name <tab> sides <tab> source material)
+Incus	[LR]	Bone-1
+Malleus	[LR]	Bone-1
+Stapes	[LR]	Bone-1
+Fifth metatarsal bone	[LR]	Bone
+First metatarsal bone	[LR]	Bone
+Fourth metatarsal bone	[LR]	Bone
+Second metatarsal bone	[LR]	Bone
+Third metatarsal bone	[LR]	Bone
+Sesamoid bones of foot	[LR]	Bone-1
+Distal phalanx of fifth finger of foot	[LR]	Bone-8
+Distal phalanx of first finger of foot	[LR]	Bone-8
+Distal phalanx of fourth finger of foot	[LR]	Bone-8
+Distal phalanx of second finger of foot	[LR]	Bone-8
+Distal phalanx of third finger of foot	[LR]	Bone-8
+Middle phalanx of fifth finger of foot	[LR]	Bone-7
+Middle phalanx of fourth finger of foot	[LR]	Bone-7
+Middle phalanx of second finger of foot	[LR]	Bone-7
+Middle phalanx of third finger of foot	[LR]	Bone-7
+Proximal phalanx of fifth finger of foot	[LR]	Bone-6
+Proximal phalanx of first finger of foot	[LR]	Bone-6
+Proximal phalanx of fourth finger of foot	[LR]	Bone-6
+Proximal phalanx of second finger of foot	[LR]	Bone-6
+Proximal phalanx of third finger of foot	[LR]	Bone-6
+Calcaneus	[LR]	Bone-5
+Cuboid bone	[LR]	Bone-6
+Intermediate cuneiform bone	[LR]	Bone-3
+Lateral cuneiform bone	[LR]	Bone-3
+Medial cuneiform bone	[LR]	Bone-3
+Navicular bone	[LR]	Bone-2
+Talus	[LR]	Bone-1
+Femur	[LR]	Bone
+Fibula	[LR]	Bone
+Patella	[LR]	Bone-1
+Tibia	[LR]	Bone
+Hip bone	[LR]	Bone-1
+Capitate bone	[LR]	Bone-5
+Distal phalanx of fifth finger of hand	[LR]	Bone-8
+Distal phalanx of first finger of hand	[LR]	Bone-8
+Distal phalanx of fourth finger of hand	[LR]	Bone-8
+Distal phalanx of second finger of hand	[LR]	Bone-8
+Distal phalanx of third finger of hand	[LR]	Bone-8
+Fifth metacarpal bone	[LR]	Bone
+First metacarpal bone	[LR]	Bone
+Fourth metacarpal bone	[LR]	Bone
+Hamate bone	[LR]	Bone-4
+Humerus	[LR]	Bone
+Lunate bone	[LR]	Bone-2
+Middle phalanx of fifth finger of hand	[LR]	Bone-7
+Middle phalanx of fourth finger of hand	[LR]	Bone-7
+Middle phalanx of second finger of hand	[LR]	Bone-7
+Middle phalanx of third finger of hand	[LR]	Bone-7
+Pisiform bone	[LR]	Bone-8
+Scaphoid bone	[LR]	Bone-3
+Proximal phalanx of fifth finger of hand	[LR]	Bone-6
+Proximal phalanx of first finger of hand	[LR]	Bone-6
+Proximal phalanx of fourth finger of hand	[LR]	Bone-6
+Proximal phalanx of second finger of hand	[LR]	Bone-6
+Proximal phalanx of third finger of hand	[LR]	Bone-6
+Radius	[LR]	Bone
+Second metacarpal bone	[LR]	Bone
+Third metacarpal bone	[LR]	Bone
+Trapezium bone	[LR]	Bone-7
+Trapezoid bone	[LR]	Bone-6
+Triquetrum bone	[LR]	Bone-1
+Ulna	[LR]	Bone
+Clavicle	[LR]	Bone
+Scapula	[LR]	Bone
+Anterior cells of ethmoid bone	[LR]	
+Middle cells of ethmoid bone	[LR]	
+Posterior cells of ethmoid bone	[LR]	
+Ethmoid bone	[-]	Bone-7
+Sinus of frontal bone	[-]	Bone-1
+Frontal bone	[-]	Bone-3
+Inferior nasal concha bone	[LR]	Bone
+Lacrimal bone	[LR]	Bone-6
+Maxilla	[LR]	Bone-5
+Nasal bone	[LR]	Bone-4
+Occipital bone	[-]	Bone-6
+Palatine bone	[LR]	Bone-2
+Parietal bone	[LR]	Bone-2
+Sinus of sphenoid bone	[-]	Bone-1
+Sphenoid bone	[-]	Bone-4
+Temporal bone	[LR]	Bone-1
+Vomer	[-]	Bone-1
+Zygomatic bone	[LR]	Bone-8
+Hyoid bone	[-]	Bone
+Mandible	[-]	Bone
+Arytenoid cartilage	[LR]	Cartilage
+Corniculate cartilage	[LR]	Cartilage
+Cricoid cartilage	[-]	Cartilage
+Thyroid cartilage	[-]	Cartilage
+Lateral process of nasal septal cartilage	[LR]	Cartilage
+Major alar cartilage	[LR]	Cartilage
+Nasal septal cartilage	[-]	Cartilage
+Lower canine	[LR]	Teeth
+Lower lateral incisor	[LR]	Teeth
+Lower medial incisor	[LR]	Teeth
+Upper canine	[LR]	Teeth
+Upper lateral incisor	[LR]	Teeth
+Upper medial incisor	[LR]	Teeth
+Lower first molar tooth	[LR]	Teeth
+Lower first premolar	[LR]	Teeth
+Lower second molar tooth	[LR]	Teeth
+Lower second premolar	[LR]	Teeth
+Upper first molar tooth	[LR]	Teeth
+Upper first premolar	[LR]	Teeth
+Upper second molar tooth	[LR]	Teeth
+Upper second premolar	[LR]	Teeth
+Eighth rib	[LR]	Bone-3
+Eleventh rib	[LR]	Bone-4
+Twelfth rib	[LR]	Bone-4
+Ninth rib	[LR]	Bone-3
+Tenth rib	[LR]	Bone-3
+Fifth rib	[LR]	Bone-1
+First rib	[LR]	Bone-1
+Fourth rib	[LR]	Bone-1
+Second rib	[LR]	Bone-1
+Seventh rib	[LR]	Bone-1
+Sixth rib	[LR]	Bone-1
+Third rib	[LR]	Bone-1
+Body of sternum	[-]	Bone-7
+Manubrium of sternum	[-]	Bone-6
+Xiphoid process	[-]	Bone-8
+Costal cartilage of eighth rib	[LR]	Cartilage
+Costal cartilage of fifth rib	[LR]	Cartilage
+Costal cartilage of first rib	[LR]	Cartilage
+Costal cartilage of fourth rib	[LR]	Cartilage
+Costal cartilage of ninth rib	[LR]	Cartilage
+Costal cartilage of second rib	[LR]	Cartilage
+Costal cartilage of seventh rib	[LR]	Cartilage
+Costal cartilage of sixth rib	[LR]	Cartilage
+Costal cartilage of tenth rib	[LR]	Cartilage
+Costal cartilage of third rib	[LR]	Cartilage
+Atlas (C1)	[-]	Bone-2
+Axis (C2)	[-]	Bone-2
+Vertebra C3	[-]	Bone-2
+Vertebra C4	[-]	Bone-2
+Vertebra C5	[-]	Bone-2
+Vertebra C6	[-]	Bone-2
+Vertebra C7	[-]	Bone-2
+Coccyx	[-]	Bone-5
+Vertebra L1	[-]	Bone-2
+Vertebra L2	[-]	Bone-2
+Vertebra L3	[-]	Bone-2
+Vertebra L4	[-]	Bone-2
+Vertebra L5	[-]	Bone-2
+Sacrum	[-]	Bone-5
+Vertebra T1	[-]	Bone-5
+Vertebra T10	[-]	Bone-5
+Vertebra T11	[-]	Bone-5
+Vertebra T12	[-]	Bone-5
+Vertebra T2	[-]	Bone-5
+Vertebra T3	[-]	Bone-5
+Vertebra T4	[-]	Bone-5
+Vertebra T5	[-]	Bone-5
+Vertebra T6	[-]	Bone-5
+Vertebra T7	[-]	Bone-5
+Vertebra T8	[-]	Bone-5
+Vertebra T9	[-]	Bone-5

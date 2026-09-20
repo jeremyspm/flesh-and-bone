@@ -1,0 +1,145 @@
+# skeleton.glb — 3.4 MB, 144 unique structures (name <tab> sides <tab> source material)
+Atlas (C1)	[-]	Atlas
+Axis (C2)	[-]	Axis.001
+Body of sternum	[-]	Body of sternum
+Cervical vertebrae (C3)	[-]	Vertebra_C3
+Cervical vertebrae (C4)	[-]	Vertebra_C4
+Cervical vertebrae (C5)	[-]	Vertebra_C5
+Cervical vertebrae (C6)	[-]	Vertebra_C6
+Cervical vertebrae (C7)	[-]	Vertebra_C7.001
+Coccyx	[-]	Coccyx
+Ethmoid Bone	[-]	Ethmoid Bone
+Frontal bone	[-]	Frontal bone.001
+Lumbar vertebrae (L1)	[-]	Vertebra_L1
+Lumbar vertebrae (L2)	[-]	Vertebra_L2
+Lumbar vertebrae (L3)	[-]	Vertebra_L3
+Lumbar vertebrae (L4)	[-]	Vertebra_L4
+Lumbar vertebrae (L5)	[-]	Vertebra_L5
+Mandible bone	[-]	Mandible bone.r
+Manubrium of sternum	[-]	sternum
+Occipital bone	[-]	Occipital bone
+Parietal bone left	[-]	Parietal bone.l
+Parietal bone right	[-]	Parietal bone.r
+Sacrum	[-]	sacrum
+Sphenoid bone	[-]	Sphenoid bone.001
+Thoracic vertebrae (T1)	[-]	Vertebra_T1
+Thoracic vertebrae (T10)	[-]	Vertebra_T10
+Thoracic vertebrae (T11)	[-]	Vertebra_T11.001
+Thoracic vertebrae (T12)	[-]	Vertebra_T12
+Thoracic vertebrae (T2)	[-]	Vertebra_T2
+Thoracic vertebrae (T3)	[-]	Vertebra_T3
+Thoracic vertebrae (T4)	[-]	Vertebra_T4
+Thoracic vertebrae (T5)	[-]	Vertebra_T5.001
+Thoracic vertebrae (T6)	[-]	Vertebra_T6
+Thoracic vertebrae (T7)	[-]	Vertebra_T7
+Thoracic vertebrae (T8)	[-]	Vertebra_T8
+Thoracic vertebrae (T9)	[-]	Vertebra_T9
+Vomer	[-]	Vomer
+1st metacarpal bone	[R]	1st metacarpal bone
+2nd metacarpal bone	[R]	2nd metacarpal bone
+3rd metacarpal bone	[R]	3rd metacarpal bone
+4th metacarpal bone	[R]	4th metacarpal bone
+5th metacarpal bone	[R]	5th metacarpal bone
+Calcaneus	[R]	calcaneus
+Capitate	[R]	Capitate
+Clavicle	[R]	clavicle.001
+Cuboid bone	[R]	Cuboid bone
+Distal phalanx of 1st finger	[R]	Distal phalanx of 1st finger
+Distal phalanx of 2d finger	[R]	Distal phalanx of 2d finger
+Distal phalanx of 3d finger	[R]	Distal phalanx of 3d finger
+Distal phalanx of 4th finger	[R]	Distal phalanx of 4th finger
+Distal phalanx of 5th finger	[R]	Distal phalanx of 5th finger
+Distal phalanx of fifth finger of foot	[R]	Distal phalanx of fifth finger of foot
+Distal phalanx of first finger of foot	[R]	Distal phalanx of first finger of foot
+Distal phalanx of fourth finger of foot	[R]	Distal phalanx of fourth finger of foot
+Distal phalanx of second finger of foot	[R]	Distal phalanx of second finger of foot
+Distal phalanx of third finger of foot	[R]	Distal phalanx of third finger of foot
+Femur	[R]	femur
+Fibula	[R]	Fibula
+Fifth metatarsal bone	[R]	5th metatarsal bone
+First metatarsal bone	[R]	1st Metatarsal bone
+Fourth metatarsal bone	[R]	4th Metatarsal bone
+Hamate	[R]	Hamate
+Hip bone	[R]	Hip bone
+Humerus	[R]	humerus
+Inferior nasal concha bone	[R]	Inferior nasal concha bone.r
+Intermediate cuneiform bone	[R]	Intermediate cuneiform
+Lacrimal bone	[R]	Lacrimal bone.r
+Lateral cuneiform bone	[R]	Lateral cuneiform
+Lower canine	[R]	Lower canine.r
+Lower first molar tooth	[R]	Lower first molar tooth.r
+Lower first premolar	[R]	Lower first premolar.r
+Lower lateral incisor	[R]	Lower lateral incisor.r
+Lower medial incisor	[R]	Lower medial incisor.r
+Lower second molar tooth	[R]	Lower second molar tooth.r
+Lower second premolar	[R]	Lower second premolar.r
+Lunate bone	[R]	Lunate bone
+Maxilla bone	[R]	Maxilla bone_r.002
+Medial cuneiform bone	[R]	Medial cuneiform
+Middle phalanx of 2d finger	[R]	Middle phalanx of 2d finger
+Middle phalanx of 3rd finger	[R]	Middle phalanx of 3rd finger
+Middle phalanx of 4th finger	[R]	Middle phalanx of 4th finger
+Middle phalanx of 5th finger	[R]	Middle phalanx of 5th finger
+Middle phalanx of fifth finger of foot	[R]	Middle phalanx of fifth finger of foot
+Middle phalanx of fourth finger of foot	[R]	Middle phalanx of fourth finger of foot
+Middle phalanx of second finger of foot	[R]	Middle phalanx of second finger of foot
+Middle phalanx of third finger of foot	[R]	Middle phalanx of third finger of foot
+Nasal bone	[R]	Nasal bone_r
+Navicular bone	[R]	Navicular bone
+Palatine bone	[R]	Palatine bone.r
+Patella	[R]	Patella
+Pisiform	[R]	Pisiform
+Proximal phalanx of 1st finger	[R]	Proximal phalanx of 1st finger.001
+Proximal phalanx of 2d finger	[R]	Proximal phalanx of 2d finger
+Proximal phalanx of 3rd finger	[R]	Proximal phalanx of 3rd fingerProximal phalanx of 3rd finger
+Proximal phalanx of 4th finger	[R]	Proximal phalanx of 4th finger
+Proximal phalanx of 5th finger	[R]	Proximal phalanx of 5th finger
+Proximal phalanx of fifth finger of foot	[R]	Proximal phalanx of fifth finger of foot
+Proximal phalanx of first finger of foot	[R]	Proximal phalanx of first finger of foot
+Proximal phalanx of fourth finger of foot	[R]	Proximal phalanx of fourth finger of foot
+Proximal phalanx of second finger of foot	[R]	Proximal phalanx of second finger of foot
+Proximal phalanx of third finger of foot	[R]	Proximal phalanx of third finger of foot
+Radius	[R]	radius
+Rib (10th)	[R]	10th_rib
+Rib (11th)	[R]	11th_rib
+Rib (12th)	[R]	12th_rib
+Rib (1st)	[R]	1st_rib
+Rib (2nd)	[R]	2nd_rib
+Rib (3rd)	[R]	3rd_rib
+Rib (4th)	[R]	4th_rib
+Rib (5th)	[R]	5th_rib
+Rib (6th)	[R]	6th_rib
+Rib (7th)	[R]	7th_rib
+Rib (8th)	[R]	8th_rib
+Rib (9th)	[R]	9th_rib
+Scaphoid	[R]	Scaphoid
+Scapula	[R]	Scapula.001
+Second metatarsal bone	[R]	2nd Metatarsal bone
+Sesamoid bones of foot	[R]	Sesamoid bones of foot
+Sesamoid_bones_of_hand	[R]	Bone
+Talus	[R]	Talus
+Temporal bone	[R]	Temporal bone.r
+Third metatarsal bone	[R]	3rd metatarsal bone
+Tibia	[R]	Tibia
+Trapezium	[R]	Trapezium
+Trapezoid	[R]	Trapezoid.001
+Triquetrum	[R]	Triquetrum
+Ulna	[R]	ulna
+Upper canine	[R]	Upper canine.r
+Upper first molar tooth	[R]	Upper first molar tooth.r
+Upper first premolar	[R]	Upper first premolar.r
+Upper lateral incisor	[R]	Upper lateral incisor.r
+Upper medial incisor	[R]	Upper medial incisor.r
+Upper second molar tooth	[R]	Upper second molar tooth.r
+Upper second premolar	[R]	Upper second premolar.r
+Zygomatic bone	[R]	Zygomatic bone.r
+Costal cart of 10th rib	[R]	Articular cartilage
+Costal cart of 1st rib	[R]	Articular cartilage
+Costal cart of 2nd rib	[R]	Articular cartilage
+Costal cart of 3rd rib	[R]	Articular cartilage
+Costal cart of 4th rib	[R]	Articular cartilage
+Costal cart of 5th rib	[R]	Articular cartilage
+Costal cart of 6th rib	[R]	Articular cartilage
+Costal cart of 7th rib	[R]	Articular cartilage
+Costal cart of 8th rib	[R]	Articular cartilage
+Costal cart of 9th rib	[R]	Articular cartilage

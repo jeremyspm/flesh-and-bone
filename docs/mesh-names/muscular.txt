@@ -1,0 +1,345 @@
+# muscular.glb — 5.0 MB, 344 unique structures (name <tab> sides <tab> source material)
+Inguinal ligament	[LR]	Ligament
+External abdominal oblique muscle	[LR]	Internal rotator
+Internal abdominal oblique muscle	[LR]	External rotation
+Linea alba	[-]	Ligament
+Pyramidalis muscle	[LR]	Flexion
+Quadratus lumborum muscle	[LR]	Extension
+Rectus abdominis muscle	[LR]	Flexion
+Transversus abdominis muscle	[LR]	Orbicularis/Constrictor
+Omohyoid muscle	[LR]	Flexion
+Sternohyoid muscle	[LR]	Flexion
+Sternothyroid muscle	[LR]	Depressor
+Thyrohyoid muscle	[LR]	Levator
+Ary-epiglottic part of oblique arytenoid muscle	[LR]	Phonation
+Lateral crico-arytenoid muscle	[LR]	Phonation
+Posterior crico-arytenoid muscle	[LR]	Phonation
+External part of thyro-arytenoid muscle	[LR]	Phonation
+Oblique part of cricothyroid muscle	[LR]	Levator
+Straight part of cricothyroid muscle	[LR]	Levator
+Thyro-epiglottic part of thyro-arytenoid muscle	[LR]	Ingestion
+Transverse arytenoid muscle	[-]	Phonation
+Longus capitis muscle	[LR]	Flexion
+Longus colli muscle	[LR]	Flexion
+Inferior pharyngeal constrictor	[LR]	Orbicularis/Constrictor
+Middle pharyngeal constrictor	[LR]	Orbicularis/Constrictor
+Stylopharyngeus muscle	[LR]	Levator
+Superior pharyngeal constrictor	[LR]	Orbicularis/Constrictor
+Scalenus anterior muscle	[LR]	Abductor
+Scalenus medius muscle	[LR]	Abductor
+Scalenus posterior muscle	[LR]	Abductor
+Platysma	[LR]	Biarticular
+Rectus anterior capitis muscle	[LR]	Flexion
+Rectus lateralis capitis muscle	[LR]	Abductor
+Sternocleidomastoid muscle	[LR]	Internal rotator
+Anterior belly of digastric muscle	[LR]	Ingestion
+Intermediate tendon of digastric muscle	[LR]	Ligament
+Posterior belly of digastric muscle	[LR]	Ingestion
+Geniohyoid muscle	[LR]	Levator
+Mylohyoid muscle	[LR]	Masticator
+Stylohyoid muscle	[LR]	Levator
+Common tendinous ring	[LR]	Tendon
+Inferior oblique muscle	[LR]	Adductor
+Inferior rectus muscle	[LR]	Flexion
+Inferior tarsus	[LR]	Cartilage
+Lateral rectus muscle	[LR]	External rotation
+Levator palpebrae superioris	[LR]	Levator
+Medial rectus muscle	[LR]	Internal rotator
+Superior oblique muscle	[LR]	Abductor
+Superior rectus muscle	[LR]	Extension
+Superior tarsus	[LR]	Cartilage
+Trochlea of superior oblique muscle	[LR]	Tendon
+Deep part of masseter	[LR]	Flexion
+Inferior head of lateral pterygoid muscle	[LR]	Adductor
+Medial pterygoid muscle	[LR]	Flexion
+Superficial part of masseter	[LR]	Flexion
+Superior head of lateral pterygoid muscle	[LR]	Adductor
+Temporalis muscle	[LR]	Flexion
+Palatopharyngeus muscle	[LR]	Depressor
+Genioglossus muscle	[LR]	Ingestion
+Hyoglossus muscle	[LR]	Ingestion
+Epicranial aponeurosis	[LR]	Tendon
+Frontalis muscle	[LR]	Superficial
+Occipitalis muscle	[LR]	Superficial
+Temporoparietalis muscle	[LR]	Superficial
+Bucinator	[LR]	Adductor
+Corrugator supercilii	[LR]	Adductor
+Depressor anguli oris	[LR]	Depressor
+Depressor labii inferioris	[LR]	Depressor
+Depressor septi nasi	[LR]	Depressor
+Levator anguli oris	[LR]	Levator
+Levator labii superioris	[LR]	Levator
+Levator nasolabialis	[LR]	Levator
+Mentalis muscle	[LR]	Depressor
+Nasalis muscle	[LR]	Superficial
+Orbicularis oris muscle	[LR]	Orbicularis/Constrictor
+Procerus muscle	[LR]	Depressor
+Risorius muscle	[LR]	Abductor
+Orbital part of orbicularis oculi	[LR]	Orbicularis/Constrictor
+Palpebral part of orbicularis oculi	[LR]	Orbicularis/Constrictor
+Zygomaticus major muscle	[LR]	Abductor
+Zygomaticus minor muscle	[LR]	Abductor
+Iliocostalis colli muscle	[-R]	External rotation
+Iliocostalis lumborum muscle	[LR]	External rotation
+Iliocostalis thoracis muscle	[LR]	Extension
+Longissimus capitis muscle	[LR]	Abductor
+Longissimus colli muscle	[LR]	Extension
+Longissimus thoracis muscle	[LR]	Extension
+Spinalis capitis muscle	[LR]	Extension
+Spinalis colli muscle	[LR]	Extension
+Spinalis thoracis muscle	[LR]	Extension
+Interspinales colli muscles	[LR]	Extension
+Interspinales lumborum muscles	[LR]	Extension
+Interspinales thoracis muscles	[LR]	Extension
+Splenius capitis muscle	[LR]	Abductor
+Splenius colli muscle	[LR]	Abductor
+Obliquus inferior capitis muscle	[LR]	External rotation
+Obliquus superior capitis muscle	[LR]	Extension
+Rectus posterior major capitis muscle	[LR]	Extension
+Rectus posterior minor capitis muscle	[LR]	Extension
+Multifidus colli muscle	[LR]	Internal rotator
+Multifidus lumborum muscle	[LR]	External rotation
+Multifidus thoracis muscle	[LR]	External rotation
+Rotatores	[LR]	Internal rotator
+Semispinalis colli muscle	[LR]	Internal rotator
+Semispinalis thoracis muscle	[LR]	Extension
+Dorsal parts of lateral intertransversarii lumborum muscles	[LR]	Abductor
+Latissimus dorsi muscle	[LR]	Adductor
+Levator scapulae	[LR]	Levator
+Rhomboid major muscle	[LR]	Adductor
+Rhomboid minor muscle	[LR]	Adductor
+Serratus posterior inferior muscle	[LR]	External rotation
+Serratus posterior superior muscle	[LR]	External rotation
+Ascending part of trapezius muscle	[LR]	Abductor
+Descending part of trapezius muscle	[LR]	External rotation
+Transverse part of trapezius muscle	[LR]	External rotation
+Ventral parts of lateral intertransversarii lumborum muscles	[LR]	Abductor
+(Iliopectineal bursa)	[LR]	Bursa
+Anserine bursa	[LR]	Bursa
+Bursa of piriformis muscle	[LR]	Bursa
+Deep infrapatellar bursa	[LR]	Bursa
+Inferior subtendinous bursa of biceps femoris muscle	[LR]	Bursa
+Intermuscular gluteal bursae	[LR]	Bursa
+Lateral subtendinous bursa of gastrocnemius muscle	[LR]	Bursa
+Medial subtendinous bursa of gastrocnemius muscle	[LR]	Bursa
+Sciatic bursa of gluteus maximus muscle	[LR]	Bursa
+Sciatic bursa of obturator internus	[LR]	Bursa
+Semimembranosus bursa	[LR]	Bursa
+Subcutaneous bursa of lateral malleolus	[LR]	Bursa
+Subcutaneous bursa of medial malleolus	[LR]	Bursa
+Subcutaneous bursa of tuberosity of tibia	[LR]	Bursa
+Subcutaneous calcaneal bursa	[LR]	Bursa
+Subcutaneous infrapatellar bursa	[LR]	Bursa
+Subcutaneous prepatellar bursa	[LR]	Bursa
+Subcutaneous trochanteric bursa	[LR]	Bursa
+Subfacial prepatellar bursa	[LR]	Bursa
+Subtendinous bursa of iliacus muscle	[LR]	Bursa
+Subtendinous bursa of obturator internus	[LR]	Bursa
+Subtendinous bursa of sartorius muscle	[LR]	Bursa
+Subtendinous bursa of tibialis anterior	[LR]	Bursa
+Subtendinous calcaneal bursa	[LR]	Bursa
+Subtendinous prepatellar bursa	[LR]	Bursa
+Superior bursa of biceps femoris muscle	[LR]	Bursa
+Suprapatellar bursa	[LR]	Bursa
+Trochanteric bursa of gluteus maximus muscle	[LR]	Bursa
+Trochanteric bursa of gluteus medius muscle	[LR]	Bursa
+Trochanteric bursa of gluteus minimus muscle	[LR]	Bursa
+Tendon of extensor digitorum longus	[LR]	Tendon
+Extensor digitorum longus	[LR]	Extensor extremities
+Extensor hallucis longus	[LR]	Extensor extremities
+Fibularis tertius muscle	[LR]	Extension hand/foot
+Tibialis anterior muscle	[LR]	Flexion hand/foot
+Lateral patellar retinaculum	[LR]	Ligament
+Medial patellar retinaculum	[LR]	Ligament
+Rectus femoris muscle	[LR]	Biarticular
+Sartorius muscle	[LR]	Adductor
+Vastus intermedius muscle	[LR]	Extension
+Vastus lateralis muscle	[LR]	Extension
+Vastus medialis muscle	[LR]	Extension
+Inferior gemellus muscle	[LR]	Internal rotator
+Obturator internus	[LR]	Internal rotator
+Piriformis muscle	[LR]	Abductor
+Quadratus femoris muscle	[LR]	External rotation
+Superior gemellus muscle	[LR]	Internal rotator
+Iliacus muscle	[LR]	Flexion
+Psoas major	[LR]	Flexion
+Fibularis brevis muscle	[LR]	Extension hand/foot
+Fibularis longus muscle	[LR]	External rotation
+Adductor brevis	[LR]	Adductor
+Adductor longus	[LR]	Adductor
+(Adductor minimus)	[LR]	Adductor
+Adductor magnus	[LR]	Adductor
+Gracilis muscle	[LR]	Adductor
+Obturator externus	[LR]	External rotation
+Pectineus muscle	[LR]	External rotation
+(Opponens digiti minimi muscle of foot)	[LR]	Adductor
+Abductor digiti minimi of foot	[LR]	Abductor
+Abductor hallucis	[LR]	Abductor
+Oblique head of adductor hallucis	[LR]	Adductor
+Transverse head of adductor hallucis	[LR]	Adductor
+Dorsal interossei muscles of foot	[LR]	Abductor
+Extensor digitorum brevis	[LR]	Extensor extremities
+Extensor hallucis brevis	[LR]	Extensor extremities
+Flexor digiti minimi of foot	[LR]	Flexion fingers
+Flexor digitorum brevis	[LR]	Flexion fingers
+Lateral head of flexor hallucis brevis	[LR]	Flexion fingers
+Medial head of flexor hallucis brevis	[LR]	Flexion fingers
+Lumbrical muscles of foot	[LR]	Flexion fingers
+Plantar interossei muscles	[LR]	Adductor
+Quadratus plantae muscle	[LR]	Flexion fingers
+Flexor digitorum longus	[LR]	Flexion fingers
+Flexor hallucis longus	[LR]	Flexion fingers
+Popliteus muscle	[LR]	External rotation
+Tibialis posterior muscle	[LR]	Extension hand/foot
+Calcaneal tendon	[LR]	Tendon
+Lateral head of gastrocnemius	[LR]	Biarticular
+Medial head of gastrocnemius	[LR]	Biarticular
+Plantaris muscle	[LR]	Biarticular
+Soleus muscle	[LR]	Extension hand/foot
+Long head of biceps femoris	[LR]	Flexion
+Semimembranosus muscle	[LR]	Flexion
+Semitendinosus muscle	[LR]	Flexion
+Short head of biceps femoris	[LR]	Flexion
+Gluteus maximus muscle	[LR]	Extension
+Gluteus medius muscle	[LR]	Abductor
+Gluteus minimus muscle	[LR]	Abductor
+Iliotibial tract	[LR]	Trapezius
+Tensor fasciae latae	[LR]	Abductor
+Tendon sheath of extensor digitorum longus	[LR]	Articular capsule
+Tendon sheath of extensor hallucis longus	[LR]	Articular capsule
+Tendon sheath of tibialis anterior	[LR]	Articular capsule
+Common tendon sheath of fibularis muscles	[LR]	Articular capsule
+Plantar tendon sheath of fibularis longus muscle	[LR]	Articular capsule
+Tendon sheath of flexor digitorum longus	[LR]	Articular capsule
+Tendon sheath of flexor hallucis longus	[LR]	Articular capsule
+Tendon sheath of tibialis posterior muscle	[LR]	Articular capsule
+Bicipitoradial bursa	[LR]	Bursa
+Coracobrachial bursa	[LR]	Bursa
+Subacromial bursa	[LR]	Bursa
+Subcutaneous acromial bursa	[LR]	Bursa
+Subdeltoid bursa	[LR]	Bursa
+Subtendinous bursa of infraspinatus muscle	[LR]	Bursa
+Subtendinous bursa of teres major muscle	[LR]	Bursa
+Subtendinous bursa of trapezius muscle	[LR]	Bursa
+Subtendinous bursa of triceps brachii muscle	[LR]	Bursa
+Long head of biceps brachii	[LR]	Biarticular
+Short head of biceps brachii	[LR]	Biarticular
+Brachialis muscle	[LR]	Flexion
+Coracobrachialis muscle	[LR]	Flexion
+Flexor digitorum profundus	[LR]	Flexion fingers
+Flexor pollicis longus	[LR]	Flexion fingers
+Pronator quadratus	[LR]	Internal rotator
+Deep head of pronator teres	[LR]	Internal rotator
+Flexor carpi radialis	[LR]	Flexion hand/foot
+Humeral head of flexor carpi ulnaris	[LR]	Flexion hand/foot
+Humero-ulnar head of flexor digitorum superficialis	[LR]	Flexion fingers
+Palmaris longus muscle	[LR]	Flexion hand/foot
+Radial head of flexor digitorum superficialis	[LR]	Flexion fingers
+Superficial head of pronator teres	[LR]	Internal rotator
+Ulnar head of flexor carpi ulnaris	[LR]	Flexion hand/foot
+Abductor digiti minimi of hand	[LR]	Abductor
+Abductor pollicis brevis	[LR]	Abductor
+Deep head of flexor pollicis brevis	[LR]	Flexion fingers
+Dorsal interossei muscles of hand	[LR]	Abductor
+Flexor digiti minimi of hand	[LR]	Flexion fingers
+Lumbrical muscles of hand	[LR]	Flexion fingers
+Oblique head of adductor pollicis	[LR]	Adductor
+Opponens digiti minimi muscle of hand	[LR]	Adductor
+Opponens pollicis muscle	[LR]	Adductor
+Palmar interossei muscles	[LR]	Adductor
+Superficial head of flexor pollicis brevis	[LR]	Flexion fingers
+Transverse head of adductor pollicis	[LR]	Adductor
+Lateral head of triceps brachii	[LR]	Extension
+Long head of triceps brachii	[LR]	Extension
+Medial head of triceps brachii	[LR]	Extension
+Abductor pollicis longus	[LR]	Abductor
+Extensor indicis	[LR]	Extensor extremities
+Extensor pollicis brevis	[LR]	Extensor extremities
+Extensor pollicis longus	[LR]	Extensor extremities
+Supinator	[LR]	External rotation
+Anconeus muscle	[LR]	Extension
+Brachioradialis muscle	[LR]	Flexion
+Extensor carpi radialis brevis	[LR]	Extension hand/foot
+Extensor carpi radialis longus	[LR]	Extension hand/foot
+Extensor digiti minimi	[LR]	Extensor extremities
+Extensor digitorum	[LR]	Extensor extremities
+Humeral head of extensor carpi ulnaris	[LR]	Extension hand/foot
+Ulnar head of extensor carpi ulnaris	[LR]	Trapezius
+Acromial part of deltoid muscle	[LR]	Abductor
+Clavicular part of deltoid muscle	[LR]	Abductor
+Scapular spinal part of deltoid muscle	[LR]	Abductor
+Infraspinatus muscle	[LR]	External rotation
+Subscapularis muscle	[LR]	Internal rotator
+Supraspinatus muscle	[LR]	Abductor
+Teres minor muscle	[LR]	External rotation
+Teres major muscle	[LR]	Internal rotator
+Tendon sheath - abd. pollicis longus - ext. pollicis brevis	[LR]	Articular capsule
+Tendon sheath of extensor carpi ulnaris	[LR]	Articular capsule
+Tendon sheath of extensor digiti minimi manus	[LR]	Articular capsule
+Tendon sheath of extensor digitorum and extensor indicis	[LR]	Articular capsule
+Tendon sheath of extensor pollicis longus	[LR]	Articular capsule
+Tendon sheath of extensors carpi radialis	[LR]	Articular capsule
+Common flexor tendon sheath	[LR]	Articular capsule
+Tendon sheath of flexor carpi radialis	[LR]	Articular capsule
+Tendon sheath of flexor pollicis longus	[LR]	Articular capsule
+Intertubercular tendon sheath	[LR]	Articular capsule
+Cruciform part of fibrous sheath of digit of hand	[LR]	Ligament
+Synovial sheaths of digits of hand	[LR]	Articular capsule
+Coccygeus muscle	[LR]	Orbicularis/Constrictor
+Iliococcygeus muscle	[LR]	Orbicularis/Constrictor
+Pubo-analis muscle	[LR]	Orbicularis/Constrictor
+Pubococcygeus muscle	[LR]	Orbicularis/Constrictor
+Tendinous arch of levator ani	[LR]	Tendon
+External anal sphincter	[LR]	Orbicularis/Constrictor
+Diaphragm	[-]	Diaphragm
+External intercostal muscles	[LR]	Levator
+Innermost intercostal muscles	[LR]	Depressor
+Internal intercostal muscles	[LR]	Levator
+Levatores breves costarum	[LR]	Levator
+Levatores longi costarum	[LR]	Levator
+(Abdominal part of pectoralis major muscle)	[LR]	Adductor
+Clavicular head of pectoralis major muscle	[LR]	Adductor
+Sternocostal head of pectoralis major muscle	[LR]	Adductor
+Pectoralis minor muscle	[LR]	Abductor
+Serratus anterior muscle	[LR]	Internal rotator
+Subclavius muscle	[LR]	Depressor
+Transversus thoracis muscle	[LR]	Depressor
+Superficial investing cervical fascia	[LR]	Fascia
+Diaphragmatic fascia	[-]	Fascia
+Iliopsoas fascia	[LR]	Fascia
+Transversalis fascia	[-]	Fascia
+Investing abdominal fascia	[LR]	Fascia
+Masseteric fascia	[LR]	Fascia
+Superficial layer of temporal fascia	[LR]	Fascia
+Anterior intermuscular septum of leg	[LR]	Fascia
+Crural fascia	[LR]	Fascia
+Fascia lata	[LR]	Fascia
+Flexor retinaculum of ankle	[LR]	Ligament
+Iliopectineal arch	[LR]	Ligament
+Inferior extensor retinaculum of ankle	[LR]	Ligament
+Inferior fibular retinaculum	[LR]	Ligament
+Lateral femoral intermuscular septum	[LR]	Fascia
+Medial femoral intermuscular septum	[LR]	Fascia
+Piriformis fascia	[LR]	Fascia
+Plantar aponeurosis	[LR]	Ligament
+Popliteal fascia	[LR]	Fascia
+Posterior intermuscular septum of leg	[LR]	Fascia
+Superficial transverse metatarsal ligament	[LR]	Ligament
+Superior extensor retinaculum of ankle	[LR]	Ligament
+Superior fibular retinaculum	[LR]	Ligament
+Transverse intermuscular septum of leg	[LR]	Fascia
+Clavipectoral fascia	[LR]	Fascia
+Pectoral fascia	[LR]	Fascia
+Extensor retinaculum of wrist	[LR]	Ligament
+Antebrachial fascia	[LR]	Fascia
+Brachial fascia	[LR]	Fascia
+Deltoid fascia	[LR]	Fascia
+Dorsal fascia of hand	[LR]	Fascia
+Flexor retinaculum of wrist	[LR]	Ligament
+Lateral intermuscular septum of arm	[LR]	Fascia
+Medial intermuscular septum of arm	[LR]	Fascia
+Palmar aponeurosis	[LR]	Fascia
+Superficial transverse metacarpal ligament	[LR]	Ligament
+Anterior layer of thoracolumbar fascia	[LR]	Fascia
+Middle layer of thoracolumbar fascia	[LR]	Fascia
+Posterior layer of thoracolumbar fascia	[LR]	Fascia

@@ -1,0 +1,36 @@
+# respiratory.glb — 0.7 MB, 35 unique structures (name <tab> sides <tab> source material)
+Inferior lobe of left lung	[-]	Lung-base
+Superior lobe of left lung	[-]	Lung-base
+Inferior lobe of right lung	[-]	Lung-base
+Middle lobe of right lung	[-]	Lung-base
+Superior lobe of right lung	[-]	Lung-base
+(Anteromedial basal segmental bronchus of left lung)	[-]	Bronchi
+Anterior basal segmental bronchus of left lung (BVIII)	[-]	Bronchi-8
+Lateral basal segmental bronchus of left lung (BIX)	[-]	Bronchi-1
+Medial basal segmental bronchus of left lung (BVII)	[-]	Bronchi-7
+Posterior basal segmental bronchus of left lung (BX)	[-]	Bronchi-2
+Superior segmental bronchus of left lung (BVI)	[-]	Bronchi-6
+Left inferior lobar bronchus	[-]	Bronchi
+Anterior segmental bronchus of left lung (BIII)	[-]	Bronchi-3
+Apicoposterior segmental bronchus of left lung (BI+BII)	[-]	Bronchi-1
+Inferior lingular segmental bronchus of left lung (BV)	[-]	Bronchi-8
+Superior lingular segmental bronchus of left lung (BIV)	[-]	Bronchi-4
+Left superior lobar bronchus	[-]	Bronchi
+Left main bronchus	[-]	Bronchi
+Lateral segmental bronchus of right lung (BIV)	[-]	Bronchi-4
+Medial segmental bronchus of right lung (BV)	[-]	Bronchi-5
+Middle lobar bronchus	[R]	Bronchi
+Anterior basal segmental bronchus of right lung (BVIII)	[-]	Bronchi-8
+Lateral basal segmental bronchus of right lung (BIX)	[-]	Bronchi-1
+Medial basal segmental bronchus of right lung (BVII)	[-]	Bronchi-7
+Posterior basal segmental bronchus of right lung (BX)	[-]	Bronchi-2
+Superior segmental bronchus of right lung (BVI)	[-]	Bronchi-6
+Right inferior lobar bronchus	[-]	Bronchi
+Intermediate bronchus	[R]	Bronchi
+Anterior segmental bronchus of right lung (BIII)	[-]	Bronchi-3
+Apical segmental bronchus of right lung (BI)	[-]	Bronchi-1
+Posterior segmental bronchus of right lung (BII)	[-]	Bronchi-2
+Right superior lobar bronchus	[-]	Bronchi
+Right main bronchus	[-]	Bronchi
+Trachea	[-]	Bronchi
+Pleura	[-]	Fascia

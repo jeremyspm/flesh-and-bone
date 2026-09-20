@@ -1,0 +1,706 @@
+# insertions.glb — 3.7 MB, 705 unique structures (name <tab> sides <tab> source material)
+(Opponens digiti minimi muscle of foot).ol	[-]	Origin-Adduction
+Fibularis brevis muscle.el	[-]	End-Extension hand-foot
+Fibularis tertius muscle.el	[-]	End-Extension hand-foot
+Transverse head of adductor hallucis.e1l	[-]	Origin-Adduction
+(Opponens digiti minimi muscle of foot).or	[-]	Origin-Adduction
+Fibularis brevis muscle.er	[-]	End-Extension hand-foot
+Fibularis tertius muscle.er	[-]	End-Extension hand-foot
+Plantar interossei muscles.o2l	[-]	Origin-Adduction
+Transverse head of adductor hallucis.e1r	[-]	Origin-Adduction
+Lateral head of flexor hallucis brevis.o1l	[-]	Origin-Flexion fingers
+Long plantar ligament.o1l	[-]	Origin-Ligament
+Tibialis anterior muscle.e1l	[-]	End-Flexion hand/foot
+Lateral head of flexor hallucis brevis.o1r	[-]	Origin-Flexion fingers
+Long plantar ligament.o1r	[-]	Origin-Ligament
+Tibialis anterior muscle.e1r	[-]	End-Flexion hand/foot
+Long plantar ligament.o4l	[-]	Origin-Ligament
+Oblique head of adductor hallucis.o1l	[-]	Origin-Ligament
+Transverse head of adductor hallucis.e2l	[-]	Origin-Adduction
+Long plantar ligament.o4r	[-]	Origin-Ligament
+Oblique head of adductor hallucis.o1r	[-]	Origin-Ligament
+Plantar interossei muscles.o1l	[-]	Origin-Adduction
+Transverse head of adductor hallucis.e2r	[-]	Origin-Adduction
+Long plantar ligament.o2r	[-]	Origin-Ligament
+Long plantar ligament.o2l	[-]	Origin-Ligament
+Long plantar ligament.o3l	[-]	Origin-Ligament
+Transverse head of adductor hallucis.e3l	[-]	Origin-Adduction
+Long plantar ligament.o3r	[-]	Origin-Ligament
+Plantar interossei muscles.ol	[-]	Origin-Adduction
+Transverse head of adductor hallucis.e3r	[-]	Origin-Adduction
+Oblique head of adductor hallucis.er	[-]	End-Adduction
+Transverse head of adductor hallucis.or	[-]	End-Adduction
+Extensor digitorum longus.e3l	[-]	End-Extension fingers
+Flexor digitorum longus.e3l	[-]	End-Flexion fingers
+Extensor digitorum longus.e3r	[-]	End-Extension fingers
+Flexor digitorum longus.e3r	[-]	End-Flexion fingers
+Flexor hallucis longus.el	[-]	End-Flexion fingers
+Flexor hallucis longus.er	[-]	End-Flexion fingers
+Extensor digitorum longus.e2l	[-]	End-Extension fingers
+Flexor digitorum longus.e2l	[-]	End-Flexion fingers
+Extensor digitorum longus.e2r	[-]	End-Extension fingers
+Flexor digitorum longus.e2r	[-]	End-Flexion fingers
+Extensor digitorum longus.el	[-]	End-Extension fingers
+Flexor digitorum longus.el	[-]	End-Flexion fingers
+Extensor digitorum longus.er	[-]	End-Extension fingers
+Flexor digitorum longus.er	[-]	End-Flexion fingers
+Extensor digitorum longus.e1l	[-]	End-Extension fingers
+Flexor digitorum longus.e1l	[-]	End-Flexion fingers
+Extensor digitorum longus.e1r	[-]	End-Extension fingers
+Flexor digitorum longus.e1r	[-]	End-Flexion fingers
+Extensor digitorum longus.e4l	[-]	End-Extension fingers
+Flexor digitorum brevis.e2l	[-]	End-Flexion fingers
+Extensor digitorum longus.e4r	[-]	End-Extension fingers
+Flexor digitorum brevis.e2r	[-]	End-Flexion fingers
+Extensor digitorum brevis.e2l	[-]	End-Extension fingers
+Extensor digitorum brevis.e2r	[-]	End-Extension fingers
+Extensor digitorum brevis.el	[-]	End-Extension fingers
+Flexor digitorum brevis.el	[-]	End-Flexion fingers
+Extensor digitorum brevis.er	[-]	End-Extension fingers
+Flexor digitorum brevis.er	[-]	End-Flexion fingers
+Extensor digitorum brevis.e1l	[-]	End-Extension fingers
+Flexor digitorum brevis.e1l	[-]	End-Flexion fingers
+Extensor digitorum brevis.e1r	[-]	End-Extension fingers
+Flexor digitorum brevis.e1r	[-]	End-Flexion fingers
+Abductor digiti minimi of foot.el	[-]	End-Abduction
+Flexor digiti minimi of foot.el	[-]	End-Flexion fingers
+Abductor digiti minimi of foot.er	[-]	End-Abduction
+Flexor digiti minimi of foot.er	[-]	End-Flexion fingers
+Plantar interossei muscles.e2l	[-]	End-Adduction
+Abductor hallucis.el	[-]	End-Abduction
+Extensor hallucis longus.el	[-]	End-Extension fingers
+Lateral head of flexor hallucis brevis.el	[-]	End-Flexion fingers
+Medial head of flexor hallucis brevis.el	[-]	End-Flexion fingers
+Abductor hallucis.er	[-]	End-Abduction
+Extensor hallucis longus.er	[-]	End-Extension fingers
+Lateral head of flexor hallucis brevis.er	[-]	End-Flexion fingers
+Medial head of flexor hallucis brevis.er	[-]	End-Flexion fingers
+Plantar interossei muscles.e1l	[-]	End-Adduction
+Plantar interossei muscles.el	[-]	End-Adduction
+Oblique head of adductor hallucis.el	[-]	End-Adduction
+Transverse head of adductor hallucis.ol	[-]	End-Adduction
+Abductor hallucis.ol	[-]	Muscular origin
+Extensor hallucis brevis.ol	[-]	Origin-Extension fingers
+Flexor digitorum brevis.ol	[-]	Origin-Flexion fingers
+Long plantar ligament.ol	[-]	Origin-Ligament
+Triceps surae muscle.el	[-]	End-Extension hand-foot
+Abductor hallucis.or	[-]	Muscular origin
+Extensor hallucis brevis.or	[-]	Origin-Extension fingers
+Flexor digitorum brevis.or	[-]	Origin-Flexion fingers
+Long plantar ligament.or	[-]	Origin-Ligament
+Triceps surae muscle.er	[-]	End-Extension hand-foot
+Oblique head of adductor hallucis.ol	[-]	Origin-Ligament
+Oblique head of adductor hallucis.or	[-]	Origin-Ligament
+Lateral head of flexor hallucis brevis.ol	[-]	Origin-Flexion fingers
+Tibialis anterior muscle.el	[-]	End-Flexion hand/foot
+Lateral head of flexor hallucis brevis.or	[-]	Origin-Flexion fingers
+Tibialis anterior muscle.er	[-]	End-Flexion hand/foot
+Adductor longus.el	[-]	End-Adduction
+Adductor magnus.el	[-]	End-Adduction
+Articularis genus muscle.ol	[-]	Origin-Extension
+Gluteus maximus muscle.el	[-]	End-Extension
+Gluteus medius muscle.el	[-]	End-Abduction
+Iliopsoas muscle.el	[-]	End-Flexion
+Lateral head of gastrocnemius.ol	[-]	Origin-Biarticular
+Medial head of gastrocnemius.ol	[-]	Origin-Biarticular
+Plantaris muscle.ol	[-]	Origin-Biarticular
+Quadratus femoris muscle.el	[-]	End-External rotation
+Trochanteric insertion.el	[-]	End-External rotation
+Vastus intermedius muscle.ol	[-]	Origin-Extension
+Vastus lateralis muscle.ol	[-]	Origin-Extension
+Vastus medialis muscle.ol	[-]	Origin-Extension
+Adductor longus.er	[-]	End-Adduction
+Adductor magnus.er	[-]	End-Adduction
+Articularis genus muscle.or	[-]	Origin-Extension
+Gluteus maximus muscle.er	[-]	End-Extension
+Gluteus medius muscle.er	[-]	End-Abduction
+Iliopsoas muscle.er	[-]	End-Flexion
+Lateral head of gastrocnemius.or	[-]	Origin-Biarticular
+Medial head of gastrocnemius.or	[-]	Origin-Biarticular
+Pectineus muscle.el	[-]	End-External rotation
+Plantaris muscle.or	[-]	Origin-Biarticular
+Popliteus muscle.ol	[-]	Origin-External rotation
+Popliteus muscle.or	[-]	Origin-External rotation
+Piriformis muscle.el	[-]	End-Abduction
+Quadratus femoris muscle.er	[-]	End-External rotation
+Short head of biceps femoris.el	[-]	End-Flexion
+Trochanteric insertion.er	[-]	End-External rotation
+Vastus intermedius muscle.or	[-]	Origin-Extension
+Vastus lateralis muscle.or	[-]	Origin-Extension
+Vastus medialis muscle.or	[-]	Origin-Extension
+Biceps femoris muscle.el	[-]	End-Flexion
+Extensor digitorum longus.o1l	[-]	Origin-Extension fingers
+Extensor hallucis longus.ol	[-]	Origin-Extension fingers
+Fibularis brevis muscle.ol	[-]	Origin-Extension hand/foot
+Fibularis longus muscle.ol	[-]	Origin-External rotation
+Fibularis tertius muscle.ol	[-]	Origin-Extension hand/foot
+Flexor hallucis longus.ol	[-]	Origin-Flexion fingers
+Soleus muscle.ol	[-]	Origin-Extension
+Biceps femoris muscle.er	[-]	End-Flexion
+Extensor digitorum longus.o1r	[-]	Origin-Extension fingers
+Extensor hallucis longus.or	[-]	Origin-Extension fingers
+Fibularis brevis muscle.or	[-]	Origin-Extension hand/foot
+Fibularis longus muscle.or	[-]	Origin-External rotation
+Fibularis tertius muscle.or	[-]	Origin-Extension hand/foot
+Flexor hallucis longus.or	[-]	Origin-Flexion fingers
+Soleus muscle.or	[-]	Origin-Extension
+Patellar ligament.ol	[-]	Origin-Extension
+Quadriceps femoris muscle.el	[-]	End-Extension
+Patellar ligament.or	[-]	Origin-Extension
+Quadriceps femoris muscle.er	[-]	End-Extension
+Extensor digitorum longus.ol	[-]	Origin-Extension fingers
+Flexor digitorum longus.ol	[-]	Origin-Flexion fingers
+Gracilis muscle.el	[-]	End-Adduction
+Patellar ligament.el	[-]	End-Extension
+Popliteus muscle.el	[-]	End-External rotation
+Sartorius muscle.el	[-]	End-Adduction
+Semimembranosus muscle.el	[-]	End-Flexion
+Semitendinosus muscle.el	[-]	End-Flexion
+Soleus muscle.o1l	[-]	Origin-Extension hand/foot
+Tibialis anterior muscle.ol	[-]	Origin-Flexion hand/foot
+Tibialis posterior muscle.ol	[-]	Origin-Extension hand/foot
+Extensor digitorum longus.or	[-]	Origin-Extension fingers
+Flexor digitorum longus.or	[-]	Origin-Flexion fingers
+Gracilis muscle.er	[-]	End-Adduction
+Patellar ligament.er	[-]	End-Extension
+Popliteus muscle.er	[-]	End-External rotation
+Sartorius muscle.er	[-]	End-Adduction
+Semimembranosus muscle.er	[-]	End-Flexion
+Semitendinosus muscle.er	[-]	End-Flexion
+Soleus muscle.o1r	[-]	Origin-Extension hand/foot
+Tibialis anterior muscle.or	[-]	Origin-Flexion hand/foot
+Tibialis posterior muscle.or	[-]	Origin-Extension hand/foot
+Adductor longus.ol	[-]	Origin-Adduction
+Adductor magnus.ol	[-]	Origin-Adduction
+Erector spinae.ol	[-]	Origin-Extension
+External abdominal oblique muscle.o4l	[-]	Origin-Internal rotation
+External abdominal oblique muscle.o5l	[-]	Origin-Internal rotation
+Gluteus maximus muscle.ol	[-]	Origin-Extension
+Gluteus medius muscle.ol	[-]	Origin-Abduction
+Gluteus minimus muscle.ol	[-]	Origin-Abduction
+Gracilis muscle.ol	[-]	Origin-Adduction
+Iliacus muscle.ol	[-]	Origin-Flexion
+Inferior gemellus muscle.ol	[-]	Origin-Internal rotation
+Internal abdominal oblique muscle.o3l	[-]	Origin-External rotation
+Latissimus dorsi muscle.ol	[-]	Origin-Adduction
+Levator ani.ol	[-]	Origin-Orbicular/Constrictor
+Long head of biceps femoris.ol	[-]	Origin-Flexion
+Obturator externus.ol	[-]	Origin-Internal rotation
+Obturator internus.ol	[-]	Origin-External rotation
+Pectineus muscle.ol	[-]	Origin-External rotation
+Quadratus femoris muscle.ol	[-]	Origin-External rotation
+Rectus femoris muscle.ol	[-]	Origin-Biarticular
+Sartorius muscle.ol	[-]	Origin-Adduction
+Semimembranosus muscle.ol	[-]	Origin-Flexion
+Semitendinosus muscle.ol	[-]	Origin-Flexion
+Superior gemellus muscle.ol	[-]	Origin-Internal rotation
+Tensor fasciae latae.ol	[-]	Origin-Abduction
+Transversus abdominis muscle.ol	[-]	Origin-Orbicular/Constrictor
+Adductor longus.or	[-]	Origin-Adduction
+Adductor magnus.or	[-]	Origin-Adduction
+Erector spinae.or	[-]	Origin-Extension
+External abdominal oblique muscle.o4r	[-]	Origin-Internal rotation
+External abdominal oblique muscle.o5r	[-]	Origin-Internal rotation
+Gluteus maximus muscle.or	[-]	Origin-Extension
+Gluteus medius muscle.or	[-]	Origin-Abduction
+Gluteus minimus muscle.or	[-]	Origin-Abduction
+Gracilis muscle.or	[-]	Origin-Adduction
+Iliacus muscle.or	[-]	Origin-Flexion
+Inferior gemellus muscle.or	[-]	Origin-Internal rotation
+Internal abdominal oblique muscle.o3r	[-]	Origin-External rotation
+Latissimus dorsi muscle.or	[-]	Origin-Adduction
+Levator ani.or	[-]	Origin-Orbicular/Constrictor
+Long head of biceps femoris.or	[-]	Origin-Flexion
+Obturator externus.or	[-]	Origin-Internal rotation
+Obturator internus.or	[-]	Origin-External rotation
+Pectineus muscle.or	[-]	Origin-External rotation
+Quadratus femoris muscle.or	[-]	Origin-External rotation
+Rectus femoris muscle.or	[-]	Origin-Biarticular
+Sartorius muscle.or	[-]	Origin-Adduction
+Semimembranosus muscle.or	[-]	Origin-Flexion
+Semitendinosus muscle.or	[-]	Origin-Flexion
+Superior gemellus muscle.or	[-]	Origin-Internal rotation
+Tensor fasciae latae.or	[-]	Origin-Abduction
+Transversus abdominis muscle.or	[-]	Origin-Orbicular/Constrictor
+Adductor pollicis.el	[-]	Origin-Adduction
+Adductor pollicis.er	[-]	Origin-Adduction
+Flexor digitorum profundus.el	[-]	End-Flexion fingers
+Flexor digitorum profundus.er	[-]	End-Flexion fingers
+Extensor pollicis longus.el	[-]	End-Extension fingers
+Flexor pollicis longus.el	[-]	End-Flexion fingers
+Extensor pollicis longus.er	[-]	End-Extension fingers
+Flexor pollicis longus.er	[-]	End-Flexion fingers
+Flexor digitorum profundus.e1l	[-]	End-Flexion fingers
+Flexor digitorum profundus.e1r	[-]	End-Flexion fingers
+Extensor indicis.el	[-]	End-Extension fingers
+Flexor digitorum profundus.e3l	[-]	End-Flexion fingers
+Extensor indicis.er	[-]	End-Extension fingers
+Flexor digitorum profundus.e3r	[-]	End-Flexion fingers
+Flexor digitorum profundus.e2l	[-]	End-Flexion fingers
+Flexor digitorum profundus.e2r	[-]	End-Flexion fingers
+Dorsal interossei muscles of hand.ol	[-]	Origin-Abduction
+Dorsal interossei muscles of hand.or	[-]	Origin-Abduction
+Abductor pollicis longus.el	[-]	End-Abduction
+Deep head of flexor pollicis brevis.o1l	[-]	Origin-Flexion fingers
+Dorsal interossei muscles of hand.o4l	[-]	Origin-Abduction
+Abductor pollicis longus.er	[-]	End-Abduction
+Deep head of flexor pollicis brevis.o1r	[-]	Origin-Flexion fingers
+Dorsal interossei muscles of hand.o4r	[-]	Origin-Abduction
+Dorsal interossei muscles of hand.o1l	[-]	Origin-Abduction
+Dorsal interossei muscles of hand.o1r	[-]	Origin-Abduction
+Flexor digiti minimi of hand.ol	[-]	Origin-Flexion fingers
+Opponens digiti minimi muscle of hand.ol	[-]	Origin-Adduction
+Flexor digiti minimi of hand.or	[-]	Origin-Flexion fingers
+Opponens digiti minimi muscle of hand.or	[-]	Origin-Adduction
+Anconeus muscle.ol	[-]	Origin-Extension
+Brachialis muscle.ol	[-]	Origin-Flexion
+Brachioradialis muscle.ol	[-]	Origin-Flexion
+Common extensor tendon.ol	[-]	Origin-Extension fingers
+Common flexor tendon.ol	[-]	Origin-Flexion fingers
+Deltoid muscle.el	[-]	End-Abduction
+Extensor carpi radialis longus.ol	[-]	Origin-Extension hand/foot
+Infraspinatus muscle.el	[-]	End-External rotation
+Lateral head of triceps brachii.ol	[-]	Origin-Extension
+Medial head of triceps brachii.ol	[-]	Origin-Extension
+Pectoralis major muscle.el	[-]	End-Adduction
+Pronator teres.ol	[-]	Origin-Internal rotation
+Subscapularis muscle.el	[-]	End-Internal rotation
+Supraspinatus muscle.el	[-]	End-Abduction
+Teres minor muscle.el	[-]	End-External rotation
+Anconeus muscle.or	[-]	Origin-Extension
+Brachialis muscle.or	[-]	Origin-Flexion
+Brachioradialis muscle.or	[-]	Origin-Flexion
+Common extensor tendon.or	[-]	Origin-Extension fingers
+Common flexor tendon.or	[-]	Origin-Flexion fingers
+Deltoid muscle.er	[-]	End-Abduction
+Extensor carpi radialis longus.or	[-]	Origin-Extension hand/foot
+Infraspinatus muscle.er	[-]	End-External rotation
+Lateral head of triceps brachii.or	[-]	Origin-Extension
+Medial head of triceps brachii.or	[-]	Origin-Extension
+Pectoralis major muscle.er	[-]	End-Adduction
+Pronator teres.or	[-]	Origin-Internal rotation
+Subscapularis muscle.er	[-]	End-Internal rotation
+Supraspinatus muscle.er	[-]	End-Abduction
+Teres minor muscle.er	[-]	End-External rotation
+Extensor digitorum.e4l	[-]	End-Extension fingers
+Flexor digitorum superficialis.el	[-]	End-Flexion fingers
+Extensor digitorum.e4r	[-]	End-Extension fingers
+Flexor digitorum superficialis.er	[-]	End-Flexion fingers
+Extensor digitorum.e5l	[-]	End-Extension fingers
+Flexor digitorum superficialis.e1l	[-]	End-Flexion fingers
+Extensor digitorum.e5r	[-]	End-Extension fingers
+Flexor digitorum superficialis.e1r	[-]	End-Flexion fingers
+Extensor digitorum.e7l	[-]	End-Extension fingers
+Flexor digitorum superficialis.e3l	[-]	End-Flexion fingers
+Extensor digitorum.e7r	[-]	End-Extension fingers
+Flexor digitorum superficialis.e3r	[-]	End-Flexion fingers
+Extensor digitorum.e6l	[-]	End-Extension fingers
+Flexor digitorum superficialis.e2l	[-]	End-Flexion fingers
+Extensor digitorum.e6r	[-]	End-Extension fingers
+Flexor digitorum superficialis.e2r	[-]	End-Flexion fingers
+Abductor digiti minimi of hand.ol	[-]	Origin-Abduction
+Flexor carpi ulnaris.el	[-]	End-Flexion hand/foot
+Abductor digiti minimi of hand.or	[-]	Origin-Abduction
+Flexor carpi ulnaris.er	[-]	End-Flexion hand/foot
+Abductor digiti minimi of hand.el	[-]	End-Abduction
+Extensor digitorum.el	[-]	End-Extension fingers
+Flexor digiti minimi of hand.el	[-]	End-Flexion fingers
+Abductor digiti minimi of hand.er	[-]	End-Abduction
+Extensor digitorum.er	[-]	End-Extension fingers
+Flexor digiti minimi of hand.er	[-]	End-Flexion fingers
+Adductor pollicis.e1l	[-]	End-Adduction
+Extensor pollicis brevis.el	[-]	End-Extension fingers
+Adductor pollicis.e1r	[-]	End-Adduction
+Extensor pollicis brevis.er	[-]	End-Extension fingers
+Extensor digitorum.e1l	[-]	End-Extension fingers
+Extensor digitorum.e1r	[-]	End-Extension fingers
+Extensor digitorum.e3l	[-]	End-Extension fingers
+Extensor digitorum.e3r	[-]	End-Extension fingers
+Extensor digitorum.e2l	[-]	End-Extension fingers
+Extensor digitorum.e2r	[-]	End-Extension fingers
+Abductor pollicis longus.ol	[-]	Origin-Abduction
+Biceps brachii muscle.el	[-]	End-Biarticular
+Brachioradialis muscle.el	[-]	End-Flexion
+Extensor pollicis brevis.ol	[-]	Origin-Extension fingers
+Flexor digitorum superficialis.ol	[-]	Origin-Flexion fingers
+Flexor pollicis longus.o1l	[-]	Origin-Flexion fingers
+Pronator teres.el	[-]	End-Internal rotation
+Supinator.el	[-]	End-External rotation
+Abductor pollicis longus.or	[-]	Origin-Abduction
+Biceps brachii muscle.er	[-]	End-Biarticular
+Brachioradialis muscle.er	[-]	End-Flexion
+Extensor pollicis brevis.or	[-]	Origin-Extension fingers
+Flexor digitorum superficialis.or	[-]	Origin-Flexion fingers
+Flexor pollicis longus.o1r	[-]	Origin-Flexion fingers
+Pronator teres.er	[-]	End-Internal rotation
+Pronator quadratus.el	[-]	End-Internal rotation
+Supinator.er	[-]	End-External rotation
+Dorsal interossei muscles of hand.o3l	[-]	Origin-Abduction
+Extensor carpi radialis longus.el	[-]	End-Extension fingers
+Dorsal interossei muscles of hand.o3r	[-]	Origin-Abduction
+Extensor carpi radialis longus.er	[-]	End-Extension fingers
+Dorsal interossei muscles of hand.o2l	[-]	Origin-Abduction
+Extensor carpi radialis brevis.el	[-]	End-Extension fingers
+Dorsal interossei muscles of hand.o2r	[-]	Origin-Abduction
+Extensor carpi radialis brevis.er	[-]	End-Extension fingers
+Deep head of flexor pollicis brevis.ol	[-]	End-Flexion fingers
+Deep head of flexor pollicis brevis.or	[-]	End-Flexion fingers
+Extensor carpi ulnaris.el	[-]	End-Extension hand-foot
+Extensor carpi ulnaris.er	[-]	End-Extension hand-foot
+Anconeus muscle.el	[-]	End-Extension
+Brachialis muscle.el	[-]	End-Flexion
+Extensor carpi ulnaris.ol	[-]	Origin-Extension hand/foot
+Extensor indicis.ol	[-]	Origin-Extension fingers
+Extensor pollicis longus.ol	[-]	Origin-Extension fingers
+Flexor pollicis longus.ol	[-]	Origin-Flexion fingers
+Supinator.ol	[-]	Origin-External rotation
+Triceps brachii muscle.el	[-]	End-Extension
+Ulnar head of flexor carpi ulnaris.ol	[-]	Origin-Flexion hand/foot
+Anconeus muscle.er	[-]	End-Extension
+Brachialis muscle.er	[-]	End-Flexion
+Extensor carpi ulnaris.or	[-]	Origin-Extension hand/foot
+Extensor indicis.or	[-]	Origin-Extension fingers
+Extensor pollicis longus.or	[-]	Origin-Extension fingers
+Flexor pollicis longus.or	[-]	Origin-Flexion fingers
+Pronator quadratus.ol	[-]	Origin-Internal rotation
+Supinator.or	[-]	Origin-External rotation
+Triceps brachii muscle.er	[-]	End-Extension
+Ulnar head of flexor carpi ulnaris.or	[-]	Origin-Flexion hand/foot
+Ascending part of trapezius muscle.ol	[-]	Origin-Abduction
+Clavicular part of deltoid muscle.ol	[-]	Origin-Abduction
+Pectoralis major muscle.ol	[-]	Origin-Adduction
+Sternocleidomastoid muscle.o1l	[-]	Origin-External rotation
+Sternohyoid muscle.ol	[-]	Origin-Flexion
+Subclavius muscle.ol	[-]	Origin-Depressor
+Ascending part of trapezius muscle.or	[-]	Origin-Abduction
+Clavicular part of deltoid muscle.or	[-]	Origin-Abduction
+Pectoralis major muscle.or	[-]	Origin-Adduction
+Sternocleidomastoid muscle.o1r	[-]	Origin-External rotation
+Sternohyoid muscle.or	[-]	Origin-Flexion
+Subclavius muscle.or	[-]	Origin-Depressor
+Acromial part of deltoid muscle.ol	[-]	Origin-Abduction
+Coracobrachialis muscle.ol	[-]	Origin-Flexion
+Descending part of trapezius muscle.ol	[-]	Origin-Abduction
+Infraspinatus muscle.ol	[-]	Origin-External rotation
+Latissimus dorsi muscle.el	[-]	End-Adduction
+Levator scapulae.el	[-]	End-Levator
+Long head of biceps brachii.ol	[-]	Origin-Biarticular
+Long head of triceps brachii.ol	[-]	End-Extension
+Omohyoid muscle.ol	[-]	Origin-Flexion
+Pectoralis minor muscle.ol	[-]	Origin-Abduction
+Rhomboid major muscle.el	[-]	End-Adduction
+Rhomboid minor muscle.el	[-]	End-Adduction
+Scapular spinal part of deltoid muscle.ol	[-]	Origin-Abduction
+Serratus anterior muscle.ol	[-]	Origin-Internal rotation
+Subscapularis muscle.ol	[-]	Origin-Internal rotation
+Supraspinatus muscle.ol	[-]	Origin-Abduction
+Teres major muscle.ol	[-]	Origin-Internal rotation
+Teres minor muscle.ol	[-]	Origin-External rotation
+Transverse part of trapezius muscle.ol	[-]	Origin-Abduction
+Acromial part of deltoid muscle.or	[-]	Origin-Abduction
+Coracobrachialis muscle.or	[-]	Origin-Flexion
+Descending part of trapezius muscle.or	[-]	Origin-Abduction
+Infraspinatus muscle.or	[-]	Origin-External rotation
+Latissimus dorsi muscle.er	[-]	End-Adduction
+Levator scapulae.er	[-]	End-Levator
+Long head of biceps brachii.or	[-]	Origin-Biarticular
+Long head of triceps brachii.or	[-]	End-Extension
+Omohyoid muscle.or	[-]	Origin-Flexion
+Pectoralis minor muscle.or	[-]	Origin-Abduction
+Rhomboid major muscle.er	[-]	End-Adduction
+Rhomboid minor muscle.er	[-]	End-Adduction
+Scapular spinal part of deltoid muscle.or	[-]	Origin-Abduction
+Serratus anterior muscle.or	[-]	Origin-Internal rotation
+Short head of biceps brachii.ol	[-]	Origin-Biarticular
+Subscapularis muscle.or	[-]	Origin-Internal rotation
+Supraspinatus muscle.or	[-]	Origin-Abduction
+Teres major muscle.or	[-]	Origin-Internal rotation
+Teres minor muscle.or	[-]	Origin-External rotation
+Transverse part of trapezius muscle.or	[-]	Origin-Abduction
+Frontalis muscle.or	[-]	Origin-Superficial
+Frontalis muscle.ol	[-]	Origin-Superficial
+Procerus muscle.ol	[-]	Origin-Depressor
+Procerus muscle.or	[-]	Origin-Depressor
+Temporalis muscle.o1r	[-]	Origin-Flexion
+Temporalis muscle.o1l	[-]	Origin-Flexion
+Bucinator.ol	[-]	Origin-Adduction
+Depressor septi nasi.ol	[-]	Origin-Depressor
+Lateral pterygoid muscle.o1l	[-]	Origin-Adduction
+Levator anguli oris.ol	[-]	Origin-Levator
+Levator labii superioris.ol	[-]	Origin-Levator
+Levator nasolabialis.ol	[-]	Origin-Levator
+Orbital part of orbicularis oculi.ol	[-]	Origin-Orbicular/Constrictor
+Bucinator.or	[-]	Origin-Adduction
+Depressor septi nasi.or	[-]	Origin-Depressor
+Lateral pterygoid muscle.o1r	[-]	Origin-Adduction
+Levator anguli oris.or	[-]	Origin-Levator
+Levator labii superioris.or	[-]	Origin-Levator
+Levator nasolabialis.or	[-]	Origin-Levator
+Orbital part of orbicularis oculi.or	[-]	Origin-Orbicular/Constrictor
+Nasalis muscle.ol	[-]	Origin-Superficial
+Nasalis muscle.or	[-]	Origin-Superficial
+Procerus muscle.el	[-]	End-Depressor
+Ascending part of trapezius muscle.el	[-]	End-Abduction
+Ascending part of trapezius muscle.er	[-]	End-Abduction
+Longus capitis muscle.or	[-]	Origin-Flexion
+Longus capitis muscle.ol	[-]	Origin-Flexion
+Obliquus superior capitis muscle.ol	[-]	Origin-Extension
+Obliquus superior capitis muscle.or	[-]	Origin-Extension
+Occipitalis muscle.ol	[-]	Origin-Superficial
+Occipitalis muscle.or	[-]	Origin-Superficial
+Rectus anterior capitis muscle.ol	[-]	Origin-Flexion
+Rectus anterior capitis muscle.or	[-]	Origin-Flexion
+Rectus lateralis capitis muscle.ol	[-]	Origin-Abduction
+Rectus lateralis capitis muscle.or	[-]	Origin-Abduction
+Rectus posterior major capitis muscle.ol	[-]	Origin-Extension
+Rectus posterior major capitis muscle.or	[-]	Origin-Extension
+Rectus posterior minor capitis muscle.ol	[-]	Origin-Extension
+Rectus posterior minor capitis muscle.or	[-]	Origin-Extension
+Spinalis capitis muscle.el	[-]	End-Extension
+Spinalis capitis muscle.er	[-]	End-Extension
+Lateral pterygoid muscle.ol	[-]	Origin-Adduction
+Lateral pterygoid muscle.or	[-]	Origin-Adduction
+Temporalis muscle.o2l	[-]	Origin-Flexion
+Temporalis muscle.o2r	[-]	Origin-Flexion
+Medial pterygoid muscle.ol	[-]	Origin-Flexion
+Medial pterygoid muscle.or	[-]	Origin-Flexion
+Temporalis muscle.o3l	[-]	Origin-Flexion
+Temporalis muscle.o3r	[-]	Origin-Flexion
+Masseter.o1l	[-]	Origin-Flexion
+Sternocleidomastoid muscle.el	[-]	End-Internal rotation
+Temporalis muscle.o4l	[-]	Origin-Flexion
+Masseter.o1r	[-]	Origin-Flexion
+Sternocleidomastoid muscle.er	[-]	End-Internal rotation
+Temporalis muscle.o4r	[-]	Origin-Flexion
+Masseter.ol	[-]	Origin-Flexion
+Zygomaticus major muscle.ol	[-]	Origin-Abduction
+Zygomaticus minor muscle.ol	[-]	Origin-Abduction
+Masseter.or	[-]	Origin-Flexion
+Zygomaticus major muscle.or	[-]	Origin-Abduction
+Zygomaticus minor muscle.or	[-]	Origin-Abduction
+Geniohyoid muscle.el	[-]	End-Levator
+Geniohyoid muscle.er	[-]	End-Levator
+Omohyoid muscle.el	[-]	End-Flexion
+Omohyoid muscle.er	[-]	End-Flexion
+Sternohyoid muscle.el	[-]	End-Flexion
+Sternohyoid muscle.er	[-]	End-Flexion
+Thyrohyoid muscle.ol	[-]	Origin-Levator
+Thyrohyoid muscle.or	[-]	Origin-Levator
+Anterior belly of digastric muscle.el	[-]	End-Mastication
+Anterior belly of digastric muscle.er	[-]	End-Mastication
+Bucinator.o1r	[-]	Origin-Adduction
+Bucinator.o1l	[-]	Origin-Adduction
+Depressor anguli oris.ol	[-]	Origin-Depressor
+Depressor anguli oris.or	[-]	Origin-Depressor
+Depressor labii inferioris.ol	[-]	Origin-Depressor
+Depressor labii inferioris.or	[-]	Origin-Depressor
+Geniohyoid muscle.or	[-]	Origin-Levator
+Geniohyoid muscle.ol	[-]	Origin-Levator
+Masseter.el	[-]	End-Flexion
+Masseter.er	[-]	End-Flexion
+Medial pterygoid muscle.el	[-]	End-Flexion
+Medial pterygoid muscle.er	[-]	End-Flexion
+Mentalis muscle.ol	[-]	Origin-Depressor
+Mentalis muscle.or	[-]	Origin-Depressor
+Mylohyoid muscle.or	[-]	Origin mastication
+Mylohyoid muscle.ol	[-]	Origin mastication
+Orbicularis oris muscle.ol	[-]	Origin-Orbicular/Constrictor
+Orbicularis oris muscle.or	[-]	Origin-Orbicular/Constrictor
+Temporalis muscle.er	[-]	End-Flexion
+Temporalis muscle.el	[-]	End-Flexion
+Thyrohyoid muscle.el	[-]	End-Levator
+Thyrohyoid muscle.er	[-]	End-Levator
+External abdominal oblique muscle.o3l	[-]	Origin-Internal rotation
+Levatores longi costarum.e6l	[-]	End-Levator
+Longissimus thoracis muscle.e10l	[-]	End-Extension
+Serratus anterior muscle.e7l	[-]	End-Internal rotation
+External abdominal oblique muscle.o3r	[-]	Origin-Internal rotation
+Levatores longi costarum.e6r	[-]	End-Levator
+Longissimus thoracis muscle.e10r	[-]	End-Extension
+Serratus anterior muscle.e7r	[-]	End-Internal rotation
+Diaphragm.o5l	[-]	Origin-Diaphragm
+Internal abdominal oblique muscle.o4l	[-]	Origin-External rotation
+Levatores longi costarum.e9l	[-]	End-Levator
+Longissimus thoracis muscle.e4l	[-]	End-Extension
+Diaphragm.o5r	[-]	Origin-Diaphragm
+Internal abdominal oblique muscle.o4r	[-]	Origin-External rotation
+Levatores longi costarum.e9r	[-]	End-Levator
+Longissimus thoracis muscle.e4r	[-]	End-Extension
+Serratus posterior inferior muscle.e2l	[-]	End-External rotation
+Diaphragm.o4l	[-]	Origin-Diaphragm
+Internal abdominal oblique muscle.ol	[-]	Origin-External rotation
+Levatores longi costarum.e10l	[-]	End-Levator
+Longissimus thoracis muscle.e26l	[-]	End-Extension
+Diaphragm.o4r	[-]	Origin-Diaphragm
+Internal abdominal oblique muscle.or	[-]	Origin-External rotation
+Levatores longi costarum.e10r	[-]	End-Levator
+Longissimus thoracis muscle.e26r	[-]	End-Extension
+Serratus posterior inferior muscle.e3l	[-]	End-External rotation
+Levatores longi costarum.e7l	[-]	End-Levator
+Longissimus thoracis muscle.e8l	[-]	End-Extension
+Levatores longi costarum.e7r	[-]	End-Levator
+Longissimus thoracis muscle.e8r	[-]	End-Extension
+Serratus anterior muscle.e8l	[-]	End-Internal rotation
+Serratus posterior inferior muscle.el	[-]	End-External rotation
+Internal abdominal oblique muscle.o2l	[-]	Origin-External rotation
+Levatores longi costarum.e8l	[-]	End-Levator
+Longissimus thoracis muscle.e6l	[-]	End-Extension
+Internal abdominal oblique muscle.o2r	[-]	Origin-External rotation
+Levatores longi costarum.e8r	[-]	End-Levator
+Longissimus thoracis muscle.e6r	[-]	End-Extension
+Serratus posterior inferior muscle.e1l	[-]	End-External rotation
+External abdominal oblique muscle.ol	[-]	Origin-Internal rotation
+Levatores longi costarum.e3l	[-]	End-Levator
+Longissimus thoracis muscle.e16l	[-]	End-Extension
+Pectoralis minor muscle.e2l	[-]	End-Abduction
+Serratus anterior muscle.e4l	[-]	End-Internal rotation
+External abdominal oblique muscle.or	[-]	Origin-Internal rotation
+Levatores longi costarum.e3r	[-]	End-Levator
+Longissimus thoracis muscle.e16r	[-]	End-Extension
+Pectoralis minor muscle.e2r	[-]	End-Abduction
+Serratus anterior muscle.e4r	[-]	End-Internal rotation
+Serratus posterior superior muscle.e3l	[-]	End-External rotation
+Longissimus thoracis muscle.e24l	[-]	End-Extension
+Scalenus anterior muscle.ol	[-]	Origin-Abduction
+Scalenus medius muscle.ol	[-]	Origin-Abduction
+Serratus anterior muscle.el	[-]	End-Internal rotation
+Longissimus thoracis muscle.e24r	[-]	End-Extension
+Scalenus anterior muscle.or	[-]	Origin-Abduction
+Scalenus medius muscle.or	[-]	Origin-Abduction
+Serratus anterior muscle.er	[-]	End-Internal rotation
+Levatores longi costarum.e2l	[-]	End-Levator
+Longissimus thoracis muscle.e18l	[-]	End-Extension
+Pectoralis minor muscle.e1l	[-]	End-Abduction
+Serratus anterior muscle.e3l	[-]	End-Internal rotation
+Levatores longi costarum.e2r	[-]	End-Levator
+Longissimus thoracis muscle.e18r	[-]	End-Extension
+Pectoralis minor muscle.e1r	[-]	End-Abduction
+Serratus anterior muscle.e3r	[-]	End-Internal rotation
+Serratus posterior superior muscle.e2l	[-]	End-External rotation
+Levatores longi costarum.er	[-]	End-Levator
+Longissimus thoracis muscle.e22r	[-]	End-Extension
+Serratus anterior muscle.e1l	[-]	End-Internal rotation
+Serratus posterior superior muscle.el	[-]	End-External rotation
+Levatores longi costarum.el	[-]	End-Levator
+Longissimus thoracis muscle.e22l	[-]	End-Extension
+External abdominal oblique muscle.o2l	[-]	Origin-Internal rotation
+Levatores longi costarum.e5l	[-]	End-Levator
+Longissimus thoracis muscle.e12l	[-]	End-Extension
+Serratus anterior muscle.e6l	[-]	End-Internal rotation
+External abdominal oblique muscle.o2r	[-]	Origin-Internal rotation
+Levatores longi costarum.e5r	[-]	End-Levator
+Longissimus thoracis muscle.e12r	[-]	End-Extension
+Serratus anterior muscle.e6r	[-]	End-Internal rotation
+External abdominal oblique muscle.o1l	[-]	Origin-Internal rotation
+Levatores longi costarum.e4l	[-]	End-Levator
+Longissimus thoracis muscle.e14l	[-]	End-Extension
+Serratus anterior muscle.e5l	[-]	End-Internal rotation
+External abdominal oblique muscle.o1r	[-]	Origin-Internal rotation
+Levatores longi costarum.e4r	[-]	End-Levator
+Longissimus thoracis muscle.e14r	[-]	End-Extension
+Serratus anterior muscle.e5r	[-]	End-Internal rotation
+Levatores longi costarum.e1l	[-]	End-Levator
+Longissimus thoracis muscle.e20l	[-]	End-Extension
+Pectoralis minor muscle.el	[-]	End-Abduction
+Serratus anterior muscle.e2r	[-]	End-Internal rotation
+Levatores longi costarum.e1r	[-]	End-Levator
+Longissimus thoracis muscle.e20r	[-]	End-Extension
+Pectoralis minor muscle.er	[-]	End-Abduction
+Serratus anterior muscle.e2l	[-]	End-Internal rotation
+Serratus posterior superior muscle.e1l	[-]	End-External rotation
+Sternocostal head of pectoralis major muscle.e1r	[-]	Origin-Adduction
+Sternocostal head of pectoralis major muscle.e1l	[-]	Origin-Adduction
+Transversus thoracis muscle.or	[-]	Origin-Depressor
+Transversus thoracis muscle.ol	[-]	Origin-Depressor
+Sternocleidomastoid muscle.or	[-]	Origin-External rotation
+Sternocleidomastoid muscle.ol	[-]	Origin-External rotation
+Sternocostal head of pectoralis major muscle.e2r	[-]	Origin-Adduction
+Sternocostal head of pectoralis major muscle.e2l	[-]	Origin-Adduction
+Transversus thoracis muscle.o1r	[-]	Origin-Depressor
+Transversus thoracis muscle.o1l	[-]	Origin-Depressor
+Rectus abdominis muscle.ol	[-]	Origin-Flexion
+Rectus abdominis muscle.or	[-]	Origin-Flexion
+(Abdominal part of pectoralis major muscle).ol	[-]	Origin-Adduction
+Rectus abdominis muscle.el	[-]	End-Flexion
+(Abdominal part of pectoralis major muscle).or	[-]	Origin-Adduction
+Rectus abdominis muscle.er	[-]	End-Flexion
+Sternocostal head of pectoralis major muscle.el	[-]	Origin-Adduction
+Sternocostal head of pectoralis major muscle.er	[-]	Origin-Adduction
+Diaphragm.ol	[-]	Origin-Diaphragm
+Internal abdominal oblique muscle.o1l	[-]	Origin-External rotation
+Diaphragm.or	[-]	Origin-Diaphragm
+Internal abdominal oblique muscle.o1r	[-]	Origin-External rotation
+Levator scapulae.ol	[-]	Origin-Levator
+Levator scapulae.or	[-]	Origin-Levator
+Obliquus inferior capitis muscle.ol	[-]	Origin-External rotation
+Obliquus inferior capitis muscle.or	[-]	Origin-External rotation
+Rectus anterior capitis muscle.el	[-]	End-Flexion
+Rectus anterior capitis muscle.er	[-]	End-Flexion
+Rectus posterior minor capitis muscle.el	[-]	End-Extension
+Rectus posterior minor capitis muscle.er	[-]	End-Extension
+Splenius colli muscle.e1l	[-]	End-Abduction
+Splenius colli muscle.e1r	[-]	End-Abduction
+Levator scapulae.o1l	[-]	Origin-Levator
+Levator scapulae.o1r	[-]	Origin-Levator
+Obliquus inferior capitis muscle.el	[-]	End-External rotation
+Obliquus inferior capitis muscle.er	[-]	End-External rotation
+Rectus posterior major capitis muscle.el	[-]	End-Extension
+Rectus posterior major capitis muscle.er	[-]	End-Extension
+Splenius colli muscle.el	[-]	End-Abduction
+Splenius colli muscle.er	[-]	End-Abduction
+Levator scapulae.o2l	[-]	Origin-Levator
+Levator scapulae.o2r	[-]	Origin-Levator
+Iliocostalis colli muscle.el	[-]	End-External rotation
+Iliocostalis colli muscle.er	[-]	End-External rotation
+Levator scapulae.o3l	[-]	Origin-Levator
+Levator scapulae.o3r	[-]	Origin-Levator
+Scalenus anterior muscle.el	[-]	End-Abduction
+Scalenus anterior muscle.er	[-]	End-Abduction
+Scalenus anterior muscle.e1l	[-]	End-Abduction
+Scalenus anterior muscle.e1r	[-]	End-Abduction
+Scalenus posterior muscle.el	[-]	End-Abduction
+Scalenus posterior muscle.er	[-]	End-Abduction
+Scalenus anterior muscle.e2l	[-]	End-Abduction
+Scalenus anterior muscle.e2r	[-]	End-Abduction
+Scalenus medius muscle.el	[-]	End-Abduction
+Scalenus medius muscle.er	[-]	End-Abduction
+Scalenus medius muscle.e1l	[-]	End-Abduction
+Scalenus medius muscle.e1r	[-]	End-Abduction
+Diaphragm.o1l	[-]	Origin-Diaphragm
+Diaphragm.o1r	[-]	Origin-Diaphragm
+Longissimus thoracis muscle.e2l	[-]	End-Extension
+Longissimus thoracis muscle.e2r	[-]	End-Extension
+Diaphragm.o2l	[-]	Origin-Diaphragm
+Diaphragm.o2r	[-]	Origin-Diaphragm
+Longissimus thoracis muscle.e1l	[-]	End-Extension
+Longissimus thoracis muscle.e1r	[-]	End-Extension
+Diaphragm.o3l	[-]	Origin-Diaphragm
+Diaphragm.o3r	[-]	Origin-Diaphragm
+Longissimus thoracis muscle.el	[-]	End-Extension
+Longissimus thoracis muscle.er	[-]	End-Extension
+Piriformis muscle.ol	[-]	Origin-Abduction
+Piriformis muscle.or	[-]	Origin-Abduction
+Longissimus thoracis muscle.e25l	[-]	End-Extension
+Longissimus thoracis muscle.e25r	[-]	End-Extension
+Longissimus thoracis muscle.e7l	[-]	End-Extension
+Longissimus thoracis muscle.e7r	[-]	End-Extension
+Longissimus thoracis muscle.e5l	[-]	End-Extension
+Longissimus thoracis muscle.e5r	[-]	End-Extension
+Longissimus thoracis muscle.e3r	[-]	End-Extension
+Longissimus thoracis muscle.e3l	[-]	End-Extension
+Longissimus thoracis muscle.e23l	[-]	End-Extension
+Longissimus thoracis muscle.e23r	[-]	End-Extension
+Longissimus thoracis muscle.e21l	[-]	End-Extension
+Longissimus thoracis muscle.e21r	[-]	End-Extension
+Longissimus thoracis muscle.e19l	[-]	End-Extension
+Longissimus thoracis muscle.e19r	[-]	End-Extension
+Longissimus thoracis muscle.e17l	[-]	End-Extension
+Longissimus thoracis muscle.e17r	[-]	End-Extension
+Longissimus thoracis muscle.e15l	[-]	End-Extension
+Longissimus thoracis muscle.e15r	[-]	End-Extension
+Longissimus thoracis muscle.e13l	[-]	End-Extension
+Longissimus thoracis muscle.e13r	[-]	End-Extension
+Longissimus thoracis muscle.e11l	[-]	End-Extension
+Longissimus thoracis muscle.e11r	[-]	End-Extension
+Longissimus thoracis muscle.e9l	[-]	End-Extension
+Longissimus thoracis muscle.e9r	[-]	End-Extension

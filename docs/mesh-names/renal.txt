@@ -1,0 +1,6 @@
+# renal.glb — 0.1 MB, 5 unique structures (name <tab> sides <tab> source material)
+Kidney	[LR]	Organ
+Renal pelvis	[LR]	Ductus
+Ureter	[LR]	Ductus
+Urethra	[-]	Ductus
+Urinary bladder	[-]	Organ

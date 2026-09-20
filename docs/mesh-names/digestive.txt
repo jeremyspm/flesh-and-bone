@@ -1,0 +1,45 @@
+# digestive.glb — 1.1 MB, 44 unique structures (name <tab> sides <tab> source material)
+Greater omentum	[-]	Peritoneum
+Lesser omentum	[-]	Peritoneum
+Meso-appendix	[-]	Ligament
+Mesocolon	[-]	Peritoneum
+Ascending colon	[-]	Intestine
+Descending colon	[-]	Intestine
+Sigmoid colon	[-]	Intestine
+Free taenia	[-]	Ligament
+Mesocolic taenia	[-]	Ligament
+Omental taenia	[-]	Ligament
+Transverse colon	[-]	Intestine
+Vermiform appendix	[-]	Intestine
+Oesophagus	[-]	Mucosa
+Duodenum	[-]	Intestine
+Jejunum	[-]	Intestine
+Stomach	[-]	Intestine
+Bile duct	[-]	Gallbladder
+Gallbladder	[-]	Gallbladder
+Anterior lateral segment of liver (VI)	[-]	Organ-6
+Anterior medial segment of liver (V)	[-]	Organ-5
+Left anterior lateral segment of liver (III)	[-]	Organ-3
+Left medial segment of liver (IV)	[-]	Organ-4
+Left posterior lateral segment of liver (II)	[-]	Organ-2
+Posterior lateral segment of liver (VII)	[-]	Organ-7
+Posterior medial segment of liver (VIII)	[-]	Organ-8
+Posterior segment of liver (I)	[-]	Organ-1
+Liver	[-]	Organ
+Laryngopharynx	[-]	Mucosa
+Nasopharynx	[-]	Mucosa
+Oropharynx	[-]	Mucosa
+Gingiva	[-]	Mucosa
+(Accessory parotid gland)	[LR]	Gland
+Parotid duct	[LR]	Gland
+Parotid gland	[LR]	Gland
+Sublingual gland	[LR]	Gland
+Submandibular duct	[LR]	Gland
+Submandibular gland	[LR]	Gland
+Soft palate	[-]	Mucosa
+Tongue	[-]	Mucosa
+Uvula of palate	[-]	Mucosa
+Accessory pancreatic duct	[-]	Gland
+Pancreatic duct	[-]	Gland
+Pancreas	[-]	Gland
+Epiglottis	[-]	Cartilage

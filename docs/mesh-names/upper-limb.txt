@@ -1,0 +1,533 @@
+# upper-limb.glb — 6.9 MB, 532 unique structures (name <tab> sides <tab> source material)
+Lumbar vertebra (L1)	[-]	Vertebra_L1
+Lumbar vertebra (L2)	[-]	Vertebra_L2
+Lumbar vertebra (L3)	[-]	Vertebra_L3
+Lumbar vertebra (L4)	[-]	Vertebra_L4
+Lumbar vertebra (L5)	[-]	Vertebra_L5
+Sacrum	[-]	sacrum
+Thoracic vertebra (T1)	[-]	Vertebra_T1
+Thoracic vertebra (T10)	[-]	Vertebra_T10
+Thoracic vertebra (T11)	[-]	Vertebra_T11
+Thoracic vertebra (T12)	[-]	Vertebra_T12
+Thoracic vertebra (T2)	[-]	Vertebra_T2
+Thoracic vertebra (T3)	[-]	Vertebra_T3
+Thoracic vertebra (T4)	[-]	Vertebra_T4
+Thoracic vertebra (T5)	[-]	Vertebra_T5
+Thoracic vertebra (T6)	[-]	Vertebra_T6
+Thoracic vertebra (T7)	[-]	Vertebra_T7
+Thoracic vertebra (T8)	[-]	T8
+Thoracic vertebra (T9)	[-]	T9
+Humerus	[R]	humerus.001
+Bicipital aponeurosis	[R]	Retinaculum
+Brachialis muscle	[R]	Muscle basic
+Common tendon of biceps brachii	[R]	Tendon only
+Common tendon of triceps brachii	[R]	Tendon only
+Coracobrachialis muscle	[R]	Muscle tile plain
+Lateral head of triceps brachii	[R]	Muscle basic
+Long head of biceps brachii tendon sheath	[R]	sheathmat
+Long head of biceps brachii	[R]	Muscle basic
+Long head of triceps brachii	[R]	Muscle basic
+Medial head of triceps brachii	[R]	Muscle tile plain
+Short head of biceps brachii	[R]	Muscle basic
+Axillary nerve - superior lateral br cutaneous nerve	[R]	Nerves
+Lateral root of median nerve	[R]	Nerves
+Medial brachial cutaneous nerve	[R]	Nerves
+Medial root of median nerve	[R]	Nerves
+Median nerve	[R]	Nerves
+Musculocutaneus nerve	[R]	Nerves
+Radial nerve (deep branch)	[R]	Nerves
+Radial nerve (inferior lateral brachial cutaneous n)	[R]	Nerves
+Radial nerve (posterior antebrachial cutaneous n)	[R]	Nerves
+Radial nerve (posterior brachial cutaneous n)	[R]	Nerves
+Radial nerve (posterior interosseus n)	[R]	Nerves
+Radial nerve (superficial br)	[R]	Nerves
+Radial nerve	[R]	Nerves
+Ulnar nerve	[R]	Nerves
+Arm superficial vein-Basilic vein	[R]	Vein
+Arm superficial vein-Cephalic vein	[R]	Vein
+Arm superficial vein-Median antebrachial vein	[R]	Vein
+Arm superficial vein-Median cubital vein	[R]	Vein
+Axillary vein	[R]	Vein
+Deep veins of the arm	[R]	Vein
+Superficial veins of upper limb	[R]	Vein
+Anterior circumflex humeral artery	[R]	Artery
+Axillary artery	[R]	Artery
+Brachial artery	[R]	Artery
+Brachiocephalic artery	[R]	Artery
+Deep artery of arm	[R]	Artery
+Inferior ulnar collateral artery	[R]	Artery
+Medial collateral artery	[R]	Artery
+Middle collateral artery	[R]	Artery
+Posterior circumflex humeral artery	[R]	Artery
+Posterior ulnar recurrent artery	[R]	Artery
+Radial collateral artery	[R]	Artery
+Superior ulnar collateral artery	[R]	Artery
+Articular capsule of glenohumeral joint	[R]	glenhumjoint
+Brachial fascia	[R]	Fascia
+Coracohumeral ligament	[R]	Tendon only
+Glenoid labrum	[R]	Articular cartilage
+Inferior glenohumeral ligament	[R]	Overlays.001
+Lateral intermuscular septum of arm	[R]	Fascia
+Medial intermuscular septum of arm	[R]	Fascia
+Middle glenohumeral ligament	[R]	Overlays.001
+Superior glenohumeral ligament	[R]	Overlays.001
+Transverse humeral ligament	[R]	Overlays.001
+Art cart of humerus distal end.r​	[-]	artcartmat
+Art cart of humerus head​	[R]	artcartmat
+Coracobrachial bursa	[R]	Bursae
+Intratendinous olecranon bursa	[R]	Bursae
+Subcutaneous olecranon bursa	[R]	Bursae
+Subtendinous bursa of infraspinatus muscle	[R]	Bursae
+Subtendinous bursa of latissimus dorsi	[R]	Bursae
+Subtendinous bursa of subscapularis	[R]	Bursae
+Subtendinous bursa of teres major	[R]	Bursae
+Annulus fibrosus L1 L20	[-]	Articular cartilage
+Annulus fibrosus L2 L3	[-]	Articular cartilage
+Annulus fibrosus L3 L4	[-]	Articular cartilage
+Annulus fibrosus L4 L5	[-]	Articular cartilage
+Annulus fibrosus L5 S1	[-]	Articular cartilage
+Annulus fibrosus T1 T2	[-]	Articular cartilage
+Annulus fibrosus T10 T11	[-]	Articular cartilage
+Annulus fibrosus T11 T12	[-]	Articular cartilage
+Annulus fibrosus T12 L1	[-]	Articular cartilage
+Annulus fibrosus T2 T3	[-]	Articular cartilage
+Annulus fibrosus T3 T4	[-]	Articular cartilage
+Annulus fibrosus T4 T5	[-]	Articular cartilage
+Annulus fibrosus T5 T6	[-]	Articular cartilage
+Annulus fibrosus T6 T7	[-]	Articular cartilage
+Annulus fibrosus T7 T8	[-]	Articular cartilage
+Annulus fibrosus T8 T9	[-]	Articular cartilage
+Annulus fibrosus T9 T10	[-]	Articular cartilage
+art cart of sacrum art process	[R]	Articular cartilage
+art cart of sacrum lumbosacral joint	[-]	Articular cartilage
+Nucleus pulposus L1-S1	[-]	Articular cartilage
+Vertebra L1 art cart	[-]	Articular cartilage
+Vertebra L2 art cart	[-]	Articular cartilage
+Vertebra L3 art cart.	[-]	Articular cartilage
+Vertebra L4 art cart	[-]	Articular cartilage
+Vertebra L5 art cart	[-]	Articular cartilage
+Vertebra T1 art cart	[-]	Articular cartilage
+Vertebra T10 art cart	[-]	Articular cartilage
+Vertebra T11 art cart	[-]	Articular cartilage
+Vertebra T12 art cart	[-]	Articular cartilage
+Vertebra T2 art cart	[-]	Articular cartilage
+Vertebra T3 art cart	[-]	Articular cartilage
+Vertebra T4 art cart	[-]	Articular cartilage
+Vertebra T5 art cart	[-]	Articular cartilage
+Vertebra T6 art cart	[-]	Articular cartilage
+Vertebra T7 art cart	[-]	Articular cartilage
+Vertebra T8 art cart	[-]	Articular cartilage
+Vertebra T9 art cart	[-]	Articular cartilage
+Anterior interosseous artery	[R]	Artery
+Anterior ulnar recurrent artery	[R]	Artery
+Common interosseous artery	[R]	Artery
+Interosseous recurrent artery	[R]	Artery
+Posterior interosseous artery	[R]	Artery
+Radial artery	[R]	Artery
+Radial recrurrent artery	[R]	Artery
+Ulnar artery (dorsal carpal br)	[R]	Artery
+Ulnar artery	[R]	Artery
+Radius	[R]	radius.001
+Ulna	[R]	ulna.001
+Antebrachial fascia	[R]	Fascia
+Articular capsule of elbow joint	[R]	Articular capsule of elbow joint
+Dorsal radio-ulnar ligament	[R]	Tendon only
+Interosseous membrane of forearm	[R]	Interosseous membrane of forearm
+Oblique cord or radio-ulnar syndesmosis	[R]	Tendon only
+Quadrate ligament	[R]	Tendon only
+Radial annular ligament	[R]	Overlays.001
+Radial collateral ligament of elbow	[R]	Overlays.001
+Ulnar collateral ligament of elbow	[R]	Overlays.001
+Art cart of radius distal end​	[R]	Articular cartilage
+Art cart of radius head​	[R]	Articular cartilage
+Art cart of ulna (proximal end)	[R]	Articular cartilage
+Art cart of ulna. (distal end)	[R]	Articular cartilage
+Abductor pollicis longus	[R]	Muscle basic
+Anconeus muscle	[R]	Muscle tile plain
+Brachioradialis muscle	[R]	Muscle basic
+Common tendon of extensor carpi ulnaris	[R]	Tendon only
+Common tendon of flexor carpi ulnaris	[R]	Tendon only
+Extensor carpi radialis brevis	[R]	Muscle basic
+Extensor carpi radialis longus	[R]	Muscle basic
+Extensor digiti minimi	[R]	Muscle basic
+Extensor digitorum	[R]	Muscle basic
+Extensor indicis	[R]	Muscle basic
+Extensor pollicis brevis	[R]	Muscle basic
+Extensor pollicis longus	[R]	Muscle basic
+Flexor carpi radialis	[R]	Muscle basic
+Flexor digitorum profundus	[R]	Muscle basic
+Flexor digitorum superficialis humero-ulnar head	[R]	Muscle basic
+Flexor digitorum superficialis radial head	[R]	Muscle basic
+Flexor pollicis longus	[R]	Muscle basic
+Humeral head of extensor carpi ulnaris	[R]	Muscle basic
+Humeral head of flexor carpi ulnaris	[R]	Muscle basic
+Humeral head of pronator teres	[R]	Muscle basic
+Palmaris longus muscle	[R]	Muscle basic
+Pronator quadratus	[R]	Muscle basic
+Supinator	[R]	Muscle tile plain
+Ulnar head of extensor carpi ulnaris	[R]	Muscle basic
+Ulnar head of flexor carpi ulnaris	[R]	Muscle basic
+Ulnar head of pronator teres	[R]	Muscle basic
+Medial antebrachial cutaneous nerve	[R]	Nerves
+Musculocutaneus nerve  - lateral antebrachial cutaneous nerve	[R]	Nerves
+Bicipitoradial bursa	[-]	Bursae
+Interosseous cubital bursa	[R]	Bursae
+Subtendinous bursa of triceps brachii	[R]	Bursae
+Anterior interosseous veins	[R]	Vein
+Posterior interosseous veins	[R]	Vein
+Radial veins	[R]	Vein
+Ulnar veins	[R]	Vein
+Common palmar digital arteries	[R]	Artery
+Deep palmar arch	[R]	Artery
+Dorsal carpal arch	[R]	Artery
+Dorsal carpal network	[R]	Artery
+Dorsal digital arteries	[R]	Artery
+Dorsal metacarpal arteries	[R]	Artery
+Dorsalis indicis	[R]	Artery
+Dorsalis pollicis	[R]	Artery
+Palmar carpal branches	[R]	Artery
+Palmar metacarpal arteries	[R]	Artery
+Perforating arteries	[R]	Artery
+Princeps pollicis arteries	[R]	Artery
+Proper palmar digital arteries	[R]	Artery
+Radialis indicis	[R]	Artery
+Superficial palmar arch	[R]	Artery
+1st metacarpal bone	[R]	1st metacarpal bone.001
+2nd metacarpal bone	[R]	2nd metacarpal bone.001
+3rd metacarpal bone	[R]	3rd metacarpal bone.001
+4th metacarpal bone	[R]	4th metacarpal bone.001
+5th metacarpal bone	[R]	5th metacarpal bone
+Capitate	[R]	Capitate.001
+Distal phalanx of 1st finger	[R]	Distal phalanx of 1st finger.001
+Distal phalanx of 2d finger	[R]	Distal phalanx of 2d finger.001
+Distal phalanx of 3d finger	[R]	Distal phalanx of 3d finger.001
+Distal phalanx of 4th finger	[R]	Distal phalanx of 4th finger.001
+Distal phalanx of 5th finger	[R]	Distal phalanx of 5th finger.001
+Hamate	[R]	Hamate.001
+Lunate bone	[R]	Lunate bone.001
+Middle phalanx of 2d finger	[R]	Middle phalanx of 2d finger.001
+Middle phalanx of 3rd finger	[R]	Middle phalanx of 3rd finger.001
+Middle phalanx of 4th finger	[R]	Middle phalanx of 4th finger.001
+Middle phalanx of 5th finger	[R]	Middle phalanx of 5th finger.001
+Pisiform	[R]	Pisiform.001
+Proximal phalanx of 1st finger	[R]	Proximal phalanx of 1st finger.002
+Proximal phalanx of 2d finger	[R]	Proximal phalanx of 2d finger.001
+Proximal phalanx of 3rd finger	[R]	Proximal phalanx of 3rd fingerProximal phalanx of 3rd finge
+Proximal phalanx of 4th finger	[R]	Proximal phalanx of 4th finger.001
+Proximal phalanx of 5th finger	[R]	Proximal phalanx of 5th finger.001
+Scaphoid	[R]	Scaphoid.001
+Sesamoid bones of hand	[R]	Bone
+Trapezium	[R]	Trapezium.001
+Trapezoid	[R]	Trapezoid.002
+Triquetrum	[R]	Triquetrum.001
+Annular ligament(A1) of 1st finger	[R]	Overlays.001
+Annular ligament(A2) of 1st finger	[R]	Overlays.001
+Annular ligaments of 2nd finger A1-A5	[R]	Overlays.001
+Annular ligaments of 3rd finger A1-A5	[R]	Overlays.001
+Annular ligaments of 4th finger A1-A5	[R]	Overlays.001
+Annular ligaments of 5th finger A1-A5	[R]	Overlays.001
+Articular capsule of radiocarpal joint	[-]	radiocarpaljoint
+Articular capsules of distal interphalangeal joints	[-]	Tendon only
+Articular capsules of metacarpophalangeal joints	[-]	Tendon only
+Articular capsules of proximal interphalangeal joints	[-]	Tendon only
+Capitohamate interosseus ligament	[-]	Tendon only
+Collateral ligaments of distal phalangeal joints	[R]	Overlays.001
+Collateral ligaments of interphalangeal joints	[R]	Overlays.001
+Collateral ligaments of metacarpal joints	[R]	Overlays.001
+Collateral ligaments of metacarpophalangeal joints	[R]	Overlays.001
+Cruciform ligaments of 2nd finger	[R]	Overlays.001
+Cruciform ligaments of 3rd finger	[R]	Overlays.001
+Cruciform ligaments of 4th finger	[R]	Overlays.001
+Cruciform ligaments of 5th finger	[R]	Overlays.001
+Deep transverse metacarpal ligament	[-]	Tendon only
+Dorsal carpometacarpal ligaments	[-]	Tendon only
+Dorsal intercarpal ligament	[-]	Overlays.001
+Dorsal metacarpal ligaments	[-]	Tendon only
+Dorsal radiocarpal ligament	[R]	Overlays.001
+Dorsal scaphotriquetral ligament	[-]	Tendon only
+Dorsal ulnocarpal ligament	[-]	Tendon only
+Extensor retinaculum of wrist	[-]	retinaculum_wrist
+Fibrous sheath of digits of hand	[-]	fibroussheathhand
+Fibrous sheath of digits of hand thumb	[-]	Tendon only
+Flexor retinaculum	[-]	Tendon only
+Intercarpal articulations	[R]	Tendon only
+Interosseous metacarpal ligaments	[-]	Tendon only
+Intertendinous connections of extensor digitorum	[-]	Tendon only
+Lateral band of 2nd finger	[-]	Tendon only
+Lateral band of 3rd finger	[-]	Tendon only
+Lateral band of 4th finger	[-]	Tendon only
+Lateral band of 5th finger	[-]	Tendon only
+Lunotriquetral interosseous ligament	[-]	Tendon only
+Oblique ligament of 1st finger	[R]	Overlays.001
+Palmar capitohamate ligament	[-]	Tendon only
+Palmar carpometacarpal ligaments	[-]	Tendon only
+Palmar ligaments of distal phalangeal joints	[R]	Overlays.001
+Palmar ligaments of interphalangeal joints	[R]	Overlays.001
+Palmar ligaments of metacarpophalangeal joints	[R]	Overlays.001
+Palmar lunotriquetral ligament	[-]	Tendon only
+Palmar metacarpal ligaments	[-]	Tendon only
+Palmar radio-ulnar ligament	[-]	Tendon only
+Palmar radiocarpal ligament	[R]	Overlays.001
+Palmar scaphotriquetral ligament	[-]	Tendon only
+Palmar trapezoideocapitate ligament	[-]	Tendon only
+Palmar ulnocarpal ligament	[R]	Overlays.001
+Pisohamate ligament	[-]	Tendon only
+Pisometacarpal ligament	[R]	Overlays.001
+Pisotriquetral ligament	[-]	Tendon only
+Radial collateral ligament of wrist	[R]	Overlays.001
+Radiate carpal ligament	[-]	Tendon only
+Radioscaphocapitate ligament	[-]	Tendon only
+Scaphocapitate ligament	[-]	Tendon only
+Scapholunate interosseus ligament	[-]	Tendon only
+Scaphotrapeziotrapezoidal ligament	[-]	Tendon only
+Thickened part of antebrachial fascia	[-]	retinaculum_wrist
+Trapeziotrapezoidal interosseous ligament	[-]	Tendon only
+Trapezoideocapitate interosseous ligament	[-]	Tendon only
+Triangular fibro cartilage disc	[-]	Disc
+Triquetrocapitate ligament	[-]	Tendon only
+Triquetrohamate ligament	[-]	Tendon only
+Ulnar collateral ligament of wrist	[R]	Overlays.001
+Ulnopisiform ligament	[-]	Tendon only
+Ulnotriquetral ligament	[-]	Tendon only
+Art cart of capitate bone​	[-]	Articular cartilage
+Art cart of hamate bone​	[-]	Articular cartilage
+Art cart of lunate bone	[-]	Articular cartilage
+Art cart of pisiform bone ​	[-]	Articular cartilage
+Art cart of scaphoid bone​	[-]	Articular cartilage
+Art cart of trapezium bone​	[-]	Articular cartilage
+Art cart of trapezoid bone​	[-]	Articular cartilage
+Art cart of triquetrum bone	[-]	Articular cartilage
+Art carts of distal phalanges	[-]	Articular cartilage
+Art carts of metacarpal bones	[-]	Articular cartilage
+Art carts of middle phalanges	[-]	Articular cartilage
+Art carts of proximal phalanges	[-]	Articular cartilage
+Abductor pollicis longus tendon sheath	[-]	sheathmat
+Common flexor tendon sheath	[-]	sheathmat
+Extensor carpi radialis brevis tendon sheath	[-]	sheathmat
+Extensor carpi radialis longus tendon sheath	[-]	sheathmat
+Extensor carpi ulnaris tendon sheath	[-]	sheathmat
+Extensor digiti minimi tendon sheath	[-]	sheathmat
+Extensor digitorum - Extensor indicis tendon sheath	[-]	sheathmat
+Extensor pollicis brevis tendon sheath	[-]	sheathmat
+Extensor pollicis longus tendon sheath	[-]	sheathmat
+Flexor carpi radialis tendon sheath	[-]	sheathmat
+Flexor pollicis longus tendon sheath	[-]	sheathmat
+Synovial sheaths of fingers	[-]	sheathmat
+1st dorsal interosseus of hand	[R]	Muscle basic
+1st lumbrical of hand	[R]	Muscle tile plain
+1st palmar interosseus of hand	[R]	Muscle basic
+2nd dorsal interosseus of hand	[R]	Muscle basic
+2nd lumbrical of hand	[R]	Muscle tile plain
+2nd palmar interosseus of hand	[R]	Muscle basic
+3rd dorsal interosseus of hand	[R]	Muscle basic
+3rd lumbrical of hand	[R]	Muscle basic
+3rd palmar interosseus of hand	[R]	Muscle tile plain
+4th dorsal interosseus of hand	[R]	Muscle basic
+4th lumbrical of hand	[R]	Muscle basic
+Abductor digiti minimi	[R]	Muscle tile plain
+Abductor pollicis brevis	[R]	Muscle basic
+Adductor pollicis	[R]	Muscle basic
+Aponeurosis palmaris	[R]	Tendon only
+Deep head of flexor pollicis brevis	[R]	Muscle tile plain
+Extensor hood of 2nd finger	[R]	Extensor hoods
+Extensor hood of 3rd finger	[R]	Extensor hoods
+Extensor hood of 4th finger	[R]	Extensor hoods
+Extensor hood of 5th finger	[R]	Extensor hoods
+Flexor digiti minimi brevis of hand	[R]	Muscle tile plain
+Oblique head of adductor pollicis	[R]	Overlays.001
+Opponens digiti minimi muscle of hand	[R]	Muscle tile plain
+Opponens pollicis muscle	[R]	Muscle tile plain
+Palmaris brevis muscle	[R]	Muscle basic
+Superficial head of flexor pollicis brevis	[R]	Muscle tile plain
+Superficial transverse metacarpal lig.	[-]	Tendon only
+Transverse head of adductor pollicis	[R]	Overlays.001
+Median nerve Common palmar digital nerve of the thumb	[-]	Nerves
+Median nerve Common palmar digital nerves	[-]	Nerves
+Median nerve Palmar br	[-]	Nerves
+Median nerve Proper palmar digital nerves	[-]	Nerves
+Median nerve Proper palmar digital nerves of the thumb	[-]	Nerves
+Median nerve Recurrent br	[-]	Nerves
+Radial nerve (dorsal digital nn)	[R]	Nerves
+Ulnar nerve Communicating br	[-]	Nerves
+Ulnar nerve Deep br	[-]	Nerves
+Ulnar nerve Dorsal cutaneous br	[-]	Nerves
+Ulnar nerve Palmar cutaneous br	[-]	Nerves
+Ulnar nerve Superficial br Common palmar digital n	[-]	Nerves
+Ulnar nerve Superficial br Proper palmar digital nn	[-]	Nerves
+Deep venous palmar arch	[-]	Vein
+Dorsal digital veins	[-]	Vein
+Dorsal metatarsal veins	[-]	Vein
+Dorsal venous network	[-]	Vein
+Intercapitular veins	[-]	Vein
+Palmal digital veins	[-]	Vein
+Palmar metacarpal veins	[-]	Vein
+Palmar venous network	[-]	Vein
+Superficial palmar venous arch	[-]	Vein
+Common carotid artery	[R]	Artery
+Atlas (C1)	[-]	Atlas.001
+Axis (C2)	[-]	Axis.001
+Cervical vertebra (C3)	[-]	Vertebra_C3.001
+Cervical vertebra (C4)	[-]	Vertebra_C4.001
+Cervical vertebra (C5)	[-]	Vertebra_C5.001
+Cervical vertebra (C6)	[-]	Vertebra_C6.001
+Cervical vertebra (C7)	[-]	Vertebra_C7.001
+annulus fibrosus C2 C3	[-]	Articular cartilage
+annulus fibrosus C3 C4	[-]	Articular cartilage
+annulus fibrosus C4 C5	[-]	Articular cartilage
+annulus fibrosus C5 C6	[-]	Articular cartilage
+annulus fibrosus C6 C7	[-]	Articular cartilage
+annulus fibrosus C7 T1	[-]	Articular cartilage
+art cart of Atlas  C1	[-]	Articular cartilage
+art cart of Axis  C2	[-]	Articular cartilage
+Nucleus pulposus C2-T1	[-]	Articular cartilage
+Vertebra C3 art cart	[-]	Articular cartilage
+Vertebra C4 art cart	[-]	Articular cartilage
+Vertebra C5 art cart	[-]	Articular cartilage
+Vertebra C6 art cart	[-]	Articular cartilage
+Vertebra C7 art cart	[-]	Articular cartilage
+C5 root	[R]	Nerves
+C6 root	[R]	Nerves
+C7 root	[R]	Nerves
+C8 root	[R]	Nerves
+Circumflex scapular artery	[R]	Artery
+Dorsal scapular artery (Deep br of transverse cervical a.)	[R]	Artery
+Subclavian artery	[R]	Artery
+Subscapular artery	[R]	Artery
+Superficial branch of Transverse cervical artery	[R]	Artery
+Suprascapular artery	[R]	Artery
+Thoracoacromial artery Acromial br	[R]	Artery
+Thoracoacromial artery Deltoid br	[R]	Artery
+Thoracoacromial artery Pectoral br	[R]	Artery
+Thyrocervical trunk	[R]	Artery
+Transverse cervical artery	[R]	Artery
+Vertebral artery	[R]	Artery
+Clavicle	[R]	clavicle.001
+Scapula	[R]	Scapula.001
+Acromioclavicular capsule	[R]	Tendon only
+Acromioclavicular disc	[R]	Disc
+Acromioclavicular ligament	[R]	Overlays.001
+Anterior sternoclavicular ligament	[R]	Overlays.001
+Conoid ligament (part of coracoclavicular ligament)	[R]	Overlays.001
+Coraco-acromial ligament	[R]	Tendon only
+Coracoclavicular ligament	[R]	Tendon only
+Costoclavicular ligament	[R]	Tendon only
+Inferior transverse scapular ligament	[R]	Tendon only
+Interclavicular ligament	[R]	Tendon only
+Posterior Sternoclavicular ligament	[R]	Overlays.001
+Sternoclavicular capsule	[R]	Tendon only
+Superior transverse scapular ligament	[R]	Tendon only
+Trapezoid ligament (part of coracoclavicular ligament)	[R]	Overlays.001
+Articular cartilage of acromioclavicular joint on clavicle	[R]	Articular cartilage
+Articular cartilage of acromioclavicular joint on scapula	[R]	Articular cartilage
+Articular cartilage of glenohumeral joint on scapula	[R]	Articular cartilage
+Articular cartilage of sternoclavicular joint on clavicle	[R]	Articular cartilage
+Articular disc of steroclavicular joint	[R]	Disc
+Abdominal head of pectoralis major muscle	[R]	Overlays.001
+Acromial part of deltoid muscle	[R]	Overlays.001
+Ascending part of Trapezius muscle	[R]	Overlays.001
+Clavicular head of pectoralis major muscle	[R]	Overlays.001
+Clavicular part of deltoid muscle	[R]	Overlays.001
+Deltoid muscle	[R]	Muscle tile plain
+Descending part of Trapezius muscle	[R]	Overlays.001
+Infraspinatus muscle	[R]	Muscle tile plain
+Latissimus dorsi	[R]	Muscle basic
+Levator scapulae	[R]	Muscle tile plain
+Pectoralis major	[R]	Muscle tile plain
+Pectoralis minor muscle	[R]	Muscle tile plain
+Rhomboid major muscle	[R]	Muscle tile plain
+Rhomboid minor muscle	[R]	Muscle tile plain
+Serratus anterior muscle	[R]	Muscle tile plain
+Spinal part of deltoid muscle	[R]	Overlays.001
+Sternocostal head of pectoralis major muscle	[R]	Overlays.001
+Subclavius muscle	[R]	Muscle tile plain
+Subscapularis muscle	[R]	Muscle basic
+Supraspinatus muscle	[R]	Muscle tile plain
+Teres major muscle	[R]	Muscle basic
+Teres minor muscle	[R]	Muscle tile plain
+Transverse part of trapezius muscle	[R]	Overlays.001
+Trapezius muscle	[R]	Trapezius muscle
+Dorsal scapular nerve	[R]	Nerves
+Lower subscapular nerve	[R]	Nerves
+Suprascapular nerve	[R]	Nerves
+Upper subscapular nerve	[R]	Nerves
+Infraserratus bursa	[R]	Bursae
+Subacromial bursa	[R]	Overlays.001
+Subacromial-subdeltoid bursa	[R]	Bursae
+Subcutaneous acromial bursa	[R]	Bursae
+Subdeltoid bursa	[R]	Overlays.001
+Subtendinous bursa of trapezius	[R]	Bursae
+Supraserratus bursa	[R]	Bursae
+External jugular vein	[R]	Vein
+Costocervical trunk	[R]	Artery
+Internal thoracic artery	[R]	Artery
+Lateral thoracic artery	[R]	Artery
+Superior thoracic artery	[R]	Artery
+Thoracodorsal artery	[R]	Artery
+Body of sternum	[-]	Body of sternum.001
+Manubrium of sternum	[-]	sternum.001
+Rib (10th)	[R]	10th_rib.001
+Rib (11th)	[R]	11th_rib.001
+Rib (12th)	[R]	12th_rib.001
+Rib (1st)	[R]	1st_rib.001
+Rib (2nd)	[R]	2nd_rib.001
+Rib (3rd)	[R]	3rd_rib.001
+Rib (4th)	[R]	4th_rib.001
+Rib (5th)	[R]	5th_rib.001
+Rib (6th)	[R]	6th_rib.001
+Rib (7th)	[R]	7th_rib.001
+Rib (8th)	[R]	8th_rib.001
+Rib (9th)	[R]	9th_rib.001
+10th rib art cart of head	[R]	Articular cartilage
+10th rib art cart of tubercle	[R]	Articular cartilage
+11th rib art cart of head	[R]	Articular cartilage
+12th rib art cart of head	[R]	Articular cartilage
+1st rib art cart of head	[R]	Articular cartilage
+1st rib art cart of tubercle	[R]	Articular cartilage
+2nd rib art cart of head	[R]	Articular cartilage
+2nd rib art cart of tubercle	[R]	Articular cartilage
+3rd rib art cart of head	[R]	Articular cartilage
+3rd rib art cart of tubercle	[R]	Articular cartilage
+4th rib art cart of head	[R]	Articular cartilage
+4th rib art cart of tubercle	[R]	Articular cartilage
+5th rib art cart of head	[R]	Articular cartilage
+5th rib art cart of tubercle	[R]	Articular cartilage
+6th rib art cart of head	[R]	Articular cartilage
+6th rib art cart of tubercle	[R]	Articular cartilage
+7th rib art cart of head	[R]	Articular cartilage
+7th rib art cart of tubercle	[R]	Articular cartilage
+8th rib art cart of head	[R]	Articular cartilage
+8th rib art cart of tubercle	[R]	Articular cartilage
+9th rib art cart of head	[R]	Articular cartilage
+9th rib art cart of tubercle	[R]	Articular cartilage
+art cart of sternoclavicular joint on manubrium	[R]	Articular cartilage
+art cart of sternocostal joint on manubrium	[R]	Articular cartilage
+art cart of sternocostal joints on sternal body	[R]	Articular cartilage
+Costal cart of 10th.rib	[R]	Articular cartilage
+Costal cart of 11th.rib	[R]	Articular cartilage
+Costal cart of 12th.rib	[R]	Articular cartilage
+Costal cart of 1st.rib	[R]	Articular cartilage
+Costal cart of 2nd.rib	[R]	Articular cartilage
+Costal cart of 3rd.rib	[R]	Articular cartilage
+Costal cart of 4th.rib	[R]	Articular cartilage
+Costal cart of 5th.rib	[R]	Articular cartilage
+Costal cart of 6th.rib	[R]	Articular cartilage
+Costal cart of 7th.rib	[R]	Articular cartilage
+Costal cart of 8th.rib	[R]	Articular cartilage
+Costal cart of 9th.rib	[R]	Articular cartilage
+Nucleus pulposus T1-L1	[-]	Articular cartilage
+Xiphoid process	[-]	Xiphoid process
+Anterior divisions of brachial plexus	[R]	Nerves
+Inferior trunk of brachial plexus	[R]	Nerves
+Lateral cord of brachial plexus	[R]	Nerves
+Lateral pectoral nerve	[R]	Nerves
+Long thoracic nerve	[R]	Nerves
+Medial cord of brachial plexus	[R]	Nerves
+Medial pectoral nerve	[R]	Nerves
+Middle trunk of brachial plexus	[R]	Nerves
+Posterior cord of brachial plexus	[R]	Nerves
+Posterior divisions of brachial plexus	[R]	Nerves
+Subclavian nerve	[R]	Nerves
+Superior trunk of brachial plexus	[R]	Nerves
+T1 root	[R]	Nerves
+Lateral thoracic vein	[R]	Vein
+Subclavian vein	[R]	Vein
