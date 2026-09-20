@@ -738,7 +738,7 @@ export const MORE_REGIONS = {
   rpOvary:  { model:'ovarysec', m:[/./], pad:1.15, min:0.05 },
   rpMale:   { model:'male', m:[/./], pad:1.12, min:0.05 },
   arm:      { m:['humerus', 'radius', 'ulna', /metacarpal/, /of hand$/], side:'L', pad:1.08 },
-  tsLong:    { model:'longbone', m:[/./], pad:1.1, min:0.05 },
+  tsLong:    { model:'longbone', m:[/./], pad:1.28, min:0.05 },
   glAdrenal: { model:'adrenalcut', m:[/./], pad:1.5, min:0.05 },
   awTrachea: { model:'awwall', m:['c-shaped cartilage ring', 'oesophagus'], pad:1.15, min:0.05 },
   awBronchiole:{ model:'awwall', m:['smooth muscle of the bronchiole'], pad:1.6, min:0.05 },
@@ -753,6 +753,18 @@ export const MORE_REGIONS = {
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
+
+/* What each BUILT figure is, in plain words, drawn above it. A caption names the figure, never a part that can be asked. `\n` starts a dimmer second line. */
+export const CAPTIONS = [
+  { region:'tsJoint', t:'A synovial joint, cut open' }, { region:'tsBone', t:'A block of compact bone, magnified' }, { region:'tsMuscle', t:'A skeletal muscle, cut across' },
+  { region:'tsLong', t:'A long bone, cut open lengthwise', below:1 }, { region:'wlVessels', t:'Blood vessel walls, peeled back layer by layer' }, { region:'wlHeart', t:'The wall of the heart, in layers\noutside of the heart at the top' },
+  { region:'uterwall', t:'The wall of the uterus, in layers\noutside of the uterus at the top' }, { region:'ecg', t:'One heartbeat on an ECG' },
+  { region:'spiro', t:'A breathing trace, with the volumes as bars\nquiet breaths · one biggest breath in · one biggest breath out' },
+  { region:'awTrachea', t:'Looking down the trachea\nfront of the neck at the top' }, { region:'awBronchiole', t:'A bronchiole, cut across' }, { region:'awAlveolus', t:'One air sac and its blood supply' },
+  { region:'seCochlea', t:'One turn of the cochlea, cut across' }, { region:'seRetina', t:'The retina, magnified\nlight comes in from the left' },
+  { region:'rpSperm', t:'A sperm cell' }, { region:'rpTubule', t:'Wall of a seminiferous tubule\nthe hollow of the tubule is at the top' }, { region:'rpOvary', t:'An ovary, cut open' },
+  { region:'pnCord', t:'The spinal cord, cut across, with a reflex\nback of the body at the top' }, { region:'pnNerve', t:'A nerve, cut across' }, { region:'glAdrenal', t:'An adrenal gland, cut open' },
+];
 
 export const MORE_SETS = {
   levers: [

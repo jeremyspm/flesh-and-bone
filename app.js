@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
-import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, SENSES, REPRO, LEVERS, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
+import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, SENSES, REPRO, LEVERS, PLACE, MORE_REGIONS, MORE_SETS, TRACES, CAPTIONS } from './data-more.js';
 import { buildMeninges } from './made.js';
 import { buildNeuron } from './made-neuron.js';
 import { buildTissues } from './made-tissues.js';
@@ -200,6 +200,7 @@ async function loadModel(name, onProg) {
   const M = MODELS[name], kind = M.kind, root = new THREE.Group();
   if (M.make) {                                   // a model we build: every part registers like a loaded mesh; `context` parts are drawn but never tappable
     for (const p of M.make()) { if (p.context) addLines(root, p); else register(root, name, kind, p); }
+    addCaptions(root, name);
     groups[name] = root; scene.add(root); loaded[name] = true; return bindItems();
   }
   for (const file of M.files || [name]) { const gltf = await loader.loadAsync(`./models/${file}.glb`, e => onProg && onProg(e.loaded, e.total)); root.add(gltf.scene); }
@@ -246,6 +247,22 @@ async function loadModel(name, onProg) {
 }
 
 const menLines = [];
+/* A built figure says what it IS, in plain words, above itself — never the name of a part (that would be the answer). A sprite, not in REG, so it cannot be tapped.
+   It was the first thing he asked on seeing them: "why do some models look like this". */
+function addCaptions(root, model) {
+  for (const C of CAPTIONS) { const R = MORE_REGIONS[C.region]; if (!R || R.model !== model) continue;
+    const b = new THREE.Box3(); for (const i of REG) if (i.model === model && matchAny(R.m, i.base, i.mat)) b.union(i.box); if (b.isEmpty()) continue;
+    const size = b.getSize(new THREE.Vector3()), h = Math.min(.026, Math.max(.009, Math.max(size.x, size.y) * .085)), lines = C.t.split('\n'), f = 46, pad = 14;
+    const cv = document.createElement('canvas'), x = cv.getContext('2d'); x.font = `600 ${f}px system-ui, -apple-system, Segoe UI, sans-serif`;
+    cv.width = Math.ceil(Math.max(...lines.map(l => x.measureText(l).width))) + pad * 2; cv.height = lines.length * (f + 10) + pad * 2;
+    x.font = `600 ${f}px system-ui, -apple-system, Segoe UI, sans-serif`; x.textBaseline = 'top'; x.textAlign = 'center'; lines.forEach((l, k) => { x.fillStyle = k ? 'rgba(255,255,255,.5)' : 'rgba(255,255,255,.78)'; x.fillText(l, cv.width / 2, pad + k * (f + 10)); });
+    const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map:tex, transparent:true, depthWrite:false, depthTest:false })), maxW = Math.max(size.x * 1.1, size.y * .45); let H = h * lines.length * 1.25; if (H * cv.width / cv.height > maxW) H = maxW * cv.height / cv.width;
+    sp.scale.set(H * cv.width / cv.height, H, 1); sp.position.set((b.min.x + b.max.x) / 2, C.below ? b.min.y - H * .8 : b.max.y + H * .75, (b.min.z + b.max.z) / 2); sp.renderOrder = 5; root.add(sp); }
+}
+/* While a question is up, the only BUILT figure on stage is the one it is about: two unlabelled figures side by side read as one puzzle (he tapped the ovary when asked for a layer of the uterus wall). */
+function focusFigure(it) { const D = DECK[G.deck]; let ch = false;
+  for (const m of Object.keys(D.models)) { if (!MODELS[m].make || !groups[m]) continue; const on = !(D.sex && D.sex[m] && D.sex[m] !== G.sex) && (!it || it.infos.some(i => i.model === m)); if (groups[m].visible !== on) { groups[m].visible = on; ch = true; } }
+  if (ch) { refreshPickables(); invalidate(); } }
 function addLines(root, p) { const o = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(p.lines), new THREE.LineBasicMaterial({ color:0xffffff, transparent:true, opacity:.3 })); root.add(o); return o; }
 /* A structure we BUILT (made.js), registered like a loaded mesh so every mode runs on it unchanged. Its source material is 'Schematic'. */
 function register(root, model, kind, part, extra) {
@@ -287,7 +304,7 @@ function bindItems() {
     if (it.c && !it.on) it.infos.forEach(i => { i.colour.set(it.c); if (!glows.has(i)) i.mesh.material.color.copy(i.colour); });
   }
 }
-const POINTS = (base, model) => Object.values(ITEM).filter(i => i.on === base && i.ok && DECK[i.deck].bind.includes(model));
+const POINTS = (base, model) => Object.values(ITEM).filter(i => i.on === base && i.ok && i.deck === G.deck);      // this deck's landmarks only: the Levers elbow must not compete with the Bones elbow
 const _v = new THREE.Vector3();
 function pointWorld(it, info) {
   const bb = info.mesh.geometry.boundingBox;
@@ -299,9 +316,11 @@ function nLocal(info, pt) { const bb = info.mesh.geometry.boundingBox, p = info.
 /* Sphere landmarks on one bone overlap (head / neck / greater trochanter sit within 3 cm of each other), so a
  * tap belongs to ONE of them: the sphere it is deepest inside, measured in units of that sphere's own radius.
  * Without this a tap on the neck was accepted as "greater trochanter" (caught 20 Sep by measuring the overlaps). */
-function nearestSphere(info, pt, slack = 1) {
+/* fam: only landmarks of one family compete. A joint (kind 'joint') sits ON the same spot as a bone landmark (the hip joint on the head of the femur):
+   asked for one, the other must not steal the tap — it made "Head of femur" unanswerable the day the joints went in. */
+function nearestSphere(info, pt, slack = 1, fam) {
   let best = null;
-  for (const it of POINTS(info.base, info.model)) { if (it.zone) continue; const k = pt.distanceTo(pointWorld(it, info)) / it.r; if (k <= slack && (!best || k < best.k)) best = { it, k }; }
+  for (const it of POINTS(info.base, info.model)) { if (it.zone || (fam !== undefined && (it.kind || '') !== fam)) continue; const k = pt.distanceTo(pointWorld(it, info)) / it.r; if (k <= slack && (!best || k < best.k)) best = { it, k }; }
   return best && best.it;
 }
 
@@ -313,7 +332,7 @@ function describe(info, pt) {
     const n = nLocal(info, pt), neutral = NEUTRAL[info.base] && NEUTRAL[info.base](n);
     if (neutral) return { ...neutral, neutral:true, item:null, her:false };
     for (const it of pts.filter(i => i.zone).sort((a, b) => (b.prio || 0) - (a.prio || 0))) if (it.zone(n)) { lm = { it, d:0 }; break; }
-    if (!lm) { const s = nearestSphere(info, pt, 1.3); if (s) lm = { it:s, d:0 }; }
+    if (!lm) { const s = nearestSphere(info, pt, 1.3, '') || nearestSphere(info, pt, 1.3); if (s) lm = { it:s, d:0 }; }
   }
   const own = info.items.filter(i => i.bases.size === 1)[0];
   const grp = info.items.filter(i => i.bases.size > 1).sort((a, b) => a.bases.size - b.bases.size)[0];
@@ -324,7 +343,7 @@ function describe(info, pt) {
 function isCorrect(it, hit) {
   const info = hit.object.userData.info;
   if (it.between) return it.infos.includes(info) && betweenHit(it, info, hit.point);
-  if (it.on) { if (info.base !== it.on) { const a = (it.alsoOn || []).find(z => z.on === info.base); return !!a && hit.point.distanceTo(pointWorld(a, info)) <= a.r; } if (it.zone) { const n = nLocal(info, hit.point); return !(NEUTRAL[info.base] && NEUTRAL[info.base](n)) && it.zone(n); } return nearestSphere(info, hit.point) === it; }
+  if (it.on) { if (info.base !== it.on) { const a = (it.alsoOn || []).find(z => z.on === info.base); return !!a && hit.point.distanceTo(pointWorld(a, info)) <= a.r; } if (it.zone) { const n = nLocal(info, hit.point); return !(NEUTRAL[info.base] && NEUTRAL[info.base](n)) && it.zone(n); } return nearestSphere(info, hit.point, 1, it.kind || '') === it; }
   if (it.infos.includes(info) || it.alsoInfos.includes(info)) return true;
   return (it.accept || []).some(id => ITEM[id].infos && ITEM[id].infos.includes(info));
 }
@@ -511,7 +530,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
   next() {
     const R = this.round; unglow(); clearXray(); setPeel(null); ring.hide(); callout.hide(); toast();
     if (!R.queue.length) return this.finish();
-    const q = R.queue.shift(), it = q.it; setNerves(/^br-cn/.test(it.id)); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); setSection(it.section || false); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); } this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
+    const q = R.queue.shift(), it = q.it; setNerves(/^br-cn/.test(it.id)); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); setSection(it.section || false); focusFigure(it); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); } this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
     $('#barTitle').textContent = `${innerWidth > 520 ? DECK[this.deck].label + ' · ' : ''}${this.mode === 'find' ? 'Find it' : 'Name it'} · ${Math.min(R.done + 1, R.total)} of ${R.total}${q.first ? '' : ' · again'}`;
     $('#prog i').style.width = (R.done / R.total * 100) + '%';
     const P = $('#prompt'); P.classList.remove('swap'); void P.offsetWidth; P.classList.add('swap');
@@ -710,7 +729,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
     $('#xhits').innerHTML = hits.map(i => `<button class="chip" data-peek="${i.id}">${esc(i.name)}</button>`).join('') || (q.length < 2 ? '' : '<span class="quiet" style="font-size:12.5px;color:var(--tx3)">Nothing by that name in this deck.</span>'); syncDock(); },
   /* put ONE structure on stage the way its own question would show it, fly to it and light it — from a results row or the Explore search */
   peek(id) { const it = ITEM[id]; if (!it || !it.ok) return; unglow(); clearXray(); ring.hide(); callout.hide(); controls.autoRotate = false;
-    setNerves(/^br-cn/.test(it.id) || this.mode === 'explore'); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); setSection(it.section || false); setPeel(it.peel || null); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); }
+    setNerves(/^br-cn/.test(it.id) || this.mode === 'explore'); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); setSection(it.section || false); focusFigure(it); setPeel(it.peel || null); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); }
     if (it.deep) setXray(it.infos); this.spot(it, ACC(), 'pulse'); callout.show(this.anchor(it), it.name, '', 0); flyTo(this.itemFrame(it));
     if (document.body.dataset.state === 'play') this.card(`<div class="xcard"><h3>${esc(it.name)}</h3><div class="tags">${it.her ? '<span class="tag her">On her list</span>' : '<span class="tag">Not on her list</span>'}${it.alt ? `<span class="tag">${esc(it.alt)}</span>` : ''}</div>${it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`); },
   toggle(which) {

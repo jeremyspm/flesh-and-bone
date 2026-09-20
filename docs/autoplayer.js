@@ -3,10 +3,10 @@
  * It drives G.next() itself because requestAnimationFrame may be frozen in a hidden pane.
  * Usage:  await fabAutoplay('bones')   → { log:[…], right, total, logged, state }
  *         await fabAutoplay('brain', 'trace')  → walks the deck's pathway: every step tapped for real, step 3 missed twice on purpose */
-window.fabAutoplay = async (deck = 'bones', mode = 'find') => {
+window.fabAutoplay = async (deck = 'bones', mode = 'find', len = 10) => {      // len: 10 · 20 · 0 = every item of the chosen set
   const { G, ITEM, THREE } = FB, v = new THREE.Vector3(), log = [];
   if (!(innerWidth > 0)) return 'viewport is 0x0 — set a size first';
-  await G.setDeck(deck); G.mode = mode; FB.S.o.len = 10; G.start();
+  await G.setDeck(deck); G.mode = mode; FB.S.o.len = len; G.start();
   const aim = it => { const f = mode === 'trace' ? G.traceFrame() : mode === 'find' ? FB.regionFrame(it.region, it.az, it.el) : G.itemFrame(it); if (!f) return;
     FB.controls.target.copy(f.target); FB.camera.position.copy(f.pos); FB.camera.lookAt(f.target); FB.camera.updateMatrixWorld(true); };
   const findPt = it => { if (it.between) {                          // a wall shared by two chambers (the septa): aim at a vertex of one chamber that lies within t of the other
@@ -35,12 +35,12 @@ window.fabAutoplay = async (deck = 'bones', mode = 'find') => {
     return { state:document.body.dataset.state, log, right:tr.right, total:tr.T.steps.length, logged:tr.log.length, pins:FB.pins.list.length, chain:[...document.querySelectorAll('#results .chain li b')].map(b => b.textContent) };
   }
   if (mode === 'name') {                                   // Name it: answer right except the 2nd question
-    let n = 0; while (document.body.dataset.state === 'play' && n++ < 30) { const c = G.cur; if (!c || c.answered) { G.next(); continue; }
+    let n = 0; while (document.body.dataset.state === 'play' && n++ < (len === 10 ? 30 : 3000)) { const c = G.cur; if (!c || c.answered) { G.next(); continue; }
       const btns = [...document.querySelectorAll('#dock .opt')], right = btns.find(b => ITEM[b.dataset.id] === c.it), wrong = btns.find(b => ITEM[b.dataset.id] !== c.it);
       const pick = n === 2 ? wrong : right; G.choose(pick); log.push(c.it.id + (c.first ? '' : '(again)') + ':' + (pick === right ? 'ok' : 'wrong-on-purpose')); }
   } else {
     let guard = 0, missed = false; const decoy = Object.values(ITEM).find(i => i.deck === deck && i.ok && !i.on && !i.deep);
-    while (document.body.dataset.state === 'play' && guard++ < 40) { const c = G.cur; if (!c || c.answered) { G.next(); continue; }
+    while (document.body.dataset.state === 'play' && guard++ < (len === 10 ? 40 : 3000)) { const c = G.cur; if (!c || c.answered) { G.next(); continue; }
       aim(c.it);
       if (!missed && c.it !== decoy && ![...c.it.bases || []].some(b => decoy.bases.has(b))) { aim(decoy); const w = findPt(decoy);
         if (w) { G.onTap(w.x, w.y); G.onTap(w.x, w.y); log.push(c.it.id + ': two wrong taps → revealed=' + c.revealed); missed = true; G.act('skip'); continue; } aim(c.it); }
