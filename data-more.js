@@ -139,6 +139,24 @@ export const BRAIN = [
   { id:'br-fourth-ventricle', kind:'csf', name:'Fourth ventricle', her:1, deep:1, cut:1, region:'brain', az:100, el:-10, m:['fourth ventricle'], fact:'Between the pons/medulla and the cerebellum. From here CSF escapes into the subarachnoid space.' },
   { id:'br-choroid', kind:'csf', name:'Choroid plexus', her:1, deep:1, region:'brain', az:70, el:10, m:['choroid plexus'],
     clue:{ t:'The structures in the ventricles that MAKE cerebrospinal fluid.', hers:1 }, fact:'Makes CSF. (Arachnoid villi absorb it back into the blood.)' },
+  // ── meninges + where CSF goes back to blood. The four layers and the villi are BUILT (made.js) — declared schematic wherever asked ──
+  { id:'br-dura', kind:'men', name:'Dura mater', her:1, men:1, region:'meninges', az:60, el:35, m:['dura mater'],
+    clue:{ t:'Tough fibrous connective tissue forming a double membrane — the outermost of the three.', hers:1 },
+    fact:'Outermost, against the skull. Tough and DOUBLE (periosteal + meningeal layers); the dural venous sinuses run between the two. (Schematic layer.)' },
+  { id:'br-arachnoid', kind:'men', name:'Arachnoid mater', her:1, men:1, region:'meninges', az:60, el:35, m:['arachnoid mater'],
+    clue:{ t:'The cobweb-like middle layer; its granulations reabsorb CSF into the bloodstream.', hers:1 },
+    fact:'The middle layer. Web-like trabeculae cross the CSF-filled space beneath it; its villi poke up into the sagittal sinus. (Schematic layer.)' },
+  { id:'br-subarachnoid', kind:'men', name:'Subarachnoid space', her:1, men:1, region:'meninges', az:60, el:35, m:['subarachnoid space'],
+    clue:{ t:'Cerebrospinal fluid circulates in this space (and in the central canal).', hers:1 },
+    fact:'Between arachnoid and pia, full of CSF — the cushion the brain floats in. A bleed here = a sudden severe headache with vomiting. (Schematic layer.)' },
+  { id:'br-pia', kind:'men', name:'Pia mater', her:1, men:1, region:'meninges', az:60, el:35, m:['pia mater'],
+    clue:{ t:'The delicate innermost membrane that follows the convolutions of the brain.', hers:1 },
+    fact:'Innermost — stuck to the brain surface, the shiny covering you see in the lab. Rich in blood vessels; follows them into the choroid plexuses. (Schematic layer.)' },
+  { id:'br-villi', kind:'men', name:'Arachnoid villi', alt:'arachnoid granulations', her:1, men:1, region:'villi', az:70, el:30, m:['arachnoid villi'],
+    clue:{ t:'The structures that absorb CSF into the sagittal sinus.', hers:1 },
+    fact:'Tufts of arachnoid pushing through the dura into the superior sagittal sinus: CSF goes back into venous blood here. (Schematic, placed under the real sinus.)' },
+  { id:'br-sss', kind:'men', name:'Superior sagittal sinus', her:1, men:1, pin:'top', region:'villi', az:70, el:30, m:['superior sagittal sinus'],
+    fact:'A dural venous sinus running front to back along the top of the brain, between the two layers of the dura. The villi empty CSF into it. (Real mesh, moved out 7 mm so it sits inside the schematic dura.)' },
   { id:'br-hippocampus', name:'Hippocampus', deep:1, region:'brain', az:90, el:-20, m:['hippocampus'], fact:'Deep in the temporal lobe. Forming new memories.' },
   { id:'br-amygdala', name:'Amygdala', deep:1, region:'brain', az:90, el:-20, m:['amygdaloid body'], fact:'Almond at the tip of the hippocampus. Fear and emotion.' },
   { id:'br-basal', name:'Basal nuclei', deep:1, region:'brain', az:80, el:10, m:['caudate nucleus', 'putamen', 'globus pallidus', 'lentiform nucleus'], fact:'Caudate + putamen + globus pallidus, deep in each hemisphere. Smooth out movement.' },
@@ -183,6 +201,8 @@ export const NERVES = [
 
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
+  meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
+  villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
 export const MORE_SETS = {
@@ -198,7 +218,32 @@ export const MORE_SETS = {
     { id:'her',    name:'Her list',          hint:'Lobes, functional areas and the regions she asks', f:i => i.her && !/^br-cn/.test(i.id) },
     { id:'areas',  name:'Lobes & areas',     hint:'The outside of the brain', f:i => /^br-(frontal|parietal|temporal|occipital|motor|sensory|broca|wernicke|auditory|visual|prefrontal|central-sulcus|insula)$/.test(i.id) },
     { id:'inside', name:'Inside (cut)',      hint:'Brainstem, diencephalon, ventricles', f:i => !!i.cut || /ventricle|choroid|hippocampus|amygdala|basal|cerebellum/.test(i.id) },
+    { id:'men',    name:'Meninges & CSF',    hint:'Schematic layers — dura, arachnoid, pia — and the CSF spaces', f:i => i.kind === 'men' || i.kind === 'csf' },
     { id:'cn',     name:'Cranial nerves',    hint:'All twelve, from below', f:i => /^br-cn/.test(i.id) },
     { id:'all',    name:'Everything',        hint:'All of it', f:() => true },
+  ],
+};
+
+/* ── Trace it: pathways tapped in flow order. A step = an item id + the question that asks for it + `say`, the line that
+ *    step earns in a written answer. Steps come from HER wording only (focus row ns-csf: "from the choroid plexus through
+ *    all four ventricles, into the subarachnoid space, back through the arachnoid granulations into venous blood"; her MCQ
+ *    keys "choroid plexuses; arachnoidal villi … into the sagittal sinus"). The foramina and apertures between the
+ *    ventricles are not steps she asks, so they are not steps here. `context` = on stage and tappable, but not a step. ── */
+export const TRACES = {
+  brain: [
+    { id:'tr-csf', name:'CSF pathway', short:'Trace the CSF', ask:'from where it is made to where it re-enters the blood', men:1, region:'brain', az:75, el:14,
+      hint:'Made → four ventricles → subarachnoid space → back into blood',
+      note:'Dura, arachnoid, pia, subarachnoid space and the villi are schematic layers built on this brain (thickness exaggerated); the ventricles, choroid plexus and sagittal sinus are real meshes.',
+      context:['br-dura', 'br-arachnoid', 'br-pia'],
+      steps:[
+        { it:'br-choroid',          q:'Where is cerebrospinal fluid MADE?', say:'Made by the choroid plexuses — modified ependymal cells filtering blood plasma, in the ventricles.' },
+        { it:'br-lat-ventricle',    q:'Which chambers does it fill first — one in each hemisphere?', say:'It fills the two lateral ventricles, one in each cerebral hemisphere.' },
+        { it:'br-third-ventricle',  q:'Where does it flow next?', say:'Into the third ventricle, the slit between the two halves of the thalamus (diencephalon).' },
+        { it:'br-aqueduct',         q:'Then through which narrow channel?', say:'Down the cerebral aqueduct, through the midbrain.' },
+        { it:'br-fourth-ventricle', q:'Into which chamber — the one nearest the cerebellum?', say:'Into the fourth ventricle, between the pons/medulla and the cerebellum.' },
+        { it:'br-subarachnoid',     q:'It leaves the ventricles. Which space does it circulate in, around the brain and cord?', say:'Out into the subarachnoid space (and the central canal) — it surrounds and cushions the brain and spinal cord.', region:'meninges', az:60, el:35 },
+        { it:'br-villi',            q:'Which structures reabsorb it?', say:'Reabsorbed by the arachnoid villi (granulations).', region:'villi', az:70, el:30 },
+        { it:'br-sss',              q:'…into which vessel — back into the blood?', say:'Into the superior sagittal sinus — a dural venous sinus — and so back into venous blood.', region:'villi', az:70, el:30 },
+      ] },
   ],
 };

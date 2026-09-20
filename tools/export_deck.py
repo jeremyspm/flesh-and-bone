@@ -12,13 +12,13 @@ DECKS = {
     'glands': dict(names=[r'^(adenohypophysis|neurohypophysis|pineal gland|thyroid gland|hypothalamus|pancreas|testis|kidney|suprarenal gland)$',
                           r'^(inferior|superior) parathyroid gland$', r'^(left|right) lobe of thymus$']),
     'brain':  dict(paths=[r'Central nervous system'], names=[CRANIAL, r'^(olfactory bulb|olfactory tract|optic chiasm|optic tract)$',
-                          r'^(adenohypophysis|neurohypophysis|pineal gland)$'],
+                          r'^(adenohypophysis|neurohypophysis|pineal gland)$', r'^superior sagittal sinus$'],      # the sinus is where CSF goes back to blood (Trace it)
                    drop=[r'^spinal dura$', r'spinal cord', r'(spino|spinal|cortico|reticulo|vestibulo|tecto|rubro)[a-z]*(spinal|thalamic|cerebellar|tectal)? tract', r'tract$',
                          r'fasciculus', r'horn of spinal', r'funiculus', r'^cauda equina$', r'nucleus of accessory nerve']),
     'nerves': dict(names=[r'^(sciatic|femoral|tibial|common fibular|obturator|pudendal|median|ulnar|radial|axillary|musculocutaneous) nerve$',
                           r'^intercostal nerves$', r'brachial plexus$', r'^vagus nerve \(']),
     'willis': dict(names=[r'^(anterior|posterior) communicating artery$', r'^(anterior|middle|posterior) cerebral artery', r'^internal carotid artery$',
-                          r'^vertebral artery$', r'^basilar artery$']),
+                          r'^vertebral artery$', r'^basilar artery$', r'^insular branches of middle cerebral artery']),
 }
 spec = DECKS[deck]
 rx = lambda pats: [re.compile(p, re.I) for p in pats]

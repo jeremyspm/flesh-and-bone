@@ -98,3 +98,29 @@ objects (nerves, vessels), all of which are already in the exported models (chec
   median, ulnar, radial, axillary, musculocutaneous, intercostal nerves, the brachial plexus and the vagus, in a ghost skeleton.
   They are CURVE objects in the source; `tools/export_deck.py` exports curves as tubes. Her plexus question keys phrenic, femoral
   and sciatic — **the phrenic nerve is the one the source does not model**, and the deck's hint says so.
+
+## Added 21 Sep: the meninges (built, not loaded) and Trace it
+
+- **The meninges are a declared schematic** ([made.js](made.js)). Z-Anatomy has the dural sinuses and folds but not the three
+  layers. They are concentric shells, so they are generated from the brain itself: the cerebrum's outer envelope is measured
+  (farthest cortex vertex per 2° of direction, max-filtered to bridge the sulci, blurred), and four slabs are stacked on it —
+  pia · subarachnoid space · arachnoid · dura — each cut back further than the one below, so one corner reads as a staircase.
+  Thickness is exaggerated (~11 mm for a real ~4 mm) and the app says "schematic" in the prompt, the facts, Explore and help.
+  A built mesh goes through `register()` and gets a normal registry entry (source material `Schematic`), so every mode runs
+  on it unchanged. They are on stage only when asked (`men:1`), like the cranial nerves.
+- **The superior sagittal sinus was level with the gyral crowns** in the source (floor −0.3 mm against the envelope: the model
+  gives skull and dura no thickness). It is a real mesh moved straight outward, every vertex along its own radius by the same
+  ~7 mm, until its floor rests on the schematic arachnoid — inside the dura, above the arachnoid, villi pushing into it. The
+  fact line says it was moved. `brain.glb` was re-exported with it (`tools/export_deck.py`).
+- **Trace it** — a fourth mode. A pathway (`TRACES` in data-more.js) is an ordered list of item ids; you tap where it starts,
+  then each place it goes next. The pathway stands alone in a glass brain (x-ray on everything else), each right tap locks
+  the structure in the accent colour with a numbered pin, a wrong tap says whether that structure is behind you, ahead of
+  you or not on the path, and two misses show the step. The results card is the chain written out — one step, one line:
+  the shape of her ordering answers. The CSF path's eight steps use her wording only; the foramina and apertures are not
+  steps she asks, so they are not steps here.
+- **What is inside glass wins the tap**: the choroid plexus hangs inside the lateral ventricle, which is drawn as glass while
+  tracing. `cast()` prefers a hit on the plexus up to 3 cm behind a hit on the ventricle's wall (`INSIDE`).
+- **A deck can set its own Name-it frame** (`DECK.brain.frame`): the 34 cm minimum that suits a body left the brain 75 px
+  wide on a phone.
+- `docs/autoplayer.js` has a `'trace'` mode: every step ray-cast and tapped, step 3 missed twice on purpose.
+  Reach at 375×812: dura 91 %, arachnoid 40 %, subarachnoid 29 %, pia 26 %, villi 67 %, sinus 15 % (a 4 mm tube, framed close).
