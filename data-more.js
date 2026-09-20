@@ -254,6 +254,24 @@ export const NEURON = [
   NR('vesicles', 'Synaptic vesicles', 'synapse', ['synaptic vesicles'], { el:10, fact:'Little bags of neurotransmitter waiting in the terminal — acetylcholine at parasympathetic endings and neuromuscular end-plates.' }),
 ];
 
+/* ── Neuroglia: BUILT (made-glia.js), in the Neuron deck. Clues are her six-point match, word for word in substance
+ *    ("Make use of the given information to find the matching pairs"). CNS group on top, PNS group below. ── */
+const NG = (id, name, region, m, clue, fact, extra) => ({ id:'ng-' + id, kind:'glia', name, her:1, region, az:0, el:4, m, clue:{ t:clue, hers:1 }, fact, ...extra });
+NEURON.push(
+  NG('astro', 'Astrocytes', 'gliaCNS', ['astrocyte'], 'Structural and supporting; communicates between the nervous system and the blood, in the CNS.',
+    'Star-shaped, with end-feet on the capillaries: they help form the blood-brain barrier (with the ependymal cells, in her cloze).'),
+  NG('oligo', 'Oligodendrocytes', 'gliaCNS', ['oligodendrocyte'], 'Myelination of axons in the CNS.',
+    'ONE cell wraps segments of SEVERAL axons — that is how you tell it from a Schwann cell. White matter of the CNS.'),
+  NG('micro', 'Microglia', 'gliaCNS', ['microglia'], 'Transform into phagocytes — they clean up nervous system debris, in the CNS.',
+    'Small, with thorny processes. The immune defence of the CNS: they phagocytose bacteria, viruses and debris.'),
+  NG('epen', 'Ependymal cells', 'gliaCNS', ['ependymal cells', 'ependymal nuclei'], 'Secrete and move CSF through the ventricles and central canal, in the CNS.',
+    'Ciliated cells lining the ventricles. Specialised ones (the choroid plexuses) make CSF; the cilia keep it moving.'),
+  NG('sat', 'Satellite cells', 'gliaPNS', ['satellite cells'], 'Structural support and communication, in the PNS.',
+    'Flattened cells surrounding neuron cell bodies in a ganglion — the PNS counterpart of the astrocyte.'),
+  NG('schwann', 'Schwann cells', 'gliaPNS', ['schwann cells', 'schwann cell nuclei'], 'Myelination of axons in the PNS.',
+    'Each one wraps ONE segment of ONE axon; the gaps between them are the nodes of Ranvier.'),
+);
+
 /* ── Tissues: three of her figures, BUILT (made-tissues.js), declared schematics.
  *    Synovial joint — her six blanks: articular cartilage · epiphyseal plate · synovial fluid · ligament · joint capsule · bone
  *      (her MCQ: A = "hyaline cartilage; facilitates smooth frictionless movement"; D = "joint capsule strengthened by a ligament").
@@ -318,6 +336,8 @@ export const MORE_REGIONS = {
   tsOsteon: { model:'tissues', m:['artery', 'vein'], pad:2.3, min:0.05 },      // the big middle osteon, from close in: a lacuna is 7 mm
   tsMuscle: { model:'tissues', m:['epimysium', 'perimysium', 'myofibrils'], pad:1.08, min:0.05 },
   tsFibre:  { model:'tissues', m:['sarcolemma', 'myofibrils', 'muscle fibre'], pad:1.25, min:0.05 },
+  gliaCNS: { model:'glia', m:['capillary', 'cerebrospinal fluid'], pad:1.06, min:0.05 },
+  gliaPNS: { model:'glia', m:['cell body (ganglion)', 'axon (pns)', 'satellite cells'], pad:1.12, min:0.05 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
@@ -331,7 +351,9 @@ export const MORE_SETS = {
     { id:'all', name:'Everything', hint:'All of it', f:() => true },
   ],
   neuron: [
-    { id:'her', name:'Her list', hint:'Her ten-point match. A schematic, not to scale', f:i => i.her },
+    { id:'her', name:'Her list', hint:'Her neuron match + her six neuroglia. Schematics, not to scale', f:i => i.her },
+    { id:'neuron', name:'Neuron', hint:'Her ten-point match', f:i => i.kind !== 'glia' && i.her },
+    { id:'glia', name:'Neuroglia', hint:'Her six-point match: which cell does what', f:i => i.kind === 'glia' },
     { id:'all', name:'Everything', hint:'Adds the nucleus and the vesicles', f:() => true },
   ],
   willis: [

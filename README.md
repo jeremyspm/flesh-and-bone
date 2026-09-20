@@ -171,3 +171,12 @@ objects (nerves, vessels), all of which are already in the exported models (chec
 - `Fascicle` also accepts the perimysium and `Muscle fibre` also accepts the sarcolemma: tapping the wrapped bundle IS finding the bundle.
 - Reach at 375x812 (own + accepted meshes): 17-99 %. The low ones are honest: bone 17 % (most of its vertices lie under cartilage; the
   shafts are the target), sarcolemma 19 % (a 3.6 cm band on a pulled-out fibre, framed close), canaliculi 22 % (hair-thin, but dozens).
+
+## Added 21 Sep: the six neuroglia (in the Neuron deck)
+
+- [made-glia.js](made-glia.js), model `glia`, bound into the Neuron deck beside the neuron (a deck may bind several models). Each cell
+  is drawn by the ONE feature that tells it apart, because that is what her figure question tests: astrocyte = end-feet on a capillary;
+  oligodendrocyte = one cell wrapping three different axons; microglia = small and thorny; ependymal cells = a ciliated row on a CSF
+  space; satellite cells = a ring round a ganglion cell body; Schwann cells = one segment of one axon each. CNS group on top, PNS below.
+- Clues are her six-point match ("which cell does what"), so with Ask-by = Mix the FUNCTION is the prompt and the cell is the answer.
+- Context meshes (capillary, axons, CSF, ganglion cell body) are tappable in Explore and never asked. 18/18 neuron-deck items pass by tap.
