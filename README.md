@@ -279,3 +279,32 @@ pick-from-options IS the test's shape, and typing was deliberately not added (hi
 **v1 debts, all done:** a muscle that hides the asked one fades out (`peel`) - at once in Name it, after the FIRST miss in Find it
 (soleus/gastrocnemius, brachialis/biceps, semimembranosus/semitendinosus); results rows fly the camera to the structure
 (`G.peek`); Explore has a search box that stays put; "Glow her list" now fades the rest as well as darkening it.
+
+## 21 Sep: the marks audit, part 2 - "is it a cross-section where it needs to be?"
+
+His challenge: a question about something INSIDE an organ is useless if the model is not sectioned there. Audit of every deck:
+already sectioned or opened - brain (mid-sagittal cut, x-ray for deep nuclei), eye (cut-away), ear (canal opened, glass vestibule),
+joint (capsule opened), osteon and muscle (pulled apart level by level), lungs (glass). **Not** sectioned where her figure is a
+section, now fixed:
+- **The heart.** Her numbered heart figure is a FRONTAL SECTION. The chambers in this model are hollow with real inner walls, so ONE
+  clipping plane through the heart (`setSection`, normal (0.25, 0, -1) through the chambers' centre) IS that figure: cavities, valve
+  leaflets with their chordae, papillary muscles, and the wall between the ventricles. The raycast skips clipped-away hits.
+  **Septa** are asked on it as `between` items: a tap is right where one chamber's wall lies within 7 mm of the OTHER chamber
+  (the right ventricle wraps the left, so a plane test was wrong - measured: 42 mm of overlap along the centre line). **Apex** = the
+  lowest vertex of the left-ventricle mesh. Explore has "Cut it open". (Valves keep the glass view: the pulmonary valve is anterior
+  to any useful plane.)
+- **Layers no organ model can show**, built in [made-figures.js](made-figures.js) and bound into the deck they belong to as their own set:
+  vessel wall (artery / vein with valve / capillary, three tunics pulled apart - her 7-point M1 match), heart wall (pericardium to
+  endocardium - her cloze keys "epicardium or visceral pericardium", myocardium, endocardium), uterus wall (perimetrium, myometrium,
+  basal + functional endometrium with straight / spiral arteries - her M3 slide).
+- **Graphs she asks as label figures**: the ECG (P, PR segment, Q, R, S, ST segment, T - her label figure and both meaning-matches
+  are the clues) in the Heart deck; the lung volumes (four volumes in one column, each capacity a bar spanning what it sums) in Airway.
+- Still not shown anywhere, said plainly: cochlea cross-section (three scalae / organ of Corti), retina cell layers, trachea wall and
+  alveolus histology, adrenal cortex vs medulla, skull sinuses and foramina, a long-bone interior.
+
+**Two bugs found by the regression run:**
+- `regionFrame` cached an EMPTY box if it was first called while that deck's model was still loading (a resize or rotation during
+  the load did it). The camera then never moved again for that deck until reload - every question unanswerable. It now recomputes
+  an empty box. This was live and could have hit him on a phone.
+- `men:1` on items vs `men:true` on meshes: the named-stage switch compared with `===`, so meninges and conduction parts stayed
+  hidden when asked. Normalised.

@@ -335,6 +335,26 @@ export const TISSUES = [
   TS('myofibrils', 'muscle', 'Myofibrils', 'tsFibre', 0, 15, ['myofibrils'], { fact:'The contractile threads inside the fibre, made of sarcomeres (actin + myosin) end to end.' }),
 ];
 
+/* ── Layers (Module 1), BUILT in made-figures.js and bound into the Tissues deck. Her 7-point match on the vessel figure: Artery · Vein ·
+ *    Capillary · Valve · Tunica externa · Tunica media · Tunica interna. Her cloze keys on the heart wall: "epicardium or visceral
+ *    pericardium" · myocardium · endocardium; her lab MCQ keys the visceral pericardium against parietal pericardium / the two pleurae. ── */
+const WA = (id, kind, name, region, az, el, m, extra) => ({ id:'wl2-' + id, kind, name, her:1, region, az, el, m, ...extra });
+TISSUES.push(
+  WA('artery', 'vessel', 'Artery', 'wlVessels', 0, 25, [/ of artery$/, 'blood in the artery'], { fact:'Carries blood AWAY from the heart, under pressure: the THICKEST tunica media, a small round lumen, no valves.' }),
+  WA('vein', 'vessel', 'Vein', 'wlVessels', 0, 25, [/ of vein$/, 'blood in the vein'], { fact:'Carries blood TOWARD the heart at low pressure: the thinnest tunica media, a wide lumen — and valves to stop backflow.' }),
+  WA('capillary', 'vessel', 'Capillary', 'wlVessels', 0, 10, ['capillary'], { fact:'One cell thick — endothelium only (a tunica interna and nothing else), so exchange can happen. Continuous in the brain, fenestrated in the kidney, sinusoidal in bone marrow.' }),
+  WA('valve', 'vessel', 'Valve', 'wlVessels', 0, 35, ['valve'], { clue:{ t:'Found in veins, to prevent the backflow of blood.', hers:1 }, fact:'Folds of the tunica interna. Arteries do not need them; veins (especially in the legs) do.' }),
+  WA('externa', 'vessel', 'Tunica externa', 'wlVessels', 0, 25, [/^tunica externa/], { alt:'tunica adventitia', fact:'The OUTER coat: collagen fibres that anchor and protect the vessel.' }),
+  WA('media', 'vessel', 'Tunica media', 'wlVessels', 0, 25, [/^tunica media/], { clue:{ t:'The coat of smooth muscle — thickest in arteries, where it sets the vessel\'s diameter and so the peripheral resistance.', hers:1 }, fact:'The MIDDLE coat: smooth muscle and elastin. Vasoconstriction and vasodilation happen here.' }),
+  WA('interna', 'vessel', 'Tunica interna', 'wlVessels', 0, 25, [/^tunica interna/], { alt:'tunica intima', fact:'The INNER coat: endothelium, slick so blood does not clot on it. It is the only coat a capillary has.' }),
+  WA('fibrous', 'hwall', 'Fibrous pericardium', 'wlHeart', 0, 25, ['fibrous pericardium'], { her:0, fact:'The tough outer bag: anchors the heart and stops it over-filling.' }),
+  WA('parietal', 'hwall', 'Parietal pericardium', 'wlHeart', 0, 25, ['parietal pericardium'], { fact:'The serous layer lining the inside of the fibrous bag.' }),
+  WA('cavity', 'hwall', 'Pericardial cavity', 'wlHeart', 0, 25, ['pericardial cavity'], { her:0, fact:'The slit between the parietal and visceral layers, with a film of serous fluid so the beating heart slides without friction.' }),
+  WA('epi', 'hwall', 'Epicardium', 'wlHeart', 0, 25, ['epicardium'], { alt:'visceral pericardium', clue:{ t:'The membrane that covers the heart and gives it a shiny appearance.', hers:1 }, fact:'Epicardium = VISCERAL pericardium: the same layer, two names — her cloze accepts either. It is the outer layer of the heart wall itself.' }),
+  WA('myo', 'hwall', 'Myocardium', 'wlHeart', 0, 25, ['myocardium'], { clue:{ t:'The heart muscle — the layer the coronary arteries supply.', hers:1 }, fact:'The thick MIDDLE layer: cardiac muscle, branched cells joined by intercalated discs with gap junctions. Thickest in the left ventricle.' }),
+  WA('endo', 'hwall', 'Endocardium', 'wlHeart', 0, 25, ['endocardium'], { clue:{ t:'The smooth inner lining of the heart chambers and valves.', hers:1 }, fact:'The INNER layer: endothelium, continuous with the lining of the blood vessels.' }),
+);
+
 /* ── Heart (Module 1): heart.glb (832 KB) cut from the source's cardiovascular model. "Her list" = the keys of the 363-question
  *    M1 bank, read by hand: her four valve labels (pulmonary semilunar, tricuspid, aortic semilunar, mitral), her numbered-diagram
  *    matches (aortic arch, left ventricle, right atrium, aorta, pulmonary artery, left pulmonary vein, SVC, IVC, brachiocephalic
@@ -362,6 +382,13 @@ export const HEART = [
   HT('papillary', 'valve', 'Papillary muscles', 30, -5, [/papillary muscle of/], { her:1, open:1,
     clue:{ t:'The atrioventricular valves are anchored by chordae tendineae to these, in the wall of the heart.', hers:1 }, fact:'They pull on the chordae tendineae so the AV valves cannot blow back into the atria when the ventricles contract.' }),
 
+  // ── asked on the SECTION (the heart cut open like her figure): the walls between chambers are where the two hollow chambers touch ──
+  { id:'ht-ivs', kind:'wall', name:'Interventricular septum', her:1, section:1, between:['left ventricle', 'right ventricle'], t:.007, region:'heart', az:10, el:0, ask:'The heart is cut open. Which wall is ringed?',
+    clue:{ t:'The larger partition between the two sides of the heart.', hers:1 }, fact:'The thick muscular wall between the two VENTRICLES. The bundle branches run down either side of it.' },
+  { id:'ht-ias', kind:'wall', name:'Interatrial septum', her:1, section:1, between:['left atrium', 'right atrium'], t:.006, region:'heart', az:10, el:10, ask:'The heart is cut open. Which wall is ringed?',
+    clue:{ t:'The thin-walled upper part of the septum that separates the two sides of the heart.', hers:1 }, fact:'Between the two ATRIA. It carries the fossa ovalis — what is left of the fetal foramen ovale (her MCQ: the hole between right and left atrium).' },
+  { id:'ht-apex', kind:'wall', name:'Apex of the heart', her:1, on:'left ventricle', p:[.657, .534, 1], r:.02, region:'heart', az:20, el:-10, ask:'Which part of the heart is ringed?',
+    fact:'The pointed tip, formed by the LEFT ventricle, pointing down and to the left. (Measured: the lowest vertex of the left-ventricle mesh.) The base is the top, where the great vessels are.' },
   HT('aorta', 'vessel', 'Aorta', 20, 5, ['ascending aorta', 'aortic arch', 'thoracic aorta'], { her:1, region:'heartTop', fact:'Leaves the LEFT ventricle: ascending aorta, the arch, then down the back of the chest. Where the systemic circulation starts.' }),
   HT('arch', 'vessel', 'Aortic arch', 20, 10, ['aortic arch'], { her:1, region:'heartTop', fact:'Three branches, in order: brachiocephalic, left common carotid, left subclavian. Baroreceptors here sense blood pressure.' }),
   HT('brachio', 'vessel', 'Brachiocephalic artery', 10, 5, ['brachiocephalic trunk'], { her:1, region:'heartTop', alt:'brachiocephalic trunk', fact:'FIRST branch of the arch. Splits into the right common carotid and the right subclavian.' }),
@@ -400,6 +427,20 @@ export const HEART = [
   HT('lungs', 'context', 'Lungs', 10, 5, [/lobe of (left|right) lung$/], { region:'heartAll', fact:'Where the pulmonary circulation drops its carbon dioxide and picks up oxygen. (Drawn as glass here: a tap passes through unless the lungs are what was asked.)' }),
 ];
 
+/* ── The ECG (Module 1), BUILT, bound into the Heart deck. Her label figure: A = P wave · B = Q · C = R · D = S · E = T wave. Her two matches give the
+ *    meaning of each part; the clues below are those lines. ── */
+const EC = (id, name, m, clue, fact, extra) => ({ id:'ecg-' + id, kind:'ecg', name, her:1, region:'ecg', az:0, el:0, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+HEART.push(
+  EC('p', 'P wave', ['p wave'], 'Atrial depolarisation: the SA node fires and the impulse spreads through the right and left atria, which contract.', 'The first small bump. Blood is in the atria, moving through the AV valves.'),
+  EC('pr', 'PR segment', ['pr segment'], 'The impulse travels to the AV node, where it is briefly delayed.', 'The flat stretch after the P wave: the delay lets the ventricles finish filling.'),
+  EC('qrs', 'QRS complex', ['q wave', 'r wave', 's wave'], 'Ventricular depolarisation: down the bundle of His, the bundle branches and the Purkinje fibres — the ventricles contract.', 'The big spike. (Atrial repolarisation is hidden inside it.) Blood moves out through the semilunar valves.'),
+  EC('q', 'Q wave', ['q wave'], null, 'The small dip BEFORE the tall spike.'),
+  EC('r', 'R wave', ['r wave'], null, 'The tall spike itself. Heart rate is counted from R to R.'),
+  EC('s', 'S wave', ['s wave'], null, 'The dip AFTER the tall spike.'),
+  EC('st', 'ST segment', ['st segment'], 'The ventricles are fully depolarised and actively contracting.', 'The flat stretch between the spike and the last wave. Raised or sunk in a myocardial infarction.'),
+  EC('t', 'T wave', ['t wave'], 'Ventricular repolarisation: the ventricular muscle relaxes so the ventricles can refill.', 'The last, broad bump.'),
+);
+
 /* ── Airway (Module 1): airway.glb (604 KB) = the source's respiratory model + pharynx, palate, epiglottis, tongue (digestive),
  *    larynx cartilages + hyoid (skeletal), diaphragm (muscular). Her figure keys: Nostril · Nasal cavity · Larynx · Oropharynx ·
  *    Right primary bronchus · Middle lobe of right lung · Palate · Trachea · Left primary bronchus · Left lung · Diaphragm, and
@@ -436,6 +477,20 @@ export const AIRWAY = [
   AW('diaphragm', 'lung', 'Diaphragm', 'airway', 0, -20, ['diaphragm'], { her:1,
     clue:{ t:'In the bell-jar model of ventilation, the rubber sheet at the bottom stands for this.', hers:1 }, fact:'The main muscle of inspiration: it contracts and flattens, the thoracic volume rises, pressure falls, air flows in.' }),
 ];
+
+/* ── Lung volumes (Module 1), BUILT, bound into the Airway deck. Her keys: tidal volume · inspiratory and expiratory reserve volume · residual volume ·
+ *    vital capacity · total lung capacity · "inspirational capacity". The four VOLUMES are one column; each CAPACITY is a bar spanning the volumes it sums. ── */
+const SP = (id, name, fact, extra) => ({ id:'sp-' + id, kind:'spiro', name, her:1, region:'spiro', az:0, el:0, m:[name.toLowerCase()], fact, ...extra });
+AIRWAY.push(
+  SP('tv', 'Tidal volume', 'The air moved in ONE quiet breath (about 500 mL): the small waves.'),
+  SP('irv', 'Inspiratory reserve volume', 'The EXTRA air you can still force IN after a normal breath in.'),
+  SP('erv', 'Expiratory reserve volume', 'The extra air you can still force OUT after a normal breath out.'),
+  SP('rv', 'Residual volume', 'What stays in the lungs even after a maximal breath out — it cannot be measured with a spirometer. It keeps the alveoli open.'),
+  SP('ic', 'Inspiratory capacity', 'Tidal volume + inspiratory reserve volume: everything you can breathe in from a resting breath out.', { alt:'she writes "inspirational capacity"' }),
+  SP('frc', 'Functional residual capacity', 'Expiratory reserve volume + residual volume: what is in the lungs at the end of a quiet breath out.', { her:0 }),
+  SP('vc', 'Vital capacity', 'IRV + TV + ERV: the most air you can move in one breath, maximal in to maximal out.'),
+  SP('tlc', 'Total lung capacity', 'All four volumes together: vital capacity + residual volume.'),
+);
 
 /* ── Eye & Ear (Module 3): both BUILT (made-eye.js, made-ear.js). The parts and the clues are HER Module 3 revision deck
  *    ("2019 Revision mod 3 22 slide2.pptx", slides 15-21, read 21 Sep 2026): the three tunics and what is in each; outer, middle
@@ -541,6 +596,17 @@ export const LEVERS = [
     clue:{ t:'The lever that gives a SPEED advantage — the effort is in the middle. Tap any part of it.', hers:1 }, fact:'Flexing the elbow with the biceps (like tweezers). Mechanical advantage is LESS than 1 (her example: 3 ÷ 30 = 0.1) — it does not make the work easier, it makes it fast and wide-ranging. Most levers in the body are third class.' }),
 ];
 
+/* ── The uterus wall (Module 3), BUILT, on stage with the female organs. Her revision slide 2: perimetrium · myometrium (smooth muscle) · endometrium,
+ *    whose FUNCTIONAL layer (spiral arteries) is shed in menstruation while the BASAL layer (straight arteries) stays and rebuilds it. ── */
+const UW = (id, name, m, clue, fact, extra) => ({ id:'uw-' + id, kind:'uwall', sex:'female', name, her:1, region:'uterwall', az:0, el:25, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
+REPRO.push(
+  UW('peri', 'Perimetrium', ['perimetrium'], null, 'The thin OUTER serous coat of the uterus (peri = around).'),
+  UW('myo', 'Myometrium', ['myometrium'], 'The layer of smooth muscle.', 'The thick MIDDLE layer: it contracts in labour (oxytocin) and in menstrual cramps.'),
+  UW('endo', 'Endometrium', ['functional layer', 'basal layer'], null, 'The INNER lining, where the embryo implants. Two layers: functional on top of basal.'),
+  UW('func', 'Functional layer', ['functional layer'], 'The layer with SPIRAL arteries, shed during menstruation.', 'Stratum functionalis: built up in the proliferative phase (oestrogen), made secretory by progesterone, shed when progesterone falls.'),
+  UW('basal', 'Basal layer', ['basal layer'], 'The layer with STRAIGHT arteries: it stays intact and forms the new functional layer.', 'Stratum basalis: never shed.'),
+);
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -572,6 +638,11 @@ export const MORE_REGIONS = {
   rpFemale: { model:'female', m:[/./], pad:1.25, min:0.05 },
   rpMale:   { model:'male', m:[/./], pad:1.12, min:0.05 },
   arm:      { m:['humerus', 'radius', 'ulna', /metacarpal/, /of hand$/], side:'L', pad:1.08 },
+  wlVessels: { model:'walls', m:[/ of (artery|vein)$/, 'capillary', 'valve'], pad:1.12, min:0.05 },
+  wlHeart:   { model:'walls', m:[/cardium$/, 'pericardial cavity'], pad:1.25, min:0.05 },
+  ecg:       { model:'ecg', m:[/./], pad:1.08, min:0.05 },
+  spiro:     { model:'spiro', m:[/./], pad:1.08, min:0.05 },
+  uterwall:  { model:'uterwall', m:[/./], pad:1.3, min:0.05 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
@@ -584,8 +655,9 @@ export const MORE_SETS = {
   ],
   repro: [
     { id:'her', name:'Her list', hint:'The parts on her Module 3 revision slides (no vagina, ligaments or bulbo-urethral glands in the 3D sources)', f:i => i.her },
-    { id:'female', name:'Female', hint:'HuBMAP reference organs, placed as one set in this pelvis', f:i => i.sex === 'female' },
+    { id:'female', name:'Female', hint:'HuBMAP reference organs, placed as one set in this pelvis', f:i => i.sex === 'female' && i.kind !== 'uwall' },
     { id:'male', name:'Male', hint:'Testis, ducts and glands — with their share of the semen', f:i => i.sex === 'male' },
+    { id:'uwall', name:'Uterus wall', hint:'Perimetrium, myometrium, and the two layers of the endometrium', f:i => i.kind === 'uwall' },
   ],
   senses: [
     { id:'her', name:'Her list', hint:'The parts on her Module 3 revision slides. Schematics, not to scale', f:i => i.her },
@@ -597,14 +669,16 @@ export const MORE_SETS = {
     { id:'upper', name:'Pharynx & larynx', hint:'Above the trachea', f:i => i.kind === 'upper' },
     { id:'tree', name:'Bronchial tree', hint:'Trachea, carina, bronchi — the lobes turn to glass', f:i => i.kind === 'tree' },
     { id:'lung', name:'Lungs', hint:'Five lobes and the diaphragm', f:i => i.kind === 'lung' },
+    { id:'spiro', name:'Lung volumes', hint:'Four volumes in one column; each capacity spans the volumes it adds up', f:i => i.kind === 'spiro' },
     { id:'all', name:'Everything', hint:'All of it', f:() => true },
   ],
   heart: [
     { id:'her', name:'Her list', hint:'Every heart structure that is a key in her Module 1 bank', f:i => i.her },
-    { id:'inside', name:'Chambers & valves', hint:'Four chambers, four valves, papillary muscles', f:i => /chamber|valve/.test(i.kind) },
+    { id:'inside', name:'Chambers & valves', hint:'Four chambers, four valves, papillary muscles', f:i => /chamber|valve|wall/.test(i.kind) },
     { id:'vessels', name:'Great vessels', hint:'Aorta and its branches, pulmonary vessels, venae cavae', f:i => i.kind === 'vessel' },
     { id:'coronary', name:'Coronary', hint:'The heart\'s own supply — and the widow maker', f:i => i.kind === 'coronary' },
     { id:'cond', name:'Conduction', hint:'Schematic: SA node to Purkinje fibres', f:i => i.kind === 'cond' },
+    { id:'ecg', name:'ECG', hint:'Her label figure (P · Q · R · S · T) and what each part means', f:i => i.kind === 'ecg' },
     { id:'all', name:'Everything', hint:'All of it', f:() => true },
   ],
   tissues: [
@@ -612,6 +686,8 @@ export const MORE_SETS = {
     { id:'joint', name:'Synovial joint', hint:'Her six-blank label question', f:i => i.kind === 'joint' },
     { id:'bone', name:'Compact bone', hint:'The osteon: her six-blank cloze', f:i => i.kind === 'bone' },
     { id:'muscle', name:'Muscle', hint:'Muscle, fascicle, fibre and their three wrappings', f:i => i.kind === 'muscle' },
+    { id:'vessel', name:'Vessel wall', hint:'Module 1: artery, vein, capillary, valve and the three tunics — her 7-point match', f:i => i.kind === 'vessel' },
+    { id:'hwall', name:'Heart wall', hint:'Module 1: pericardium to endocardium', f:i => i.kind === 'hwall' },
     { id:'all', name:'Everything', hint:'All of it', f:() => true },
   ],
   neuron: [
