@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0a0c11">
 <meta name="robots" content="noindex">
-<title>Flesh & Bone — 3D bone and muscle trainer</title>
+<title>Flesh & Bone — 3D anatomy trainer</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0c11'/%3E%3Cpath d='M20 14a7 7 0 0 1 12 5l-1 3 11 11 3-1a7 7 0 1 1-2 12 7 7 0 0 1-12 2l1-5-11-11-5 1a7 7 0 1 1 4-17z' fill='%23f2b84b'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -152,6 +152,7 @@ body:not([data-state=home]) #home{transform:translateY(110%);opacity:0;pointer-e
 .brand p{margin:0;font-size:12.5px;color:var(--tx3)}
 .decks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .deck{position:relative;text-align:left;padding:12px 12px 12px 14px;border-radius:16px;background:rgba(255,255,255,.05);border:1.5px solid var(--line);display:flex;gap:10px;align-items:center;transition:all .2s}
+@media (max-width:879px){ .decks{display:flex;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;touch-action:pan-x;margin-right:-16px;padding-right:16px} .decks::-webkit-scrollbar{display:none} .deck{flex:0 0 min(44%,190px);scroll-snap-align:start} }      /* six decks: one swipeable row, so the stage keeps its height on a phone */
 .deck[aria-pressed=true]{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 12%,transparent)}
 .deck b{display:block;font-size:17px;letter-spacing:-.01em}
 .deck small{display:block;font-size:12px;color:var(--tx2);margin-top:1px}
@@ -272,7 +273,7 @@ body[data-mode=explore] #stats,body[data-mode=explore] #prog{visibility:hidden}
 <section id="dock" class="glass"></section>
 
 <section id="home" class="glass">
-  <div class="brand"><h1>Flesh <em>&amp;</em> Bone</h1><p>3D bone &amp; muscle trainer</p></div>
+  <div class="brand"><h1>Flesh <em>&amp;</em> Bone</h1><p>3D anatomy trainer</p></div>
   <div class="decks" id="decks"></div>
   <div class="lbl">Mode</div>
   <div class="seg" id="modes"></div>
@@ -304,6 +305,8 @@ body[data-mode=explore] #stats,body[data-mode=explore] #prog{visibility:hidden}
   <p>The ring on each deck is how many of her list you have <b>locked</b>: answered right first time, twice in a row. A miss unlocks it. Rounds deal what you have not locked first. Nothing is due, nothing expires, nothing leaves this browser.</p>
   <h3>Glands and Brain</h3>
   <p><b>Glands</b> shows the endocrine glands inside a ghost skeleton — her label-the-glands figure in 3D; with "Mix" on, a hormone or an action is the clue and the gland is the answer. <b>Brain</b>: the cortex is one colour on purpose (tinting the lobes would give them away). Questions about the inside are asked on the brain <b>cut in half</b>, seen from the left. Lobe membership is the 3D source's own classification; a boundary furrow (central sulcus, lateral fissure) counts for both lobes it separates. Wernicke's area is ringed on the back of the superior temporal gyrus.</p>
+  <h3>Circle of Willis</h3>
+  <p>The ring of arteries on the <b>ventral</b> (under) side of the brain, shown under a ghost brain and seen from below, frontal lobes at the top. "Her list" is the vessels her question names: anterior communicating, anterior cerebral, internal carotid, posterior communicating, posterior cerebral and basilar, fed by the carotids from the front and the vertebrals from the back. The middle cerebral artery is in "Everything": the biggest branch, but not part of the ring.</p>
   <h3>The meninges are a schematic</h3>
   <p>The 3D source models the dural sinuses but not the three layers, so <b>dura, arachnoid, subarachnoid space and pia are built here</b>: shells measured off this brain's own surface, peeled back in steps so each one shows, with the <b>thickness exaggerated</b> (the real stack is about 4 mm). The arachnoid villi are placed under the real superior sagittal sinus. Right order, right relationships — not a scan.</p>
   <h3>Left and right</h3>

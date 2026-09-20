@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
-import { GLANDS, BRAIN, NERVES, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
+import { GLANDS, BRAIN, NERVES, WILLIS, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
 import { buildMeninges } from './made.js';
 const REGIONS = { ...REGIONS0, ...MORE_REGIONS }, SETS = { ...SETS0, ...MORE_SETS };
 
@@ -39,6 +39,7 @@ const DECK = {
   glands: { label:'Glands',  acc:'#5fd4c0', ink:'#03211c', items:GLANDS,  models:{ skeletal:'ghost', glands:'solid', ovary:'solid' }, bind:['glands', 'ovary'], noun:'gland' },
   brain:  { label:'Brain',   acc:'#b9a2ff', ink:'#140b2e', items:BRAIN,   models:{ brain:'solid' }, bind:['brain'], noun:'part of the brain', home:'brain', frame:{ pad:1.3, min:.13 } },      // a 34 cm frame (right for a body) left the brain 75 px wide on a phone
   nerves: { label:'Nerves',  acc:'#ffd95e', ink:'#231a02', items:NERVES,  models:{ skeletal:'ghost', nerves:'solid' }, bind:['nerves'], noun:'nerve' },
+  willis: { label:'Circle of Willis', acc:'#7fe3ff', ink:'#03222b', items:WILLIS, models:{ brain:'ghost', willis:'solid' }, bind:['willis'], noun:'artery', home:'brain', view:[12, -52], frame:{ pad:1.45, min:.08 } },   // under a ghost brain, seen from below: it is on the VENTRAL side. The accent is ice blue because a red glow on a red artery cannot be seen
 };
 const ITEM = {};
 for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
@@ -111,6 +112,7 @@ const MODELS = {
   ovary:   { kind:'organ',  noun:'gland',     note:'Placing the glands…', files:['hra-ovary-l', 'hra-ovary-r'], rename:{ VH_F_left_ovary:'Ovary.l', VH_F_right_ovary:'Ovary.r' } },
   brain:   { kind:'brain',  noun:'structure', note:'Opening the skull…' },
   nerves:  { kind:'nerve',  noun:'nerve',     note:'Threading the nerves…' },
+  willis:  { kind:'artery', noun:'artery',    note:'Filling the arteries…' },
 };
 const HIDE_BRAIN = [/^falx cerebri$/, /^tentorium cerebelli$/, /root of spinal nerve$/, /^nerve to /, /^central canal/];      // the dura folds stand in front of the medial cut and the cerebellum
 
@@ -125,6 +127,7 @@ function colourFor(kind, base, matName) {
     return BONE_C.clone().offsetHSL(0, 0, (h - .5) * .05);
   }
   if (kind === 'nerve') return new THREE.Color('#ffe27a').offsetHSL((h - .5) * .03, 0, (h - .5) * .08);
+  if (kind === 'artery') return new THREE.Color('#e2504c').offsetHSL((h - .5) * .02, 0, (h - .5) * .1);
   if (kind === 'organ') return new THREE.Color('#c9a08f');                                     // an item's own colour (`c`) replaces this at bind time
   if (kind === 'brain') {                                                                       // the cortex is ONE colour on purpose: tinting by lobe would hand over the answer
     if (/^(midbrain|corpus callosum)$/.test(base)) return new THREE.Color(base === 'midbrain' ? '#d8c2a8' : '#ece5d6');   // the source files these two under "Frontal lobe"
@@ -261,11 +264,12 @@ function clearXray() { if (!xray) return; xray = null; for (const i of REG) { i.
 /* the brain cut in half: the left hemisphere's meshes go, midline structures stay, and you look in from the left */
 /* the twelve cranial nerves are long tubes (the vagus reaches the abdomen): on stage only when they are the question, or in Explore */
 let nervesOn = true;
-function setNerves(on) { if (on === nervesOn) return; nervesOn = on; for (const i of REG) if (i.model === 'brain' && i.base.includes(' nerve (')) i.mesh.visible = on && !(cutOn && i.side === 'L'); refreshPickables(); invalidate(); }
+function setNerves(on) { nervesOn = on;      // no early return: a brain that loads after boot (deck switch) has never been told, and its nerves stayed on stage
+  for (const i of REG) if (i.model === 'brain' && i.base.includes(' nerve (')) i.mesh.visible = on && !(cutOn && i.side === 'L'); refreshPickables(); invalidate(); }
 let menOn = true;
-function setMeninges(on) { if (on === menOn) return; menOn = on; for (const i of REG) if (i.men) i.mesh.visible = on; refreshPickables(); invalidate(); }
+function setMeninges(on) { menOn = on; for (const i of REG) if (i.men) i.mesh.visible = on; refreshPickables(); invalidate(); }
 let cutOn = false;
-function setCut(on) { if (on === cutOn) return; cutOn = on; for (const i of REG) if (i.model === 'brain' && i.side === 'L') i.mesh.visible = !on && (nervesOn || !i.base.includes(' nerve (')); refreshPickables(); invalidate(); }
+function setCut(on) { cutOn = on; for (const i of REG) if (i.model === 'brain' && i.side === 'L') i.mesh.visible = !on && (nervesOn || !i.base.includes(' nerve (')); refreshPickables(); invalidate(); }
 /* put a deck on stage: which models show, which are ghosts, and the accent colour */
 function applyDeck() { const D = DECK[G.deck]; for (const m of Object.keys(groups)) groups[m].visible = m in D.models;
   for (const i of REG) { i.baseGhost = D.models[i.model] === 'ghost'; paint(i); }
@@ -304,6 +308,7 @@ function regionFrame(name, az, elv) {
   if (!regionBox[name]) { const b = new THREE.Box3(); REG.filter(i => i.model === (R.model || 'skeletal') && (!R.side || i.side === R.side || !i.side) && matchAny(R.m, i.base, i.mat)).forEach(i => b.union(i.box)); regionBox[name] = b; }
   return frameBox(regionBox[name], az, elv, R.pad || 1.15, R.min || 0.26);
 }
+const homeFrame = (az = 20) => { const D = DECK[G.deck], v = D.view || [az, 4]; return regionFrame(D.home || 'whole', v[0], v[1]); };      // how a deck looks at rest
 const sph = new THREE.Spherical();
 function flyTo(f, dur = 850) {
   if (!f || !Number.isFinite(f.pos.x + f.pos.y + f.pos.z + f.target.x + f.target.y + f.target.z)) return;
@@ -518,7 +523,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
       <div class="acts">${misses.length ? `<button class="act pri" data-r="misses">Drill the ${misses.length} I missed</button>` : `<button class="act pri" data-r="again">Another round</button>`}</div>
       <div class="acts" style="margin-top:8px">${misses.length ? `<button class="act" data-r="again">New round</button>` : ''}<button class="act" data-r="home">Menu</button></div>`;
     this.lastMisses = misses.map(l => l.it); this.cur = null; sfx.done(); setState('results');
-    controls.autoRotate = true; flyTo(regionFrame(DECK[G.deck].home || 'whole', 20, 4), 1200);
+    controls.autoRotate = true; flyTo(homeFrame(), 1200);
   },
 
   /* ── Trace it: tap the structures of a pathway in flow order. One step, one mark — the shape of her ordering questions.
@@ -589,7 +594,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
     const P = $('#prompt'); P.querySelector('.k').textContent = 'Explore'; const n = P.querySelector('.n'); n.textContent = 'Tap anything'; n.classList.remove('long'); P.querySelector('.s').textContent = 'Drag to turn · pinch to zoom';
     $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xCut').hidden = $('#xMen').hidden = this.deck !== 'brain'; $('#xCut').setAttribute('aria-pressed', 'false'); $('#xMen').setAttribute('aria-pressed', 'false'); $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
     dock(`<div class="xcard"><p class="quiet">Nothing selected. Tap a ${DECK[this.deck].noun} to see what it is${this.deck === 'bones' ? ' — on the femur and hip bone the landmarks are live too' : ''}.</p></div>`);
-    flyTo(regionFrame(DECK[this.deck].home || 'whole', this.deck === 'brain' ? 60 : 15, 4));
+    flyTo(homeFrame(this.deck === 'brain' ? 60 : 15));
   },
   inspect(hit) {
     const info = hit.object.userData.info, d = describe(info, hit.point), it = d.item; unglow();
@@ -603,7 +608,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, xHer:fa
     if (which === 'men') { setMeninges(!menOn); $('#xMen').setAttribute('aria-pressed', menOn); unglow(); callout.hide(); if (menOn) flyTo(regionFrame('meninges', 60, 35)); }
     if (which === 'peel') { this.xPeel = !this.xPeel; $('#xPeel').setAttribute('aria-pressed', this.xPeel); groups.muscular.visible = !this.xPeel; unglow(); callout.hide(); refreshPickables(); invalidate(); }
   },
-  reframe() { const st = document.body.dataset.state; if (st === 'home' || st === 'results') flyTo(regionFrame(DECK[G.deck].home || 'whole', 20, 4), 500); else if (this.tr && this.cur) flyTo(this.cur.revealed ? this.itemFrame(this.cur.it) : this.traceFrame(), 400); else if (this.cur) flyTo(this.mode === 'find' && !this.cur.revealed ? regionFrame(this.cur.it.region, this.cur.it.az, this.cur.it.el) : this.itemFrame(this.cur.it), 400); },
+  reframe() { const st = document.body.dataset.state; if (st === 'home' || st === 'results') flyTo(homeFrame(), 500); else if (this.tr && this.cur) flyTo(this.cur.revealed ? this.itemFrame(this.cur.it) : this.traceFrame(), 400); else if (this.cur) flyTo(this.mode === 'find' && !this.cur.revealed ? regionFrame(this.cur.it.region, this.cur.it.az, this.cur.it.el) : this.itemFrame(this.cur.it), 400); },
 };
 
 /* ───────────── UI plumbing ───────────── */
@@ -621,7 +626,7 @@ const MODES = [['find', 'Find it', 'A name or a clue — you tap it on the body.
 function renderHome() {
   const deckCard = d => { const her = DECK[d].items.filter(i => i.her && (i.ok || !DECK[d].bind.every(m => loaded[m]))), seen = her.some(i => S.m[i.id] && S.m[i.id].s), locked = her.filter(i => S.m[i.id] && S.m[i.id].b >= LOCK).length, p = her.length ? locked / her.length * 100 : 0;
     return `<button class="deck" data-deck="${d}" aria-pressed="${G.deck === d}"><span class="donut" style="--p:${p};--dc:${DECK[d].acc}"><span>${seen ? locked : '–'}</span></span><span><b>${DECK[d].label}</b><small>${seen ? `${locked} of ${her.length} locked` : `${her.length} on her list · not started`}</small></span></button>`; };
-  $('#decks').innerHTML = Object.keys(DECK).map(deckCard).join('');
+  $('#decks').innerHTML = Object.keys(DECK).map(deckCard).join(''); const on = $('#decks [aria-pressed=true]'); if (on && on.scrollIntoView) on.scrollIntoView({ block:'nearest', inline:'nearest' });
   const trs = G.traces(), tracing = G.mode === 'trace' && trs.length > 0; if (G.mode === 'trace' && !tracing) G.mode = 'find';      // a deck with no pathway falls back to Find it
   $('#modes').innerHTML = MODES.map(m => `<button data-mode="${m[0]}" aria-pressed="${G.mode === m[0]}"${m[0] === 'trace' && !trs.length ? ' disabled title="No pathway in this deck yet — Brain has the CSF one"' : ''}>${m[1]}</button>`).join('');
   $('#modeNote').textContent = MODES.find(m => m[0] === G.mode)[2];
@@ -686,8 +691,8 @@ const perf = { last:0, t:0, n:0, downs:0 };
   if (!DECK[G.deck]) G.deck = S.o.deck = 'bones';
   try { for (const m of Object.keys(DECK[G.deck].models)) { $('#loader p').textContent = MODELS[m].note; await loadModel(m, loadProg); } }
   catch (err) { console.error(err); $('#loader p').textContent = 'The 3D model did not load.'; $('#loadNote').textContent = location.protocol === 'file:' ? 'Open it through a web server (or the live site) — browsers block 3D files on file://.' : String(err.message || err); return; }
-  document.body.dataset.deck = G.deck; setNerves(false); applyDeck(); setState('home'); renderHome();
-  const f = regionFrame(DECK[G.deck].home || 'whole', 20, 4); if (f) { controls.target.copy(f.target); camera.position.copy(f.pos); } controls.autoRotate = true;
+  document.body.dataset.deck = G.deck; setNerves(false); setMeninges(false); applyDeck(); setState('home'); renderHome();
+  const f = homeFrame(); if (f) { controls.target.copy(f.target); camera.position.copy(f.pos); } controls.autoRotate = true;
   requestAnimationFrame(frame); setTimeout(hideLoader, 150);
 })();
 

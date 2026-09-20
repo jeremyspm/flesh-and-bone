@@ -199,13 +199,45 @@ export const NERVES = [
   { id:'nv-intercostal', name:'Intercostal nerves', region:'trunk', az:30, c:'#ffe27a', m:['intercostal nerves'], fact:'Run under each rib — the thoracic spinal nerves; they do not form a plexus.' },
 ];
 
+/* ── Circle of Willis: willis.glb (132 KB, 18 vessels cut from the source's cardiovascular curves), under a ghost brain, from below.
+ *    Her MCQ lists the ring as: anterior communicating, anterior cerebral, internal carotid, posterior communicating, posterior
+ *    cerebral and basilar arteries — "carotid arteries from the anterior side join up with vertebral arteries from the posterior
+ *    side", on the VENTRAL side of the brain; berry aneurysms form here. The middle cerebral artery is not in her list. ── */
+const WL = (id, name, extra) => ({ id:'wl-' + id, name, region:'willis', az:0, el:-62, m:[name.toLowerCase()], ...extra });
+export const WILLIS = [
+  WL('acom', 'Anterior communicating artery', { her:1,
+    fact:'The short bridge between the two anterior cerebral arteries — it closes the FRONT of the ring. The commonest site of a berry aneurysm.' }),
+  WL('aca', 'Anterior cerebral artery', { her:1,
+    fact:'Runs forward and up between the hemispheres: medial surface of the frontal and parietal lobes (leg area of the motor cortex).' }),
+  WL('ica', 'Internal carotid artery', { her:1, region:'willisAll', az:25, el:-25,
+    clue:{ t:'The arteries that feed the circle from the ANTERIOR side.', hers:1 },
+    fact:'Up the front of the neck and through the skull base. Each one feeds the ring and continues as the middle cerebral artery.' }),
+  WL('pcom', 'Posterior communicating artery', { her:1,
+    fact:'Joins the carotid (front) system to the posterior cerebral artery (back) on each side — the SIDES of the ring. This link is why one blocked artery can be compensated for.' }),
+  WL('pca', 'Posterior cerebral artery', { her:1,
+    fact:'The two end branches of the basilar artery — the BACK of the ring. Occipital lobe: a stroke here affects vision.' }),
+  WL('basilar', 'Basilar artery', { her:1,
+    fact:'Formed where the two vertebral arteries join; runs up the front of the pons and splits into the posterior cerebral arteries.' }),
+  WL('vertebral', 'Vertebral artery', { her:1, region:'willisAll', az:160, el:-15,
+    clue:{ t:'The arteries that join the circle from the POSTERIOR side.', hers:1 },
+    fact:'Up through the cervical vertebrae on each side, in through the foramen magnum; the two join to make the basilar artery.' }),
+  { id:'wl-mca', name:'Middle cerebral artery', region:'willis', az:0, el:-62, m:[/^middle cerebral artery/, /^insular branches of middle cerebral artery/],
+    fact:'The biggest branch of the internal carotid: the lateral surface of the hemisphere — face and arm motor/sensory cortex, Broca and Wernicke. NOT part of the ring, but the artery most often blocked in a stroke.' },
+];
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
+  willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
+  willisAll: { model:'willis', m:[/./], pad:1.1, min:0.05 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
 export const MORE_SETS = {
+  willis: [
+    { id:'her', name:'Her list', hint:'On the ventral side of the brain. Berry aneurysms form here → haemorrhagic stroke', f:i => i.her },
+    { id:'all', name:'Everything', hint:'Adds the middle cerebral artery', f:() => true },
+  ],
   nerves: [
     { id:'her', name:'Her list', hint:'Sciatic · femoral · ulnar · vagus (the phrenic nerve is not in the 3D source)', f:i => i.her },
     { id:'all', name:'Everything', hint:'All of it', f:() => true },

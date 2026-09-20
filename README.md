@@ -124,3 +124,18 @@ objects (nerves, vessels), all of which are already in the exported models (chec
   wide on a phone.
 - `docs/autoplayer.js` has a `'trace'` mode: every step ray-cast and tapped, step 3 missed twice on purpose.
   Reach at 375×812: dura 91 %, arachnoid 40 %, subarachnoid 29 %, pia 26 %, villi 67 %, sinus 15 % (a 4 mm tube, framed close).
+
+## Added 21 Sep: Circle of Willis
+
+- `models/willis.glb` (132 KB): the 18 vessels of the ring and its feeders, cut from the source's cardiovascular CURVE objects by
+  `tools/export_deck.py willis`. Shown under a **ghost brain** (`models:{ brain:'ghost', willis:'solid' }`), seen from below with
+  the frontal lobes at the top — her MCQ keys the circle as being on the **ventral** side. "Her list" = the vessels her question
+  names (anterior communicating, anterior cerebral, internal carotid, posterior communicating, posterior cerebral, basilar; carotids
+  from the front, vertebrals from the back). The middle cerebral artery is in "Everything" only: not part of the ring.
+- A deck may set `view:[az, el]` (how it looks at rest — this one from below) and `frame:{ pad, min }` (its Name-it framing).
+- **The accent is ice blue on purpose**: the first build used a red accent and the glow on a red artery was invisible.
+- Reach at 375×812, each from its own angle: 75–91 % (posterior communicating lowest: two 2 cm links).
+- **Bug fixed in passing (it was live in the Brain deck):** `setNerves` / `setCut` returned early when the flag already had the
+  wanted value, so a brain that loaded AFTER boot (open on Bones, switch to Brain) never heard "nerves off" and the twelve cranial
+  nerves stayed on stage in every question. The stage toggles no longer trust their own memory.
+- Six decks: on a phone the deck cards are one swipeable row, which gives ~150 px of stage back.
