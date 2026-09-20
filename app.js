@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { BONES, MUSCLES, HIDE, REGIONS as REGIONS0, SETS as SETS0, NEUTRAL, CLIP } from './data.js';
-import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, SENSES, REPRO, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
+import { GLANDS, BRAIN, NERVES, WILLIS, NEURON, TISSUES, HEART, AIRWAY, SENSES, REPRO, LEVERS, PLACE, MORE_REGIONS, MORE_SETS, TRACES } from './data-more.js';
 import { buildMeninges } from './made.js';
 import { buildNeuron } from './made-neuron.js';
 import { buildTissues } from './made-tissues.js';
@@ -42,6 +42,9 @@ const LOCK = 2;
 const DECK = {
   bones:  { label:'Bones',   acc:'#f2b84b', ink:'#1b1303', items:BONES,   models:{ skeletal:'solid' }, bind:['skeletal'], noun:'bone' },
   muscles:{ label:'Muscles', acc:'#ff7d68', ink:'#220804', items:MUSCLES, models:{ skeletal:'solid', muscular:'solid' }, bind:['muscular'], noun:'muscle' },
+  /* her three body levers on the real skeleton: only the muscles that ARE the effort stay on stage */
+  levers: { label:'Levers',  acc:'#c4f07a', ink:'#162403', items:LEVERS,  models:{ skeletal:'solid', muscular:'solid' }, bind:['skeletal', 'muscular'], noun:'part', view:[70, 4], frame:{ pad:1.3, min:.22 },
+    only:{ muscular:[/head of gastrocnemius$/, 'soleus muscle', 'calcaneal tendon', /head of biceps brachii$/, 'brachialis muscle', 'sternocleidomastoid muscle', 'descending part of trapezius muscle', 'splenius capitis muscle'] } },
   glands: { label:'Glands',  acc:'#5fd4c0', ink:'#03211c', items:GLANDS,  models:{ skeletal:'ghost', glands:'solid', ovary:'solid' }, bind:['glands', 'ovary'], noun:'gland' },
   brain:  { label:'Brain',   acc:'#b9a2ff', ink:'#140b2e', items:BRAIN,   models:{ brain:'solid' }, bind:['brain'], noun:'part of the brain', home:'brain', frame:{ pad:1.3, min:.13 } },      // a 34 cm frame (right for a body) left the brain 75 px wide on a phone
   nerves: { label:'Nerves',  acc:'#ffd95e', ink:'#231a02', items:NERVES,  models:{ skeletal:'ghost', nerves:'solid' }, bind:['nerves'], noun:'nerve' },
@@ -216,6 +219,7 @@ async function loadModel(name, onProg) {
   const NONE = new THREE.MeshBasicMaterial({ visible:false }); kill.forEach(o => { o.material = NONE; });
   groups[name] = root; scene.add(root); loaded[name] = true;
   if (name === 'brain') makeMeninges(root);
+  if (name === 'nerves') makePhrenic(root);
   if (name === 'heart') buildConduction(b => REG.find(i => i.model === 'heart' && i.base === b)).forEach(p => p.context ? menLines.push(addLines(root, p)) : register(root, 'heart', 'heart', p, { men:true }));
   bindItems();
 }
@@ -229,9 +233,18 @@ function register(root, model, kind, part, extra) {
   const info = { mesh, base:part.name.toLowerCase(), side:'', mat:'Schematic', model, kind, colour:colour.clone(), clipX:0, pretty:part.name, box:new THREE.Box3().setFromObject(mesh), items:[], ghost:false, soft:!!part.soft, made:true, glassy:part.glassy || 0, anchor:part.anchor || null, ...extra };
   mesh.userData.info = info; REG.push(info); return info;
 }
+function makePhrenic(root) {
+  const c = b => { const i = REG.find(r => r.model === 'skeletal' && r.base === b); return i && i.box.getCenter(new THREE.Vector3()); }, C4 = c('vertebra c4'), T1 = c('vertebra t1'), T9 = c('vertebra t9'); if (!C4 || !T1 || !T9) return;
+  const side = s => new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(s * .016, C4.y, C4.z + .012), new THREE.Vector3(s * .034, T1.y + .01, T1.z + .04), new THREE.Vector3(s * (s > 0 ? .062 : .048), (T1.y + T9.y) / 2 + .02, T1.z + .085), new THREE.Vector3(s * (s > 0 ? .066 : .055), T9.y + .015, T9.z + .1)]), 40, .0024, 8, false);
+  const L = side(1).toNonIndexed(), R = side(-1).toNonIndexed(), g = new THREE.BufferGeometry(); for (const a of ['position', 'normal', 'uv']) g.setAttribute(a, new THREE.Float32BufferAttribute([...L.attributes[a].array, ...R.attributes[a].array], a === 'uv' ? 2 : 3));
+  register(root, 'nerves', 'nerve', { name:'Phrenic nerve', geometry:g, colour:'#ffb347', anchor:new THREE.Vector3(.034, T1.y + .01, T1.z + .04) });
+}
 function makeMeninges(root) {
   const cortex = REG.filter(i => i.model === 'brain' && /lobe$|^Interlobar sulci$/.test(i.mat)), sinus = REG.find(i => i.model === 'brain' && i.base === 'superior sagittal sinus');
   const M = buildMeninges(THREE, cortex, sinus); M.parts.forEach(p => register(root, 'brain', 'brain', p, { men:true }));
+  /* her MCQ: "the line labelled A separates the brain into two halves" = the longitudinal fissure. A fissure is a GAP, so it is marked with a thin plate standing in it, on stage only when asked */
+  const cb = new THREE.Box3(); cortex.forEach(i => cb.union(i.box)); const cs = cb.getSize(new THREE.Vector3()), cc = cb.getCenter(new THREE.Vector3()), plate = new THREE.BoxGeometry(.0026, cs.y * .5, cs.z * .95); plate.translate(cc.x, cb.max.y - cs.y * .25 + .004, cc.z);
+  register(root, 'brain', 'brain', { name:'Longitudinal fissure', geometry:plate, colour:'#ffd27a', glassy:.62, anchor:new THREE.Vector3(cc.x, cb.max.y + .005, cc.z + cs.z * .18) }, { men:'fis' });
   if (DEBUG) console.log('[fab] meninges: the sinus floor was', (M.sinusFloor * 1000).toFixed(1), 'mm above the envelope; moved out', (M.sinusLift * 1000).toFixed(1), 'mm');
 }
 
@@ -287,7 +300,7 @@ function describe(info, pt) {
 }
 function isCorrect(it, hit) {
   const info = hit.object.userData.info;
-  if (it.on) { if (info.base !== it.on) return false; if (it.zone) { const n = nLocal(info, hit.point); return !(NEUTRAL[info.base] && NEUTRAL[info.base](n)) && it.zone(n); } return nearestSphere(info, hit.point) === it; }
+  if (it.on) { if (info.base !== it.on) { const a = (it.alsoOn || []).find(z => z.on === info.base); return !!a && hit.point.distanceTo(pointWorld(a, info)) <= a.r; } if (it.zone) { const n = nLocal(info, hit.point); return !(NEUTRAL[info.base] && NEUTRAL[info.base](n)) && it.zone(n); } return nearestSphere(info, hit.point) === it; }
   if (it.infos.includes(info) || it.alsoInfos.includes(info)) return true;
   return (it.accept || []).some(id => ITEM[id].infos && ITEM[id].infos.includes(info));
 }
@@ -299,8 +312,8 @@ const rest = i => { i.mesh.material.emissive.setRGB(0, 0, 0); i.mesh.material.co
 function unglow(infos) { for (const i of infos || [...glows.keys()]) { glows.delete(i); rest(i); } invalidate(); }
 /* (the lungs round the heart are glass at .1: context, not clutter) */
 /* one painter for both kinds of see-through: a deck's ghost context (the skeleton around the glands) and the x-ray round a deep target */
-function paint(i) { const g = i.baseGhost || i.xr, m = i.mesh.material, was = m.transparent, glass = !!i.glassy || (i.soft && !(xray && xray.has(i) && !G.tr));
-  m.transparent = !!g || glass; m.opacity = i.baseGhost ? .11 : i.xr ? (i.kind === 'bone' ? .16 : .07) : glass ? (i.glassy || (i.openable ? .3 : i.kind === 'heart' ? .1 : G.tr ? .5 : .42)) : 1; m.depthWrite = !(g || glass); if (was !== m.transparent) m.needsUpdate = true; i.ghost = !!g; }
+function paint(i) { const g = i.baseGhost || i.xr || i.peel, dimmed = (i.dimK || 1) < 1, m = i.mesh.material, was = m.transparent, glass = !!i.glassy || (i.soft && !(xray && xray.has(i) && !G.tr));
+  m.transparent = !!g || glass || dimmed; m.opacity = i.baseGhost ? .11 : i.peel ? .13 : i.xr ? (i.kind === 'bone' ? .16 : .07) : glass ? (i.glassy || (i.openable ? .3 : i.kind === 'heart' ? .1 : G.tr ? .5 : .42)) : dimmed ? .3 : 1; m.depthWrite = !(g || glass || dimmed); if (was !== m.transparent) m.needsUpdate = true; i.ghost = !!g; }
 let xray = null;
 function setXray(keep) { xray = new Set(keep); for (const i of REG) { i.xr = !xray.has(i); paint(i); } refreshPickables(); invalidate(); }
 function clearXray() { if (!xray) return; xray = null; for (const i of REG) { i.xr = false; paint(i); } refreshPickables(); invalidate(); }
@@ -310,17 +323,19 @@ let nervesOn = true;
 function setNerves(on) { nervesOn = on;      // no early return: a brain that loads after boot (deck switch) has never been told, and its nerves stayed on stage
   for (const i of REG) if (i.model === 'brain' && i.base.includes(' nerve (')) i.mesh.visible = on && !(cutOn && i.side === 'L'); refreshPickables(); invalidate(); }
 let menOn = true;
-function setMeninges(on) { menOn = on; for (const i of REG) if (i.men) i.mesh.visible = on; for (const o of menLines) o.visible = on; refreshPickables(); invalidate(); }
+function setMeninges(on) { menOn = on; for (const i of REG) if (i.men) i.mesh.visible = on === true ? i.men === true : !!on && i.men === on; for (const o of menLines) o.visible = on === true; refreshPickables(); invalidate(); }
 /* open the heart: its chambers (and the two great roots) turn to glass and a tap passes through them, so the valves inside can be seen and touched */
 let openOn = false;
 function setOpen(on) { openOn = on; for (const i of REG) if (i.openable) { i.soft = on; paint(i); } refreshPickables(); invalidate(); }
 let cutOn = false;
 function setCut(on) { cutOn = on; for (const i of REG) if (i.model === 'brain' && i.side === 'L') i.mesh.visible = !on && (nervesOn || !i.base.includes(' nerve (')); refreshPickables(); invalidate(); }
 /* put a deck on stage: which models show, which are ghosts, and the accent colour */
-function applyDeck() { const D = DECK[G.deck]; for (const m of Object.keys(groups)) groups[m].visible = m in D.models && !(D.sex && D.sex[m] && D.sex[m] !== G.sex);
+const ONLY_MODELS = new Set(Object.values(DECK).flatMap(d => Object.keys(d.only || {})));
+function applyDeck() { const D = DECK[G.deck]; for (const i of REG) if (ONLY_MODELS.has(i.model)) i.mesh.visible = !(D.only && D.only[i.model]) || matchAny(D.only[i.model], i.base, i.mat); for (const m of Object.keys(groups)) groups[m].visible = m in D.models && !(D.sex && D.sex[m] && D.sex[m] !== G.sex);
   for (const i of REG) { i.baseGhost = D.models[i.model] === 'ghost'; paint(i); }
   document.body.style.setProperty('--acc', D.acc); document.body.style.setProperty('--acc-ink', D.ink); refreshPickables(); invalidate(); }
-function setDim(keepFn) { for (const i of REG) { i.dimK = !keepFn || keepFn(i) ? 1 : .3; if (!glows.has(i)) rest(i); } invalidate(); }
+function setDim(keepFn) { for (const i of REG) { i.dimK = !keepFn || keepFn(i) ? 1 : .3; paint(i); if (!glows.has(i)) rest(i); } invalidate(); }      /* dimmed = darker AND see-through: colour alone was too quiet */
+function setPeel(ms) { for (const i of REG) { const p = !!ms && matchAny(ms, i.base, i.mat); if (p !== !!i.peel) { i.peel = p; paint(i); } } refreshPickables(); invalidate(); }
 
 let pickables = [];
 function refreshPickables() { pickables = REG.filter(i => i.mesh.visible && groups[i.model].visible && !i.ghost).map(i => i.mesh); }
@@ -427,7 +442,7 @@ canvas.addEventListener('pointermove', e => {
 const ACC = () => getComputedStyle(document.body).getPropertyValue('--acc').trim() || '#f2b84b';
 const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'female', xHer:false, xPeel:false,
 
-  pool(deck = this.deck, setId = S.o.set[deck], mode = this.mode) { const set = SETS[deck].find(s => s.id === setId) || SETS[deck][0]; return DECK[deck].items.filter(i => i.ok && set.f(i) && (mode !== 'find' || !i.deep)); },
+  pool(deck = this.deck, setId = S.o.set[deck], mode = this.mode) { const set = SETS[deck].find(s => s.id === setId) || SETS[deck][0]; return DECK[deck].items.filter(i => i.ok && set.f(i) && (mode !== 'find' || !(i.deep || i.nameOnly)) && (mode !== 'name' || !i.findOnly)); },
 
   async setDeck(deck) {
     this.deck = S.o.deck = deck; document.body.dataset.deck = deck; save();
@@ -458,24 +473,25 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
   },
 
   next() {
-    const R = this.round; unglow(); clearXray(); ring.hide(); callout.hide(); toast();
+    const R = this.round; unglow(); clearXray(); setPeel(null); ring.hide(); callout.hide(); toast();
     if (!R.queue.length) return this.finish();
-    const q = R.queue.shift(), it = q.it; setNerves(/^br-cn/.test(it.id)); setCut(!!it.cut); setMeninges(!!it.men); setOpen(!!it.open); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); } this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
+    const q = R.queue.shift(), it = q.it; setNerves(/^br-cn/.test(it.id)); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); } this.cur = { it, first:q.first, tries:0, hinted:false, revealed:false, answered:false, style:this.askStyle(it), t0:performance.now() };
     $('#barTitle').textContent = `${innerWidth > 520 ? DECK[this.deck].label + ' · ' : ''}${this.mode === 'find' ? 'Find it' : 'Name it'} · ${Math.min(R.done + 1, R.total)} of ${R.total}${q.first ? '' : ' · again'}`;
     $('#prog i').style.width = (R.done / R.total * 100) + '%';
     const P = $('#prompt'); P.classList.remove('swap'); void P.offsetWidth; P.classList.add('swap');
     if (this.mode === 'find') {
       const st = this.cur.style, text = st === 'clue' ? it.clue.t : st === 'common' ? it.common : it.name;
-      P.querySelector('.k').textContent = st === 'clue' ? (it.clue.hers ? 'Find it · clue from her quiz' : 'Find it · clue') : it.on && it.deck !== 'brain' ? `On the ${it.on} · find the` : 'Find the';
+      P.querySelector('.k').textContent = st === 'clue' ? (it.clue.hers ? 'Find it · clue from her quiz' : 'Find it · clue') : it.on && (it.deck === 'bones' || it.deck === 'airway') ? `On the ${it.on} · find the` : 'Find the';
       const n = P.querySelector('.n'); n.textContent = text; n.classList.toggle('long', st === 'clue');
       P.querySelector('.s').textContent = st === 'name' ? (it.sub ? `(${it.sub})` : '') : st === 'common' ? 'Tap it — what is its proper name?' : it.cut ? 'cut in half · seen from the left' : it.men ? (it.stage || 'schematic layers · thickness exaggerated') : it.open ? 'the chambers are shown as glass' : DECK[this.deck].schematic || '';
       dock(`<div class="acts"><button class="act" data-a="hint">Zoom me in</button><button class="act" data-a="show">Show me</button></div>`);
+      if (it.peelNow) setPeel(it.peel);
       flyTo(regionFrame(it.region, it.az, it.el));
     } else {
       P.querySelector('.k').textContent = it.deep ? 'Name it · x-ray' : it.men ? 'Name it · ' + (it.stage ? 'schematic' : 'schematic layers') : DECK[this.deck].schematic ? 'Name it · schematic' : 'Name it';
-      const n = P.querySelector('.n'); n.textContent = it.on ? (it.zone && it.deck === 'brain' ? 'Which area is ringed?' : `Which part of the ${it.on}?`) : 'What is glowing?'; n.classList.remove('long'); P.querySelector('.s').textContent = '';
+      const n = P.querySelector('.n'); n.textContent = it.ask ? it.ask : it.on ? (it.zone && it.deck === 'brain' ? 'Which area is ringed?' : `Which part of the ${it.on}?`) : 'What is glowing?'; n.classList.remove('long'); P.querySelector('.s').textContent = '';
       dock(`<div class="opts">${this.options(it).map(o => `<button class="opt" data-id="${o.id}">${esc(o.name)}${o.sub ? `<small>${esc(o.sub)}</small>` : ''}</button>`).join('')}</div>`);
-      if (it.deep) setXray(it.infos);
+      if (it.deep) setXray(it.infos); else if (it.peel) setPeel(it.peel);
       this.spot(it, ACC(), 'pulse');
       flyTo(this.itemFrame(it));
     }
@@ -491,7 +507,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
   options(it) {
     const zoneOf = r => /lower|leg|foot|femur|pelvis/.test(r) ? 'low' : /forearm|hand/.test(r) ? 'arm' : r;
     const lastWord = s => s.toLowerCase().split(' ').pop(), firstWord = s => s.toLowerCase().split(' ')[0];
-    const cand = DECK[this.deck].items.filter(o => o.ok && o !== it && o.name !== it.name && !(o.accept || []).includes(it.id)
+    const cand = DECK[this.deck].items.filter(o => o.ok && o !== it && o.name !== it.name && (!it.strict || o.kind === it.kind) && !(o.accept || []).includes(it.id)
       && !(!it.on && !o.on && [...o.bases].some(b => it.bases.has(b))) && !(!!it.on !== !!o.on && (it.on || o.on) && (it.on ? o.bases.has(it.on) : it.bases.has(o.on))));
     const score = o => (o.kind && o.kind === it.kind ? 5 : 0) + (o.on && it.on ? (o.on === it.on ? 6 : 2) : 0) + (!!o.on === !!it.on ? 3 : 0) + (lastWord(o.name) === lastWord(it.name) ? 3 : 0) + (firstWord(o.name) === firstWord(it.name) ? 3 : 0)
       + (o.region === it.region ? 3 : zoneOf(o.region) === zoneOf(it.region) ? 1.5 : 0) + (o.name[0] === it.name[0] ? 2 : 0)      // same first letter is HER trap: cranium/carpal/clavicle/condyle
@@ -520,16 +536,16 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
       if (c.revealed) return;
       const d = describe(info, hit.point);
       if (d.neutral) { callout.show(hit.point, d.title, '', 2200); sfx.tick(); return toast('info', `<b>${esc(d.title)}</b> — ${esc(d.sub)}.<small>Doesn't count against you. Tap a part that is only ${esc(it.name.toLowerCase())}.</small>`); }
-      c.tries++;
+      c.tries++; const peeled = c.tries === 1 && it.peel && !it.deep; if (peeled) setPeel(it.peel);
       glow([info], '#ff5d6c', 'flash', 800); callout.show(hit.point, d.title, 'bad', 1600);
       sfx.bad(); buzz([30, 40, 30]); $('#prompt').classList.remove('shake'); void $('#prompt').offsetWidth; $('#prompt').classList.add('shake');
       const rel = d.item && !it.on && !d.item.on && [...it.bases].some(b => d.item.bases.has(b));
-      toast('bad', `That's the <b>${esc(d.title)}</b>${d.sub ? ` <span style="opacity:.7">· ${esc(d.sub)}</span>` : ''}<small>${c.tries >= 2 ? 'Here it is — tap it to carry on.' : rel ? 'Close — right group, wrong part. One more go.' : 'One more go.'}</small>`);
+      toast('bad', `That's the <b>${esc(d.title)}</b>${d.sub ? ` <span style="opacity:.7">· ${esc(d.sub)}</span>` : ''}<small>${c.tries >= 2 ? 'Here it is — tap it to carry on.' : peeled ? 'It lies UNDER another muscle — that one has been faded out. One more go.' : rel ? 'Close — right group, wrong part. One more go.' : 'One more go.'}</small>`);
       if (c.tries >= 2) this.reveal();
     }
   },
 
-  reveal() { const c = this.cur, it = c.it; c.revealed = true; this.spot(it, ACC(), 'pulse'); flyTo(this.itemFrame(it)); setTimeout(() => this.cur === c && !c.answered && callout.show(this.anchor(it), it.name, '', 0), 500);
+  reveal() { const c = this.cur, it = c.it; c.revealed = true; if (it.peel && !it.deep) setPeel(it.peel); this.spot(it, ACC(), 'pulse'); flyTo(this.itemFrame(it)); setTimeout(() => this.cur === c && !c.answered && callout.show(this.anchor(it), it.name, '', 0), 500);
     dock(`<div class="fact"><b>${esc(it.name)}</b> — ${esc(it.fact || '')}</div><div class="acts"><button class="act pri" data-a="skip">Got it · next</button></div>`); },
 
   settle(clean) {                       // score + mastery, once per question
@@ -569,7 +585,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
     const tip = pct === 100 ? 'Every one first time. Lengthen the round or switch the mode.' : misses.length ? `${misses.length} to tighten — they come back first next round.` : '';
     $('#results').innerHTML = `<div class="rhead"><div class="big" style="--p:${pct}"><b>${pct}%</b></div><div><h2>${verdict}</h2><p>${R.right} of ${R.total} first time. ${tip}</p></div></div>
       <div class="kpis"><div class="kpi"><b>${R.score}</b><small>${best && prev ? 'New best' : 'Score'}</small></div><div class="kpi"><b>×${R.bestStreak}</b><small>Best run</small></div><div class="kpi"><b>${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}</b><small>Time</small></div></div>
-      <ul class="rlist">${R.log.map(l => `<li class="${l.ok ? '' : 'miss'}"><i>${l.ok ? '✓' : '✕'}</i>${esc(l.it.name)}${l.it.sub ? ` <span style="color:var(--tx3);font-weight:500">(${esc(l.it.sub)})</span>` : ''}<small>${mast(l.it.id).b >= LOCK ? 'locked' : l.hinted && l.ok ? 'with a hint' : ''}</small></li>`).join('')}</ul>
+      <ul class="rlist">${R.log.map(l => `<li data-peek="${l.it.id}" class="${l.ok ? '' : 'miss'}"><i>${l.ok ? '✓' : '✕'}</i>${esc(l.it.name)}${l.it.sub ? ` <span style="color:var(--tx3);font-weight:500">(${esc(l.it.sub)})</span>` : ''}<small>${mast(l.it.id).b >= LOCK ? 'locked' : l.hinted && l.ok ? 'with a hint' : ''}</small></li>`).join('')}</ul>
       <div class="acts">${misses.length ? `<button class="act pri" data-r="misses">Drill the ${misses.length} I missed</button>` : `<button class="act pri" data-r="again">Another round</button>`}</div>
       <div class="acts" style="margin-top:8px">${misses.length ? `<button class="act" data-r="again">New round</button>` : ''}<button class="act" data-r="home">Menu</button></div>`;
     this.lastMisses = misses.map(l => l.it); this.cur = null; sfx.done(); setState('results');
@@ -632,7 +648,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
     const secs = Math.round((performance.now() - tr.t0) / 1000), verdict = pct === 100 ? 'The whole path, in order.' : pct >= 75 ? 'Nearly the whole path.' : pct >= 40 ? 'Getting there.' : 'First pass done.';
     $('#results').innerHTML = `<div class="rhead"><div class="big" style="--p:${pct}"><b>${tr.right}/${n}</b></div><div><h2>${verdict}</h2><p>${tr.right} of ${n} steps first time, ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}. The list below is the shape of a full-mark answer: one step, one mark.</p></div></div>
       <div class="lbl" style="margin-top:16px">${esc(tr.T.name)} · ${esc(tr.T.ask)}</div>
-      <ol class="chain">${tr.log.map((l, k) => `<li class="${l.ok ? '' : 'miss'}"><i>${k + 1}</i><div><b>${esc(l.it.name)}</b><span>${esc(l.say)}</span></div></li>`).join('')}</ol>
+      <ol class="chain">${tr.log.map((l, k) => `<li data-peek="${l.it.id}" class="${l.ok ? '' : 'miss'}"><i>${k + 1}</i><div><b>${esc(l.it.name)}</b><span>${esc(l.say)}</span></div></li>`).join('')}</ol>
       ${tr.T.note ? `<p class="quiet" style="font-size:12.5px;color:var(--tx3);margin:0 2px 12px">${esc(tr.T.note)}</p>` : ''}
       <div class="acts"><button class="act pri" data-r="again">Trace it again</button><button class="act" data-r="home">Menu</button></div>`;
     this.cur = null; ring.hide(); callout.hide(); toast(); sfx.done(); setState('results');
@@ -643,15 +659,23 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
   explore() {
     const P = $('#prompt'); P.querySelector('.k').textContent = 'Explore'; const n = P.querySelector('.n'); n.textContent = 'Tap anything'; n.classList.remove('long'); P.querySelector('.s').textContent = 'Drag to turn · pinch to zoom';
     $('#barTitle').textContent = `${DECK[this.deck].label} · Explore`; $('#xPeel').hidden = this.deck !== 'muscles'; $('#xCut').hidden = this.deck !== 'brain'; $('#xMen').hidden = !REG.some(i => i.men && DECK[this.deck].bind.includes(i.model)); $('#xMen').textContent = DECK[this.deck].extra || 'Meninges'; $('#xOpen').hidden = !REG.some(i => i.openable && DECK[this.deck].bind.includes(i.model)); $('#xSex').hidden = !DECK[this.deck].sex; $('#xSex').textContent = this.sex === 'female' ? 'Show male' : 'Show female'; $('#xOpen').setAttribute('aria-pressed', 'false'); $('#xOpen').textContent = DECK[this.deck].openLabel || 'Glass chambers'; $('#xCut').setAttribute('aria-pressed', 'false'); $('#xMen').setAttribute('aria-pressed', 'false'); $('#xHer').setAttribute('aria-pressed', 'false'); $('#xPeel').setAttribute('aria-pressed', 'false');
-    dock(`<div class="xcard"><p class="quiet">Nothing selected. Tap a ${DECK[this.deck].noun} to see what it is${this.deck === 'bones' ? ' — on the femur and hip bone the landmarks are live too' : ''}.</p></div>`);
+    dock(`<input id="xq" type="search" placeholder="Search this deck…" autocomplete="off" autocapitalize="off" spellcheck="false"><div id="xhits"></div><div id="xbody"><div class="xcard"><p class="quiet">Nothing selected. Tap a ${DECK[this.deck].noun} to see what it is${this.deck === 'bones' ? ' — on the femur and hip bone the landmarks are live too' : ''}, or search for it.</p></div></div>`);
     flyTo(homeFrame(this.deck === 'brain' ? 60 : 15));
   },
   inspect(hit) {
     const info = hit.object.userData.info, d = describe(info, hit.point), it = d.item; unglow();
     const same = it && !it.on ? it.infos : REG.filter(i => i.base === info.base); glow(same, ACC(), 'solid'); callout.show(hit.point, d.title, '', 0); sfx.tick();
     const tags = [d.her ? '<span class="tag her">On her list</span>' : '<span class="tag">Not on her list</span>', it && it.common ? `<span class="tag">${esc(it.common)}</span>` : '', it && it.alt ? `<span class="tag">${esc(it.alt)}</span>` : '', info.made ? '<span class="tag">Schematic</span>' : '', d.sub ? `<span class="tag">${esc(d.sub)}</span>` : ''].join('');
-    dock(`<div class="xcard"><h3>${esc(d.title)}</h3><div class="tags">${tags}</div>${it && it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it && it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`);
+    this.card(`<div class="xcard"><h3>${esc(d.title)}</h3><div class="tags">${tags}</div>${it && it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it && it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`);
   },
+  card(html) { const b = $('#xbody'); if (b) { b.innerHTML = html; const h = $('#xhits'); if (h) h.innerHTML = ''; syncDock(); } else dock(html); },
+  search(q) { q = q.trim().toLowerCase(); const hits = q.length < 2 ? [] : DECK[this.deck].items.filter(i => i.ok && [i.name, i.alt, i.common, i.sub].some(s => s && s.toLowerCase().includes(q))).slice(0, 6);
+    $('#xhits').innerHTML = hits.map(i => `<button class="chip" data-peek="${i.id}">${esc(i.name)}</button>`).join('') || (q.length < 2 ? '' : '<span class="quiet" style="font-size:12.5px;color:var(--tx3)">Nothing by that name in this deck.</span>'); syncDock(); },
+  /* put ONE structure on stage the way its own question would show it, fly to it and light it — from a results row or the Explore search */
+  peek(id) { const it = ITEM[id]; if (!it || !it.ok) return; unglow(); clearXray(); ring.hide(); callout.hide(); controls.autoRotate = false;
+    setNerves(/^br-cn/.test(it.id) || this.mode === 'explore'); setCut(!!it.cut); setMeninges(it.men || false); setOpen(!!it.open); setPeel(it.peel || null); if (it.sex && it.sex !== this.sex) { this.sex = it.sex; applyDeck(); }
+    if (it.deep) setXray(it.infos); this.spot(it, ACC(), 'pulse'); callout.show(this.anchor(it), it.name, '', 0); flyTo(this.itemFrame(it));
+    if (document.body.dataset.state === 'play') this.card(`<div class="xcard"><h3>${esc(it.name)}</h3><div class="tags">${it.her ? '<span class="tag her">On her list</span>' : '<span class="tag">Not on her list</span>'}${it.alt ? `<span class="tag">${esc(it.alt)}</span>` : ''}</div>${it.fact ? `<p>${esc(it.fact)}</p>` : ''}${it.clue && it.clue.hers ? `<p class="quiet">Her quiz: “${esc(it.clue.t)}”</p>` : ''}</div>`); },
   toggle(which) {
     if (which === 'her') { this.xHer = !this.xHer; $('#xHer').setAttribute('aria-pressed', this.xHer); const bind = DECK[this.deck].bind; setDim(this.xHer ? (i => !bind.includes(i.model) || i.items.some(x => x.her)) : null); }
     if (which === 'cut') { setCut(!cutOn); $('#xCut').setAttribute('aria-pressed', cutOn); unglow(); callout.hide(); flyTo(regionFrame('brain', cutOn ? 90 : 60, 8)); }
@@ -707,9 +731,10 @@ $('#home').addEventListener('click', e => {
   if (b.id === 'go') { tone(1, 1, .01, 'sine', .0001); return G.start(); }
   if (b.id === 'homeHelp') $('#help').classList.add('on');
 });
-$('#dock').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.id) G.choose(b); else if (b.dataset.a) G.act(b.dataset.a); });
-$('#results').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const r = b.dataset.r; if (r === 'home') goHome(); else if (r === 'misses') G.start(G.lastMisses); else if (r === 'again') G.start(); });
-function goHome() { G.round = null; G.cur = null; G.tr = null; pins.clear(); unglow(); clearXray(); setDim(null); ring.hide(); callout.hide(); toast(); setCut(false); setNerves(false); setMeninges(false); setOpen(false); applyDeck(); setState('home'); controls.autoRotate = true; renderHome(); }
+$('#dock').addEventListener('input', e => { if (e.target.id === 'xq') G.search(e.target.value); });
+$('#dock').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.peek) return G.peek(b.dataset.peek); if (b.dataset.id) G.choose(b); else if (b.dataset.a) G.act(b.dataset.a); });
+$('#results').addEventListener('click', e => { const li = e.target.closest('li[data-peek]'); if (li) return G.peek(li.dataset.peek); const b = e.target.closest('button'); if (!b) return; const r = b.dataset.r; if (r === 'home') goHome(); else if (r === 'misses') G.start(G.lastMisses); else if (r === 'again') G.start(); });
+function goHome() { G.round = null; G.cur = null; G.tr = null; pins.clear(); unglow(); clearXray(); setPeel(null); setDim(null); ring.hide(); callout.hide(); toast(); setCut(false); setNerves(false); setMeninges(false); setOpen(false); applyDeck(); setState('home'); controls.autoRotate = true; renderHome(); }
 $('#btnHome').onclick = goHome;
 $('#btnHelp').onclick = () => $('#help').classList.add('on');
 $('#helpClose').onclick = () => $('#help').classList.remove('on');
@@ -749,6 +774,6 @@ const perf = { last:0, t:0, n:0, downs:0 };
 })();
 
 /* debug + calibration: ?debug logs every tap as mesh-local 0..1 coordinates */
-window.FB = { S, G, REG, ITEM, DECK, TRACES, THREE, setCut, setMeninges, setOpen, pins, setXray, clearXray, applyDeck, camera, controls, scene, groups, flyTo, frameBox, regionFrame, pointWorld, cast, toScreen, invalidate,
+window.FB = { S, G, REG, ITEM, DECK, TRACES, THREE, setCut, setMeninges, setOpen, setPeel, pins, setXray, clearXray, applyDeck, camera, controls, scene, groups, flyTo, frameBox, regionFrame, pointWorld, cast, toScreen, invalidate,
   local(hit) { const i = hit.object.userData.info, bb = i.mesh.geometry.boundingBox, p = i.mesh.worldToLocal(hit.point.clone()); return { base:i.base, side:i.side, p:[(p.x - bb.min.x) / (bb.max.x - bb.min.x), (p.y - bb.min.y) / (bb.max.y - bb.min.y), (p.z - bb.min.z) / (bb.max.z - bb.min.z)].map(x => +x.toFixed(3)) }; } };
 if (DEBUG) canvas.addEventListener('click', e => { const h = cast(e.clientX, e.clientY); if (h) console.log('[fab]', JSON.stringify(window.FB.local(h))); });

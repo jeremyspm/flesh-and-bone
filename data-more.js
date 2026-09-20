@@ -108,6 +108,17 @@ export const BRAIN = [
     fact:'The front of the frontal lobe, ahead of the motor areas. Planning, judgement, personality.' },
   { id:'br-central-sulcus', name:'Central sulcus', deep:1, region:'brain', az:90, el:40, m:[CENTRAL],
     fact:'A sulcus is a furrow, a gyrus a ridge. This furrow divides frontal from parietal — motor cortex in front, sensory behind.' },
+  // ── her brain-terminology match and lab MCQs: the vocabulary, asked as "tap any one of them" (findOnly: glowing ALL of them in Name it would mean nothing) ──
+  { id:'br-gyrus', kind:'vocab', name:'A gyrus', her:1, findOnly:1, region:'brain', az:80, el:25, m:[{ mat:/lobe$/, not:/^(midbrain|corpus callosum)$|^(?!.*gyr).*(sulc|fis)/ }],
+    clue:{ t:'A ridge on the surface of the brain. (Tap any one.)', hers:1 }, fact:'Gyrus = ridge (plural gyri). Sulcus = furrow. The folding packs more cortex into the skull.' },
+  { id:'br-sulcus', kind:'vocab', name:'A sulcus', her:1, nameOnly:1, region:'brain', az:80, el:25, m:[/sulc/, /^lat_fis/, { mat:/^Interlobar sulci$/ }],
+    clue:{ t:'A furrow on the surface of the brain.', hers:1 }, fact:'(A furrow is too thin for a finger — 3 % reach — so the furrows are lit and YOU name them.) Sulcus = furrow (plural sulci); a deep one is a fissure. The central sulcus and the lateral fissure are the two you must know.' },
+  { id:'br-grey', kind:'vocab', name:'Grey matter', sub:'the cerebral cortex', her:1, findOnly:1, region:'brain', az:60, el:20, m:[{ mat:/lobe$/, not:/^(midbrain|corpus callosum)$/ }],
+    clue:{ t:'The tissue made of neuronal cell bodies — the surface layer of the cerebrum. (Tap anywhere on it.)', hers:1 }, fact:'Grey = neuron cell bodies (unmyelinated). The cerebral cortex is grey matter — and the seat of the conscious mind.' },
+  { id:'br-white', kind:'vocab', name:'White matter', her:1, cut:1, region:'brain', az:90, m:['white matter of telencephalon', 'corpus callosum'],
+    clue:{ t:'The tissue that consists of myelinated axons.', hers:1 }, fact:'White = myelinated axons (myelin is fatty, hence white), deep to the cortex. The corpus callosum is the biggest single band of it. In the cerebellum it branches like a tree: the arbor vitae.' },
+  { id:'br-fissure', kind:'vocab', name:'Longitudinal fissure', her:1, men:'fis', stage:'a fissure is a gap — it is marked here with a thin plate', region:'brain', az:10, el:55, m:['longitudinal fissure'],
+    clue:{ t:'The line that separates the brain into two halves.', hers:1 }, fact:'The deep groove between the left and right cerebral hemispheres. The falx cerebri (a fold of dura) hangs in it; the corpus callosum bridges its floor.' },
   { id:'br-insula', kind:'lobe', name:'Insula', deep:1, region:'brain', az:90, m:[/^insula /], fact:'The lobe hidden deep inside the lateral fissure.' },
 
   // ── regions ──
@@ -177,6 +188,9 @@ export const NERVES = [
   NV('sciatic', 'Sciatic nerve', 'lower', 180, { her:1,
     clue:{ t:'The nerve that could be damaged by an injection into the gluteus maximus.', hers:1 },
     fact:'The major nerve of the SACRAL plexus and the thickest nerve in the body; down the back of the thigh, then splits into tibial and common fibular.' }),
+  { id:'nv-phrenic', name:'Phrenic nerve', her:1, region:'upper', az:20, c:'#ffb347', m:['phrenic nerve'],
+    clue:{ t:'The major nerve of the cervical plexus.', hers:1 },
+    fact:'C3, C4, C5 — to the diaphragm, so a high neck injury stops breathing. SCHEMATIC: the 3D source has no phrenic nerve, so its course is drawn here (orange) from the neck, past the heart, to the diaphragm.' },
   NV('femoral', 'Femoral nerve', 'lower', 0, { her:1,
     clue:{ t:'The major nerve of the lumbar plexus.', hers:1 },
     fact:'Major nerve of the LUMBAR plexus. Front of the thigh — supplies the quadriceps.' }),
@@ -490,6 +504,43 @@ export const REPRO = [
   RP('bladder', 'male', 'Urinary bladder', 100, 5, ['urinary bladder'], null, 'Not reproductive — it is here because the vas deferens loops over it and the prostate sits under it.', { her:0, c:'#d9c27a' }),
 ];
 
+/* ── Levers (Module 2, focus row ms-levers: 15 questions, 8 of them drop-down passages). Her three worked examples, word for word:
+ *    "Contracting neck muscles to pull the head back … first class … the atlanto-occipital joint, seen as the FULCRUM, is in the middle. The load is the HEAD."
+ *    "Standing on our toes by contracting the gastrocnemius … second class … the body, seen as the LOAD, is in the middle. The fulcrum is the JOINT IN THE BALL OF THE FOOT."
+ *    "Contracting the biceps to flex the arm at the elbow … third class … the biceps, seen as the EFFORT, is in the middle. The fulcrum is the ELBOW JOINT."  (the hand is the load)
+ *    Her match: 1st = power (and changes direction), 2nd = a STRENGTH advantage, 3rd = a SPEED advantage. Bones = the lever arm. MA = effort arm ÷ load arm.
+ *    Nine role items are all named Fulcrum / Load / Effort on purpose: Name it becomes her drop-down (three options). ── */
+const SKULL = [/^(frontal|parietal|occipital|temporal|sphenoid|ethmoid|zygomatic|nasal|lacrimal) bone$/, 'maxilla', 'mandible'];
+const NECK = ['descending part of trapezius muscle', 'splenius capitis muscle', 'sternocleidomastoid muscle'], CALF = [/head of gastrocnemius$/, 'soleus muscle', 'calcaneal tendon'];
+const BALL = [/metatarsal bone$/, /phalanx of .* of foot$/], HAND = [/^(capitate|hamate|lunate|pisiform|scaphoid|trapezium|trapezoid|triquetrum) bone$/, /metacarpal bone$/, /phalanx of .* of hand$/], BICEPS = [/head of biceps brachii$/, 'brachialis muscle'];
+const LV = (id, kind, name, sub, region, az, el, extra) => ({ id:'lv-' + id, kind, strict:1, name, sub, her:1, region, az, el, ask:kind === 'role' ? sub[0].toUpperCase() + sub.slice(1) + ' — what is the glowing part?' : 'Which class of lever is this?', ...extra });
+export const LEVERS = [
+  LV('1f', 'role', 'Fulcrum', 'nodding the head', 'head', 180, -5, { m:['atlas (c1)'], also:['axis (c2)'], peel:NECK, peelNow:1,
+    clue:{ t:'Pulling the head back: the atlanto-occipital joint is in the MIDDLE of this lever. Tap it — what is it seen as?', hers:1 }, fact:'The atlanto-occipital joint (skull on the atlas) is the FULCRUM, and it sits in the middle → FIRST class. FLE: 1 = Fulcrum in the middle.' }),
+  LV('1l', 'role', 'Load', 'nodding the head', 'head', 90, 0, { m:SKULL,
+    clue:{ t:'Pulling the head back with the neck muscles: tap the LOAD.', hers:1 }, fact:'The load is the HEAD (its weight sits in front of the joint). Her drop-down offers head / neck / cervical vertebrae — it is the head.' }),
+  LV('1e', 'role', 'Effort', 'nodding the head', 'head', 110, 0, { m:NECK,
+    clue:{ t:'Pulling the head back: tap the EFFORT.', hers:1 }, fact:'The neck muscles are the effort (posterior ones pull the head back; sternocleidomastoid and the upper fibres of trapezius tilt it at the same joint). Muscles are always the effort.' }),
+  LV('2f', 'role', 'Fulcrum', 'standing on tiptoe', 'leg', 90, 0, { m:BALL,
+    clue:{ t:'Standing on our toes: tap the FULCRUM.', hers:1 }, fact:'The JOINT IN THE BALL OF THE FOOT (metatarsal heads on the toes). Her drop-down offers ankle joint / joint in the ball of the foot / Achilles tendon — not the ankle.' }),
+  LV('2l', 'role', 'Load', 'standing on tiptoe', 'leg', 90, 0, { m:['tibia', 'talus', 'fibula'],
+    clue:{ t:'Standing on our toes: the body is in the MIDDLE of this lever. Tap where its weight comes down — what is it seen as?', hers:1 }, fact:'Body weight comes down the tibia onto the talus: the LOAD, and it is in the middle → SECOND class. FLE: 2 = Load in the middle.' }),
+  LV('2e', 'role', 'Effort', 'standing on tiptoe', 'leg', 110, 0, { m:CALF,
+    clue:{ t:'Standing on our toes: tap the EFFORT.', hers:1 }, fact:'Gastrocnemius (with soleus) pulling up on the heel through the Achilles tendon.' }),
+  { ...LV('3f', 'role', 'Fulcrum', 'flexing the elbow', 'arm', 20, 0, {}), on:'humerus', p:[.5, .03, .5], r:.04, alsoOn:[{ on:'ulna', p:[.5, .96, .5], r:.04 }, { on:'radius', p:[.5, .97, .5], r:.035 }],
+    clue:{ t:'Contracting the biceps to flex the arm: tap the FULCRUM.', hers:1 }, fact:'The ELBOW JOINT. Her drop-down offers wrist joint / triceps muscle / biceps muscle / elbow joint.' },
+  LV('3e', 'role', 'Effort', 'flexing the elbow', 'arm', 20, 0, { m:BICEPS,
+    clue:{ t:'Flexing the arm at the elbow: the biceps is in the MIDDLE of this lever. Tap it — what is it seen as?', hers:1 }, fact:'The biceps is the EFFORT, and it inserts between the elbow and the hand → THIRD class. FLE: 3 = Effort in the middle.' }),
+  LV('3l', 'role', 'Load', 'flexing the elbow', 'arm', 20, 0, { m:HAND,
+    clue:{ t:'Flexing the arm at the elbow: tap the LOAD.', hers:1 }, fact:'The hand (and whatever it holds). The bones of the forearm are the LEVER ARM — her answer to "what part of the lever system represents bones".' }),
+  LV('c1', 'class', 'First-class lever', 'fulcrum in the middle', 'head', 90, 0, { m:['atlas (c1)', ...SKULL, ...NECK],
+    clue:{ t:'The lever with the FULCRUM in the middle. Tap any part of it.', hers:1 }, fact:'Nodding the head on the atlanto-occipital joint. Like a see-saw or scissors: it can change the direction of a force; moving the fulcrum closer to the LOAD makes the load easier to move (more mechanical advantage).' }),
+  LV('c2', 'class', 'Second-class lever', 'load in the middle', 'leg', 90, 0, { m:[...BALL, 'tibia', 'talus', 'fibula', ...CALF],
+    clue:{ t:'The lever that gives a STRENGTH advantage — the load is in the middle. Tap any part of it.', hers:1 }, fact:'Standing on tiptoe (like a wheelbarrow). The effort arm is longer than the load arm, so mechanical advantage is greater than 1: strength.' }),
+  LV('c3', 'class', 'Third-class lever', 'effort in the middle', 'arm', 20, 0, { m:['humerus', 'radius', 'ulna', ...HAND, ...BICEPS],
+    clue:{ t:'The lever that gives a SPEED advantage — the effort is in the middle. Tap any part of it.', hers:1 }, fact:'Flexing the elbow with the biceps (like tweezers). Mechanical advantage is LESS than 1 (her example: 3 ÷ 30 = 0.1) — it does not make the work easier, it makes it fast and wide-ranging. Most levers in the body are third class.' }),
+];
+
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
   willis: { model:'willis', m:[/communicating artery$/, 'posterior cerebral artery', 'basilar artery', /^middle cerebral artery \(m1/], pad:1.35, min:0.05 },
@@ -520,11 +571,17 @@ export const MORE_REGIONS = {
   earIn:    { model:'ear', m:['vestibule', 'cochlea', 'semicircular canals', 'vestibulocochlear nerve'], pad:1.12, min:0.05 },
   rpFemale: { model:'female', m:[/./], pad:1.25, min:0.05 },
   rpMale:   { model:'male', m:[/./], pad:1.12, min:0.05 },
+  arm:      { m:['humerus', 'radius', 'ulna', /metacarpal/, /of hand$/], side:'L', pad:1.08 },
   meninges: { model:'brain', m:[{ mat:/^Schematic$/ }], pad:1.2, min:0.05 },
   villi: { model:'brain', m:['arachnoid villi'], pad:1.15, min:0.075 },      // the villi are 5 mm across: asked from close in
 };
 
 export const MORE_SETS = {
+  levers: [
+    { id:'her', name:'Her three levers', hint:'What is in the middle? F = 1st, L = 2nd, E = 3rd', f:() => true },
+    { id:'role', name:'Fulcrum · load · effort', hint:'Tap the part — or name the glowing part', f:i => i.kind === 'role' },
+    { id:'class', name:'Which class?', hint:'First (power / direction) · second (strength) · third (speed)', f:i => i.kind === 'class' },
+  ],
   repro: [
     { id:'her', name:'Her list', hint:'The parts on her Module 3 revision slides (no vagina, ligaments or bulbo-urethral glands in the 3D sources)', f:i => i.her },
     { id:'female', name:'Female', hint:'HuBMAP reference organs, placed as one set in this pelvis', f:i => i.sex === 'female' },
@@ -568,7 +625,7 @@ export const MORE_SETS = {
     { id:'all', name:'Everything', hint:'Adds the middle cerebral artery', f:() => true },
   ],
   nerves: [
-    { id:'her', name:'Her list', hint:'Sciatic · femoral · ulnar · vagus (the phrenic nerve is not in the 3D source)', f:i => i.her },
+    { id:'her', name:'Her list', hint:'Her plexus question: phrenic (cervical) · femoral (lumbar) · sciatic (sacral) — plus ulnar and vagus', f:i => i.her },
     { id:'all', name:'Everything', hint:'All of it', f:() => true },
   ],
   glands: [

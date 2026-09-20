@@ -250,3 +250,32 @@ replacement never ends in `// ...` unless it replaces a whole line; and the file
   layers, bulbo-urethral glands. The urethra runs inside the corpus spongiosum (1 % reach), so the spongiosum is `also`-accepted.
 - Traces: the sperm's path (her duct sequence, with the glands' shares of the semen) and the egg's path.
 - 19/19 Find it, 13/13 Name it (her list), both traces by real taps at 375x812.
+
+## 21 Sep: the marks audit (does this translate to marks?) and the v1 debts
+
+**Method.** Every image question in her banks was listed (M2: 111 of 471; M1 likewise) and every short key of those questions
+was matched by script against the trainer's item names (`audit.mjs` in the session notes: 203 keys per module), then the
+misses were read by hand. Her summative tests are closed-ended (multi-choice, drop-down, matching, find-the-error) - so
+pick-from-options IS the test's shape, and typing was deliberately not added (his own rule, 24 Aug).
+
+**What the audit found missing for Friday (Module 2) and what was done:**
+- **Levers - 15 questions in her bank, 8 of them drop-down passages, and nothing in the trainer.** New **Levers** deck: her three
+  worked examples on the real skeleton, with only the effort muscles left on (`DECK.only`). Nine role items are all NAMED
+  Fulcrum / Load / Effort, so Name it shows exactly her three drop-down options (`strict` keeps distractors in-kind); three class
+  items glow a whole lever (options: first / second / third class). The elbow is a point landmark that also accepts the
+  ulna and radius ends (`alsoOn`). Every clue is her sentence.
+- Her 6-blank posterior-leg figure keys **Semitendinosus, Semimembranosus and Peroneus longus** one by one; the deck only had a
+  Hamstrings group and called the last one Fibularis longus with no alias. Added / re-named (alt = HER name).
+- **IM injection sites** set in Muscles (her figure asks for the four sites).
+- Vertebral regions now carry what her three questions ask there: C1-C8 nerves vs 7 vertebrae, primary/secondary curvatures,
+  sympathetic T1-L2 and parasympathetic S2-S4 origins (clues marked hers).
+- Brain vocabulary she keys: **longitudinal fissure** (a gap: marked with a thin plate, on its own stage `men:'fis'`), **a gyrus**,
+  **grey matter** (`findOnly`: tap any one), **a sulcus** (`nameOnly`: 3 % reach - a furrow is too thin for a finger), **white matter**.
+- **Phrenic nerve**: the one her plexus cloze keys that the source lacks - now a drawn, declared-schematic course from C4 to the
+  diaphragm, so all three answers (phrenic / femoral / sciatic) can be asked.
+- Not recognition, left to the Paper Sim on purpose: hormone/energy/ossification processes, skin receptors, joint-type MCQs,
+  skull foramina/sinuses, lung-volume and ECG graphs (see the next section for those two).
+
+**v1 debts, all done:** a muscle that hides the asked one fades out (`peel`) - at once in Name it, after the FIRST miss in Find it
+(soleus/gastrocnemius, brachialis/biceps, semimembranosus/semitendinosus); results rows fly the camera to the structure
+(`G.peek`); Explore has a search box that stays put; "Glow her list" now fades the rest as well as darkening it.
