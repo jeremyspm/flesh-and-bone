@@ -358,3 +358,15 @@ the **spinal cord in cross-section** (central canal · dorsal horn · ventral ho
 **reflex arc** over it, which is also a Trace-it pathway (`tr-reflex`: receptor → sensory neuron → interneuron → motor neuron → effector — her essay asks for the components in order);
 and a **nerve cut across** (endoneurium · perineurium · epineurium). Her nerve–condition match became clues on real nerves: radial (wrist drop), median (carpal tunnel),
 common fibular = her "peroneal nerve" (foot drop), trigeminal (tooth extraction), facial (Bell's palsy). 469 items, 0 unbound.
+
+## The full drive (21 Sep 2026, his ask: "drive absolutely every question… does this actually make sense")
+
+**A · mechanical, at 375×812.** `fabAutoplay(deck, mode, 'all')` played EVERY item of every deck in Find it and in Name it (every set where a deck has no "Everything"), and all 10 traces.
+All pass. It caught one real bug: a joint placed on the same spot as a bone landmark (hip joint ↔ head of femur, knee ↔ condyles) stole the tap, so "Head of femur" could not be
+answered — `nearestSphere` now competes inside the current deck and inside the asked item's family (`kind`).
+**B · reading.** All 469 items (name, other names, clue, fact) and every trace step were read for falseness. Three corrections: "zona radiata" had been given the wrong synonym
+(corona radiata → zona pellucida, with the difference said); sperm mitochondria "stay outside the egg" → "are destroyed after fertilisation"; a note that bronchioles and alveoli are
+"too small for this model" predated the Airway walls figure. Provenance: 233 clues tagged as her wording were scored against her three banks + slides; seven that were my framing of
+her figure lost the tag.
+**C · what his screenshots showed.** Built figures floated unlabelled ("why do some models look like this"): each now carries a plain-words caption (`CAPTIONS`, a sprite, never a part's
+name), and during a question the deck's other built figures leave the stage (`focusFigure`) — he had tapped the ovary when asked for a layer of the uterus wall.

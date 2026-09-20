@@ -466,7 +466,7 @@ export const AIRWAY = [
   AW('lmain', 'tree', 'Left primary bronchus', 'awTree', 0, 5, ['left main bronchus'], { her:1, open:1, alt:'left main bronchus', fact:'Longer and more horizontal: it has to pass under the aortic arch to reach the left lung.' }),
   AW('lobar', 'tree', 'Lobar bronchi', 'awTree', 0, 5, [/lobar bronchus$/, 'intermediate bronchus'], { open:1, alt:'secondary bronchi', fact:'One to each LOBE: three on the right, two on the left.' }),
   AW('segmental', 'tree', 'Segmental bronchi', 'awTree', 0, 5, [/segmental bronchus/], { open:1, alt:'tertiary bronchi',
-    fact:'One to each bronchopulmonary segment. Beyond them come the bronchioles (no cartilage, cuboidal epithelium) and the alveoli — too small for this model.' }),
+    fact:'One to each bronchopulmonary segment. Beyond them come the bronchioles (no cartilage, cuboidal epithelium) and the alveoli — too small for the 3D lungs, so they are drawn in the Airway walls set.' }),
   AW('rlung', 'lung', 'Right lung', 'airway', 330, 5, [/lobe of right lung$/], { fact:'THREE lobes: superior, middle, inferior.' }),
   AW('llung', 'lung', 'Left lung', 'airway', 30, 5, [/lobe of left lung$/], { her:1, fact:'TWO lobes — it gives up room to the heart (the cardiac notch).' }),
   AW('rmid', 'lung', 'Middle lobe of right lung', 'airway', 340, 0, ['middle lobe of right lung'], { her:1, fact:'Only the right lung has a middle lobe.' }),
@@ -661,7 +661,7 @@ const RX = (id, kind, sex, name, region, m, clue, fact, extra) => ({ id:'rx-' + 
 REPRO.push(
   RX('acrosome', 'sperm', 'male', 'Acrosome', 'rpSperm', ['acrosome'], 'The enzyme-filled cap that covers the head of the sperm.', 'Its enzymes digest a way through the zona radiata round the egg. Her label figure keys it; so does her fertilisation drop-down.'),
   RX('chromatin', 'sperm', 'male', 'Chromatin', 'rpSperm', ['chromatin'], 'In the head of the sperm: only 23 chromosomes.', 'The nucleus — haploid. Her label figure calls it chromatin.', { alt:'nucleus of the sperm' }),
-  RX('mito', 'sperm', 'male', 'Mitochondria', 'rpSperm', ['mitochondria'], 'Found in the mid piece: they make the ATP for motility.', 'Wound round the start of the tail. Mitochondrial DNA is inherited only from the mother: the sperm\'s stay outside the egg.'),
+  RX('mito', 'sperm', 'male', 'Mitochondria', 'rpSperm', ['mitochondria'], 'Found in the mid piece: they make the ATP for motility.', 'Wound round the start of the tail. Mitochondrial DNA is inherited only from the mother: the sperm\'s mitochondria are destroyed after fertilisation.'),
   RX('tail', 'sperm', 'male', 'Tail', 'rpSperm', ['tail'], 'To propel the sperm cell.', 'A flagellum. Sperm with short, double or crooked tails have problems with motility.', { alt:'flagellum' }),
   RX('gonia', 'tubule', 'male', 'Spermatogonia', 'rpTubule', ['spermatogonia'], 'Diploid cells that divide mitotically to form diploid primary spermatocytes — the stem cells of the testis.', 'Against the wall of the tubule. Because they keep dividing by MITOSIS, males make gametes throughout life.', { alt:'spermatogonium' }),
   RX('primary', 'tubule', 'male', 'Primary spermatocytes', 'rpTubule', ['primary spermatocytes'], 'Diploid cells that go through Meiosis I to form haploid secondary spermatocytes.', 'The biggest cells in the wall. Her sequence: spermatogonium → diploid spermatocyte → haploid spermatocyte → spermatid → spermatozoon.'),
@@ -674,7 +674,7 @@ REPRO.push(
   RX('sfollicle', 'ovarysec', 'female', 'Secondary follicle', 'rpOvary', ['secondary follicle'], null, 'Growing under FSH; the developing follicle releases estrogen.', { her:0 }),
   RX('tfollicle', 'ovarysec', 'female', 'Tertiary follicle', 'rpOvary', ['tertiary follicle', 'oocyte in the tertiary follicle'], 'The fluid-filled Graafian follicle that ruptures at ovulation.', 'Ovulation is triggered by the LH peak. It releases a secondary oocyte arrested in metaphase of Meiosis II.', { alt:'Graafian follicle' }),
   RX('oocyte', 'ovarysec', 'female', 'Secondary oocyte', 'rpOvary', ['secondary oocyte', 'zona radiata'], 'A haploid female gamete that is released from the tertiary follicle.', 'Caught by the fimbriae and swept into the Fallopian tube. Meiosis II is only completed if fertilisation occurs.'),
-  RX('zona', 'ovarysec', 'female', 'Zona radiata', 'rpOvary', ['zona radiata'], 'The layer round the egg that the sperm must get through.', 'Her drop-down keys it. The acrosome\'s enzymes open the way; calcium then blocks other sperm.', { alt:'corona radiata' }),
+  RX('zona', 'ovarysec', 'female', 'Zona radiata', 'rpOvary', ['zona radiata'], 'The layer round the egg that the sperm must get through.', 'Her drop-down keys it as "zona radiata": the coat round the egg (most textbooks say zona pellucida; the corona radiata is the cloud of follicle cells outside it). The acrosome\'s enzymes open the way; calcium then blocks other sperm.', { alt:'zona pellucida' }),
   RX('owall', 'ovarysec', 'female', 'Ovarian wall', 'rpOvary', ['ovarian wall'], 'It ruptures at ovulation to let the secondary oocyte out.', 'Drawn open at the top, where the follicle has just burst.'),
   RX('luteum', 'ovarysec', 'female', 'Corpus luteum', 'rpOvary', ['corpus luteum'], 'What is left of the follicle after ovulation: it releases progesterone and estrogen.', 'Progesterone keeps the endometrium. No pregnancy → it degenerates into the corpus albicans and menstruation follows; hCG from an embryo keeps it alive.'),
   RX('albicans', 'ovarysec', 'female', 'Corpus albicans', 'rpOvary', ['corpus albicans'], null, 'The white scar a corpus luteum leaves behind.', { her:0 }),
@@ -701,6 +701,9 @@ NERVES.push(
   PN('fascicle', 'nervecut', 'Fascicle', 'pnNerve', ['fascicle'], null, 'A bundle of nerve fibres inside its perineurium.', { her:0 }),
   PN('fibre', 'nervecut', 'Nerve fibre', 'pnNerve', ['nerve fibre', 'myelin sheath of the nerve fibre'], null, 'An axon (with its myelin, if myelinated). A NERVE is many fibres bundled; a nerve FIBRE is one axon — her question is the difference.', { alt:'axon', her:0 }),
 );
+
+/* clues that are MY framing of her figure, not her sentence: not tagged as her wording (content audit, 21 Sep 2026) */
+for (const id of ['pn-canal', 'pn-droot', 'pn-vroot', 'pn-spinal', 'pn-receptor', 'pn-effector', 'rx-zona']) { const it = [...NERVES, ...REPRO].find(i => i.id === id); if (it && it.clue) it.clue.hers = 0; }
 
 export const MORE_REGIONS = {
   brain: { model:'brain', m:[{ mat:/lobe$|^Cerebellum$|^Brain$|^Interlobar sulci$|^Insula$/ }], pad:1.12, min:0.05 },
