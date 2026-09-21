@@ -174,6 +174,8 @@ body:not([data-state=home]) #home{transform:translateY(110%);opacity:0;pointer-e
 .seg button[aria-pressed=true]{background:rgba(255,255,255,.13);color:var(--tx);box-shadow:0 1px 6px rgba(0,0,0,.3)}
 .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:1px;touch-action:pan-x}
 .chips::-webkit-scrollbar{display:none}
+/* with a mouse there is no swipe: a row that scrolls sideways can only be reached with the arrow keys (he said so). On a fine pointer the chips WRAP instead; touch keeps the swipe row. */
+@media (hover:hover) and (pointer:fine){ .chips{flex-wrap:wrap;overflow-x:visible} }
 .chip{flex:none;padding:8px 12px;border-radius:999px;font-size:13.5px;font-weight:700;color:var(--tx2);background:rgba(255,255,255,.05);border:1px solid var(--line);white-space:nowrap}
 .chip b{font-weight:800;color:var(--tx3);margin-left:4px;font-size:12px}
 .chip[aria-pressed=true]{color:var(--acc-ink);background:var(--acc);border-color:transparent}
@@ -236,6 +238,8 @@ body[data-mode=explore] #stats,body[data-mode=explore] #prog{visibility:hidden}
 @media (min-width:880px){
   #home{left:24px;right:auto;top:24px;bottom:24px;width:400px;max-height:none;padding:26px 22px 18px}
   body:not([data-state=home]) #home{transform:translateX(-110%)}
+  /* desktop: the panel is one tall column, so the button that starts everything stays pinned to its bottom edge however many rows the chips wrap to */
+  #go{position:sticky;bottom:0;z-index:2;box-shadow:0 -14px 18px -6px #0e1220,0 8px 28px color-mix(in srgb,var(--acc) 35%,transparent)}
   #results{left:24px;right:auto;top:24px;bottom:auto;width:420px;max-height:calc(100dvh - 48px)}
   body:not([data-state=results]) #results{transform:translateX(-110%)}
   .brand{display:block;margin-bottom:20px}.brand h1{font-size:34px}.brand p{margin-top:2px;font-size:14px}
