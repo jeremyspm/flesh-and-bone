@@ -425,4 +425,4 @@ Each entry says where it is from and, in one sentence I wrote after LOOKING at i
   (same origin, plain `<img>`). `tools/check-figrefs.mjs [--live]` fails on a src that is not on a sim, is missing from the sim's `img/` on disk, or is dead.
 - **No answer leaks.** The button is only built where no question is open: Explore cards, results peeks, and the fact shown AFTER a Name-it answer.
   Checked at 375 px: 0 buttons while a Find-it or Name-it question is open, 1 after answering; sheet opens, loads, closes (✕, backdrop, Esc); no overflow.
-- Module 3 figures (ovary, eye, cochlea, tubule, sperm, female, male) join when `hs2-test3` is published and hosts them.
+- **Module 3 joined the same day**, once `hs2-test3` was published: ovary, eye ×2, ear, cochlea ×2, tubule, sperm, female and male organs — 10 more images, 30 keys and 28 images in all. Her SLIDE figures (ovulation, uterus-wall arteries) are hosted nowhere yet, so the uterus wall has no button.
