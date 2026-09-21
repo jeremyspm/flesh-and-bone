@@ -255,7 +255,7 @@ function openFig(key, n = 0) { const L = FIGREF[key]; if (!L) return; const f = 
     el.addEventListener('click', e => { if (e.target === el || e.target.closest('[data-figx]')) { el.hidden = true; return; } const nx = e.target.closest('[data-fign]'); if (nx) openFig(el.dataset.key, +nx.dataset.fign); });
     addEventListener('keydown', e => { if (e.key === 'Escape' && !el.hidden) el.hidden = true; }); }
   el.dataset.key = key; el.hidden = false;
-  el.innerHTML = `<div class="figbox"><div class="fighead"><b>HER FIGURE</b><span>from her quiz — not ours</span><button class="figx" data-figx aria-label="Close">✕</button></div>`
+  el.innerHTML = `<div class="figbox"><div class="fighead"><b>HER FIGURE</b><span>${/\/img\/(slides|figs)\//.test(f.src) ? 'from her slides' : 'from her quiz'} — not ours</span><button class="figx" data-figx aria-label="Close">✕</button></div>`
     + `<div class="figimg"><img alt="Her figure: ${esc(f.from)}" src="${esc(f.src)}" onerror="this.replaceWith(Object.assign(document.createElement('p'),{className:'figfail',textContent:'Her figure would not load — open the Paper Sim instead.'}))"></div>`
     + `<p class="figfrom">${esc(f.from)}</p><p class="figdiff">${esc(f.differs)}</p>`
     + `<div class="figacts">${L.length > 1 ? `<button class="act" data-fign="${(n + 1) % L.length}">Her other figure (${(n + 1) % L.length + 1} of ${L.length})</button>` : ''}<a class="act pri" href="${esc(f.sim)}" target="_blank" rel="noopener">Answer her questions on it ↗</a></div></div>`; }
