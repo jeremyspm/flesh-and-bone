@@ -58,7 +58,7 @@ const DECK = {
   heart:  { label:'Heart',   acc:'#fff0b3', ink:'#2a2205', items:HEART,   models:{ heart:'solid', ecg:'solid' }, bind:['heart', 'ecg'], noun:'structure', home:'heart', view:[15, 4], frame:{ pad:1.45, min:.09 }, extra:'Conduction system' },   // Module 1. Chambers turn to glass when what is asked is inside them
   airway: { label:'Airway',  acc:'#a9c4ff', ink:'#0a1230', items:AIRWAY,  models:{ skeletal:'ghost', airway:'solid', spiro:'solid', awwall:'solid' }, bind:['airway', 'spiro', 'awwall'], noun:'structure', openLabel:'Glass lungs', home:'airway', view:[15, 4], frame:{ pad:1.4, min:.1 } },   // Module 1. The lobes turn to glass when a bronchus is asked
   senses: { label:'Eye & Ear', acc:'#ffc46b', ink:'#2a1a02', items:SENSES,  models:{ eye:'solid', ear:'solid', cochlea:'solid', retina:'solid' }, bind:['eye', 'ear', 'cochlea', 'retina'], noun:'part', home:'eye', view:[-72, 52], frame:{ pad:1.35, min:.05 }, schematic:'schematic · not to scale' },   // Module 3. Both BUILT: made-eye.js, made-ear.js
-  repro:  { label:'Reproductive', acc:'#ff9ecb', ink:'#2b0618', items:REPRO, models:{ skeletal:'ghost', female:'solid', male:'solid', uterwall:'solid', sperm:'solid', tubule:'solid', ovarysec:'solid' }, bind:['female', 'male', 'uterwall', 'sperm', 'tubule', 'ovarysec'], sex:{ female:'female', male:'male', uterwall:'female', sperm:'male', tubule:'male', ovarysec:'female' }, noun:'structure', home:'rpFemale', view:[0, 10], frame:{ pad:1.5, min:.08 } },   // Module 3. Two bodies share one pelvis: only one is on stage at a time
+  repro:  { label:'Reproductive', acc:'#ff9ecb', ink:'#2b0618', items:REPRO, models:{ skeletal:'ghost', female:'solid', male:'solid', uterwall:'solid', sperm:'solid', tubule:'solid', ovarysec:'solid' }, bind:['female', 'male', 'uterwall', 'sperm', 'tubule', 'ovarysec'], sex:{ female:'female', male:'male', uterwall:'female', sperm:'male', tubule:'male', ovarysec:'female' }, noun:'structure', home:'rpFemale', view:[0, -20], frame:{ pad:1.5, min:.08 } },   // Module 3. Two bodies share one pelvis: only one is on stage at a time. Seen from a little BELOW: the uterus tips forward, so dead-on it collapses into a squat cap; from 20° under it is her diagram's pear
 };
 const ITEM = {};
 for (const d of Object.keys(DECK)) for (const it of DECK[d].items) { it.deck = d; ITEM[it.id] = it; }
@@ -139,11 +139,14 @@ const MODELS = {
   airway:  { kind:'airway', noun:'structure', note:'Filling the lungs…' },
   male:    { kind:'organ',  noun:'structure', note:'Placing the organs…' },
   /* The female organs are NOT Z-Anatomy (its body is male): HuBMAP CCF reference organs, Visible Human female, CC BY 4.0, files unmodified. They share one
-   * frame, so ONE shift seats them all: the midpoint of the two ovaries goes to the midpoint the ovaries were given by hand in the Glands deck. */
-  female:  { kind:'organ',  noun:'structure', note:'Placing the organs…', files:['hra-ovary-l', 'hra-ovary-r', 'hra-uterus', 'hra-tube-l', 'hra-tube-r'], shift:[.0131, .8541, .0275],
-    hide:[/wall of uterus$/, /^cornua$/, /^ostium of uterine tube$/, /^lower uterine segment$/, /^cervicovaginal junction$/],      // sub-regions that overlap the body and the cervix
+   * frame, so ONE move seats them all. The move is a FIT, not a guess (27 Sep): the same donor's own pelvis (HuBMAP VH_F_Pelvis.glb, same frame, not shipped)
+   * was fitted onto this skeleton's hip bones + sacrum (ICP, 3.9 mm rms), and the organs take that fit's tilt (2.3° about the left-right axis) and place
+   * (the set's centre goes where the fit puts it), kept life-size. Before, the set hung off a hand-placed ovary and sat 4–5 cm too far back and 1.5 cm too
+   * high: ovaries, fimbriae and infundibula were inside the sacrum. Both frames are +x left, +y up, +z front, so nothing is mirrored. */
+  female:  { kind:'organ',  noun:'structure', note:'Placing the organs…', files:['hra-ovary-l', 'hra-ovary-r', 'hra-uterus', 'hra-tube-l', 'hra-tube-r'], shift:[.0130, .8376, .0616], tilt:2.3,
+    hide:[/wall of uterus$/, /^ostium of uterine tube$/, /^cervicovaginal junction$/],      // the two walls repeat the body's surface; the ostium strip is inside it; the junction is the stump of the vagina
     rename:{ VH_F_left_ovary:'Ovary.l', VH_F_right_ovary:'Ovary.r', VH_F_body_of_uterus:'Body of uterus', VH_F_fundus_of_uterus:'Fundus of uterus', VH_F_cervix:'Cervix', VH_F_internal_cervical_os:'Internal os', VH_F_external_cervical_os:'External os',
-      VH_F_lower_uterine_segment:'Lower uterine segment', VH_F_cornua:'Cornua', VH_F_posterior_wall_of_uterus:'Posterior wall of uterus', VH_F_anterior_wall_of_uterus:'Anterior wall of uterus', VH_F_cervicovaginal_junction:'Cervicovaginal junction',
+      VH_F_lower_uterine_segment:'Body of uterus', VH_F_cornua:'Body of uterus', VH_F_posterior_wall_of_uterus:'Posterior wall of uterus', VH_F_anterior_wall_of_uterus:'Anterior wall of uterus', VH_F_cervicovaginal_junction:'Cervicovaginal junction',      // the lower segment (isthmus) and the cornua are the body's neck and upper corners: hidden, they left a hole between body and cervix and one where each tube joins
       VH_F_abdominal_ostium_of_uterine_tube:'Ostium of uterine tube', VH_F_uterine_tube_infundibulum_L:'Infundibulum.l', VH_F_uterine_tube_infundibulum_R:'Infundibulum.r', VH_F_fibria_of_uterine_tube_L:'Fimbriae.l', VH_F_fibria_of_uterine_tube_R:'Fimbriae.r',
       VH_F_isthmus_of_fallopian_tube_L:'Isthmus of fallopian tube.l', VH_F_isthmus_of_fallopian_tube_R:'Isthmus of fallopian tube.r', VH_F_ampulla_of_uterine_tube_L:'Ampulla of fallopian tube.l', VH_F_ampulla_of_uterine_tube_R:'Ampulla of fallopian tube.r' } },
   eye:     { kind:'cell',   noun:'part',      note:'Building the eye…', make:buildEye },
@@ -205,6 +208,7 @@ async function loadModel(name, onProg) {
   }
   for (const file of M.files || [name]) { const gltf = await loader.loadAsync(`./models/${file}.glb`, e => onProg && onProg(e.loaded, e.total)); root.add(gltf.scene); }
   if (M.shift) root.position.set(...M.shift);
+  if (M.tilt) root.rotation.x = M.tilt * DEG;      // degrees about the left-right axis (+ = the top of the set comes forward)
   root.updateMatrixWorld(true);
   const kill = [];
   root.traverse(o => {
@@ -749,7 +753,7 @@ const G = { deck:S.o.deck, mode:S.o.mode, round:null, cur:null, tr:null, sex:'fe
     if (which === 'her') { this.xHer = !this.xHer; $('#xHer').setAttribute('aria-pressed', this.xHer); const bind = DECK[this.deck].bind; setDim(this.xHer ? (i => !bind.includes(i.model) || i.items.some(x => x.her)) : null); }
     if (which === 'cut') { setCut(!cutOn); $('#xCut').setAttribute('aria-pressed', cutOn); unglow(); callout.hide(); flyTo(regionFrame('brain', cutOn ? 90 : 60, 8)); }
     if (which === 'men') { setMeninges(!menOn); $('#xMen').setAttribute('aria-pressed', menOn); unglow(); callout.hide(); if (this.deck === 'brain') { if (menOn) flyTo(regionFrame('meninges', 60, 35)); } else { setOpen(menOn); $('#xOpen').setAttribute('aria-pressed', openOn); } }
-    if (which === 'sex') { this.sex = this.sex === 'female' ? 'male' : 'female'; applyDeck(); $('#xSex').textContent = this.sex === 'female' ? 'Show male' : 'Show female'; unglow(); callout.hide(); flyTo(regionFrame(this.sex === 'female' ? 'rpFemale' : 'rpMale', this.sex === 'female' ? 0 : 100, 8)); }
+    if (which === 'sex') { this.sex = this.sex === 'female' ? 'male' : 'female'; applyDeck(); $('#xSex').textContent = this.sex === 'female' ? 'Show male' : 'Show female'; unglow(); callout.hide(); flyTo(regionFrame(this.sex === 'female' ? 'rpFemale' : 'rpMale', this.sex === 'female' ? 0 : 100, this.sex === 'female' ? -20 : 8)); }
     if (which === 'sect') { setSection(sectionOn ? false : this.deck === 'bones' ? 'skull' : true); $('#xSect').setAttribute('aria-pressed', sectionOn); if (this.deck === 'bones') { if (sectionOn) { setOpen(false); $('#xOpen').setAttribute('aria-pressed', 'false'); } } else { const glass = sectionOn === true; setOpen(glass); $('#xOpen').setAttribute('aria-pressed', glass); } unglow(); callout.hide(); flyTo(this.deck === 'bones' ? regionFrame('head', 180, 78) : regionFrame('heart', 10, 2)); }
     if (which === 'open') { setOpen(!openOn); if (this.deck === 'bones') { setMeninges(openOn ? 'sin' : false); if (openOn) flyTo(regionFrame('head', 90, 5)); } $('#xOpen').setAttribute('aria-pressed', openOn); unglow(); callout.hide(); }
     if (which === 'peel') { this.xPeel = !this.xPeel; $('#xPeel').setAttribute('aria-pressed', this.xPeel); groups.muscular.visible = !this.xPeel; unglow(); callout.hide(); refreshPickables(); invalidate(); }

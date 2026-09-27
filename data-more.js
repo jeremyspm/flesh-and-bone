@@ -7,7 +7,7 @@
  *   c:'#hex'              the structure's own colour.
  * Models: glands.glb and brain.glb are cut from the Z-Anatomy source by tools/export_deck.py (same axes as the body).
  * The ovaries are NOT Z-Anatomy (its body is male): they are the HuBMAP CCF reference ovaries (Visible Human
- * female, CC BY 4.0), scaled 1:1 and placed by hand on the lateral pelvic wall — see PLACE below. */
+ * female, CC BY 4.0), scaled 1:1 and placed where the same donor's own pelvis, fitted onto this one, has them — see PLACE below. */
 
 export const GLANDS = [
   { id:'gl-pituitary', name:'Pituitary gland', alt:'Hypophysis', her:1, region:'head', az:90, c:'#ff9f6e',
@@ -50,7 +50,7 @@ export const GLANDS = [
     fact:'She gives nothing for "pancreas" alone — name the cells: ALPHA cells → glucagon (raises glucose), BETA cells → insulin (lowers it).' },
   { id:'gl-ovary', name:'Ovary', her:1, region:'pelvis', az:0, c:'#ff8fc7',
     m:['ovary'],
-    fact:'Oestrogen and progesterone. (This one is from a different reference body — HuBMAP\'s female Visible Human — placed by hand: the 3D body here is male.)' },
+    fact:'Oestrogen and progesterone. (This one is from a different reference body — HuBMAP\'s female Visible Human — placed by fitting her own pelvis onto this one: the 3D body here is male.)' },
   { id:'gl-testis', name:'Testis', her:1, region:'pelvis', az:0, el:-10, c:'#8fb8ff',
     m:['testis'], fact:'Testosterone. Testosterone also closes the epiphyseal plates at the end of puberty.' },
   { id:'gl-kidney', name:'Kidney', sub:'not an endocrine gland', her:1, region:'trunk', az:180, c:'#c98a6b',
@@ -60,7 +60,7 @@ export const GLANDS = [
 ];
 
 /* The ovaries come from another body: where they go in this one (metres, body coordinates; +x = the body's left). */
-export const PLACE = { 'ovary.l':[0.047, 0.915, -0.018], 'ovary.r':[-0.047, 0.915, -0.018] };
+export const PLACE = { 'ovary.l':[0.0573, 0.9003, 0.0186], 'ovary.r':[-0.0576, 0.9003, 0.0186] };      // where the Reproductive deck's fitted set has them (see MODELS.female); the old hand guess sat in the sacrum
 
 const LOBE = (name, not) => ({ mat:new RegExp('^' + name + '$'), not });
 const CENTRAL = 'central sulcus', LATF = /^lat_fis-/, POS = 'parieto-occipital sulcus';
@@ -539,16 +539,16 @@ export const SENSES = [
  *    (male glands with their share of the semen, and the duct sequence). `sex` decides which body is on stage for the question. ── */
 const RP = (id, sex, name, az, el, m, clue, fact, extra) => ({ id:'rp-' + id, kind:sex, sex, name, her:1, region:sex === 'female' ? 'rpFemale' : 'rpMale', az, el, m, clue:clue ? { t:clue, hers:1 } : undefined, fact, ...extra });
 export const REPRO = [
-  RP('ovary', 'female', 'Ovary', 0, 10, ['ovary'], 'Produces the eggs — and the hormones oestrogen and progesterone.', 'Follicular phase → ovulation → luteal phase, under FSH and LH from the pituitary.', { c:'#ff8fc7' }),
-  RP('fimbriae', 'female', 'Fimbriae', 0, 10, ['fimbriae'], 'They stroke over the ovary to catch the secondary oocyte.', 'The fingers on the end of the infundibulum. The tube is NOT attached to the ovary: the egg has to be caught.', { c:'#ffd27a' }),
-  RP('tube', 'female', 'Fallopian tube', 0, 10, ['infundibulum', 'fimbriae', 'ampulla of fallopian tube', 'isthmus of fallopian tube'], 'Cilia on its inside help the egg or embryo move toward the uterus — and it is where fertilisation happens.', 'Uterine tube: infundibulum with fimbriae → ampulla → isthmus → uterus. An embryo that implants here is an ectopic pregnancy.', { alt:'uterine tube' }),
-  RP('infundibulum', 'female', 'Infundibulum', 0, 10, ['infundibulum'], null, 'The funnel at the ovarian end of the tube; the fimbriae hang from it.', { her:0, c:'#ffb38a' }),
-  RP('ampulla', 'female', 'Ampulla of the tube', 0, 10, ['ampulla of fallopian tube'], null, 'The wide middle stretch — where fertilisation usually takes place.', { her:0, c:'#f59aa6' }),
-  RP('isthmus', 'female', 'Isthmus of the tube', 0, 10, ['isthmus of fallopian tube'], null, 'The narrow stretch that enters the uterus.', { her:0, c:'#e57f98' }),
-  RP('uterus', 'female', 'Uterus', 0, 10, ['body of uterus', 'fundus of uterus', 'cervix'], 'It houses the embryo.', 'Three layers, inside out: endometrium (its functional layer is shed in menstruation, the basal layer rebuilds it), myometrium (smooth muscle), perimetrium. The layers are not separate in this model.'),
-  RP('fundus', 'female', 'Fundus of the uterus', 0, 20, ['fundus of uterus'], null, 'The dome above the openings of the two tubes.', { her:0, c:'#d9708a' }),
-  RP('body', 'female', 'Body of the uterus', 0, 5, ['body of uterus'], null, 'The main part, where the embryo implants.', { her:0, c:'#c9607c' }),
-  RP('cervix', 'female', 'Cervix', 0, -10, ['cervix', 'internal os', 'external os'], null, 'The neck of the uterus, opening into the vagina (the vagina is not in this model).', { c:'#b9a2ff' }),
+  RP('ovary', 'female', 'Ovary', 0, -20, ['ovary'], 'Produces the eggs — and the hormones oestrogen and progesterone.', 'Follicular phase → ovulation → luteal phase, under FSH and LH from the pituitary.', { c:'#ff8fc7' }),
+  RP('fimbriae', 'female', 'Fimbriae', 0, -20, ['fimbriae'], 'They stroke over the ovary to catch the secondary oocyte.', 'The fingers on the end of the infundibulum. The tube is NOT attached to the ovary: the egg has to be caught.', { c:'#ffd27a' }),
+  RP('tube', 'female', 'Fallopian tube', 0, -20, ['infundibulum', 'fimbriae', 'ampulla of fallopian tube', 'isthmus of fallopian tube'], 'Cilia on its inside help the egg or embryo move toward the uterus — and it is where fertilisation happens.', 'Uterine tube: infundibulum with fimbriae → ampulla → isthmus → uterus. An embryo that implants here is an ectopic pregnancy.', { alt:'uterine tube' }),
+  RP('infundibulum', 'female', 'Infundibulum', 0, -20, ['infundibulum'], null, 'The funnel at the ovarian end of the tube; the fimbriae hang from it.', { her:0, c:'#ffb38a' }),
+  RP('ampulla', 'female', 'Ampulla of the tube', 0, -20, ['ampulla of fallopian tube'], null, 'The wide middle stretch — where fertilisation usually takes place.', { her:0, c:'#f59aa6' }),
+  RP('isthmus', 'female', 'Isthmus of the tube', 0, -20, ['isthmus of fallopian tube'], null, 'The narrow stretch that enters the uterus.', { her:0, c:'#e57f98' }),
+  RP('uterus', 'female', 'Uterus', 0, -20, ['body of uterus', 'fundus of uterus', 'cervix'], 'It houses the embryo.', 'Three layers, inside out: endometrium (its functional layer is shed in menstruation, the basal layer rebuilds it), myometrium (smooth muscle), perimetrium. The layers are not separate in this model. It normally tips FORWARD (anteverted) to lie on the bladder — turn it side-on to see that; from straight in front you look down its length.'),
+  RP('fundus', 'female', 'Fundus of the uterus', 0, -15, ['fundus of uterus'], null, 'The dome above the openings of the two tubes.', { her:0, c:'#d9708a' }),
+  RP('body', 'female', 'Body of the uterus', 0, -20, ['body of uterus'], null, 'The main part, where the embryo implants.', { her:0, c:'#c9607c' }),
+  RP('cervix', 'female', 'Cervix', 0, -30, ['cervix', 'internal os', 'external os'], null, 'The neck of the uterus, opening into the vagina (the vagina is not in this model).', { c:'#b9a2ff' }),
 
   RP('testis', 'male', 'Testis', 100, 0, ['testis'], 'Makes the sperm (in the seminiferous tubules, under FSH) and testosterone (Leydig cells, under LH) — about 5–10 % of the semen.', 'Sertoli cells in the tubules make inhibin. Kept outside the body because sperm need it cooler than 37 °C.', { c:'#8fb8ff' }),
   RP('epididymis', 'male', 'Epididymis', 100, 0, ['epididymis'], null, 'Coiled on the back of the testis: sperm mature and are stored here. FIRST duct after the rete testis.', { c:'#ffd27a' }),
@@ -795,7 +795,7 @@ export const FIGREF = {
   rpOvary:[FG(M3, 'HS2DATA-e3645ba42e2642d3.png', 'Fertility cases quiz · the “ovarian cycle” figure', 'The same convention as ours — stages in order round the edge, the Graafian follicle at the surface, the egg leaving beside it, then corpus luteum and corpus albicans — but hers runs ANTICLOCKWISE with the vessels entering on the right. It labels the cells round the released egg corona radiata; her drop-down key calls that layer zona radiata.', 1), OVCYCLE],
   rpTubule:[FG(M3, 'HS2DATA-d37cc11e291479fb.jpg', 'Module 3 revision quiz · spermatogenesis', 'On the right, the round cross-section ours copies (lumen in the middle, Leydig cells and a capillary outside) as a microscope photo. On the left, her flow chart — which runs from the spermatogonium at the TOP down to the sperm at the bottom.', 1)],
   rpSperm:[FG(M3, 'HS2DATA-d84b6f38368cc300.png', 'Reproduction MC quiz · normal and abnormal sperm', 'Hers labels a normal sperm simply head, middle section and tail, beside drawings of abnormal heads, necks and tails. Ours adds what is inside: acrosome, chromatin, mitochondria.', 1)],
-  rpFemale:[FG(M3, 'HS2DATA-1c9309897b1c6922.jpg', 'Formative: female reproduction · mix and match 1–8', 'A front view of the uterus, tubes and ovaries inside a body outline, with eight numbered pointers. Ours is the same view in 3D.')],
+  rpFemale:[FG(M3, 'HS2DATA-1c9309897b1c6922.jpg', 'Formative: female reproduction · mix and match 1–8', 'A front view of the uterus, tubes and ovaries inside a body outline, with eight numbered pointers. Hers stands the uterus upright; in the body it tips forward over the bladder, so ours opens from a little below, where it has her shape.')],
   rpMale:[FG(M3, 'HS2DATA-73c637315e48328d.png', 'Module 3 revision quiz · the male system', 'A side-on section with the front of the body on the LEFT and numbered pointers — the way ours opens.')],
   tsJoint:JOINT, tsBone:BONE, tsOsteon:BONE, tsMuscle:MUSCLE, tsFibre:MUSCLE, pnCord:CORD, pnCordIn:CORD,
   pnNerve:[FG(M2, 'HS2DATA-2de7f5a6fd8badb2.png', 'PNS quiz · nerve fibre versus nerve', 'The same cut-across view as ours: endoneurium round each fibre, perineurium round each bundle, epineurium round the whole nerve.', 1)],
@@ -934,7 +934,7 @@ export const TRACES = {
         { it:'rp-prostate',   q:'The duct now runs through which gland, which adds about 30 %?', say:'Ejaculatory duct, through the prostate: acidic, citric acid, PSA.', az:120 },
         { it:'rp-urethra',    q:'…and out through?', say:'Urethra: prostatic → membranous → penile.', el:-5 },
       ] },
-    { id:'tr-egg', name:'The egg\'s path', short:'Trace the egg', ask:'from the ovary to where an embryo is housed', sex:'female', xray:false, region:'rpFemale', az:0, el:10,
+    { id:'tr-egg', name:'The egg\'s path', short:'Trace the egg', ask:'from the ovary to where an embryo is housed', sex:'female', xray:false, region:'rpFemale', az:0, el:-20,
       hint:'Ovary → fimbriae → fallopian tube → uterus',
       note:'From her female parts-and-functions slide. The female organs are HuBMAP reference organs placed in this pelvis as one set.',
       steps:[

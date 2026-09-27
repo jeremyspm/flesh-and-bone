@@ -79,6 +79,7 @@ Rendering: [three.js](https://threejs.org/) (MIT). A study aid, not a clinical r
 - **The ovaries are not Z-Anatomy** (its body is male). They are the HuBMAP CCF 3D reference ovaries — Visible Human
   female, **CC BY 4.0**, files unmodified (`models/hra-ovary-*.glb`, 9 KB each) — and are **placed by hand** on the
   lateral pelvic wall (`PLACE` in data-more.js). Right organ, approximate position; the app says so in the fact line and help.
+  *(27 Sep: superseded — see "The female set, re-seated" below.)*
 - **Brain** — `models/brain.glb` (1.9 MB): cortex, cerebellum, brainstem, diencephalon, ventricles, deep nuclei and all
   twelve cranial nerves. Lobe membership is the source's own: Z-Anatomy files every gyrus and sulcus under a material named
   for its lobe, so items match on `{ mat }`. Boundary furrows (central sulcus, lateral fissure, parieto-occipital sulcus)
@@ -244,7 +245,7 @@ replacement never ends in `// ...` unless it replaces a whole line; and the file
   from `cdn.humanatlas.io/digital-objects/ref-organ/<organ>/v1.2/assets/`): `hra-uterus.glb` (980 KB), `hra-tube-l/r.glb`, and
   the two ovaries already in the repo. The HuBMAP organs share one frame, so `MODELS.female.shift` moves them as ONE set: the
   midpoint of the two ovaries goes to the midpoint the Glands deck gave them by hand. Relative positions real, pelvic position
-  approximate - the help sheet says exactly that. (`PLACE` is skipped for a shifted model: it had pulled the ovaries out of the set.)
+  approximate - the help sheet says exactly that. *(27 Sep: that hand-placed anchor was wrong — see "The female set, re-seated".)* (`PLACE` is skipped for a shifted model: it had pulled the ovaries out of the set.)
   `MODELS.x.hide` drops the uterus sub-regions that overlap its body (walls, cornua, lower segment).
 - Only one body is on stage at a time (`DECK.repro.sex` + `G.sex`): the question's `sex` decides, Explore has a Show male/female switch.
 - Her list = her Module 3 revision slides 2 and 5. Not in either source, and said so: vagina, uterine ligaments, the three uterine
@@ -426,3 +427,17 @@ Each entry says where it is from and, in one sentence I wrote after LOOKING at i
 - **No answer leaks.** The button is only built where no question is open: Explore cards, results peeks, and the fact shown AFTER a Name-it answer.
   Checked at 375 px: 0 buttons while a Find-it or Name-it question is open, 1 after answering; sheet opens, loads, closes (✕, backdrop, Esc); no overflow.
 - **Module 3 joined the same day**, once `hs2-test3` was published: ovary, eye ×2, ear, cochlea ×2, tubule, sperm, female and male organs — 10 more images, 30 keys and 28 images in all. Her SLIDE figures joined that night, hosted by `hs2-test3` (its `content/hosted-figs.json`): the uterus wall gets her revision-slide arteries drawing and her Repro Female lecture's labelled one; the retina gets her Light & Seeing slides 10 and 11 (she draws no retina layers — the button says so); the ovary, eye, ear, inner ear and cochlea each gain her revision slide. 32 keys, 37 images; checked at 375 px, all 21 Module 3 images load, 0 buttons while a Find-it question is open. The sheet's header says "from her slides" for a slide image.
+
+## 27 Sep: the female set, re-seated ("is that even oriented the right way?")
+
+- **Orientation was right.** Both frames are +x left, +y up, +z front; the donor's own pelvis (HuBMAP `VH_F_Pelvis.glb`, same frame
+  as the organs) puts her sacrum at -z and pubis at +z, and her uterus is anteverted (fundus forward over the bladder) — normal.
+- **Placement was wrong.** The set hung off the Glands deck's hand-placed ovary: 4-5 cm too far back and 1.5 cm too high. Ovaries,
+  fimbriae and infundibula were inside the sacrum (checked vertex by vertex against the bone normals). Now: the donor pelvis was fitted
+  onto this skeleton's hip bones + sacrum (ICP, similarity, 3.9 mm rms, 2.3 deg tilt); the set takes that tilt, its centre goes where
+  the fit puts it, life-size. Nothing touches bone; the ovaries sit about 6 mm off the side wall, where the ovarian fossa is.
+  `PLACE` (Glands deck ovaries) moved to the same spot. The HuBMAP library itself is not shipped (5 GB); only the numbers are.
+- **Holes.** Hiding the lower uterine segment and the cornua left a gap between body and cervix and a hole where each tube joins
+  (the "dark cleft"). They are back, renamed `Body of uterus` (they are the body's neck and upper corners).
+- **Camera.** An anteverted uterus seen dead-on collapses into a squat cap. The female views open 20 deg from below (fundus -15,
+  cervix -30), which is her diagram's upright pear; side-on shows the tilt.
