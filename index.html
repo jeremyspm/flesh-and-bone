@@ -9,7 +9,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0c11'/%3E%3Cpath d='M20 14a7 7 0 0 1 12 5l-1 3 11 11 3-1a7 7 0 1 1-2 12 7 7 0 0 1-12 2l1-5-11-11-5 1a7 7 0 1 1 4-17z' fill='%23f2b84b'/%3E%3C/svg%3E">
 <style>
 :root{
-  --ink:#0a0c11; --ink2:#11141c; --glass:rgba(17,20,28,.74); --glass2:rgba(28,33,45,.78);
+  /* the paper's colour (15 Oct 2026): HS2's blue, as on jeremyspm.github.io. The stage behind the body takes a soft
+     tint of it, the start menu's title is a banner in it and the game bar has its edge; the gold accent stays ours */
+  --paper:#2563eb;
+  --ink:color-mix(in srgb,var(--paper) 7%,#0a0c11); --ink2:color-mix(in srgb,var(--paper) 7%,#11141c); --glass:rgba(17,20,28,.74); --glass2:rgba(28,33,45,.78);
   --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.18);
   --tx:#f3f4f8; --tx2:rgba(243,244,248,.66); --tx3:rgba(243,244,248,.42);
   --good:#3ddc97; --bad:#ff5d6c; --acc:#f2b84b; --acc-ink:#1b1303;
@@ -25,7 +28,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 
 /* ── stage ── */
 #stage{position:fixed;inset:0;background:
-  radial-gradient(120% 70% at 50% 8%, #222b3f 0%, #141926 38%, var(--ink) 78%);}
+  radial-gradient(120% 70% at 50% 8%, color-mix(in srgb,var(--paper) 12%,#222b3f) 0%, color-mix(in srgb,var(--paper) 9%,#141926) 38%, var(--ink) 78%);}
 #stage::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(90% 60% at 50% 50%, transparent 55%, rgba(0,0,0,.5) 100%)}
 /* the prompt sits over the body: a scrim keeps it readable whatever is behind it */
@@ -55,6 +58,8 @@ body[data-state=play] #scrim{opacity:1}
 /* ── top bar ── */
 #bar{position:fixed;z-index:20;top:calc(8px + var(--sat));left:8px;right:8px;height:50px;display:flex;align-items:center;gap:6px;padding:0 6px;
   max-width:720px;margin:0 auto;transition:transform .45s var(--ease),opacity .3s}
+/* the game bar floats over a live 3D body, so it keeps its glass and only takes the paper's colour as a tint and edge */
+#bar.glass{background:color-mix(in srgb,var(--paper) 22%,var(--glass));border-color:color-mix(in srgb,var(--paper) 55%,transparent)}
 body:not([data-state=play]) #bar{transform:translateY(-90px);opacity:0;pointer-events:none}
 .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--tx2);flex:none}
 .ic:hover{background:rgba(255,255,255,.07);color:var(--tx)}
@@ -152,10 +157,16 @@ body[data-mode=trace] #streak{display:none}
   transition:transform .55s var(--ease),opacity .35s;scrollbar-width:none}
 #home::-webkit-scrollbar{display:none}
 body:not([data-state=home]) #home{transform:translateY(110%);opacity:0;pointer-events:none}
-.brand{display:flex;align-items:baseline;gap:10px;justify-content:space-between;margin-bottom:14px}
-.brand h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-.035em}
+/* the start menu's title is the banner (15 Oct 2026): the paper's colour, the name in giant type, a bone watermark */
+.brand{position:relative;overflow:hidden;margin-bottom:14px;padding:14px 16px;border-radius:14px;color:#fff;
+  background:radial-gradient(90% 130% at 100% 0%,rgb(255 255 255 / .2),transparent 60%),
+    linear-gradient(135deg,color-mix(in srgb,var(--paper) 94%,#fff),color-mix(in srgb,var(--paper) 72%,#000));
+  box-shadow:0 14px 34px -16px color-mix(in srgb,var(--paper) 80%,transparent)}
+.brand::after{content:"🦴";position:absolute;right:-6px;bottom:-22px;font-size:5.5rem;line-height:1;opacity:.22;transform:rotate(-14deg);pointer-events:none}
+.brand small{position:relative;display:block;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgb(255 255 255 / .86)}
+.brand h1{position:relative;margin:4px 0 6px;font-size:clamp(2rem,8vw,2.6rem);line-height:.95;font-weight:900;letter-spacing:-.03em;text-transform:uppercase}
 .brand h1 em{font-style:normal;color:var(--acc)}
-.brand p{margin:0;font-size:12.5px;color:var(--tx3)}
+.brand p{position:relative;margin:0;font-size:12.5px;color:rgb(255 255 255 / .9)}
 /* the way back to the BN2 Study Tools page, on the start menu (the bar's ‹ is back-to-menu) */
 .hub{display:inline-flex;align-items:center;margin:0 0 12px;padding:5px 12px 5px 9px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--acc);background:color-mix(in srgb,var(--acc) 15%,transparent);text-decoration:none}
 .decks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
@@ -244,7 +255,8 @@ body[data-mode=explore] #stats,body[data-mode=explore] #prog{visibility:hidden}
   #go{position:sticky;bottom:0;z-index:2;box-shadow:0 -14px 18px -6px #0e1220,0 8px 28px color-mix(in srgb,var(--acc) 35%,transparent)}
   #results{left:24px;right:auto;top:24px;bottom:auto;width:420px;max-height:calc(100dvh - 48px)}
   body:not([data-state=results]) #results{transform:translateX(-110%)}
-  .brand{display:block;margin-bottom:20px}.brand h1{font-size:34px}.brand p{margin-top:2px;font-size:14px}
+  .brand{margin-bottom:20px;padding:20px 22px;border-radius:18px}.brand h1{font-size:3rem}.brand p{margin-top:2px;font-size:14px}
+  .brand::after{font-size:7rem;bottom:-28px}
   #help{place-items:center}
 }
 @media (max-height:620px){ #home{max-height:78dvh} .brand{margin-bottom:8px} }
@@ -298,7 +310,7 @@ body[data-mode=explore] #stats,body[data-mode=explore] #prog{visibility:hidden}
 
 <section id="home" class="glass">
   <a class="hub" href="https://jeremyspm.github.io/" title="All the BN2 study tools">‹ All tools</a>
-  <div class="brand"><h1>Flesh <em>&amp;</em> Bone</h1><p>3D anatomy trainer</p></div>
+  <div class="brand"><small>Health Science 2 · 722.541</small><h1>Flesh <em>&amp;</em> Bone</h1><p>3D anatomy trainer</p></div>
   <div class="decks" id="decks"></div>
   <div class="lbl">Mode</div>
   <div class="seg" id="modes"></div>
