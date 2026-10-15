@@ -156,6 +156,8 @@ body:not([data-state=home]) #home{transform:translateY(110%);opacity:0;pointer-e
 .brand h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-.035em}
 .brand h1 em{font-style:normal;color:var(--acc)}
 .brand p{margin:0;font-size:12.5px;color:var(--tx3)}
+/* the way back to the BN2 Study Tools page, on the start menu (the bar's ‹ is back-to-menu) */
+.hub{display:inline-flex;align-items:center;margin:0 0 12px;padding:5px 12px 5px 9px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--acc);background:color-mix(in srgb,var(--acc) 15%,transparent);text-decoration:none}
 .decks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .deck{position:relative;text-align:left;padding:12px 12px 12px 14px;border-radius:16px;background:rgba(255,255,255,.05);border:1.5px solid var(--line);display:flex;gap:10px;align-items:center;transition:all .2s}
 @media (max-width:879px){ .decks{display:flex;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;touch-action:pan-x;margin-right:-16px;padding-right:16px} .decks::-webkit-scrollbar{display:none} .deck{flex:0 0 min(44%,190px);scroll-snap-align:start} }      /* six decks: one swipeable row, so the stage keeps its height on a phone */
@@ -295,6 +297,7 @@ body[data-mode=explore] #stats,body[data-mode=explore] #prog{visibility:hidden}
 <section id="dock" class="glass"></section>
 
 <section id="home" class="glass">
+  <a class="hub" href="https://jeremyspm.github.io/" title="All the BN2 study tools">‹ All tools</a>
   <div class="brand"><h1>Flesh <em>&amp;</em> Bone</h1><p>3D anatomy trainer</p></div>
   <div class="decks" id="decks"></div>
   <div class="lbl">Mode</div>
